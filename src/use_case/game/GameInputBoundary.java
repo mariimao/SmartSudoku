@@ -1,4 +1,4 @@
-package interface_adapter.game;
+package use_case.game;
 
 public class GameInputBoundary {
 }
