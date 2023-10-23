@@ -1,1 +1,3 @@
 # SmartSudoku
+
+The program should be able to simulate a game of sudoku, except every time the player inputs a correct response, the entire board changes into a completely new one. The new board should still be a valid board with the user’s previous inputs still in place. The player wins when they have filled in all the squares with valid inputs. The program will keep track of the player’s highest score. The program will also have a leaderboard that ranks users’ scores based on time.
