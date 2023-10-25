@@ -5,6 +5,16 @@ import java.util.HashMap;
 
 public class Board {
     private ArrayList<ArrayList<HashMap<Integer, Boolean>>> currBoard;
+    /* A matrix representing the board.
+    - The Integer value is the value stored in that position.
+    - The Boolean value is True when the value is a user stored value.
+    Example on an Easy board:
+    currBoard = [[{}, {2 = false}, {}, {4 = false}],
+                [{}, {}, {3 = true}, {}],
+                [{}, {3 = true}, {}, {1 = true}],
+                [{1 = false}, {}, {2 = false}, {}]]
+    See http://bit.ly/3tNbWNg for what this board would look like.
+     */
 
     public Board(int difficulty) {
         if (difficulty == 1) {
