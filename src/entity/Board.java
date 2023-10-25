@@ -49,9 +49,9 @@ public class Board {
     }
 
     public boolean noSpacesLeft() {
-        for (ArrayList row : currBoard) {
-            for (Object value : row) {
-                if (((HashMap<Integer, Boolean>) value).isEmpty()) {
+        for (ArrayList<HashMap<Integer, Boolean>> row : currBoard) {
+            for (HashMap<Integer, Boolean> value : row) {
+                if (value.isEmpty()) {
                     return false;
                 }
             }
