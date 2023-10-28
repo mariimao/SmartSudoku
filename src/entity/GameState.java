@@ -1,8 +1,5 @@
 package entity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 public class GameState {
 
     private final int difficulty; // 1 - easy, 2 - hard
@@ -13,7 +10,11 @@ public class GameState {
     public GameState(int difficulty) {
         this.difficulty = difficulty;
         this.sudokuAI = new SudokuAI(difficulty);
-        currBoard = new Board(difficulty);
+        if (difficulty == 1) {
+            currBoard = new EasyBoard();
+        } else {
+            currBoard = new HardBoard();
+        }
         this.lives = 5;
     }
 
