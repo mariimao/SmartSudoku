@@ -20,21 +20,8 @@ public class EasyBoard implements Board{
     }
 
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
-        int[][] possibleValues = new int[4][4];
-        boolean badBoard = true;
-        while (badBoard) {
-            HashMap<int[][], Boolean> generatedValues = new HashMap<>();
-            generatedValues = easyBoardValues();
-            Map.Entry<int[][], Boolean> entry = generatedValues.entrySet().iterator().next();
-            badBoard = entry.getValue();
-            int[][] generated = entry.getKey();
-            for (int i = 0; i <= 3; i++) {
-                for (int j = 0; j <= 3; j++) {
-                    possibleValues[i][j] = generated[i][j];
-                }
-            }
-        }
-        // Delete thi part later -----------
+        int[][] possibleValues = generatePossibleEasyBoardValues();
+        // Delete this part later -----------
         String str = "Solution: \n";
         for (int z = 0; z <= 3; z++) {
             for (int w = 0; w <= 3; w++) {
@@ -42,8 +29,8 @@ public class EasyBoard implements Board{
             }
             str += "\n";
         }
-        // -----------------------------------
         System.out.println(str);
+        // -----------------------------------
         ArrayList<Integer> positions = generateEasyStartingPositions();
         HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
         int i = 0;
@@ -54,21 +41,38 @@ public class EasyBoard implements Board{
         return easyBoard;
     }
 
-    private HashMap<int[][], Boolean> easyBoardValues() {
+    private int[][] generatePossibleEasyBoardValues() {
+        int[][] possibleValues = new int[4][4];
+        boolean badBoard = true;
+        while (badBoard) {
+            HashMap<int[][], Boolean> generatedValues = new HashMap<>();
+            generatedValues = generatePossibleEasyBoardValuesHelper();
+            Map.Entry<int[][], Boolean> entry = generatedValues.entrySet().iterator().next();
+            badBoard = entry.getValue();
+            int[][] generated = entry.getKey();
+            for (int i = 0; i <= 3; i++) {
+                for (int j = 0; j <= 3; j++) {
+                    possibleValues[i][j] = generated[i][j];
+                }
+            }
+        }
+        return possibleValues;
+    }
+    private HashMap<int[][], Boolean> generatePossibleEasyBoardValuesHelper() {
         int[][] possibleValues = {{0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0},
-                {0, 0, 0, 0}};
+                    {0, 0, 0, 0},
+                    {0, 0, 0, 0},
+                    {0, 0, 0, 0}};
         HashMap<int[][], Boolean> generatedValues = new HashMap<>();
         for (int i = 0; i <= 3; i++) {
             for(int j = 0; j <= 3; j++) {
                 int value = (int) (Math.random() * 4) + 1;
                 int tries = 0;
-                while (tries <= 100 && valueNotAvailable(possibleValues, value, i, j)) {
+                while (tries <= 50 && valueNotAvailable(possibleValues, value, i, j)) {
                     value = (int) (Math.random() * 4) + 1;
                     tries ++;
                 }
-                if (tries > 100) {
+                if (tries > 50) {
                     generatedValues.put(new int[4][4], true);
                     return generatedValues;
                 } else {
@@ -98,14 +102,12 @@ public class EasyBoard implements Board{
                 return true;
             }
         }
-
         // Checking if the column is okay
         for (int i = 0; i <= 3; i++){
             if (value == possibleValues[i][y]) {
                 return true;
             }
         }
-
         // Checking if the square is okay
         int sqt = (int) Math.sqrt(4);
         int boxRowSt = x - x % sqt;
