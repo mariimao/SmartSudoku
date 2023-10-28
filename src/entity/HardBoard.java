@@ -1,3 +1,7 @@
+/*
+    TODO: All of the code in this file is incomplete/broken. Please standby.
+ */
+
 package entity;
 
 import java.util.HashMap;
