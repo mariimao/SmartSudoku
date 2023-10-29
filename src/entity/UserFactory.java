@@ -1,4 +1,6 @@
 package entity;
 
-public class UserFactory {
+public interface UserFactory {
+    User create(String username, String password);
+
 }
