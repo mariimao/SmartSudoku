@@ -9,6 +9,7 @@ public class Main {
         EasyBoard easyTester = new EasyBoard();
         System.out.println(easyTester);
 
+        moo
         HardBoard hardTester = new HardBoard();
         System.out.println(hardTester);
     }
