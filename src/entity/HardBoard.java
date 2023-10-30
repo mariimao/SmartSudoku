@@ -4,9 +4,7 @@
 
 package entity;
 
-import java.util.HashMap;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 public class HardBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
@@ -22,31 +20,82 @@ public class HardBoard implements Board {
             This is the syntax for generating random numbers in python:
             random.nextInt((max - min) + 1) + min;
          */
-        int[][] possibleValues = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                {0, 0, 0, 0, 0, 0, 0, 0, 0}};
-        for (int i = 0; i <= 9; i++) {
-            for (int j = 0; j <= 9; j++) {
-                int value = random.nextInt(9) + 1;
-                while (valueNotAvailable(possibleValues, value, i, j)) {
-                    value = random.nextInt(9) + 1;
+        int[][] possibleValues = generatePossibleHardBoardValues();
+        // Delete this part later -----------
+        String str = "Solution: \n";
+        for (int z = 0; z <= 8; z++) {
+            for (int w = 0; w <= 8; w++) {
+                str += possibleValues[z][w];
+            }
+            str += "\n";
+        }
+        System.out.println(str);
+        // -----------------------------------
+        int[][] positions = generateHardStartingPositions();
+        HashMap<Integer, Boolean>[][] hardBoard = blankHardBoard();
+        for (int i = 0; i <= 8; i++) {
+            for (int j = 0; j <= 8; j++) {
+                if (positions[i][j] == 1) {
+                    hardBoard[i][j].put(possibleValues[i][j], true);
                 }
-                possibleValues[i][j] = value;
             }
         }
-        return new HashMap[0][0];
+        return hardBoard;
+    }
+
+    private int[][] generatePossibleHardBoardValues() {
+        int[][] possibleValues = new int[9][9];
+        boolean badBoard = true;
+        while (badBoard) {
+            HashMap<int[][], Boolean> generatedValues = new HashMap<>();
+            generatedValues = generatePossibleHardBoardValuesHelper();
+            Map.Entry<int[][], Boolean> entry = generatedValues.entrySet().iterator().next();
+            badBoard = entry.getValue();
+            int[][] generated = entry.getKey();
+            for (int i = 0; i <= 8; i++) {
+                for (int j = 0; j <= 8; j++) {
+                    possibleValues[i][j] = generated[i][j];
+                }
+            }
+        }
+        return possibleValues;
+    }
+
+    private HashMap<int[][], Boolean> generatePossibleHardBoardValuesHelper() {
+        int[][] possibleValues = {{0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0},
+                {0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        HashMap<int[][], Boolean> generatedValues = new HashMap<>();
+        for (int i = 0; i <= 8; i++) {
+            for(int j = 0; j <= 8; j++) {
+                int value = (int) (Math.random() * 9) + 1;
+                int tries = 0;
+                while (tries <= 100 && valueNotAvailable(possibleValues, value, i, j)) {
+                    value = (int) (Math.random() * 9) + 1;
+                    tries ++;
+                }
+                if (tries > 100) {
+                    generatedValues.put(new int[9][9], true);
+                    return generatedValues;
+                } else {
+                    possibleValues[i][j] = value;
+                }
+            }
+        }
+        generatedValues.put(possibleValues, false);
+        return generatedValues;
     }
 
     private HashMap<Integer, Boolean>[][] blankHardBoard() {
-        HashMap<Integer, Boolean>[][] blankHardBoard = new HashMap[10][10];
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        HashMap<Integer, Boolean>[][] blankHardBoard = new HashMap[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
                 HashMap<Integer, Boolean> blankValue = new HashMap<>();
                 blankHardBoard[i][j] = blankValue;
             }
@@ -58,58 +107,38 @@ public class HardBoard implements Board {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
-                return false;
+                return true;
             }
         }
         // Checking if the column is okay
-        for (int item : possibleValues[y]) {
-            if (value == item) {
-                return false;
+        for (int i = 0; i <= 8; i++){
+            if (value == possibleValues[i][y]) {
+                return true;
             }
         }
         // Checking if the square is okay
-        if (x <= 2 && y <= 2) {
-            return checkSquare(possibleValues, value, "A1");
-        } else if (x >= 3 && x <= 5 && y <= 2) {
-            return checkSquare(possibleValues, value, "A2");
-        } else if (x >= 6 && y <= 2) {
-            return checkSquare(possibleValues, value, "A3");
-        } else if (x <= 2 && y <= 5) {
-            return checkSquare(possibleValues, value, "B1");
-        } else if (x >= 3 && x <= 5 && y <= 5) {
-            return checkSquare(possibleValues, value, "B2");
-        } else if (x >= 6 && y <= 5) {
-            return checkSquare(possibleValues, value, "B3");
-        } else if (x <= 2) {
-            return checkSquare(possibleValues, value, "C1");
-        } else if (x <= 5) {
-            return checkSquare(possibleValues, value, "C2");
-        } else {
-            return checkSquare(possibleValues, value, "C3");
-        }
-    }
-
-    private boolean checkSquare(int[][] possibleValues, int value, String square) {
-        int xIndex = -1; int yIndex = -1;
-        switch (square) {
-            case "A1" -> {xIndex = 0; yIndex = 0;}
-            case "A2" -> {xIndex = 3; yIndex = 0;}
-            case "A3" -> {xIndex = 6; yIndex = 0;}
-            case "B1" -> {xIndex = 0; yIndex = 3;}
-            case "B2" -> {xIndex = 3; yIndex = 3;}
-            case "B3" -> {xIndex = 6; yIndex = 3;}
-            case "C1" -> {xIndex = 0; yIndex = 6;}
-            case "C2" -> {xIndex = 3; yIndex = 6;}
-            case "C3" -> {xIndex = 6; yIndex = 6;}
-        }
-        for (int i = xIndex; i <= xIndex + 2; i++) {
-            for (int j = yIndex; j <= yIndex + 2; j++) {
-                if (value == possibleValues[i][j]) {
-                    return false;
+        int sqt = (int) Math.sqrt(9);
+        int boxRowSt = x - x % sqt;
+        int boxColSt = y - y % sqt;
+        for (int r1 = boxRowSt; r1 < boxRowSt + sqt; r1++) {
+            for (int d = boxColSt; d < boxColSt + sqt; d++) {
+                if (possibleValues[r1][d] == value) {
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
+    }
+
+    private int[][] generateHardStartingPositions() {
+        int[][] startingPositions = new int[9][9];
+        for (int i = 0; i <= 8; i++) {
+            for (int j = 0; j <= 8; j++) {
+                int rand = (int)(Math.random() * 2);
+                startingPositions[i][j] = rand;
+            }
+        }
+        return startingPositions;
     }
 
     public HardBoard makeMove(char x, int y, int move) {
@@ -135,5 +164,23 @@ public class HardBoard implements Board {
 
     public HashMap<Integer, Boolean>[][] getCurrBoard() {
         return this.currBoard;
+    }
+
+    @Override
+    public String toString() {
+        String str = "";
+        for (HashMap<Integer, Boolean>[] row : currBoard) {
+            for (HashMap<Integer, Boolean> map : row) {
+                if (map.isEmpty()) {
+                    str += "0 ";
+                } else {
+                    for (Map.Entry<Integer, Boolean> entry : map.entrySet()) {
+                        str += entry.getKey() + " ";
+                    }
+                }
+            }
+            str += "\n";
+        }
+        return str;
     }
 }

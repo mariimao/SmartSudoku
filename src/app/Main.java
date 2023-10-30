@@ -1,13 +1,15 @@
 package app;
 
 import entity.EasyBoard;
+import entity.HardBoard;
 
 public class Main {
 
     public static void main(String[] args) {
-        EasyBoard tester = new EasyBoard();
-        System.out.println(tester);
+        EasyBoard easyTester = new EasyBoard();
+        System.out.println(easyTester);
 
-        System.out.println("hello");
+        HardBoard hardTester = new HardBoard();
+        System.out.println(hardTester);
     }
 }
