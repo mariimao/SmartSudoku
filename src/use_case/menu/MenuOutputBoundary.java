@@ -1,4 +1,4 @@
-package interface_adapter.menu;
+package use_case.menu;
 
 public class MenuOutputBoundary {
 }

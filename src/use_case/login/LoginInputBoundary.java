@@ -1,4 +1,4 @@
-package interface_adapter.login;
+package use_case.login;
 
 public class LoginInputBoundary {
 }
