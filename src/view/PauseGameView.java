@@ -1,2 +1,4 @@
-package view;public class PauseGameView {
+package view;
+
+public class PauseGameView {
 }

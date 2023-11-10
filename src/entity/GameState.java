@@ -1,4 +1,5 @@
 package entity;
+import java.util. *;
 
 public class GameState {
 
@@ -6,6 +7,8 @@ public class GameState {
     private final SudokuAI sudokuAI;
     private Board currBoard;
     private int lives;
+
+    private LinkedList<GameState> past_states;
 
     public GameState(int difficulty) {
         this.difficulty = difficulty;
@@ -16,6 +19,22 @@ public class GameState {
             currBoard = new HardBoard();
         }
         this.lives = 5;
+        this.past_states = new LinkedList<>();
+    }
+
+    // akunna: overloading the GameState constructor so that it can pass in a linked list for the previous GameStates
+    // seen when necessary
+    public GameState(int difficulty, LinkedList<GameState> past_states) {
+        this.difficulty = difficulty;
+        this.sudokuAI = new SudokuAI(difficulty);
+        if (difficulty == 1) {
+            currBoard = new EasyBoard();
+        } else {
+            currBoard = new HardBoard();
+        }
+        this.lives = 5;
+
+        this.past_states = past_states;
     }
 
     public void makeMove(char x, int y, int move) {
@@ -45,5 +64,7 @@ public class GameState {
     public int getLives() {
         return this.lives;
     }
+
+    public LinkedList<GameState> getPastStates() {return this.past_states; }
 
 }

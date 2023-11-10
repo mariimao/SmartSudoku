@@ -1,2 +1,5 @@
-package use_case.pause_game;public class PauseGameInputBoundary {
+package use_case.pause_game;
+
+public interface PauseGameInputBoundary {
+    void execute();
 }

@@ -1,2 +1,5 @@
-package use_case.pause_game;public class PauseGameOutputBoundary {
+package use_case.pause_game;
+
+public interface PauseGameOutputBoundary {
+    // TODO: IMPLEMENT ONCE YOU START ON VIEW
 }

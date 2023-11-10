@@ -1,2 +1,4 @@
-package interface_adapter.pause_game;public class PauseGameController {
+package interface_adapter.pause_game;
+
+public class PauseGameController {
 }
