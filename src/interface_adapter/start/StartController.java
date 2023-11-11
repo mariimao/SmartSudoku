@@ -1,6 +1,7 @@
 package interface_adapter.start;
 
 import use_case.start.StartInputBoundary;
+import use_case.start.StartInputData;
 import use_case.start.StartInteractor;
 
 public class StartController {
@@ -11,8 +12,9 @@ public class StartController {
         this.startUseCaseInteractor = startUseCaseInteractor;
     }
 
-    public void execute () {
-        startUseCaseInteractor.execute();
+    public void execute (String interaction) {
+        StartInputData startInputData = new StartInputData(interaction);
+        startUseCaseInteractor.execute(startInputData);
     }
 
 
