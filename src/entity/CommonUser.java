@@ -12,7 +12,7 @@ public class CommonUser implements User{
 
     private final Map<LocalTime, Integer> scores;
 
-    CommonUser(String name, String password, Map<LocalTime, Integer> scores){
+    public CommonUser(String name, String password, Map<LocalTime, Integer> scores){
         this.name = name;
         this.password = password;
         this.scores = scores;
