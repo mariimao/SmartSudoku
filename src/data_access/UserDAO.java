@@ -1,4 +1,5 @@
 package data_access;
+import java.time.LocalTime;
 import java.util.*;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.result.InsertOneResult;
@@ -15,10 +16,9 @@ import static com.mongodb.client.model.Filters.eq;
 
 public class UserDAO implements PauseGameDataAccessInterface {
     private final MongoCollection<Document> userCollection;
-    private final Map<String, String> accounts = new HashMap<>(); // TODO: change to User class
+    private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
 
-    //TODO: new attribute of each user with list of scores/times
     public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception{
         this.userFactory = userFactory;
 
@@ -29,27 +29,52 @@ public class UserDAO implements PauseGameDataAccessInterface {
                 .getDatabase(database)
                 .getCollection(collection);
 
+        // gets info from mongo and creates account object
         // creates list of accounts (in document form)
-        List<Document> accounts = userCollection.find().into(new ArrayList<>());
-        for (Document account : accounts) {
-            //TODO: check its not already in accounts
-            String username = account.getString("username");
-            String password = account.getString("password");
-            //List scores??
-            this.addUser(username, password);
+        List<Document> doc = userCollection.find().into(new ArrayList<>());
+        for (Document account : doc) {
+            String name = account.getString("name");
+            if (!accounts.containsKey(name)) {
+                String password = account.getString("password");
+                Map<String, Integer> stringScores = account.get("scores", Map.class);
+
+                // convert to localtime
+                Map<LocalTime, Integer> scores = new HashMap<>();
+                for (String time : stringScores.keySet()) {
+                    scores.put(LocalTime.parse(time), scores.get(time));
+                }
+
+                User user = userFactory.create(name, password, scores);
+                accounts.put(name, user);
+            }
         }
     }
 
-    //TODO: add scores?
-    public void addUser(String username, String password){
-        if (!accounts.containsKey(username)) {
-            InsertOneResult result = this.userCollection.insertOne(new Document()
-                            .append("_id", new ObjectId())
-                            .append("username", username)
-                            .append("password", password)
-                            //.append("scores", {time, score})?????
-            );
-            accounts.put(username, password);
+    public void addUser(User user){
+        accounts.put(user.getName(), user);
+        this.addUser();
+    }
+
+    private void addUser() { //does NOT add it name is already in database
+        for (User user : accounts.values()) {
+            String name = user.getName();
+            String password = user.getPassword();
+            Map<LocalTime, Integer> scores = user.getScores();
+
+            // cannot store LocalTime, so must convert it to String
+            Map<String, Integer> stringScores = new HashMap<>();
+            for (LocalTime time : scores.keySet()) {
+                stringScores.put(time.toString(), scores.get(time));
+            }
+
+            if (userCollection.countDocuments(eq("name", name)) == 0) { // not in database
+                Document entry = new Document()
+                        .append("_id", new ObjectId())
+                        .append("name", name)
+                        .append("password", password)
+                        .append("scores", stringScores);
+                this.userCollection.insertOne(entry);
+            }
         }
     }
 
@@ -65,13 +90,17 @@ public class UserDAO implements PauseGameDataAccessInterface {
         accounts.clear();
     }
 
-    public void addNewScore(){
-        //TODO
+    public void addScore(User user, LocalTime time, Integer score){
+        accounts.get(user.getName()).addScores(time, score);
+        this.changeScores(user);
     }
 
-    public void changePassword(){
-        //maybe TODO?
+    private void changeScores(User user) {
+        this.userCollection.findOneAndUpdate(
+                eq("name", user.getName()), //find by name
+                eq("scores", user.getScores())); //update score
     }
+
     public String toString(){
         return accounts.toString();
     }
