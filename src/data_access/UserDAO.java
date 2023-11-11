@@ -9,10 +9,11 @@ import entity.User;
 import entity.UserFactory;
 
 import com.mongodb.MongoException;
+import use_case.pause_game.PauseGameDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class UserDAO {
+public class UserDAO implements PauseGameDataAccessInterface {
     private final MongoCollection<Document> userCollection;
     private final Map<String, String> accounts = new HashMap<>(); // TODO: change to User class
     private UserFactory userFactory;
@@ -74,20 +75,26 @@ public class UserDAO {
     public String toString(){
         return accounts.toString();
     }
+
+    @Override
+    public void saveProgress() {
+        // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
+
+    }
 }
 
-/**
- * Temporary
- * GUIDES/DOCUMENTATION:
- * https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html
- * https://www.mongodb.com/products/tools/compass
- * https://www.mongodb.com/developer/languages/java/java-setup-crud-operations/#delete-documents
- * https://www.baeldung.com/java-mongodb
- * https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
- *
- * TODO: SLFJ4 logger warning:
- * https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
- * https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
- * https://www.slf4j.org/codes.html#StaticLoggerBinder
- * https://stackoverflow.com/questions/23775906/maven-dependency-and-logging-slf4j-and-log4j
+/*
+  Temporary
+  GUIDES/DOCUMENTATION:
+  https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html
+  https://www.mongodb.com/products/tools/compass
+  https://www.mongodb.com/developer/languages/java/java-setup-crud-operations/#delete-documents
+  https://www.baeldung.com/java-mongodb
+  https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
+
+  TODO: SLFJ4 logger warning:
+  https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
+  https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
+  https://www.slf4j.org/codes.html#StaticLoggerBinder
+  https://stackoverflow.com/questions/23775906/maven-dependency-and-logging-slf4j-and-log4j
  */
