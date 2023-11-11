@@ -1,7 +1,7 @@
 package interface_adapter.menu;
 
-import use_case.start.MenuInputBoundary;
-import use_case.start.MenuInteractor;
+import use_case.menu.MenuInputBoundary;
+import use_case.menu.MenuInteractor;
 
 public class MenuController {
 

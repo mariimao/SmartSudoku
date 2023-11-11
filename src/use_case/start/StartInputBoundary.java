@@ -2,5 +2,5 @@ package use_case.start;
 
 public interface StartInputBoundary {
 
-    void execute();
+    void execute(StartInputData startInputData);
 }

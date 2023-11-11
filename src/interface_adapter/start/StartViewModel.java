@@ -1,7 +1,6 @@
 package interface_adapter.start;
 
 import interface_adapter.ViewModel;
-import interface_adapter.start.StartState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -10,7 +9,8 @@ public class StartViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Welcome to Sudoku";
 
-    public static final String START_BUTTON_LABEL = "start";
+    public static final String SIGNUP_BUTTON_LABEL = "signup";
+    public static final String LOGIN_BUTTON_LABEL = "login";
 
     private StartState startState = new StartState();
 

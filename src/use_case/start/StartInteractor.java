@@ -14,9 +14,8 @@ public class StartInteractor implements StartInputBoundary {
     }
 
     @Override
-    public void execute() {
-        // redirects the user to the menu
-        //StartOutputData startOutputData = new StartOutputData();
-        startPresenter.prepareSuccessView();
+    public void execute(StartInputData startInputData) {
+        StartOutputData startOutputData = new StartOutputData(startInputData.getInteracton());
+        startPresenter.prepareSuccessView(startOutputData);
     }
 }
