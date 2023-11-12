@@ -10,10 +10,11 @@ import org.bson.types.ObjectId;
 
 import com.mongodb.MongoException;
 import use_case.pause_game.PauseGameDataAccessInterface;
+import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 
-public class UserDAO implements PauseGameDataAccessInterface {
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
     public static void main(String[] args) {
         // Just for testing this file
 
