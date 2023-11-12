@@ -76,13 +76,13 @@ public class Main {
         sampleScores.put(LocalTime.of(12, 31, 1), 4);
         CommonUser user2 = new CommonUser("user2", "pass", sampleScores);
         userDataAccessObject.addUser(user2);
-        System.out.println(userDataAccessObject.toString());
-        System.out.println(user1.getName());
-        System.out.println(user1.getPassword());
-        System.out.println(user1.getScores());
-        System.out.println(user2.getName());
-        System.out.println(user2.getPassword());
-        System.out.println(user2.getScores());
+//        System.out.println(userDataAccessObject.toString());
+//        System.out.println(user1.getName());
+//        System.out.println(user1.getPassword());
+//        System.out.println(user1.getScores());
+//        System.out.println(user2.getName());
+//        System.out.println(user2.getPassword());
+//        System.out.println(user2.getScores());
 
 //        userDataAccessObject.delete("user1");
 //        System.out.println(userDataAccessObject.toString());
