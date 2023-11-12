@@ -4,10 +4,9 @@ import java.util.*;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.MongoCollection;
+import entity.*;
 import org.bson.Document;
 import org.bson.types.ObjectId;
-import entity.User;
-import entity.UserFactory;
 
 import com.mongodb.MongoException;
 import use_case.pause_game.PauseGameDataAccessInterface;
@@ -16,6 +15,39 @@ import use_case.start.StartUserDataAccessInterface;
 import static com.mongodb.client.model.Filters.eq;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
+    public static void main(String[] args) {
+        // Just for testing this file
+
+        // made sample scores, boards, and users
+        Map<LocalTime, Integer> scores1 = new HashMap<>();
+        scores1.put(LocalTime.now(), 4);
+        scores1.put(LocalTime.of(12, 30, 1), 3);
+        Map<LocalTime, Integer> scores2 = new HashMap<>();
+        scores2.put(LocalTime.now(), 2);
+        scores2.put(LocalTime.of(12, 30, 1), 1);
+        EasyBoard easyBoard = new EasyBoard();
+        HardBoard hardBoard = new HardBoard();
+        CommonUser u1 = new CommonUser("u1", "p1", scores1);
+        CommonUser u2 = new CommonUser("u2", "p2", scores2);
+
+        // adding the users to a DAO
+        UserDAO userDAO;
+        try {
+            userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        userDAO.addUser(u1);
+        userDAO.addUser(u2);
+
+        userDAO.accounts.forEach((key, value) -> {
+            System.out.println(key + ": " + value.getPassword() + ',' + value.getScores());
+        });
+
+
+
+    }
     private final MongoCollection<Document> userCollection;
     private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
@@ -61,6 +93,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             String name = user.getName();
             String password = user.getPassword();
             Map<LocalTime, Integer> scores = user.getScores();
+            GameState pausedGame = user.getPausedGame();
 
             // cannot store LocalTime, so must convert it to String
             Map<String, Integer> stringScores = new HashMap<>();
@@ -73,7 +106,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("_id", new ObjectId())
                         .append("name", name)
                         .append("password", password)
-                        .append("scores", stringScores);
+                        .append("scores", stringScores)
+                        .append("pausedgame", pausedGame);  // it
                 this.userCollection.insertOne(entry);
             }
         }
