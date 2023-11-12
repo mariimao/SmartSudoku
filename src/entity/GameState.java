@@ -67,4 +67,10 @@ public class GameState {
 
     public LinkedList<GameState> getPastStates() {return this.past_states; }
 
+    @Override
+    public String toString() {
+        // should return everything needed to create an exact replica of this state (not counting the past states)
+        return  null;
+    }
+
 }

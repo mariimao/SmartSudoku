@@ -93,6 +93,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             String name = user.getName();
             String password = user.getPassword();
             Map<LocalTime, Integer> scores = user.getScores();
+            GameState pausedGame = user.getPausedGame();
 
             // cannot store LocalTime, so must convert it to String
             Map<String, Integer> stringScores = new HashMap<>();
@@ -105,7 +106,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("_id", new ObjectId())
                         .append("name", name)
                         .append("password", password)
-                        .append("scores", stringScores);
+                        .append("scores", stringScores)
+                        .append("pausedgame", pausedGame);  // it
                 this.userCollection.insertOne(entry);
             }
         }

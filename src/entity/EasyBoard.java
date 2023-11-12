@@ -4,6 +4,11 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 public class EasyBoard implements Board{
+    public static void main(String[] args) {
+        System.out.println(generateArrayFromString("02T04F003T003T01T1F02F0"));
+        System.out.println(new EasyBoard());
+        System.out.println(new EasyBoard("003T00004T004T01F2T00"));
+    }
     private HashMap<Integer, Boolean>[][] currBoard;
     /* A matrix representing the board.
     - The Integer value is the value stored in that position.
@@ -17,6 +22,64 @@ public class EasyBoard implements Board{
      */
     public EasyBoard() {
         this.currBoard = this.generateEasyBoard();
+    }
+
+    public EasyBoard(String positions) {this.currBoard = generateEasyBoard1(positions);}
+
+    private HashMap<Integer, Boolean>[][] generateEasyBoard1(String str_positions) {
+           /* This is a helper for the overloaded constructor for the EasyBoard class that will generate a board based
+           on a complete set of positions.
+          */
+        // currBoard = [[{}, {2 = false}, {}, {4 = false}],
+        //                [{}, {}, {3 = true}, {}],
+        //                [{}, {3 = true}, {}, {1 = true}],
+        //                [{1 = false}, {}, {2 = false}, {}]]
+        // the string representation of currBoard should be:  "#2T#4F##3T##3T#1T1F#2F#"
+
+        ArrayList<String> positions = generateArrayFromString(str_positions);
+
+        int sidelength = 4;  // just the length of the easy board
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+
+        int[][] possibleValues = generatePossibleEasyBoardValues();
+        ArrayList<Integer> positions1 = generateEasyStartingPositions();
+        HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
+        int i = 0;
+        for (int row = 0; row < sidelength; row++) {
+            for (int col = 0; col < sidelength; col++){
+                if (positions.get(i).equals("0")) {easyBoard[row][col] = blankValue;}
+                else {
+                    int int_value = Integer.parseInt(positions.get(i).substring(0,1));
+                    boolean truth_value = positions.get(i).charAt(1) == 'T';
+                    HashMap<Integer, Boolean> value = new HashMap<>();
+                    value.put(int_value, truth_value);
+                    easyBoard[row][col] = value;
+                }
+                i++;
+            }
+        }
+        return easyBoard;
+    }
+
+    private static ArrayList<String> generateArrayFromString(String str_positions) {
+        // creates an array based on the strings such that each index corresponds to a specific positions info
+        ArrayList<String> positions = new ArrayList<>();
+
+        String info = "";
+        for (char character : str_positions.toCharArray()) {
+            info = info.concat(String.valueOf(character));
+            if (info.equals("0")) {
+                positions.add(info);
+                info = "";
+                continue;
+            };
+            if (info.length() == 2) {
+                positions.add(info);
+                info = "";
+            }
+        }
+        positions.add(info);
+        return positions;
     }
 
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
