@@ -5,7 +5,19 @@ import entity.CommonUser;
 import entity.EasyBoard;
 import entity.HardBoard;
 import entity.CommonUserFactory;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupViewModel;
+import interface_adapter.start.StartController;
+import interface_adapter.start.StartViewModel;
+import view.LoginView;
+import view.SignupView;
+import view.StartView;
+import view.ViewManager;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.time.LocalTime;
 import java.util.HashMap;
@@ -16,11 +28,32 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        EasyBoard easyTester = new EasyBoard();
-        System.out.println(easyTester);
+        // Build the main program window, the main panel containing the
+        // various cards, and the layout, and stitch them together.
 
-        HardBoard hardTester = new HardBoard();
-        System.out.println(hardTester);
+        // The main application window.
+        JFrame application = new JFrame("Login Example");
+        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        CardLayout cardLayout = new CardLayout();
+
+        // The various View objects. Only one view is visible at a time.
+        JPanel views = new JPanel(cardLayout);
+        application.add(views);
+
+        // This keeps track of and manages which view is currently showing.
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
+        // The data for the views, such as username and password, are in the ViewModels.
+        // This information will be changed by a presenter object that is reporting the
+        // results from the use case. The ViewModels are observable, and will
+        // be observed by the Views.
+        StartViewModel startViewModel = new StartViewModel();
+        LoginViewModel loginViewModel = new LoginViewModel();
+        SignupViewModel signupViewModel = new SignupViewModel();
+
+
 
 
         // testing userDAO
@@ -53,6 +86,22 @@ public class Main {
 
 //        userDataAccessObject.delete("user1");
 //        System.out.println(userDataAccessObject.toString());
+
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject)
+        views.add(startView, startView.viewName);
+
+        viewManagerModel.setActiveViewName(startView.viewName);
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setVisible(true);
+
+        // board generation
+        EasyBoard easyTester = new EasyBoard();
+        System.out.println(easyTester);
+
+        HardBoard hardTester = new HardBoard();
+        System.out.println(hardTester);
 
 
     }
