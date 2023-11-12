@@ -8,7 +8,7 @@ public class StartController {
 
     final StartInputBoundary startUseCaseInteractor;
 
-    public StartController(StartInteractor startUseCaseInteractor) {
+    public StartController(StartInputBoundary startUseCaseInteractor) {
         this.startUseCaseInteractor = startUseCaseInteractor;
     }
 
