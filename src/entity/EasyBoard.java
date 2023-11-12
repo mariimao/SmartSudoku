@@ -5,6 +5,7 @@ import java.util.*;
 
 public class EasyBoard implements Board{
     public static void main(String[] args) {
+        //TODO: DELETE MAIN, just for testing
         System.out.println(generateArrayFromString("02T04F003T003T01T1F02F0"));
         System.out.println(new EasyBoard());
         System.out.println(new EasyBoard("003T00004T004T01F2T00"));
@@ -36,26 +37,33 @@ public class EasyBoard implements Board{
         //                [{1 = false}, {}, {2 = false}, {}]]
         // the string representation of currBoard should be:  "#2T#4F##3T##3T#1T1F#2F#"
 
-        ArrayList<String> positions = generateArrayFromString(str_positions);
-
-        int sidelength = 4;  // just the length of the easy board
-        HashMap<Integer, Boolean> blankValue = new HashMap<>();
-
-        int[][] possibleValues = generatePossibleEasyBoardValues();
-        ArrayList<Integer> positions1 = generateEasyStartingPositions();
         HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
-        int i = 0;
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+        String blankChar = "0"; // how we represent blank squares
+
+        // populate the blank board with values based on str_positions
+        int sidelength = 4; // length of the Sudoku Board
+        return getHashMaps(str_positions, easyBoard, blankValue, blankChar, sidelength);
+    }
+
+    static HashMap<Integer, Boolean>[][] getHashMaps(String str_positions, HashMap<Integer, Boolean>[][] easyBoard, HashMap<Integer, Boolean> blankValue, String blankChar, int sidelength) {
+        String info; // corresponding information based on str_positions
+
         for (int row = 0; row < sidelength; row++) {
-            for (int col = 0; col < sidelength; col++){
-                if (positions.get(i).equals("0")) {easyBoard[row][col] = blankValue;}
+            for (int col = 0; col < sidelength; col++) {
+                if (String.valueOf(str_positions.charAt(0)).equals(blankChar)) {
+                    easyBoard[row][col] = blankValue;
+                    str_positions = str_positions.substring(1);
+                }
                 else {
-                    int int_value = Integer.parseInt(positions.get(i).substring(0,1));
-                    boolean truth_value = positions.get(i).charAt(1) == 'T';
+                    info =  str_positions.substring(0,2);
+                    str_positions = str_positions.substring(2);
+                    int int_value = Integer.parseInt(info.substring(0,1));
+                    boolean truth_value = info.charAt(1) == 'T';
                     HashMap<Integer, Boolean> value = new HashMap<>();
                     value.put(int_value, truth_value);
                     easyBoard[row][col] = value;
                 }
-                i++;
             }
         }
         return easyBoard;
@@ -72,7 +80,7 @@ public class EasyBoard implements Board{
                 positions.add(info);
                 info = "";
                 continue;
-            };
+            }
             if (info.length() == 2) {
                 positions.add(info);
                 info = "";

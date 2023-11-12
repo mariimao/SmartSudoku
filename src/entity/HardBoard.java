@@ -6,6 +6,8 @@ package entity;
 
 import java.util.*;
 
+import static entity.EasyBoard.getHashMaps;
+
 public class HardBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
     private final Random random = new Random();
@@ -14,7 +16,18 @@ public class HardBoard implements Board {
         this.currBoard = this.generateHardBoard();
     }
 
-    private HashMap<Integer, Boolean>[][] generateHardBoard() {
+    private HashMap<Integer, Boolean>[][] generateHardBoard1(String str_positions) {
+        HashMap<Integer, Boolean>[][] hardBoard = blankHardBoard();
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+        String blankChar = "0"; // how we represent blank squares
+
+        // populate the blank board with values based on str_positions
+        int sidelength = 9; // length of the Sudoku Board
+        return getHashMaps(str_positions, hardBoard, blankValue, blankChar, sidelength);
+    }
+
+
+        private HashMap<Integer, Boolean>[][] generateHardBoard() {
         /* TODO: return an Arraylist of values that generates a new Hard board.
             This board will have a 9 x 9 grid.
             This is the syntax for generating random numbers in python:

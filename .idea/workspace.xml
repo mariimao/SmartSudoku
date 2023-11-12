@@ -4,11 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="026eb654-f351-448d-bd07-42c46c6146ca" name="Changes" comment="Added an attribute to User interface to facilitate pausing the game">
+    <list default="true" id="026eb654-f351-448d-bd07-42c46c6146ca" name="Changes" comment="added some methods to EasyBoard to help with Pausing the game. I will add them to HardBoard as well and add a method to GameState later">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/EasyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/HardBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +39,12 @@
   }
 }]]></component>
   <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="mariimao" />
+        <option name="repository" value="SmartSudoku" />
+      </RepoCoordinatesHolder>
+    </option>
     <option name="selectedUrlAndAccountId">
       <UrlAndAccount>
         <option name="accountId" value="a934f9b6-92b1-44e9-be4a-2e512c65a768" />
@@ -224,7 +229,7 @@
       <option name="presentableId" value="Default" />
       <updated>1699725021435</updated>
       <workItem from="1699725029996" duration="855000" />
-      <workItem from="1699735595057" duration="18767000" />
+      <workItem from="1699735595057" duration="21260000" />
     </task>
     <task id="LOCAL-00001" summary="I just made the CommonUser constructor public">
       <option name="closed" value="true" />
@@ -282,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1699810570467</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="added some methods to EasyBoard to help with Pausing the game. I will add them to HardBoard as well and add a method to GameState later">
+      <option name="closed" value="true" />
+      <created>1699817551845</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1699817551845</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,17 +320,7 @@
     <MESSAGE value="adding some files" />
     <MESSAGE value="I just added the CACoding version of the LoginState file to avoid errors for right now" />
     <MESSAGE value="Added an attribute to User interface to facilitate pausing the game" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added an attribute to User interface to facilitate pausing the game" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/entity/EasyBoard.java</url>
-          <line>9</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added some methods to EasyBoard to help with Pausing the game. I will add them to HardBoard as well and add a method to GameState later" />
+    <option name="LAST_COMMIT_MESSAGE" value="added some methods to EasyBoard to help with Pausing the game. I will add them to HardBoard as well and add a method to GameState later" />
   </component>
 </project>
