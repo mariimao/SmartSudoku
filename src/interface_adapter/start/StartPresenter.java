@@ -2,21 +2,13 @@ package interface_adapter.start;
 
 import interface_adapter.ViewManagerModel;
 
-import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.menu.MenuState;
-import interface_adapter.menu.MenuViewModel;
 
 
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
 import use_case.start.StartOutputBoundary;
 import use_case.start.StartOutputData;
-import view.StartView;
-
-import javax.swing.text.View;
-
-import java.awt.*;
 
 
 public class StartPresenter implements StartOutputBoundary {

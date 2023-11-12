@@ -87,7 +87,7 @@ public class Main {
 //        userDataAccessObject.delete("user1");
 //        System.out.println(userDataAccessObject.toString());
 
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject)
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
         views.add(startView, startView.viewName);
 
         viewManagerModel.setActiveViewName(startView.viewName);
