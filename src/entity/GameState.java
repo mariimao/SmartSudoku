@@ -2,6 +2,13 @@ package entity;
 import java.util. *;
 
 public class GameState {
+    public static void main(String[] args) {
+        //TODO: DELETE MAIN, just for testing
+        EasyBoard testBoard = new EasyBoard("003T00004T004T01F2T00");
+        GameState testState = new GameState(1);
+        System.out.println(testState.currBoard);
+        System.out.println(testState.toStringPause());
+    }
 
     private final int difficulty; // 1 - easy, 2 - hard
     private final SudokuAI sudokuAI;
@@ -61,16 +68,36 @@ public class GameState {
         return this.currBoard;
     }
 
+    public void setCurrBoard(String values) {
+        if (difficulty == 1) {this.currBoard = new EasyBoard(values);}
+        else {this.currBoard = new HardBoard(values);}
+    }
+
     public int getLives() {
         return this.lives;
     }
 
     public LinkedList<GameState> getPastStates() {return this.past_states; }
 
-    @Override
-    public String toString() {
+    public String toStringPause() {
         // should return everything needed to create an exact replica of this state (not counting the past states)
-        return  null;
+        // board representation-difficulty-lives
+        // EXAMPLE: 003T00004T004T01F2T00-1-4  should be returned for board below if the player has only 4 lives
+        // currBoard =    [
+        //                [{},          {2 = false}, {},          {4 = false}],
+        //                [{},          {},          {3 = true},  {}],
+        //                [{},          {3 = true},  {},          {1 = true}],
+        //                [{1 = false}, {},          {2 = false}, {}]
+        //                ]
+        if (this == null) {return "No Paused Game Exists";}
+        if (this.currBoard == null) {return "No Board Exists for this Game State ";}
+        StringJoiner representation = new StringJoiner("-");
+        String boardRep = this.currBoard.toStringPause();
+        representation.add(boardRep);
+        representation.add(String.valueOf(difficulty));
+        representation.add(String.valueOf(lives));
+
+        return  representation.toString();
     }
 
 }

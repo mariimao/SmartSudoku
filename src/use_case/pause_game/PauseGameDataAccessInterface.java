@@ -1,5 +1,7 @@
 package use_case.pause_game;
 
+import entity.User;
+
 public interface PauseGameDataAccessInterface {
-    void saveProgress();
+    void saveProgress(User user);
 }

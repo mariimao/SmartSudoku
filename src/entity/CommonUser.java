@@ -30,8 +30,8 @@ public class CommonUser implements User{
     }
 
     @Override
-    public void addPausedGame(GameState currentGame) {this.pausedGame = currentGame;}
+    public void setPausedGame(GameState currentGame) {this.pausedGame = currentGame;}
 
     @Override
-    public GameState getPausedGame() {return this.pausedGame;}
+    public GameState getPausedGame() {return this.pausedGame;}  // you will get a null pointer exception if this returns null and a method is applied to it
 }

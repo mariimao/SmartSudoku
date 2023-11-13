@@ -6,8 +6,9 @@ import java.util.*;
 public class EasyBoard implements Board{
     public static void main(String[] args) {
         //TODO: DELETE MAIN, just for testing
-        System.out.println(generateArrayFromString("02T04F003T003T01T1F02F0"));
-        System.out.println(new EasyBoard());
+        EasyBoard testBoard = new EasyBoard();
+        System.out.println(testBoard);
+        System.out.println(testBoard.toStringPause());
         System.out.println(new EasyBoard("003T00004T004T01F2T00"));
     }
     private HashMap<Integer, Boolean>[][] currBoard;
@@ -225,14 +226,18 @@ public class EasyBoard implements Board{
         return false;
     }
 
-    public EasyBoard makeMove(char x, int y, int move) {
+    public EasyBoard makeMove(int x, int y, int move) { // akunna: I changed move to an int
         /* TODO: this function stores the user's current move into the board,
             then sends an updated board to the GameState.
             - x is the x-coordinate of the user's move
             - y is the y-coordinate of the user's move
             - move is the integer value of the user's move
          */
-        return this;
+        HashMap<Integer, Boolean> value = new HashMap<>();
+        value.put(move, true);
+        this.currBoard[y][x] = (value);
+
+        return this; // akunna: I don't think that this needs to be returned since we are mutating the board. This method is essentially a setter, right?
     }
 
     public HashMap<Integer, Boolean>[][] getCurrBoard(){
@@ -266,5 +271,31 @@ public class EasyBoard implements Board{
             str += "\n";
         }
         return str;
+    }
+
+    public String toStringPause() {
+        // return board in the format found in the overridden constructor method
+        // boardlength should be 4 for easy and 9 for hard
+        StringBuilder values = new StringBuilder();
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+        int boardlength = 4;
+
+
+        for (int row = 0; row < boardlength; row++) {
+            for (int col = 0; col < boardlength; col++) {
+                HashMap<Integer, Boolean> position = currBoard[row][col];
+                if(position.isEmpty()) {values.append('0');}
+                else{
+                    int int_value = position.keySet().iterator().next();
+                    Boolean truth_value = position.get(int_value);
+                    String value = String.valueOf(int_value);
+                    if (truth_value) {value = value.concat("T");}
+                    else {value = value.concat("F");}
+                    values.append(value);
+                }
+            }
+        }
+
+        return values.toString();
     }
 }
