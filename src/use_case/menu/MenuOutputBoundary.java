@@ -1,4 +1,7 @@
 package use_case.menu;
 
-public class MenuOutputBoundary {
+public interface MenuOutputBoundary {
+    void prepareSuccessView();
+
+    void prepareFailView(String error);
 }

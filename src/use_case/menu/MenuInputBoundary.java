@@ -1,4 +1,6 @@
 package use_case.menu;
 
-public class MenuInputBoundary {
+public interface MenuInputBoundary {
+
+    void execute();
 }

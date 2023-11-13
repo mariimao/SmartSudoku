@@ -1,23 +1,64 @@
 package data_access;
+import java.time.LocalTime;
 import java.util.*;
 import com.mongodb.client.MongoClients;
-import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
+import entity.*;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-import entity.User;
-import entity.UserFactory;
 
-import com.mongodb.MongoException;
+import use_case.pause_game.PauseGameDataAccessInterface;
+import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
-public class UserDAO {
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
+    public static void main(String[] args) {
+        // TODO: DELETE MAIN, Just for testing this file
+
+        // made sample scores, boards, and users
+        Map<LocalTime, Integer> scores1 = new HashMap<>();
+        scores1.put(LocalTime.now(), 4);
+        scores1.put(LocalTime.of(12, 30, 1), 3);
+        Map<LocalTime, Integer> scores2 = new HashMap<>();
+        scores2.put(LocalTime.now(), 2);
+        scores2.put(LocalTime.of(12, 30, 1), 1);
+        EasyBoard easyBoard = new EasyBoard();
+        HardBoard hardBoard = new HardBoard();
+        CommonUser u1 = new CommonUser("u1", "p1", scores1);
+        CommonUser u2 = new CommonUser("u2", "p2", scores2);
+
+        // adding the users to a DAO
+        UserDAO userDAO;
+        try {
+            userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        userDAO.addUser(u1);
+        userDAO.addUser(u2);
+
+        userDAO.accounts.forEach((key, value) -> {
+            System.out.println("Username: " + key + "Password: " + value.getPassword() + "Scores: " + value.getScores() + "Paused Game: " + value.getPausedGame());
+        });
+
+        u1.setPausedGame(new GameState(1));
+        userDAO.accounts.forEach((key, value) -> {
+            System.out.println("Username: " + key + "  Password: " + value.getPassword() + "  Scores: " + value.getScores() + "  Paused Game: " + value.getPausedGame());
+        });
+        userDAO.saveProgress(u1);
+        System.out.println(userDAO.toString());
+    }
     private final MongoCollection<Document> userCollection;
-    private final Map<String, String> accounts = new HashMap<>(); // TODO: change to User class
+    private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
 
-    //TODO: new attribute of each user with list of scores/times
     public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception{
         this.userFactory = userFactory;
 
@@ -28,35 +69,66 @@ public class UserDAO {
                 .getDatabase(database)
                 .getCollection(collection);
 
+        // gets info from mongo and creates account object
         // creates list of accounts (in document form)
-        List<Document> accounts = userCollection.find().into(new ArrayList<>());
-        for (Document account : accounts) {
-            //TODO: check its not already in accounts
-            String username = account.getString("username");
-            String password = account.getString("password");
-            //List scores??
-            this.addUser(username, password);
+        List<Document> doc = userCollection.find().into(new ArrayList<>());
+        for (Document account : doc) {
+            String name = account.getString("name");
+            if (!accounts.containsKey(name)) {
+                String password = account.getString("password");
+                Map<String, Integer> stringScores = account.get("scores", Map.class);
+
+                // convert to localtime
+                Map<LocalTime, Integer> scores = new HashMap<>();
+                for (String time : stringScores.keySet()) {
+                    scores.put(LocalTime.parse(time), scores.get(time));
+                }
+
+                User user = userFactory.create(name, password, scores);
+                accounts.put(name, user);
+            }
         }
     }
 
-    //TODO: add scores?
-    public void addUser(String username, String password){
-        if (!accounts.containsKey(username)) {
-            InsertOneResult result = this.userCollection.insertOne(new Document()
-                            .append("_id", new ObjectId())
-                            .append("username", username)
-                            .append("password", password)
-                            //.append("scores", {time, score})?????
-            );
-            accounts.put(username, password);
+    public void addUser(User user){
+        accounts.put(user.getName(), user);
+        this.addUser();
+    }
+
+    private void addUser() { //does NOT add it name is already in database
+        for (User user : accounts.values()) {
+            String name = user.getName();
+            String password = user.getPassword();
+            Map<LocalTime, Integer> scores = user.getScores();
+            GameState pausedGame = user.getPausedGame();
+
+            // cannot store LocalTime, so must convert it to String
+            Map<String, Integer> stringScores = new HashMap<>();
+            for (LocalTime time : scores.keySet()) {
+                stringScores.put(time.toString(), scores.get(time));
+            }
+
+            if (userCollection.countDocuments(eq("name", name)) == 0) { // not in database
+                Document entry = new Document()
+                        .append("_id", new ObjectId())
+                        .append("name", name)
+                        .append("password", password)
+                        .append("scores", stringScores)
+                        .append("pausedgame", pausedGame.toStringPause());  // it
+                this.userCollection.insertOne(entry);
+            }
         }
     }
 
-    public void delete(String username){
-        this.userCollection.deleteOne(eq("username", username));
+    public boolean existsByName(String name) {
+        return accounts.containsKey(name);
+    }
+
+    public void delete(String name){
+        this.userCollection.deleteOne(eq("name", name));
         // below is alternative method that returns info of the deleted user
         //Document user = this.userCollection.findOneAndDelete(eq("username", username));
-        accounts.remove(username);
+        accounts.remove(name);
     }
 
     public void deleteAll(){
@@ -64,30 +136,50 @@ public class UserDAO {
         accounts.clear();
     }
 
-    public void addNewScore(){
-        //TODO
+    public void addScore(User user, LocalTime time, Integer score){
+        accounts.get(user.getName()).addScores(time, score);
+        this.changeScores(user);
     }
 
-    public void changePassword(){
-        //maybe TODO?
+    private void changeScores(User user) {
+        this.userCollection.findOneAndUpdate(
+                eq("name", user.getName()), //find by name
+                eq("scores", user.getScores())); //update score
     }
+
     public String toString(){
         return accounts.toString();
     }
+
+    @Override
+    public void saveProgress(User user) {
+        // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
+        // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
+        Bson filter = Filters.eq("name", user.getName());  // creating a filter
+        Bson update = Updates.set("pausedgame", user.getPausedGame().toStringPause());  // create an update
+        UpdateResult result = this.userCollection.updateOne(filter, update);  //performing the update
+
+        // Check if the document was found and updated
+        if (result.getMatchedCount() == 1) {
+            System.out.println("Game paused and updated successfully.");
+        } else {
+            System.out.println("Game not paused or not updated.");
+        }
+    }
 }
 
-/**
- * Temporary
- * GUIDES/DOCUMENTATION:
- * https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html
- * https://www.mongodb.com/products/tools/compass
- * https://www.mongodb.com/developer/languages/java/java-setup-crud-operations/#delete-documents
- * https://www.baeldung.com/java-mongodb
- * https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
- *
- * TODO: SLFJ4 logger warning:
- * https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
- * https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
- * https://www.slf4j.org/codes.html#StaticLoggerBinder
- * https://stackoverflow.com/questions/23775906/maven-dependency-and-logging-slf4j-and-log4j
+/*
+  Temporary
+  GUIDES/DOCUMENTATION:
+  https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html
+  https://www.mongodb.com/products/tools/compass
+  https://www.mongodb.com/developer/languages/java/java-setup-crud-operations/#delete-documents
+  https://www.baeldung.com/java-mongodb
+  https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
+
+  TODO: SLFJ4 logger warning:
+  https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
+  https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
+  https://www.slf4j.org/codes.html#StaticLoggerBinder
+  https://stackoverflow.com/questions/23775906/maven-dependency-and-logging-slf4j-and-log4j
  */

@@ -4,6 +4,13 @@ import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
 public class EasyBoard implements Board{
+    public static void main(String[] args) {
+        //TODO: DELETE MAIN, just for testing
+        EasyBoard testBoard = new EasyBoard();
+        System.out.println(testBoard);
+        System.out.println(testBoard.toStringPause());
+        System.out.println(new EasyBoard("003T00004T004T01F2T00"));
+    }
     private HashMap<Integer, Boolean>[][] currBoard;
     /* A matrix representing the board.
     - The Integer value is the value stored in that position.
@@ -17,6 +24,71 @@ public class EasyBoard implements Board{
      */
     public EasyBoard() {
         this.currBoard = this.generateEasyBoard();
+    }
+
+    public EasyBoard(String positions) {this.currBoard = generateEasyBoard1(positions);}
+
+    private HashMap<Integer, Boolean>[][] generateEasyBoard1(String str_positions) {
+           /* This is a helper for the overloaded constructor for the EasyBoard class that will generate a board based
+           on a complete set of positions.
+          */
+        // currBoard = [[{}, {2 = false}, {}, {4 = false}],
+        //                [{}, {}, {3 = true}, {}],
+        //                [{}, {3 = true}, {}, {1 = true}],
+        //                [{1 = false}, {}, {2 = false}, {}]]
+        // the string representation of currBoard should be:  "#2T#4F##3T##3T#1T1F#2F#"
+
+        HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+        String blankChar = "0"; // how we represent blank squares
+
+        // populate the blank board with values based on str_positions
+        int sidelength = 4; // length of the Sudoku Board
+        return getHashMaps(str_positions, easyBoard, blankValue, blankChar, sidelength);
+    }
+
+    static HashMap<Integer, Boolean>[][] getHashMaps(String str_positions, HashMap<Integer, Boolean>[][] easyBoard, HashMap<Integer, Boolean> blankValue, String blankChar, int sidelength) {
+        String info; // corresponding information based on str_positions
+
+        for (int row = 0; row < sidelength; row++) {
+            for (int col = 0; col < sidelength; col++) {
+                if (String.valueOf(str_positions.charAt(0)).equals(blankChar)) {
+                    easyBoard[row][col] = blankValue;
+                    str_positions = str_positions.substring(1);
+                }
+                else {
+                    info =  str_positions.substring(0,2);
+                    str_positions = str_positions.substring(2);
+                    int int_value = Integer.parseInt(info.substring(0,1));
+                    boolean truth_value = info.charAt(1) == 'T';
+                    HashMap<Integer, Boolean> value = new HashMap<>();
+                    value.put(int_value, truth_value);
+                    easyBoard[row][col] = value;
+                }
+            }
+        }
+        return easyBoard;
+    }
+
+    private static ArrayList<String> generateArrayFromString(String str_positions) {
+        // creates an array based on the strings such that each index corresponds to a specific positions info
+        ArrayList<String> positions = new ArrayList<>();
+
+        String info = "";
+        for (char character : str_positions.toCharArray()) {
+            info = info.concat(String.valueOf(character));
+            if (info.equals("0")) {
+                positions.add(info);
+                info = "";
+                continue;
+            }
+            if (info.length() == 2) {
+                positions.add(info);
+                info = "";
+            }
+        }
+        positions.add(info);
+        return positions;
     }
 
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
@@ -154,14 +226,18 @@ public class EasyBoard implements Board{
         return false;
     }
 
-    public EasyBoard makeMove(char x, int y, int move) {
+    public EasyBoard makeMove(int x, int y, int move) { // akunna: I changed move to an int
         /* TODO: this function stores the user's current move into the board,
             then sends an updated board to the GameState.
             - x is the x-coordinate of the user's move
             - y is the y-coordinate of the user's move
             - move is the integer value of the user's move
          */
-        return this;
+        HashMap<Integer, Boolean> value = new HashMap<>();
+        value.put(move, true);
+        this.currBoard[y][x] = (value);
+
+        return this; // akunna: I don't think that this needs to be returned since we are mutating the board. This method is essentially a setter, right?
     }
 
     public HashMap<Integer, Boolean>[][] getCurrBoard(){
@@ -195,5 +271,31 @@ public class EasyBoard implements Board{
             str += "\n";
         }
         return str;
+    }
+
+    public String toStringPause() {
+        // return board in the format found in the overridden constructor method
+        // boardlength should be 4 for easy and 9 for hard
+        StringBuilder values = new StringBuilder();
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+        int boardlength = 4;
+
+
+        for (int row = 0; row < boardlength; row++) {
+            for (int col = 0; col < boardlength; col++) {
+                HashMap<Integer, Boolean> position = currBoard[row][col];
+                if(position.isEmpty()) {values.append('0');}
+                else{
+                    int int_value = position.keySet().iterator().next();
+                    Boolean truth_value = position.get(int_value);
+                    String value = String.valueOf(int_value);
+                    if (truth_value) {value = value.concat("T");}
+                    else {value = value.concat("F");}
+                    values.append(value);
+                }
+            }
+        }
+
+        return values.toString();
     }
 }

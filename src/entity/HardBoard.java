@@ -6,6 +6,8 @@ package entity;
 
 import java.util.*;
 
+import static entity.EasyBoard.getHashMaps;
+
 public class HardBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
     private final Random random = new Random();
@@ -13,6 +15,20 @@ public class HardBoard implements Board {
     public HardBoard() {
         this.currBoard = this.generateHardBoard();
     }
+
+    public HardBoard(String positions) {this.currBoard = generateHardBoard1(positions);}
+
+
+    private HashMap<Integer, Boolean>[][] generateHardBoard1(String str_positions) {
+        HashMap<Integer, Boolean>[][] hardBoard = blankHardBoard();
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+        String blankChar = "0"; // how we represent blank squares
+
+        // populate the blank board with values based on str_positions
+        int sidelength = 9; // length of the Sudoku Board
+        return getHashMaps(str_positions, hardBoard, blankValue, blankChar, sidelength);
+    }
+
 
     private HashMap<Integer, Boolean>[][] generateHardBoard() {
         /* TODO: return an Arraylist of values that generates a new Hard board.
@@ -73,12 +89,12 @@ public class HardBoard implements Board {
                 {0, 0, 0, 0, 0, 0, 0, 0, 0}};
         HashMap<int[][], Boolean> generatedValues = new HashMap<>();
         for (int i = 0; i <= 8; i++) {
-            for(int j = 0; j <= 8; j++) {
+            for (int j = 0; j <= 8; j++) {
                 int value = (int) (Math.random() * 9) + 1;
                 int tries = 0;
                 while (tries <= 100 && valueNotAvailable(possibleValues, value, i, j)) {
                     value = (int) (Math.random() * 9) + 1;
-                    tries ++;
+                    tries++;
                 }
                 if (tries > 100) {
                     generatedValues.put(new int[9][9], true);
@@ -111,7 +127,7 @@ public class HardBoard implements Board {
             }
         }
         // Checking if the column is okay
-        for (int i = 0; i <= 8; i++){
+        for (int i = 0; i <= 8; i++) {
             if (value == possibleValues[i][y]) {
                 return true;
             }
@@ -134,20 +150,23 @@ public class HardBoard implements Board {
         int[][] startingPositions = new int[9][9];
         for (int i = 0; i <= 8; i++) {
             for (int j = 0; j <= 8; j++) {
-                int rand = (int)(Math.random() * 2);
+                int rand = (int) (Math.random() * 2);
                 startingPositions[i][j] = rand;
             }
         }
         return startingPositions;
     }
 
-    public HardBoard makeMove(char x, int y, int move) {
+    public HardBoard makeMove(int x, int y, int move) {
         /* TODO: this function stores the user's current move into the board,
             then sends an updated board to the GameState.
             - x is the x-coordinate of the user's move
             - y is the y-coordinate of the user's move
             - move is the integer value of the user's move
          */
+        HashMap<Integer, Boolean> value = new HashMap<>();
+        value.put(move, true);
+        this.currBoard[y][x] = (value);
         return this;
     }
 
@@ -182,5 +201,35 @@ public class HardBoard implements Board {
             str += "\n";
         }
         return str;
+    }
+
+    public String toStringPause() {
+        // return board in the format found in the overridden constructor method
+        // boardlength should be 4 for easy and 9 for hard
+        int boardlength = 9;
+        StringBuilder values = new StringBuilder();
+        HashMap<Integer, Boolean> blankValue = new HashMap<>();
+
+
+        for (int row = 0; row < boardlength; row++) {
+            for (int col = 0; col < boardlength; col++) {
+                HashMap<Integer, Boolean> position = currBoard[row][col];
+                if (position.isEmpty()) {
+                    values.append('0');
+                } else {
+                    int int_value = position.keySet().iterator().next();
+                    Boolean truth_value = position.get(int_value);
+                    String value = String.valueOf(int_value);
+                    if (truth_value) {
+                        value = value.concat("T");
+                    } else {
+                        value = value.concat("F");
+                    }
+                    values.append(value);
+                }
+            }
+        }
+
+        return values.toString();
     }
 }
