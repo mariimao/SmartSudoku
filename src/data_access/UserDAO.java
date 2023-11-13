@@ -120,11 +120,15 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
-    public void delete(String username){
-        this.userCollection.deleteOne(eq("name", username));
+    public boolean existsByName(String name) {
+        return accounts.containsKey(name);
+    }
+
+    public void delete(String name){
+        this.userCollection.deleteOne(eq("name", name));
         // below is alternative method that returns info of the deleted user
         //Document user = this.userCollection.findOneAndDelete(eq("username", username));
-        accounts.remove(username);
+        accounts.remove(name);
     }
 
     public void deleteAll(){
