@@ -2,21 +2,24 @@ package data_access;
 import java.time.LocalTime;
 import java.util.*;
 import com.mongodb.client.MongoClients;
-import com.mongodb.client.result.InsertOneResult;
 import com.mongodb.client.MongoCollection;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.UpdateResult;
 import entity.*;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
-import com.mongodb.MongoException;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
     public static void main(String[] args) {
-        // Just for testing this file
+        // TODO: DELETE MAIN, Just for testing this file
 
         // made sample scores, boards, and users
         Map<LocalTime, Integer> scores1 = new HashMap<>();
@@ -42,11 +45,15 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         userDAO.addUser(u2);
 
         userDAO.accounts.forEach((key, value) -> {
-            System.out.println(key + ": " + value.getPassword() + ',' + value.getScores());
+            System.out.println("Username: " + key + "Password: " + value.getPassword() + "Scores: " + value.getScores() + "Paused Game: " + value.getPausedGame());
         });
 
-
-
+        u1.setPausedGame(new GameState(1));
+        userDAO.accounts.forEach((key, value) -> {
+            System.out.println("Username: " + key + "  Password: " + value.getPassword() + "  Scores: " + value.getScores() + "  Paused Game: " + value.getPausedGame());
+        });
+        userDAO.saveProgress(u1);
+        System.out.println(userDAO.toString());
     }
     private final MongoCollection<Document> userCollection;
     private final Map<String, User> accounts = new HashMap<>();
@@ -107,14 +114,14 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("name", name)
                         .append("password", password)
                         .append("scores", stringScores)
-                        .append("pausedgame", pausedGame);  // it
+                        .append("pausedgame", pausedGame.toStringPause());  // it
                 this.userCollection.insertOne(entry);
             }
         }
     }
 
     public void delete(String username){
-        this.userCollection.deleteOne(eq("username", username));
+        this.userCollection.deleteOne(eq("name", username));
         // below is alternative method that returns info of the deleted user
         //Document user = this.userCollection.findOneAndDelete(eq("username", username));
         accounts.remove(username);
@@ -141,9 +148,19 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     }
 
     @Override
-    public void saveProgress() {
+    public void saveProgress(User user) {
         // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
+        // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
+        Bson filter = Filters.eq("name", user.getName());  // creating a filter
+        Bson update = Updates.set("pausedgame", user.getPausedGame().toStringPause());  // create an update
+        UpdateResult result = this.userCollection.updateOne(filter, update);  //performing the update
 
+        // Check if the document was found and updated
+        if (result.getMatchedCount() == 1) {
+            System.out.println("Game paused and updated successfully.");
+        } else {
+            System.out.println("Game not paused or not updated.");
+        }
     }
 }
 

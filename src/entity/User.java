@@ -1,8 +1,6 @@
 package entity;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Map;
 
 public interface User {
@@ -15,7 +13,7 @@ public interface User {
 
     void addScores(LocalTime time, Integer score);
 
-    void addPausedGame(GameState currentGame);
+    void setPausedGame(GameState currentGame);
 
     GameState getPausedGame();
 
