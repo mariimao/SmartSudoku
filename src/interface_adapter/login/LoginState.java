@@ -1,20 +1,18 @@
 package interface_adapter.login;
 
 public class LoginState {
-    // TODO: change however is necessary, just added this to avoid errors
     private String username = "";
     private String usernameError = null;
     private String password = "";
     private String passwordError = null;
 
-    public LoginState(LoginState copy) {
-        username = copy.username;
-        usernameError = copy.usernameError;
-        password = copy.password;
-        passwordError = copy.passwordError;
+    public LoginState(LoginState copy) { // copy constructor
+        this.username = copy.username;
+        this.usernameError = copy.usernameError;
+        this.password = copy.password;
+        this.passwordError = copy.passwordError;
     }
 
-    // Because of the previous copy constructor, the default constructor must be explicit.
     public LoginState() {}
 
     public String getUsername() {
