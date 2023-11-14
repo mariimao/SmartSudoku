@@ -153,7 +153,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
     @Override
     public void saveProgress(User user) {
-        // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
+        // TODO: if Board implementation changes form HashMap[] to int[][] switch from string rep to array rep
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
         Bson filter = Filters.eq("name", user.getName());  // creating a filter
         Bson update = Updates.set("pausedgame", user.getPausedGame().toStringPause());  // create an update
