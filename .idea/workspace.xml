@@ -5,23 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/SignupOutputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/view/LabelTextPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelPresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelUserDataAccessInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartSudoku.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartSudoku.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupOutputBoundary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,6 +26,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -39,7 +34,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="LoginUseCase" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -47,10 +42,10 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "customColor": "",
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2Y8CKw92FXM1O1TUUf1hTqeQ2yS" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
@@ -60,13 +55,13 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "SignupView",
+    "git-widget-placeholder": "CancelUseCase",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -82,11 +77,26 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699897760707</updated>
-      <workItem from="1699897762500" duration="5642000" />
+      <workItem from="1699897762500" duration="6734000" />
+      <workItem from="1699925842618" duration="1317000" />
+      <workItem from="1699927185308" duration="1703000" />
     </task>
+    <task id="LOCAL-00001" summary="Completed Signup Use Case, may need to adjust user interaction flow">
+      <option name="closed" value="true" />
+      <created>1699905137433</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1699905137433</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Completed Signup Use Case, may need to adjust user interaction flow" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed Signup Use Case, may need to adjust user interaction flow" />
   </component>
 </project>

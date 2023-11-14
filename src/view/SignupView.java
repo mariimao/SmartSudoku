@@ -3,6 +3,8 @@ package view;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.signup.cancel.CancelController;
+import interface_adapter.signup.cancel.CancelViewModel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +21,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
     private final SignupViewModel signupViewModel;
 
     private final SignupController signupController;
+    private final CancelController cancelController;
 
     // text input
     private final JTextField usernameInputField =  new JTextField(15);
@@ -30,9 +33,10 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
     private final JButton cancel;
 
 
-    public SignupView(SignupController menuController, SignupViewModel signupViewModel) {
+    public SignupView(SignupController menuController, SignupViewModel signupViewModel, CancelController cancelController) {
         this.signupViewModel = signupViewModel;
         this.signupController = menuController;
+        this.cancelController = cancelController;
 
         signupViewModel.addPropertyChangeListener(this);
 
@@ -74,7 +78,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(cancel)) {
-                            //cancelController.execute();
+                            cancelController.execute();
                         }
                     }
                 }
