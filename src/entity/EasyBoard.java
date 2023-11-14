@@ -15,12 +15,14 @@ public class EasyBoard implements Board{
                 [{1 = false}, {}, {2 = false}, {}]]
     See http://bit.ly/3tNbWNg for what this board would look like.
      */
+    private int[][] solutionBoard;
     public EasyBoard() {
+        this.solutionBoard = generatePossibleEasyBoardValues();
         this.currBoard = this.generateEasyBoard();
     }
 
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
-        int[][] possibleValues = generatePossibleEasyBoardValues();
+        int[][] possibleValues = solutionBoard;
         // Delete this part later -----------
         String str = "Solution: \n";
         for (int z = 0; z <= 3; z++) {
@@ -32,7 +34,7 @@ public class EasyBoard implements Board{
         System.out.println(str);
         // -----------------------------------
         ArrayList<Integer> positions = generateEasyStartingPositions();
-        HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
+        HashMap<Integer, Boolean>[][] easyBoard = generateBlankBoard();
         int i = 0;
         for (int position : positions) {
             easyBoard[i][position].put(possibleValues[i][position], true);
@@ -84,7 +86,7 @@ public class EasyBoard implements Board{
         return generatedValues;
     }
 
-    private HashMap<Integer, Boolean>[][] blankEasyBoard() {
+    public HashMap<Integer, Boolean>[][] generateBlankBoard() {
         HashMap<Integer, Boolean>[][] blankEasyBoard = new HashMap[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -168,6 +170,10 @@ public class EasyBoard implements Board{
         return currBoard;
     }
 
+    public int[][] getSolutionBoard() {
+        return solutionBoard;
+    }
+
     public boolean noSpacesLeft() {
         for (HashMap<Integer, Boolean>[] row : currBoard) {
             for (HashMap<Integer, Boolean> value : row) {
@@ -177,6 +183,9 @@ public class EasyBoard implements Board{
             }
         }
         return true;
+    }
+    public void setBoard(HashMap<Integer, Boolean>[][] newBoard) {
+        this.currBoard = newBoard;
     }
 
     @Override

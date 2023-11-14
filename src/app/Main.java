@@ -1,9 +1,7 @@
 package app;
 
 import data_access.UserDAO;
-import entity.EasyBoard;
-import entity.HardBoard;
-import entity.CommonUserFactory;
+import entity.*;
 
 import java.io.IOException;
 
@@ -12,10 +10,15 @@ public class Main {
     public static void main(String[] args) {
         EasyBoard easyTester = new EasyBoard();
         System.out.println(easyTester);
-        
+
+        EasySudokuScrambler easyScramblerTester = new EasySudokuScrambler(easyTester);
+        System.out.println(easyScramblerTester.scramble());
+
         HardBoard hardTester = new HardBoard();
         System.out.println(hardTester);
 
+        HardSudokuScrambler hardSudokuScrambler = new HardSudokuScrambler(hardTester);
+        System.out.println(hardSudokuScrambler.scramble());
 
         // testing userDAO
         UserDAO userDataAccessObject;

@@ -3,17 +3,18 @@ package entity;
 public class GameState {
 
     private final int difficulty; // 1 - easy, 2 - hard
-    private final SudokuAI sudokuAI;
+    private final SudokuScrambler sudokuScrambler;
     private Board currBoard;
     private int lives;
 
     public GameState(int difficulty) {
         this.difficulty = difficulty;
-        this.sudokuAI = new SudokuAI(difficulty);
         if (difficulty == 1) {
             currBoard = new EasyBoard();
+            sudokuScrambler = new EasySudokuScrambler((EasyBoard) currBoard);
         } else {
             currBoard = new HardBoard();
+            sudokuScrambler = new HardSudokuScrambler((HardBoard) currBoard);
         }
         this.lives = 5;
     }
@@ -23,7 +24,7 @@ public class GameState {
     }
 
     public void scrambleBoard() {
-        sudokuAI.scramble(currBoard);
+        sudokuScrambler.scramble();
     }
 
     public void loseLife(){
