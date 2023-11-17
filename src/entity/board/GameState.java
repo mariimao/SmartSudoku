@@ -1,4 +1,5 @@
-package entity;
+package entity.board;
+
 import java.util. *;
 
 public class GameState {

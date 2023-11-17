@@ -1,9 +1,8 @@
-package entity;
+package entity.board;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
-public class EasyBoard implements Board{
+public class EasyBoard implements Board {
     public static void main(String[] args) {
         //TODO: DELETE MAIN, just for testing
         EasyBoard testBoard = new EasyBoard();

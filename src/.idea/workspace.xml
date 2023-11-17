@@ -5,19 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="27758703-9def-4ffd-a562-ee9de194a875" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/EasySudokuScrambler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/HardSudokuScrambler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/entity/SudokuScrambler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/EasyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/HardBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entity/SudokuAI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/BoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/BoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/CommonUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/CommonUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/EasyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/EasyBoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/EasyBoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/EasySudokuScrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/EasySudokuScrambler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/HardBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/HardBoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/HardBoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/HardSudokuScrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/HardSudokuScrambler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/SudokuScrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/board/SudokuScrambler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_case/pause_game/PauseGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/use_case/pause_game/PauseGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/use_case/user_move/UserMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/use_case/user_move/UserMoveInputData.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,11 +92,22 @@
       <option name="presentableId" value="Default" />
       <updated>1698977811441</updated>
       <workItem from="1698977812792" duration="92000" />
-      <workItem from="1700245295975" duration="1168000" />
+      <workItem from="1700245295975" duration="2075000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

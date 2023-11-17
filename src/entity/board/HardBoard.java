@@ -2,11 +2,11 @@
     TODO: All of the code in this file is incomplete/broken. Please standby.
  */
 
-package entity;
+package entity.board;
 
 import java.util.*;
 
-import static entity.EasyBoard.getHashMaps;
+import static entity.board.EasyBoard.getHashMaps;
 
 public class HardBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
