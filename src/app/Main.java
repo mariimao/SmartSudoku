@@ -2,23 +2,18 @@ package app;
 
 import data_access.UserDAO;
 import entity.CommonUser;
-import entity.EasyBoard;
-import entity.HardBoard;
+import entity.board.EasyBoard;
+import entity.board.HardBoard;
 import entity.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
-import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
-import view.LoginView;
-import view.SignupView;
 import view.StartView;
 import view.ViewManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;

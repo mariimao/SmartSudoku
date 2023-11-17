@@ -1,0 +1,149 @@
+Index: src/entity/SudokuAI.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package entity;\n\nimport java.awt.image.AreaAveragingScaleFilter;\nimport java.util.ArrayList;\nimport java.util.HashMap;\n\npublic class SudokuAI {\n\n    private final int difficulty;\n\n    public SudokuAI(int difficulty) {\n        this.difficulty = difficulty;\n    }\n\n    public Board scramble(Board board) {\n        if (difficulty == 1) {\n            return scrambleEasy(board);\n        } else {\n            return scrambleHard(board);\n        }\n    }\n\n    private Board scrambleEasy(Board board) {\n        /* TODO: implement a function that scrambles the numbers on an Easy board.\n            This function and its related helper functions are not complete.\n         */\n        int[][] currBoard = board.getBoard();\n        int[][] newBoard = new int[4][4];\n        ArrayList<Integer> values = new ArrayList<>();\n        int[][] positions = new int[4][4];\n        for (int i = 0; i < 4; i++) {\n            for (int j = 0; j < 4; j++) {\n                newBoard[i][j] = 0;\n                if (currBoard[i][j] != 0) {\n                    values.add(currBoard[i][j]);\n                    positions[i][j] = 1;\n                } else {\n                    positions[i][j] = 0;\n                }\n            }\n        }\n\n        for(int i = 0; i < 4; i++) {\n            for (int j = 0; j < 4; j++) {\n                int index = (int)(Math.random() * values.size());\n                int value = values.get(index);\n                if (positions[i][j] == 1 && isSafeSquare(newBoard, value, i, j)) {\n                    newBoard[i][j] = value;\n                }\n                values.remove(index);\n            }\n        }\n        return board;\n    }\n\n    private boolean isSafeSquare(int[][] newBoard, int value, int x, int y) {\n        // Checking if the row is okay\n        for (int item : newBoard[x]) {\n            if (value == item) {\n                return false;\n            }\n        }\n        // Checking if the column is okay\n        for (int i = 0; i <= 3; i++){\n            if (value == newBoard[i][y]) {\n                return false;\n            }\n        }\n        // Checking if the square is okay\n        int sqt = (int) Math.sqrt(4);\n        int boxRowSt = x - x % sqt;\n        int boxColSt = y - y % sqt;\n        for (int r1 = boxRowSt; r1 < boxRowSt + sqt; r1++) {\n            for (int d = boxColSt; d < boxColSt + sqt; d++) {\n                if (newBoard[r1][d] == value) {\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n\n    private Board scrambleHard(Board board) {\n        /* TODO: implement a function that scrambles the numbers on a Hard board.\n         */\n        return board;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/entity/SudokuAI.java b/src/entity/SudokuAI.java
+--- a/src/entity/SudokuAI.java	(revision e52bda7115b82b08a19c6e970e011070d8cfaedb)
++++ b/src/entity/SudokuAI.java	(date 1699040621437)
+@@ -12,15 +12,15 @@
+         this.difficulty = difficulty;
+     }
+ 
+-    public Board scramble(Board board) {
++    public void scramble(Board board) {
+         if (difficulty == 1) {
+-            return scrambleEasy(board);
++            scrambleEasy(board);
+         } else {
+-            return scrambleHard(board);
++            scrambleHard(board);
+         }
+     }
+ 
+-    private Board scrambleEasy(Board board) {
++    private void scrambleEasy(Board board) {
+         /* TODO: implement a function that scrambles the numbers on an Easy board.
+             This function and its related helper functions are not complete.
+          */
+@@ -42,15 +42,26 @@
+ 
+         for(int i = 0; i < 4; i++) {
+             for (int j = 0; j < 4; j++) {
+-                int index = (int)(Math.random() * values.size());
+-                int value = values.get(index);
+-                if (positions[i][j] == 1 && isSafeSquare(newBoard, value, i, j)) {
++                if (positions[i][j] == 1) {
++                    ArrayList<Integer> unusedValues = new ArrayList<>();
++                    for (int value : values) {
++                        unusedValues.add(value);
++                    }
++                    System.out.println(unusedValues);
++                    int index = (int) (Math.random() * unusedValues.size());
++                    int value = unusedValues.get(index);
++                    System.out.println(value);
++                    while (!isSafeSquare(newBoard, value, i, j)) {
++                        unusedValues.remove(index);
++                        index = (int) (Math.random() * unusedValues.size());
++                        value = unusedValues.get(index);
++                    }
+                     newBoard[i][j] = value;
+-                }
+-                values.remove(index);
++                    values.remove(index);
++                }
+             }
+         }
+-        return board;
++        board.setBoard(newBoard);
+     }
+ 
+     private boolean isSafeSquare(int[][] newBoard, int value, int x, int y) {
+Index: src/entity/HardBoard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\n    TODO: All of the code in this file is incomplete/broken. Please standby.\n */\n\npackage entity;\n\nimport javax.swing.tree.AbstractLayoutCache;\nimport java.util.*;\n\npublic class HardBoard implements Board {\n    private int[][] currBoard;\n    private final Random random = new Random();\n\n    public HardBoard() {\n        this.currBoard = this.generateHardBoard();\n    }\n\n    private int[][] generateHardBoard() {\n        /* TODO: return an Arraylist of values that generates a new Hard board.\n            This board will have a 9 x 9 grid.\n            This is the syntax for generating random numbers in python:\n            random.nextInt((max - min) + 1) + min;\n         */\n        int[][] possibleValues = generatePossibleHardBoardValues();\n        // Delete this part later -----------\n        String str = \"Solution: \\n\";\n        for (int z = 0; z <= 8; z++) {\n            for (int w = 0; w <= 8; w++) {\n                str += possibleValues[z][w];\n            }\n            str += \"\\n\";\n        }\n        System.out.println(str);\n        // -----------------------------------\n        int[][] positions = generateHardStartingPositions();\n        int[][] hardBoard = blankHardBoard();\n        for (int i = 0; i <= 8; i++) {\n            for (int j = 0; j <= 8; j++) {\n                if (positions[i][j] == 1) {\n                    hardBoard[i][j] = possibleValues[i][j];\n                }\n            }\n        }\n        return hardBoard;\n    }\n\n    private int[][] generatePossibleHardBoardValues() {\n        int[][] possibleValues = new int[9][9];\n        boolean badBoard = true;\n        while (badBoard) {\n            HashMap<int[][], Boolean> generatedValues = new HashMap<>();\n            generatedValues = generatePossibleHardBoardValuesHelper();\n            Map.Entry<int[][], Boolean> entry = generatedValues.entrySet().iterator().next();\n            badBoard = entry.getValue();\n            int[][] generated = entry.getKey();\n            for (int i = 0; i <= 8; i++) {\n                for (int j = 0; j <= 8; j++) {\n                    possibleValues[i][j] = generated[i][j];\n                }\n            }\n        }\n        return possibleValues;\n    }\n\n    private HashMap<int[][], Boolean> generatePossibleHardBoardValuesHelper() {\n        int[][] possibleValues = blankHardBoard();\n        HashMap<int[][], Boolean> generatedValues = new HashMap<>();\n        for (int i = 0; i <= 8; i++) {\n            for(int j = 0; j <= 8; j++) {\n                int value = (int) (Math.random() * 9) + 1;\n                int tries = 0;\n                while (tries <= 100 && valueNotAvailable(possibleValues, value, i, j)) {\n                    value = (int) (Math.random() * 9) + 1;\n                    tries ++;\n                }\n                if (tries > 100) {\n                    generatedValues.put(new int[9][9], true);\n                    return generatedValues;\n                } else {\n                    possibleValues[i][j] = value;\n                }\n            }\n        }\n        generatedValues.put(possibleValues, false);\n        return generatedValues;\n    }\n\n    private int[][] blankHardBoard() {\n        int[][] blankHardBoard = new int[9][9];\n        for (int i = 0; i < 9; i++) {\n            for (int j = 0; j < 9; j++) {\n                blankHardBoard[i][j] = 0;\n            }\n        }\n        return blankHardBoard;\n    }\n\n    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {\n        // Checking if the row is okay\n        for (int item : possibleValues[x]) {\n            if (value == item) {\n                return true;\n            }\n        }\n        // Checking if the column is okay\n        for (int i = 0; i <= 8; i++){\n            if (value == possibleValues[i][y]) {\n                return true;\n            }\n        }\n        // Checking if the square is okay\n        int sqt = (int) Math.sqrt(9);\n        int boxRowSt = x - x % sqt;\n        int boxColSt = y - y % sqt;\n        for (int r1 = boxRowSt; r1 < boxRowSt + sqt; r1++) {\n            for (int d = boxColSt; d < boxColSt + sqt; d++) {\n                if (possibleValues[r1][d] == value) {\n                    return true;\n                }\n            }\n        }\n        return false;\n    }\n\n    private int[][] generateHardStartingPositions() {\n        int[][] startingPositions = new int[9][9];\n        for (int i = 0; i <= 8; i++) {\n            for (int j = 0; j <= 8; j++) {\n                int rand = (int)(Math.random() * 2);\n                startingPositions[i][j] = rand;\n            }\n        }\n        return startingPositions;\n    }\n\n    public HardBoard makeMove(char x, int y, int move) {\n        /* TODO: this function stores the user's current move into the board,\n            then sends an updated board to the GameState.\n            - x is the x-coordinate of the user's move\n            - y is the y-coordinate of the user's move\n            - move is the integer value of the user's move\n         */\n        return this;\n    }\n\n    public boolean noSpacesLeft() {\n        for (int[] row : currBoard) {\n            for (int value : row) {\n                if (value == 0) {\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n\n    public int[][] getBoard() {\n        return this.currBoard;\n    }\n\n    @Override\n    public String toString() {\n        String str = \"\";\n        for (int[] row : currBoard) {\n            for (int value : row) {\n                str += value + \" \";\n            }\n            str += \"\\n\";\n        }\n        return str;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/entity/HardBoard.java b/src/entity/HardBoard.java
+--- a/src/entity/HardBoard.java	(revision e52bda7115b82b08a19c6e970e011070d8cfaedb)
++++ b/src/entity/HardBoard.java	(date 1699038965586)
+@@ -158,6 +158,10 @@
+         return this.currBoard;
+     }
+ 
++    public void setBoard(int[][] newBoard) {
++        this.currBoard = newBoard;
++    }
++
+     @Override
+     public String toString() {
+         String str = "";
+Index: src/entity/Board.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package entity;\n\nimport java.util.HashMap;\n\npublic interface Board {\n    Board makeMove(char x, int y, int move);\n    boolean noSpacesLeft();\n\n    int[][] getBoard();\n\n    String toString();\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/entity/Board.java b/src/entity/Board.java
+--- a/src/entity/Board.java	(revision e52bda7115b82b08a19c6e970e011070d8cfaedb)
++++ b/src/entity/Board.java	(date 1699038965607)
+@@ -9,4 +9,5 @@
+     int[][] getBoard();
+ 
+     String toString();
++    void setBoard(int[][] newBoard);
+ }
+Index: src/entity/EasyBoard.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package entity;\n\nimport java.awt.image.AreaAveragingScaleFilter;\nimport java.util.*;\n\npublic class EasyBoard implements Board{\n    private int[][] currBoard;\n    /* A matrix representing the board.\n    - The Integer value is the value stored in that position.\n    - The Boolean value is True when the value is a user stored value.\n    Example on an Easy board:\n    currBoard = [[{}, {2 = false}, {}, {4 = false}],\n                [{}, {}, {3 = true}, {}],\n                [{}, {3 = true}, {}, {1 = true}],\n                [{1 = false}, {}, {2 = false}, {}]]\n    See http://bit.ly/3tNbWNg for what this board would look like.\n     */\n    public EasyBoard() {\n        this.currBoard = this.generateEasyBoard();\n    }\n\n    private int[][] generateEasyBoard() {\n        int[][] possibleValues = generatePossibleEasyBoardValues();\n        // Delete this part later -----------\n        String str = \"Solution: \\n\";\n        for (int z = 0; z <= 3; z++) {\n            for (int w = 0; w <= 3; w++) {\n                str += possibleValues[z][w];\n            }\n            str += \"\\n\";\n        }\n        System.out.println(str);\n        // -----------------------------------\n        ArrayList<Integer> positions = generateEasyStartingPositions();\n        int[][] easyBoard = {{0, 0, 0, 0},\n                {0, 0, 0, 0},\n                {0, 0, 0, 0},\n                {0, 0, 0, 0}};\n        int i = 0;\n        for (int position : positions) {\n            easyBoard[i][position] = possibleValues[i][position];\n            i++;\n        }\n        return easyBoard;\n    }\n\n    private int[][] generatePossibleEasyBoardValues() {\n        int[][] possibleValues = new int[4][4];\n        boolean badBoard = true;\n        while (badBoard) {\n            HashMap<int[][], Boolean> generatedValues = new HashMap<>();\n            generatedValues = generatePossibleEasyBoardValuesHelper();\n            Map.Entry<int[][], Boolean> entry = generatedValues.entrySet().iterator().next();\n            badBoard = entry.getValue();\n            int[][] generated = entry.getKey();\n            for (int i = 0; i <= 3; i++) {\n                for (int j = 0; j <= 3; j++) {\n                    possibleValues[i][j] = generated[i][j];\n                }\n            }\n        }\n        return possibleValues;\n    }\n    private HashMap<int[][], Boolean> generatePossibleEasyBoardValuesHelper() {\n        int[][] possibleValues = {{0, 0, 0, 0},\n                    {0, 0, 0, 0},\n                    {0, 0, 0, 0},\n                    {0, 0, 0, 0}};\n        HashMap<int[][], Boolean> generatedValues = new HashMap<>();\n        for (int i = 0; i <= 3; i++) {\n            for(int j = 0; j <= 3; j++) {\n                int value = (int) (Math.random() * 4) + 1;\n                int tries = 0;\n                while (tries <= 50 && valueNotAvailable(possibleValues, value, i, j)) {\n                    value = (int) (Math.random() * 4) + 1;\n                    tries ++;\n                }\n                if (tries > 50) {\n                    generatedValues.put(new int[4][4], true);\n                    return generatedValues;\n                } else {\n                    possibleValues[i][j] = value;\n                }\n            }\n        }\n        generatedValues.put(possibleValues, false);\n        return generatedValues;\n    }\n\n    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {\n        // Checking if the row is okay\n        for (int item : possibleValues[x]) {\n            if (value == item) {\n                return true;\n            }\n        }\n        // Checking if the column is okay\n        for (int i = 0; i <= 3; i++){\n            if (value == possibleValues[i][y]) {\n                return true;\n            }\n        }\n        // Checking if the square is okay\n        int sqt = (int) Math.sqrt(4);\n        int boxRowSt = x - x % sqt;\n        int boxColSt = y - y % sqt;\n        for (int r1 = boxRowSt; r1 < boxRowSt + sqt; r1++) {\n            for (int d = boxColSt; d < boxColSt + sqt; d++) {\n                if (possibleValues[r1][d] == value) {\n                    return true;\n                }\n            }\n        }\n        return false;\n    }\n\n    private ArrayList<Integer> generateEasyStartingPositions() {\n        int[][] possiblePositions = {{0, 1, 2, 3},\n                                    {0, 1, 2, 3},\n                                    {0, 1, 2, 3},\n                                    {0, 1, 2, 3}};\n        int rowAValue = 0; int rowBValue = 0; int rowCValue = 0; int rowDValue = 0;\n        while (threeOrMoreEqual(rowAValue, rowBValue, rowCValue, rowDValue)) {\n            rowAValue = (int) (Math.random() * 4);\n            rowBValue = (int) (Math.random() * 4);\n            rowCValue = (int) (Math.random() * 4);\n            rowDValue = (int) (Math.random() * 4);\n        }\n        ArrayList<Integer> startingPositions = new ArrayList<>();\n        startingPositions.add(possiblePositions[0][rowAValue]);\n        startingPositions.add(possiblePositions[1][rowBValue]);\n        startingPositions.add(possiblePositions[2][rowCValue]);\n        startingPositions.add(possiblePositions[3][rowDValue]);\n        return startingPositions;\n    }\n\n    private boolean threeOrMoreEqual(int a, int b, int c, int d) {\n        ArrayList<Integer> values = new ArrayList<>();\n        values.add(a); values.add(b); values.add(c); values.add(d);\n        for (int value : values) {\n            int occurrences = Collections.frequency(values, value);\n            if (occurrences >= 3) {\n                return true;\n            }\n        }\n        return false;\n    }\n\n    public EasyBoard makeMove(char x, int y, int move) {\n        /* TODO: this function stores the user's current move into the board,\n            then sends an updated board to the GameState.\n            - x is the x-coordinate of the user's move\n            - y is the y-coordinate of the user's move\n            - move is the integer value of the user's move\n         */\n        return this;\n    }\n\n    public int[][] getCurrBoard(){\n        return currBoard;\n    }\n\n    public boolean noSpacesLeft() {\n        for (int[] row : currBoard) {\n            for (int value : row) {\n                if (value == 0) {\n                    return false;\n                }\n            }\n        }\n        return true;\n    }\n\n    public int[][] getBoard(){\n        return this.currBoard;\n    }\n\n    @Override\n    public String toString() {\n        String str = \"\";\n        for (int[] row : currBoard) {\n            for (int value : row) {\n                str += value + \" \";\n            }\n            str += \"\\n\";\n        }\n        return str;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/entity/EasyBoard.java b/src/entity/EasyBoard.java
+--- a/src/entity/EasyBoard.java	(revision e52bda7115b82b08a19c6e970e011070d8cfaedb)
++++ b/src/entity/EasyBoard.java	(date 1699038965599)
+@@ -174,6 +174,9 @@
+     public int[][] getBoard(){
+         return this.currBoard;
+     }
++    public void setBoard(int[][] newBoard) {
++        this.currBoard = newBoard;
++    }
+ 
+     @Override
+     public String toString() {
+Index: src/app/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package app;\n\nimport data_access.UserDAO;\nimport entity.EasyBoard;\nimport entity.HardBoard;\nimport entity.CommonUserFactory;\n\nimport java.io.IOException;\n\npublic class Main {\n\n    public static void main(String[] args) {\n        EasyBoard easyTester = new EasyBoard();\n        System.out.println(easyTester);\n        \n        HardBoard hardTester = new HardBoard();\n        System.out.println(hardTester);\n\n\n        // testing userDAO\n        UserDAO userDataAccessObject;\n        try {\n            userDataAccessObject = new UserDAO(\"mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\\n\\n\",\n                    \"smartsudoku\", \"user\", new CommonUserFactory());\n        } catch (Exception e) {\n            throw new RuntimeException(e);\n        }\n\n        userDataAccessObject.deleteAll(); //for testing\n        userDataAccessObject.addUser(\"usertest1\", \"supersecurepassword\");\n        userDataAccessObject.addUser(\"usertest2\", \"notsosecurepassword\");\n        System.out.println(userDataAccessObject.toString());\n\n        userDataAccessObject.delete(\"usertest1\");\n        System.out.println(userDataAccessObject.toString());\n\n\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/app/Main.java b/src/app/Main.java
+--- a/src/app/Main.java	(revision e52bda7115b82b08a19c6e970e011070d8cfaedb)
++++ b/src/app/Main.java	(date 1699040350194)
+@@ -4,6 +4,7 @@
+ import entity.EasyBoard;
+ import entity.HardBoard;
+ import entity.CommonUserFactory;
++import entity.SudokuAI;
+ 
+ import java.io.IOException;
+ 
+@@ -16,6 +17,10 @@
+         HardBoard hardTester = new HardBoard();
+         System.out.println(hardTester);
+ 
++        SudokuAI easyAiTester = new SudokuAI(1);
++        easyAiTester.scramble(easyTester);
++        System.out.println(easyTester);
++
+ 
+         // testing userDAO
+         UserDAO userDataAccessObject;

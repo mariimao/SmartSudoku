@@ -5,18 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputBoundary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInteractor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputBoundary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelUserDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +45,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "CancelUseCase",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Janet/Desktop/CS Work/csc207/SmartSudoku/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -80,6 +70,7 @@
       <workItem from="1699897762500" duration="6734000" />
       <workItem from="1699925842618" duration="1317000" />
       <workItem from="1699927185308" duration="1703000" />
+      <workItem from="1700245285981" duration="9000" />
     </task>
     <task id="LOCAL-00001" summary="Completed Signup Use Case, may need to adjust user interaction flow">
       <option name="closed" value="true" />
