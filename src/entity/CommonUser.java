@@ -1,5 +1,7 @@
 package entity;
 
+import entity.board.GameState;
+
 import java.time.LocalTime;
 import java.util.Map;
 
