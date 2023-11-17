@@ -1,6 +1,6 @@
 # SmartSudoku
 
-#### Files
+## Files
 
 ### app
 * Main: (temporary) Tester Code
