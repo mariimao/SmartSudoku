@@ -1,6 +1,9 @@
 package data_access;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -19,6 +22,9 @@ import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
     public static void main(String[] args) {
+
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
+
         // TODO: DELETE MAIN, Just for testing this file
 
         // made sample scores, boards, and users
@@ -80,8 +86,14 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
                 // convert to localtime
                 Map<LocalTime, Integer> scores = new HashMap<>();
-                for (String time : stringScores.keySet()) {
-                    scores.put(LocalTime.parse(time), scores.get(time));
+
+
+                if (stringScores==null) {
+                    scores.put(LocalTime.now(), 0); //TODO: may need to change
+                } else {
+                    for (String time : stringScores.keySet()) {
+                        scores.put(LocalTime.parse(time), scores.get(time));
+                    }
                 }
 
                 User user = userFactory.create(name, password, scores);
@@ -102,6 +114,11 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             Map<LocalTime, Integer> scores = user.getScores();
             GameState pausedGame = user.getPausedGame();
 
+            String pausedGameStr = "yes";
+            if (pausedGame != null) {
+                pausedGameStr = pausedGame.toStringPause();
+            }
+
             // cannot store LocalTime, so must convert it to String
             Map<String, Integer> stringScores = new HashMap<>();
             for (LocalTime time : scores.keySet()) {
@@ -114,7 +131,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("name", name)
                         .append("password", password)
                         .append("scores", stringScores)
-                        .append("pausedgame", pausedGame.toStringPause());  // it
+                        .append("pausedgame", pausedGameStr);  // it
                 this.userCollection.insertOne(entry);
             }
         }
