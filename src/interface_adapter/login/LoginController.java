@@ -1,6 +1,5 @@
 package interface_adapter.login;
 
-import jdk.jpackage.internal.Log;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;
 

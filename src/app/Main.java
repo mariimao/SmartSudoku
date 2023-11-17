@@ -7,8 +7,10 @@ import entity.HardBoard;
 import entity.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.menu.MenuViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
 import view.LoginView;
@@ -52,6 +54,10 @@ public class Main {
         StartViewModel startViewModel = new StartViewModel();
         LoginViewModel loginViewModel = new LoginViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
+        CancelViewModel cancelViewModel = new CancelViewModel();
+        MenuViewModel menuViewModel = new MenuViewModel();
+
+
 
 
 
@@ -66,6 +72,22 @@ public class Main {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        views.add(signupView, signupView.viewName);
+
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        views.add(loginView, loginView.viewName);
+
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        views.add(startView, startView.viewName);
+
+        viewManagerModel.setActiveViewName(signupView.viewName);
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setVisible(true);
+
 
         //userDataAccessObject.deleteAll(); //for testing
         Map<LocalTime, Integer> sampleScores = new HashMap<>();
@@ -86,15 +108,6 @@ public class Main {
 
 //        userDataAccessObject.delete("user1");
 //        System.out.println(userDataAccessObject.toString());
-
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        viewManagerModel.setActiveViewName(startView.viewName);
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
 
         // board generation
         EasyBoard easyTester = new EasyBoard();
