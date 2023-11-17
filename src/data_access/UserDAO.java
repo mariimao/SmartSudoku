@@ -14,13 +14,17 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import use_case.login.LoginUserDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
+import use_case.signup.cancel.CancelUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface,
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface {
     public static void main(String[] args) {
         // TODO: DELETE MAIN, Just for testing this file
 
@@ -93,6 +97,11 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
+    @Override
+    public boolean existsbyName(String username) {
+        return false;
+    }
+
     public void addUser(User user){
         accounts.put(user.getName(), user);
         this.addUser();
@@ -125,6 +134,11 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
     public boolean existsByName(String name) {
         return accounts.containsKey(name);
+    }
+
+    @Override
+    public User get(String username) {
+        return accounts.get(username);
     }
 
     public void delete(String name){
