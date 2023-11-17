@@ -1,11 +1,11 @@
-package entity;
+package entity.user;
 
 import entity.board.GameState;
 
 import java.time.LocalTime;
 import java.util.Map;
 
-public class CommonUser implements User{
+public class CommonUser implements User {
 
     private final String name;
     private final String password;

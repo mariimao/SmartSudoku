@@ -1,4 +1,4 @@
-package entity;
+package entity.leaderboard;
 
 import java.util.SortedMap;
 import java.util.Set;
