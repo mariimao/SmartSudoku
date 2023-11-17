@@ -5,5 +5,5 @@ import java.util.Set;
 
 public interface Leaderboard {
 
-    SortedMap<Integer, Set<String>> generateLeaderboard();
+    <K, V> SortedMap<K, V> getLeaderboard();
 }

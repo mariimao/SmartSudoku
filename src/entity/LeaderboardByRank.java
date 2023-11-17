@@ -4,22 +4,22 @@ package entity;
 import java.time.LocalTime;
 import java.util.*;
 
-public class LeaderboardByHighScore implements Leaderboard {
+public class LeaderboardByRank implements Leaderboard {
 
     private final Map<String, User> accounts;
     private final SortedMap<Integer, Set<String>> leaderboard;
 
 
-    public LeaderboardByHighScore(Map<String, User> accounts) {
+    public LeaderboardByRank(Map<String, User> accounts) {
         this.accounts = accounts;
         this.leaderboard = this.generateLeaderboard();
     }
 
     public SortedMap<Integer, Set<String>> getLeaderboard() {
-        return this.leaderboard;
+        return leaderboard;
     }
 
-    public SortedMap<Integer, Set<String>> generateLeaderboard() {
+    private SortedMap<Integer, Set<String>> generateLeaderboard() {
         Map<Integer, Set<String>> highScoreToUsers = this.highScoreToUsers();
 
         SortedMap<Integer, Set<String>> leaderboard = new TreeMap<>();
@@ -70,8 +70,8 @@ public class LeaderboardByHighScore implements Leaderboard {
         sample3.put(LocalTime.of(1,2,5), 13);
         accounts.put("Squidward", new CommonUser("Squidward", "a", sample3));
 
-        Leaderboard leaderboard = new LeaderboardByHighScore(accounts);
+        Leaderboard leaderboard = new LeaderboardByRank(accounts);
 
-        System.out.println(leaderboard.generateLeaderboard());
+        System.out.println(leaderboard.getLeaderboard());
     }
 }

@@ -1,4 +1,6 @@
 package use_case.leaderboard;
 
-public class LeaderboardInputBoundary {
+public interface LeaderboardInputBoundary {
+    void execute(LeaderboardInputData leaderboardInputData);
+
 }
