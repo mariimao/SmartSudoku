@@ -55,11 +55,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         userDAO.saveProgress(u1);
         System.out.println(userDAO.toString());
     }
+
     private final MongoCollection<Document> userCollection;
     private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
 
-    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception{
+    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception {
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
@@ -90,7 +91,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         accounts.put(user.getName(), user);
         this.addUser();
     }
@@ -114,7 +115,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("name", name)
                         .append("password", password)
                         .append("scores", stringScores)
-                        .append("pausedgame", pausedGame.toStringPause());  // it
+                        .append("pausedGamePastBoards", null)
+                        .append("pausedgame", null);
                 this.userCollection.insertOne(entry);
             }
         }
@@ -124,19 +126,19 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return accounts.containsKey(name);
     }
 
-    public void delete(String name){
+    public void delete(String name) {
         this.userCollection.deleteOne(eq("name", name));
         // below is alternative method that returns info of the deleted user
         //Document user = this.userCollection.findOneAndDelete(eq("username", username));
         accounts.remove(name);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         this.userCollection.deleteMany(new Document());
         accounts.clear();
     }
 
-    public void addScore(User user, LocalTime time, Integer score){
+    public void addScore(User user, LocalTime time, Integer score) {
         accounts.get(user.getName()).addScores(time, score);
         this.changeScores(user);
     }
@@ -147,26 +149,39 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 eq("scores", user.getScores())); //update score
     }
 
-    public String toString(){
+    public String toString() {
         return accounts.toString();
     }
 
     @Override
-    public void saveProgress(User user) {
+    public boolean saveProgress(User user) {
         // TODO: if Board implementation changes form HashMap[] to int[][] switch from string rep to array rep
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
-        Bson filter = Filters.eq("name", user.getName());  // creating a filter
-        Bson update = Updates.set("pausedgame", user.getPausedGame().toStringPause());  // create an update
-        UpdateResult result = this.userCollection.updateOne(filter, update);  //performing the update
+        // returns true if game was paused successfully and false otherwise
+        String name = user.getName();
+        GameState pausedGame = user.getPausedGame();
 
-        // Check if the document was found and updated
-        if (result.getMatchedCount() == 1) {
-            System.out.println("Game paused and updated successfully.");
-        } else {
-            System.out.println("Game not paused or not updated.");
+        Bson filter = Filters.eq("name", name);   // Creating a filter
+        Bson updateGameState = Updates.set("pausedgame", pausedGame.toStringPause());    // Creating an update for the game state
+        UpdateResult resultGameState = this.userCollection.updateOne(filter, updateGameState);   // Performing the update for the game state
+
+        Bson updatePastGames = Updates.set("pastgames", pausedGame.getPastStates());   // Creating an update for the past games
+        UpdateResult resultPastGames = this.userCollection.updateOne(filter, updatePastGames);   // Performing the update for the past games
+
+        // Check if the document was found and updated for the game state
+        boolean gamePaused = false;
+        if (resultGameState.getMatchedCount() == 1) {
+            gamePaused = true;
         }
+
+        // Check if the document was found and updated for the past games
+        if (resultPastGames.getMatchedCount() == 1) {
+            gamePaused = true;
+        }
+        return gamePaused;
     }
 }
+
 
 /*
   Temporary
@@ -178,6 +193,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
   https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
 
   TODO: SLFJ4 logger warning:
+      akunna: I think I fixed this issue
   https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
   https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
   https://www.slf4j.org/codes.html#StaticLoggerBinder
