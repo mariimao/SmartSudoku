@@ -9,7 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import entity.*;
+import entity.user.*;
 import entity.board.EasyBoard;
 import entity.board.GameState;
 import entity.board.HardBoard;

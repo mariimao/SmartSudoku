@@ -32,11 +32,12 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         LoginState loginState = loginViewModel.getLoginState();
-        if (error.equals("Username already exists. Please pick a different username.")){
-            loginState.setUsernameError(error);
-        }
-        else {
+        if (error.equals("Incorrect password. Try again.")){
             loginState.setPasswordError(error);
         }
+        else {
+            loginState.setUsernameError(error);
+        }
+        loginViewModel.firePropertyChanged();
     }
 }

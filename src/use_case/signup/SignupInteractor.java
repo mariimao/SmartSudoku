@@ -1,8 +1,8 @@
 package use_case.signup;
 
 
-import entity.User;
-import entity.UserFactory;
+import entity.user.User;
+import entity.user.UserFactory;
 
 import java.time.LocalTime;
 import java.util.Map;
@@ -36,6 +36,8 @@ public class SignupInteractor implements SignupInputBoundary {
         else {
 
             User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword(), scores);
+            signupUserDataAccessInterface.addUser(user);
+
             SignupOutputData signupOutputData = new SignupOutputData(user.getName(), false);
             signupPresenter.prepareSuccessView(signupOutputData);
         }

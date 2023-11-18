@@ -1,10 +1,10 @@
 package app;
 
 import data_access.UserDAO;
-import entity.CommonUser;
+import entity.user.CommonUser;
 import entity.board.EasyBoard;
 import entity.board.HardBoard;
-import entity.CommonUserFactory;
+import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
@@ -13,6 +13,8 @@ import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
+import view.LoginView;
+import view.SignupView;
 import view.StartView;
 import view.ViewManager;
 
@@ -31,7 +33,7 @@ public class Main {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        JFrame application = new JFrame("Login Example");
+        JFrame application = new JFrame("SudokuScramble");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -70,16 +72,16 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        views.add(startView, startView.viewName);
+
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, cancelViewModel, startViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        viewManagerModel.setActiveViewName(signupView.viewName);
+        viewManagerModel.setActiveViewName(startView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
