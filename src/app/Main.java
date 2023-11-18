@@ -13,10 +13,7 @@ import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
-import view.LoginView;
-import view.SignupView;
-import view.StartView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -80,6 +77,10 @@ public class Main {
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
+
+        // TODO: Update this when you add more views
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, userDataAccessObject);
+        views.add(menuView, menuView.viewName);
 
         viewManagerModel.setActiveViewName(startView.viewName);
         viewManagerModel.firePropertyChanged();
