@@ -5,17 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="Started working on PauseGame Interface Adapters">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/menu/MenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/menu/MenuPresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/PauseGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PauseGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +30,18 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="a934f9b6-92b1-44e9-be4a-2e512c65a768" />
+        <option name="url" value="https://github.com/mariimao/SmartSudoku" />
+      </UrlAndAccount>
+    </option>
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -50,24 +54,24 @@
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "PauseGame",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;PauseGame&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="java-quick-start" />
@@ -162,40 +166,6 @@
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
     </configuration>
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="SmartSudoku" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="SmartSudoku" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -211,5 +181,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
   </component>
 </project>

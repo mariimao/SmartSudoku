@@ -1,20 +1,22 @@
 package view;
 
-import entity.UserFactory;
+import app.StartUseCaseFactory;
+import data_access.UserDAO;
+import entity.CommonUser;
+import entity.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
+import interface_adapter.menu.MenuPresenter;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartController;
+import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
 import use_case.menu.MenuInteractor;
 import use_case.menu.MenuOutputBoundary;
-import use_case.menu.MenuUserDataAccessInterface;
-import use_case.signup.SignupUserDataAccessInterface;
 import use_case.start.StartInteractor;
-import use_case.start.StartOutputBoundary;
-import use_case.start.StartUserDataAccessInterface;
 
 import javax.swing.*;
 import java.awt.*;
@@ -23,6 +25,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalTime;
+import java.util.HashMap;
 import java.util.Map;
 
 // when the game is paused I want it to move from the GameView to this one
@@ -32,84 +35,138 @@ import java.util.Map;
 // "Log Out" - takes them back to SignUp View
 
 public class PauseGameView extends JPanel implements ActionListener, PropertyChangeListener {
-    // TODO: FINISH
     public final String viewName = "Game Paused";
     private final PauseGameViewModel pauseGameViewModel;
-
+    private final StartViewModel startViewModel;
+    private final MenuViewModel menuViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private final StartController startController;
+    private final MenuController menuController;
     final JButton backToMenu;
     final JButton logOut;
     final JButton resumeGame;
-    private final PauseGameController pauseGameController;
-    private final SignupUserDataAccessInterface signupUserDataAccessInterface;
-    private final ViewManagerModel viewManagerModel;
-    private final StartOutputBoundary startPresenter;
-    private final UserFactory userFactory;
-    private final Map<LocalTime, Integer> scores;
-    private final StartUserDataAccessInterface startUserDataAccessInterface;
-    private final MenuUserDataAccessInterface menuUserDataAccessInterface;
-    private final MenuOutputBoundary menuPresenter;
 
     public static void main(String[] args) {
         //TODO: for testing
-        // PauseGameView pauseGameView = new PauseGameView();
+        UserDAO userDAO;
+        try {
+            userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        //userDataAccessObject.deleteAll(); //for testing
+        Map<LocalTime, Integer> sampleScores = new HashMap<>();
+        sampleScores.put(LocalTime.now(), 4);
+        sampleScores.put(LocalTime.of(12, 30, 1), 3);
+        CommonUser user1 = new CommonUser("user1", "pass2", sampleScores);
+        userDAO.addUser(user1);
+        sampleScores.put(LocalTime.of(12, 31, 1), 4);
+        CommonUser user2 = new CommonUser("user2", "pass", sampleScores);
+        userDAO.addUser(user2);
+        PauseGameViewModel pauseGameViewModel1 = new PauseGameViewModel();
+        StartViewModel startViewModel1 = new StartViewModel();
+        SignupViewModel signupViewModel1 = new SignupViewModel();
+        LoginViewModel loginViewModel1 = new LoginViewModel();
+        MenuViewModel menuViewModel1 = new MenuViewModel();
+        ViewManagerModel viewManagerModel1 = new ViewManagerModel();
+        StartController startController1 = new StartController(new StartInteractor(userDAO, new StartPresenter(startViewModel1, signupViewModel1, loginViewModel1, viewManagerModel1)));
+        MenuController menuController1 = new MenuController(new MenuInteractor(userDAO, new MenuPresenter()));
+        PauseGameView pauseGameView = new PauseGameView(pauseGameViewModel1, startViewModel1, menuViewModel1, viewManagerModel1, startController1, menuController1);
+
+        // CREATED ALL NECESSARY PARTS FOR THE APP TO RUN VIEWS
+
+        // The main application window.
+        JFrame application = new JFrame("Login Example");
+        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        CardLayout cardLayout = new CardLayout();
+
+        // The various View objects. Only one view is visible at a time.
+        JPanel views = new JPanel(cardLayout);
+        application.add(views);
+        // This keeps track of and manages which view is currently showing.
+        new ViewManager(views, cardLayout, viewManagerModel1);
+        views.add(pauseGameView, pauseGameView.viewName);
+
+        viewManagerModel1.setActiveViewName(pauseGameView.viewName);
+        viewManagerModel1.firePropertyChanged();
+
+        application.pack();
+        application.setVisible(true);
+
     }
 
     public PauseGameView(PauseGameViewModel pauseGameViewModel,
-                         PauseGameController pauseGameController,
-                         SignupUserDataAccessInterface signupUserDataAccessInterface,
-                         ViewManagerModel viewManagerModel, StartUserDataAccessInterface startUserDataAccessInterface,
-                         StartOutputBoundary startPresenter,
-                         UserFactory userFactory,
-                         Map<LocalTime, Integer> scores, MenuUserDataAccessInterface menuUserDataAccessInterface, MenuOutputBoundary menuPresenter) {
+                         StartViewModel startViewModel,
+                         MenuViewModel menuViewModel,
+                         ViewManagerModel viewManagerModel,
+                         StartController startController,
+                         MenuController menuController) {
         this.pauseGameViewModel = pauseGameViewModel;
-        this.pauseGameController = pauseGameController;
-        this.signupUserDataAccessInterface = signupUserDataAccessInterface;
+        this.startViewModel = startViewModel;
+        this.menuViewModel = menuViewModel;
+
         this.viewManagerModel = viewManagerModel;
-        this.startUserDataAccessInterface = startUserDataAccessInterface;
-        this.startPresenter = startPresenter;
-        this.userFactory = userFactory;
-        this.scores = scores;
-        this.menuUserDataAccessInterface = menuUserDataAccessInterface;
-        this.menuPresenter = menuPresenter;
-        this.pauseGameViewModel.addPropertyChangeListener(this);
+        this.startController = startController;
+        this.menuController = menuController;
+
+        pauseGameViewModel.addPropertyChangeListener(this);
 
         JLabel title = new JLabel("Paused Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JPanel buttons = new JPanel();
-        backToMenu = new JButton(pauseGameViewModel.BACK_TO_MENU_BUTTON_LABEL);
+        backToMenu = new JButton(PauseGameViewModel.BACK_TO_MENU_BUTTON_LABEL);
         buttons.add(backToMenu);
-        logOut = new JButton(pauseGameViewModel.LOGOUT_BUTTON_LABEL);
+        logOut = new JButton(PauseGameViewModel.LOGOUT_BUTTON_LABEL);
         buttons.add(logOut);
-        resumeGame = new JButton(pauseGameViewModel.RESUME_GAME_BUTTON_LABEL); //TODO: has to be implemented after the game use case is done or cut altogether
+        resumeGame = new JButton(PauseGameViewModel.RESUME_GAME_BUTTON_LABEL); //TODO: has to be implemented after the game use case is done or cut altogether
         buttons.add(resumeGame);
 
         logOut.addActionListener(                // This creates an anonymous subclass of ActionListener and instantiates it.
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(logOut)) {
-                            StartInteractor startInteractor = new StartInteractor(startUserDataAccessInterface, startPresenter);
-                            StartController startController = new StartController(startInteractor);
                             StartView startView = new StartView(startController, new StartViewModel());
-                            PauseGameView.this.viewManagerModel.setActiveViewName(startView.viewName);
-                            PauseGameView.this.viewManagerModel.firePropertyChanged();
-                        }
-
-                        else if (evt.getSource().equals(backToMenu)) {
-                            MenuInteractor menuInteractor = new MenuInteractor(menuUserDataAccessInterface, menuPresenter);
-                            MenuController menuController = new MenuController(menuInteractor);
-                            MenuView menuView = new MenuView(menuController, new MenuViewModel());
-                            PauseGameView.this.viewManagerModel.setActiveViewName(menuView.viewName);
-                            PauseGameView.this.viewManagerModel.firePropertyChanged();
-                        }
-
-                        else {
-                            // TODO: IMPLEMENT RESUME GAME
+                            startController.execute("Login");
+                            // PauseGameView.this.viewManagerModel.setActiveViewName(startView.viewName);
+                            // PauseGameView.this.viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
         );
 
+        backToMenu.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(backToMenu)) {
+                            MenuView menuView = new MenuView(menuController, new MenuViewModel());
+                            menuController.execute();
+                            PauseGameView.this.viewManagerModel.setActiveViewName(menuView.viewName);
+                            PauseGameView.this.viewManagerModel.firePropertyChanged();
+                        }
+                    }
+                }
+
+        );
+
+        resumeGame.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent evt) {
+                        if (evt.getSource().equals(resumeGame)) {
+                            // TODO: implement when game playing use case is done
+                        }
+                    }
+                }
+
+        );
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(buttons);
     }
 
 

@@ -11,13 +11,14 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import use_case.menu.MenuUserDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, MenuUserDataAccessInterface {
     public static void main(String[] args) {
         // TODO: DELETE MAIN, Just for testing this file
 
@@ -77,16 +78,15 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             String name = account.getString("name");
             if (!accounts.containsKey(name)) {
                 String password = account.getString("password");
-                Map<String, Integer> stringScores = account.get("scores", Map.class);
-
-                // convert to localtime
-                Map<LocalTime, Integer> scores = new HashMap<>();
-                for (String time : stringScores.keySet()) {
-                    scores.put(LocalTime.parse(time), scores.get(time));
-                }
-
-                User user = userFactory.create(name, password, scores);
-                accounts.put(name, user);
+//                Map<String, Integer> stringScores = account.get("scores", Map.class);   // TODO: remove this comment. I only commented it out because of the NUllPointer Error
+//
+//                // convert to localtime
+//                Map<LocalTime, Integer> scores = new HashMap<>();
+//                for (String time : stringScores.keySet()) {
+//                    scores.put(LocalTime.parse(time), scores.get(time));
+//                }
+                // User user = userFactory.create(name, password, scores);
+                // accounts.put(name, user);
             }
         }
     }
