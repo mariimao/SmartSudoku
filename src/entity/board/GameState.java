@@ -8,7 +8,9 @@ public class GameState {
         EasyBoard testBoard = new EasyBoard("003T00004T004T01F2T00");
         GameState testState = new GameState(1);
         System.out.println(testState.currBoard);
-        System.out.println(testState.toStringPause());
+        String stringRep = testState.toStringPause();
+        System.out.println("String Rep of State: " + testState.toStringPause());
+        System.out.println(Arrays.toString(stringRep.split("-")));
     }
 
     private final int difficulty; // 1 - easy, 2 - hard
@@ -79,6 +81,8 @@ public class GameState {
     public int getLives() {
         return this.lives;
     }
+
+    public void setLives(int life) {this.lives = life;}
 
     public LinkedList<GameState> getPastStates() {return this.past_states; }
 

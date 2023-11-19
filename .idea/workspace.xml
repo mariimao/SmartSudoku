@@ -5,74 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="There were issues with the imports because of restructuring the entity package. They should be fixed now.">
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/Board.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/EasyBoard.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/GameState.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/HardBoard.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/Main.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/SudokuAI.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/shelved.patch" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m___Changes_.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/LoginUseCaseFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/app/SignupUseCaseFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/board/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/board/EasySudokuScrambler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/board/HardBoardFactory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/board/HardSudokuScrambler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/entity/board/SudokuScrambler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelPresenter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelViewModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginInputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginInteractor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginOutputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginUserDataAccessInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputBoundary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInteractor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputBoundary.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelUserDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/StartUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/StartUseCaseFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Board.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/BoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/BoardFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/CommonUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/CommonUserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUserFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/EasyBoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoardFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/GameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/HardBoardFactory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/leaderboard/Leaderboard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/LeaderboardByHighScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/leaderboard/LeaderboardByHighScore.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/SudokuAI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/UserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/UserFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginInputBoundary.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputBoundary.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PauseGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PauseGameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,6 +35,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -90,7 +44,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="LoginUseCase" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -112,7 +66,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Merging PauseGame",
+    "git-widget-placeholder": "ResumeGame",
     "last_opened_file_path": "C:/Users/Janet/Desktop/CS Work/csc207/SmartSudoku/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -126,6 +80,11 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="interface_adapter" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

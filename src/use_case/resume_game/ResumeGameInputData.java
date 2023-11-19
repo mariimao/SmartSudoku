@@ -1,15 +1,16 @@
-package use_case.pause_game;
+package use_case.resume_game;
+
 import entity.board.GameState;
 import entity.user.User;
 
 import java.util.LinkedList;
 
-public class PauseGameInputData {
+public class ResumeGameInputData {
     final private User user;
     final private GameState current_state;
     final private LinkedList<GameState> past_states;
 
-    public PauseGameInputData(User user, GameState currentState, LinkedList<GameState> pastStates) {
+    public ResumeGameInputData(User user, GameState currentState, LinkedList<GameState> pastStates) {
         this.user = user;
         current_state = currentState;
         past_states = pastStates;
