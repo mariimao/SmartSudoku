@@ -1,8 +1,7 @@
 package use_case.signup;
 
 
-import entity.User;
-import entity.UserFactory;
+import entity.user.*;
 
 import java.time.LocalTime;
 import java.util.Map;

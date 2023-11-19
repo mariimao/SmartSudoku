@@ -1,6 +1,6 @@
 package use_case.pause_game;
 
-import entity.User;
+import entity.user.*;
 
 public class PauseGameInteractor implements PauseGameInputBoundary{
     final PauseGameDataAccessInterface pauseGameDataAccessInterface;

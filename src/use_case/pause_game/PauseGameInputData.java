@@ -1,5 +1,7 @@
 package use_case.pause_game;
 import entity.*;
+import entity.board.GameState;
+import entity.user.User;
 
 import java.util.LinkedList;
 

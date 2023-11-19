@@ -1,7 +1,7 @@
 package interface_adapter.pause_game;
 
-import entity.GameState;
-import entity.User;
+import entity.board.GameState;
+import entity.user.User;
 import use_case.pause_game.PauseGameInputBoundary;
 import use_case.pause_game.PauseGameInputData;
 

@@ -1,6 +1,6 @@
 package use_case.pause_game;
 
-import entity.User;
+import entity.user.User;
 
 public class PauseGameOutputData {
     // TODO: how will we conserve time when pausing?

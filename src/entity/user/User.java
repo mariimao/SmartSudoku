@@ -1,4 +1,6 @@
-package entity;
+package entity.user;
+
+import entity.board.GameState;
 
 import java.time.LocalTime;
 import java.util.Map;

@@ -1,25 +1,38 @@
 package data_access;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import entity.*;
+import entity.user.*;
+import entity.board.EasyBoard;
+import entity.board.GameState;
+import entity.board.HardBoard;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import use_case.login.LoginUserDataAccessInterface;
 import use_case.menu.MenuUserDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
+import use_case.signup.cancel.CancelUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, MenuUserDataAccessInterface {
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface,
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface {
     public static void main(String[] args) {
+
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
+
         // TODO: DELETE MAIN, Just for testing this file
 
         // made sample scores, boards, and users
@@ -78,17 +91,28 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             String name = account.getString("name");
             if (!accounts.containsKey(name)) {
                 String password = account.getString("password");
-//                Map<String, Integer> stringScores = account.get("scores", Map.class);   // TODO: remove this comment. I only commented it out because of the NUllPointer Error
-//
-//                // convert to localtime
-//                Map<LocalTime, Integer> scores = new HashMap<>();
-//                for (String time : stringScores.keySet()) {
-//                    scores.put(LocalTime.parse(time), scores.get(time));
-//                }
-                // User user = userFactory.create(name, password, scores);
-                // accounts.put(name, user);
+                Map<String, Integer> stringScores = account.get("scores", Map.class);
+
+                // convert to localtime
+                Map<LocalTime, Integer> scores = new HashMap<>();
+
+
+                if (stringScores==null) {
+                    scores.put(LocalTime.now(), 0); //TODO: may need to change
+                } else {
+                    for (String time : stringScores.keySet()) {
+                        scores.put(LocalTime.parse(time), scores.get(time));
+                    }
+                }
+
+                User user = userFactory.create(name, password, scores);
+                accounts.put(name, user);
             }
         }
+    }
+    @Override
+    public boolean existsbyName(String username) {
+        return false;
     }
 
     public void addUser(User user) {
@@ -102,6 +126,11 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             String password = user.getPassword();
             Map<LocalTime, Integer> scores = user.getScores();
             GameState pausedGame = user.getPausedGame();
+
+            String pausedGameStr = "yes";
+            if (pausedGame != null) {
+                pausedGameStr = pausedGame.toStringPause();
+            }
 
             // cannot store LocalTime, so must convert it to String
             Map<String, Integer> stringScores = new HashMap<>();
@@ -126,7 +155,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return accounts.containsKey(name);
     }
 
-    public void delete(String name) {
+    @Override
+    public User get(String username) {
+        return accounts.get(username);
+    }
+
+    public void delete(String name){
         this.userCollection.deleteOne(eq("name", name));
         // below is alternative method that returns info of the deleted user
         //Document user = this.userCollection.findOneAndDelete(eq("username", username));
@@ -193,7 +227,6 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
   https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
 
   TODO: SLFJ4 logger warning:
-      akunna: I think I fixed this issue
   https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
   https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
   https://www.slf4j.org/codes.html#StaticLoggerBinder

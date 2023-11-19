@@ -4,8 +4,75 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="finished the PauseGame use case">
+    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="There were issues with the imports because of restructuring the entity package. They should be fixed now.">
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/Board.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/EasyBoard.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/GameState.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/HardBoard.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/SudokuAI.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/shelved.patch" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m___Changes_.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/LoginUseCaseFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/SignupUseCaseFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/board/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/board/EasySudokuScrambler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/board/HardBoardFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/board/HardSudokuScrambler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/entity/board/SudokuScrambler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelPresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/signup/cancel/CancelViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginInputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginOutputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/login/LoginUserDataAccessInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelOutputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/signup/cancel/CancelUserDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/StartUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/StartUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Board.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/BoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/BoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/CommonUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/CommonUserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUserFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/EasyBoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/HardBoardFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/leaderboard/Leaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/LeaderboardByHighScore.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/leaderboard/LeaderboardByHighScore.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/SudokuAI.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/UserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/UserFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PauseGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PauseGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,6 +82,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -22,28 +90,10 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="LoginUseCase" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-  }
-}]]></component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="recentNewPullRequestHead">
-      <RepoCoordinatesHolder>
-        <option name="owner" value="mariimao" />
-        <option name="repository" value="SmartSudoku" />
-      </RepoCoordinatesHolder>
-    </option>
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="a934f9b6-92b1-44e9-be4a-2e512c65a768" />
-        <option name="url" value="https://github.com/mariimao/SmartSudoku" />
-      </UrlAndAccount>
-    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -57,119 +107,25 @@
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;PauseGame&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "Merging PauseGame",
+    "last_opened_file_path": "C:/Users/Janet/Desktop/CS Work/csc207/SmartSudoku/src",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager">
-    <configuration default="true" type="DjangoTestsConfigurationType">
-      <module name="java-quick-start" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="TARGET" value="" />
-      <option name="SETTINGS_FILE" value="" />
-      <option name="CUSTOM_SETTINGS" value="false" />
-      <option name="USE_OPTIONS" value="false" />
-      <option name="OPTIONS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="java-quick-start" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="java-quick-start" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
-      <module name="java-quick-start" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="ADDITIONAL_ARGS" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="java-quick-start" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Python.FlaskServer">
-      <module name="java-quick-start" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="launchJavascriptDebuger" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="java-quick-start" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <method v="2" />
-    </configuration>
-  </component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -178,35 +134,36 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1699897760707</updated>
-      <workItem from="1699897762500" duration="5642000" />
+      <workItem from="1699897762500" duration="6734000" />
+      <workItem from="1699925842618" duration="1317000" />
+      <workItem from="1699927185308" duration="1703000" />
+      <workItem from="1700245285981" duration="9000" />
     </task>
-    <task id="LOCAL-00001" summary="finished the PauseGame use case">
+    <task id="LOCAL-00001" summary="Completed Signup Use Case, may need to adjust user interaction flow">
       <option name="closed" value="true" />
-      <created>1700281191233</created>
+      <created>1699905137433</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1700281191233</updated>
+      <updated>1699905137433</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="committing files asfter resolving conflicts from leaderboard branch">
+      <option name="closed" value="true" />
+      <created>1700360361246</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1700360361246</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="finished the PauseGame use case" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished the PauseGame use case" />
+    <MESSAGE value="Completed Signup Use Case, may need to adjust user interaction flow" />
+    <MESSAGE value="There were issues with the imports because of restructuring the entity package. They should be fixed now." />
+    <option name="LAST_COMMIT_MESSAGE" value="There were issues with the imports because of restructuring the entity package. They should be fixed now." />
   </component>
 </project>

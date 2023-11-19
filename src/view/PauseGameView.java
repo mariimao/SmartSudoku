@@ -2,8 +2,8 @@ package view;
 
 import app.StartUseCaseFactory;
 import data_access.UserDAO;
-import entity.CommonUser;
-import entity.CommonUserFactory;
+import entity.user.CommonUser;
+import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
