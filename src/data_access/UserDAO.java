@@ -9,7 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import entity.*;
+import entity.user.*;
 import entity.board.EasyBoard;
 import entity.board.GameState;
 import entity.board.HardBoard;
@@ -186,7 +186,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     }
 
     @Override
-    public void saveProgress(User user) {
+    public boolean saveProgress(User user) {
         // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
         Bson filter = Filters.eq("name", user.getName());  // creating a filter
@@ -199,6 +199,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         } else {
             System.out.println("Game not paused or not updated.");
         }
+        return false;
     }
 }
 

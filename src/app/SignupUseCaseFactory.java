@@ -1,8 +1,7 @@
 package app;
 
 import data_access.UserDAO;
-import entity.CommonUserFactory;
-import entity.UserFactory;
+import entity.user.*;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.SignupController;

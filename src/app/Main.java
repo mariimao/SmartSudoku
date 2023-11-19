@@ -1,10 +1,10 @@
 package app;
 
 import data_access.UserDAO;
-import entity.CommonUser;
+import entity.user.CommonUser;
 import entity.board.EasyBoard;
 import entity.board.HardBoard;
-import entity.CommonUserFactory;
+import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
@@ -13,6 +13,8 @@ import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
+import view.LoginView;
+import view.SignupView;
 import view.StartView;
 import view.ViewManager;
 
