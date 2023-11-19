@@ -47,15 +47,15 @@ public class MenuUseCaseFactory {
         return null;
     }
 
-    private static LoginController createUserSignupUseCase(ViewManagerModel viewManagerModel,
+    private static MenuController createUserSignupUseCase(ViewManagerModel viewManagerModel,
                                                            MenuViewModel menuViewModel, UserDAO userDataAccessObject) throws IOException {
 
         MenuOutputBoundary menuOutputBoundary = new MenuPresenter();
 
-        MenuInputBoundary menuInteractor = new MenuInteractor(
+        MenuInteractor menuInteractor = new MenuInteractor(
                 userDataAccessObject, menuOutputBoundary);
 
-        return new LoginController(menuInteractor);
+        return new MenuController(menuInteractor);
     }
 
 }
