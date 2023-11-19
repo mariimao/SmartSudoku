@@ -21,7 +21,7 @@ public class MenuViewModel extends ViewModel {
     private MenuState menuState = new MenuState();
 
     public MenuViewModel() {
-        super("start view");
+        super("menu view");
     }
 
     public void setMenuState(MenuState menuState) {

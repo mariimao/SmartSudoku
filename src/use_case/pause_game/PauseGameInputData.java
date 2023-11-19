@@ -1,5 +1,5 @@
 package use_case.pause_game;
-import entity.*;
+import entity.user.*;
 import entity.board.GameState;
 import entity.user.User;
 
