@@ -1,6 +1,6 @@
 package interface_adapter.pause_game;
 
-import entity.GameState;
+import entity.board.GameState;
 
 import java.util.LinkedList;
 
