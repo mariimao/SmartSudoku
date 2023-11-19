@@ -34,7 +34,7 @@ public class PausedGameUseCaseFactory {
                                         LoginViewModel loginViewModel, UserDAO userDataAccessObject) {
         try {
             StartController startController = createUserStartUseCase(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-            MenuController menuController = createUserMenuUseCase(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+            MenuController menuController = createUserMenuUseCase(viewManagerModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, userDataAccessObject);
             return new PausedGameView(pauseGameViewModel, startViewModel, menuViewModel, viewManagerModel, startController, menuController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open page.");
