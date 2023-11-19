@@ -1,6 +1,5 @@
 package view;
 
-import app.StartUseCaseFactory;
 import data_access.UserDAO;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
@@ -15,7 +14,6 @@ import interface_adapter.start.StartController;
 import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
 import use_case.menu.MenuInteractor;
-import use_case.menu.MenuOutputBoundary;
 import use_case.start.StartInteractor;
 
 import javax.swing.*;
@@ -34,7 +32,7 @@ import java.util.Map;
 // "Resume Game" - takes them back to the game they are playing
 // "Log Out" - takes them back to SignUp View
 
-public class PauseGameView extends JPanel implements ActionListener, PropertyChangeListener {
+public class PausedGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "Game Paused";
     private final PauseGameViewModel pauseGameViewModel;
     private final StartViewModel startViewModel;
@@ -72,7 +70,7 @@ public class PauseGameView extends JPanel implements ActionListener, PropertyCha
         ViewManagerModel viewManagerModel1 = new ViewManagerModel();
         StartController startController1 = new StartController(new StartInteractor(userDAO, new StartPresenter(startViewModel1, signupViewModel1, loginViewModel1, viewManagerModel1)));
         MenuController menuController1 = new MenuController(new MenuInteractor(userDAO, new MenuPresenter()));
-        PauseGameView pauseGameView = new PauseGameView(pauseGameViewModel1, startViewModel1, menuViewModel1, viewManagerModel1, startController1, menuController1);
+        PausedGameView pausedGameView = new PausedGameView(pauseGameViewModel1, startViewModel1, menuViewModel1, viewManagerModel1, startController1, menuController1);
 
         // CREATED ALL NECESSARY PARTS FOR THE APP TO RUN VIEWS
 
@@ -87,9 +85,9 @@ public class PauseGameView extends JPanel implements ActionListener, PropertyCha
         application.add(views);
         // This keeps track of and manages which view is currently showing.
         new ViewManager(views, cardLayout, viewManagerModel1);
-        views.add(pauseGameView, pauseGameView.viewName);
+        views.add(pausedGameView, pausedGameView.viewName);
 
-        viewManagerModel1.setActiveViewName(pauseGameView.viewName);
+        viewManagerModel1.setActiveViewName(pausedGameView.viewName);
         viewManagerModel1.firePropertyChanged();
 
         application.pack();
@@ -97,12 +95,12 @@ public class PauseGameView extends JPanel implements ActionListener, PropertyCha
 
     }
 
-    public PauseGameView(PauseGameViewModel pauseGameViewModel,
-                         StartViewModel startViewModel,
-                         MenuViewModel menuViewModel,
-                         ViewManagerModel viewManagerModel,
-                         StartController startController,
-                         MenuController menuController) {
+    public PausedGameView(PauseGameViewModel pauseGameViewModel,
+                          StartViewModel startViewModel,
+                          MenuViewModel menuViewModel,
+                          ViewManagerModel viewManagerModel,
+                          StartController startController,
+                          MenuController menuController) {
         this.pauseGameViewModel = pauseGameViewModel;
         this.startViewModel = startViewModel;
         this.menuViewModel = menuViewModel;
@@ -144,12 +142,11 @@ public class PauseGameView extends JPanel implements ActionListener, PropertyCha
                         if (evt.getSource().equals(backToMenu)) {
                             MenuView menuView = new MenuView(menuController, new MenuViewModel());
                             menuController.execute();
-                            PauseGameView.this.viewManagerModel.setActiveViewName(menuView.viewName);
-                            PauseGameView.this.viewManagerModel.firePropertyChanged();
+                            // PausedGameView.this.viewManagerModel.setActiveViewName(menuView.viewName);
+                            // PausedGameView.this.viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
-
         );
 
         resumeGame.addActionListener(
