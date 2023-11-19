@@ -18,6 +18,7 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import use_case.login.LoginUserDataAccessInterface;
+import use_case.menu.MenuUserDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.signup.cancel.CancelUserDataAccessInterface;
@@ -27,7 +28,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface,
-        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface {
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface {
     public static void main(String[] args) {
 
         Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
@@ -68,11 +69,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         userDAO.saveProgress(u1);
         System.out.println(userDAO.toString());
     }
+
     private final MongoCollection<Document> userCollection;
     private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
 
-    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception{
+    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception {
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
@@ -108,13 +110,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             }
         }
     }
-
     @Override
     public boolean existsbyName(String username) {
         return false;
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         accounts.put(user.getName(), user);
         this.addUser();
     }
@@ -143,7 +144,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("name", name)
                         .append("password", password)
                         .append("scores", stringScores)
-                        .append("pausedgame", pausedGameStr);  // it
+                        .append("pausedGamePastBoards", null)
+                        .append("pausedgame", null);
                 this.userCollection.insertOne(entry);
             }
         }
@@ -165,12 +167,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         accounts.remove(name);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         this.userCollection.deleteMany(new Document());
         accounts.clear();
     }
 
-    public void addScore(User user, LocalTime time, Integer score){
+    public void addScore(User user, LocalTime time, Integer score) {
         accounts.get(user.getName()).addScores(time, score);
         this.changeScores(user);
     }
@@ -181,27 +183,39 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 eq("scores", user.getScores())); //update score
     }
 
-    public String toString(){
+    public String toString() {
         return accounts.toString();
     }
 
     @Override
     public boolean saveProgress(User user) {
-        // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
+        // TODO: if Board implementation changes form HashMap[] to int[][] switch from string rep to array rep
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
-        Bson filter = Filters.eq("name", user.getName());  // creating a filter
-        Bson update = Updates.set("pausedgame", user.getPausedGame().toStringPause());  // create an update
-        UpdateResult result = this.userCollection.updateOne(filter, update);  //performing the update
+        // returns true if game was paused successfully and false otherwise
+        String name = user.getName();
+        GameState pausedGame = user.getPausedGame();
 
-        // Check if the document was found and updated
-        if (result.getMatchedCount() == 1) {
-            System.out.println("Game paused and updated successfully.");
-        } else {
-            System.out.println("Game not paused or not updated.");
+        Bson filter = Filters.eq("name", name);   // Creating a filter
+        Bson updateGameState = Updates.set("pausedgame", pausedGame.toStringPause());    // Creating an update for the game state
+        UpdateResult resultGameState = this.userCollection.updateOne(filter, updateGameState);   // Performing the update for the game state
+
+        Bson updatePastGames = Updates.set("pastgames", pausedGame.getPastStates());   // Creating an update for the past games
+        UpdateResult resultPastGames = this.userCollection.updateOne(filter, updatePastGames);   // Performing the update for the past games
+
+        // Check if the document was found and updated for the game state
+        boolean gamePaused = false;
+        if (resultGameState.getMatchedCount() == 1) {
+            gamePaused = true;
         }
-        return false;
+
+        // Check if the document was found and updated for the past games
+        if (resultPastGames.getMatchedCount() == 1) {
+            gamePaused = true;
+        }
+        return gamePaused;
     }
 }
+
 
 /*
   Temporary

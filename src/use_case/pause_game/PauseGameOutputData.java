@@ -1,5 +1,16 @@
 package use_case.pause_game;
 
+import entity.user.User;
+
 public class PauseGameOutputData {
-    // TODO: IMPLEMENT, figure out what needs to outputted based on continuing an already started game
+    // TODO: how will we conserve time when pausing?
+    private final User user;
+    private boolean useCaseFailed;
+
+    public PauseGameOutputData(User user, boolean useCaseFailed) {
+        this.user = user;
+        this.useCaseFailed = useCaseFailed;
+    }
+
+    public String getUsername() {return user.getName();}
 }

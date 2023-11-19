@@ -1,5 +1,10 @@
 package use_case.pause_game;
 
+import use_case.signup.SignupOutputData;
+
 public interface PauseGameOutputBoundary {
-    // TODO: IMPLEMENT ONCE YOU START ON VIEW
+    void prepareSuccessView(PauseGameOutputData user);
+
+    void prepareFailView(String error);
+
 }

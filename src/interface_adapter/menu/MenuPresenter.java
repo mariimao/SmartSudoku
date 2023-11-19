@@ -1,4 +1,15 @@
 package interface_adapter.menu;
 
-public class MenuPresenter {
+import use_case.menu.MenuOutputBoundary;
+
+public class MenuPresenter implements MenuOutputBoundary {
+    @Override
+    public void prepareSuccessView() {
+
+    }
+
+    @Override
+    public void prepareFailView(String error) {
+
+    }
 }
