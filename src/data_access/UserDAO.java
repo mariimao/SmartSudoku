@@ -69,7 +69,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             System.out.println("Username: " + key + "  Password: " + value.getPassword() + "  Scores: " + value.getScores() + "  Paused Game: " + value.getPausedGame());
         });
         userDAO.setProgress(u1);
-        System.out.println(userDAO.toString());
+        userDAO.getProgress(u1);
+        System.out.println(u1.getPausedGame());
     }
 
     private final MongoCollection<Document> userCollection;
@@ -230,7 +231,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
             // TODO: find a way to set pastgames, the issue is ensuring that the GameState is preserved when taken out of the database
             if (gameAsString == null) {return null;}  // returns null if there is no game
-            else {
+            else {  // create a new game state based on the data stored in mongo
                 String[] gameAsArray = gameAsString.split("-");
                 String gameValues = gameAsArray[0];
                 int difficulty = Integer.parseInt(gameAsArray[1]);
@@ -239,6 +240,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 GameState gameState = new GameState(difficulty);
                 gameState.setCurrBoard(gameValues);
                 gameState.setLives(lives);
+                user.setPausedGame(gameState);  // set the user's PausedGame attribute to the game state created
 
                 return gameState;
             }

@@ -9,6 +9,7 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelViewModel;
@@ -53,6 +54,7 @@ public class Main {
         SignupViewModel signupViewModel = new SignupViewModel();
         CancelViewModel cancelViewModel = new CancelViewModel();
         PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
+        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
         MenuViewModel menuViewModel = new MenuViewModel();
 
 
@@ -80,7 +82,7 @@ public class Main {
         StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
         views.add(startView, startView.viewName);
 
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
         viewManagerModel.setActiveViewName(signupView.viewName);

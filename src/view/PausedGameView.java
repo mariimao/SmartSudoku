@@ -1,15 +1,24 @@
 package view;
 
+import app.LoginUseCaseFactory;
+import app.PausedGameUseCaseFactory;
+import app.SignupUseCaseFactory;
+import app.StartUseCaseFactory;
 import data_access.UserDAO;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
+import entity.user.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuPresenter;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.resume_game.ResumeGameController;
+import interface_adapter.resume_game.ResumeGameState;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
@@ -25,6 +34,8 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 // when the game is paused I want it to move from the GameView to this one
 // It should have two buttons, "Go Back to Menu", "Log Out", "Resume Game
@@ -37,42 +48,19 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
     private final PauseGameViewModel pauseGameViewModel;
     private final StartViewModel startViewModel;
     private final MenuViewModel menuViewModel;
+    private final ResumeGameViewModel resumeGameViewModel;
     private final ViewManagerModel viewManagerModel;
     private final StartController startController;
     private final MenuController menuController;
+    private final ResumeGameController resumeGameController;
     final JButton backToMenu;
     final JButton logOut;
     final JButton resumeGame;
 
     public static void main(String[] args) {
         //TODO: for testing
-        UserDAO userDAO;
-        try {
-            userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                    "smartsudoku", "user", new CommonUserFactory());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        //userDataAccessObject.deleteAll(); //for testing
-        Map<LocalTime, Integer> sampleScores = new HashMap<>();
-        sampleScores.put(LocalTime.now(), 4);
-        sampleScores.put(LocalTime.of(12, 30, 1), 3);
-        CommonUser user1 = new CommonUser("user1", "pass2", sampleScores);
-        userDAO.addUser(user1);
-        sampleScores.put(LocalTime.of(12, 31, 1), 4);
-        CommonUser user2 = new CommonUser("user2", "pass", sampleScores);
-        userDAO.addUser(user2);
-        PauseGameViewModel pauseGameViewModel1 = new PauseGameViewModel();
-        StartViewModel startViewModel1 = new StartViewModel();
-        SignupViewModel signupViewModel1 = new SignupViewModel();
-        LoginViewModel loginViewModel1 = new LoginViewModel();
-        MenuViewModel menuViewModel1 = new MenuViewModel();
-        ViewManagerModel viewManagerModel1 = new ViewManagerModel();
-        StartController startController1 = new StartController(new StartInteractor(userDAO, new StartPresenter(startViewModel1, signupViewModel1, loginViewModel1, viewManagerModel1)));
-        MenuController menuController1 = new MenuController(new MenuInteractor(userDAO, new MenuPresenter()));
-        PausedGameView pausedGameView = new PausedGameView(pauseGameViewModel1, startViewModel1, menuViewModel1, viewManagerModel1, startController1, menuController1);
-
-        // CREATED ALL NECESSARY PARTS FOR THE APP TO RUN VIEWS
+        // Build the main program window, the main panel containing the
+        // various cards, and the layout, and stitch them together.
 
         // The main application window.
         JFrame application = new JFrame("Login Example");
@@ -83,15 +71,53 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
         // The various View objects. Only one view is visible at a time.
         JPanel views = new JPanel(cardLayout);
         application.add(views);
+
         // This keeps track of and manages which view is currently showing.
-        new ViewManager(views, cardLayout, viewManagerModel1);
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
+        // The data for the views, such as username and password, are in the ViewModels.
+        // This information will be changed by a presenter object that is reporting the
+        // results from the use case. The ViewModels are observable, and will
+        // be observed by the Views.
+        StartViewModel startViewModel = new StartViewModel();
+        LoginViewModel loginViewModel = new LoginViewModel();
+        SignupViewModel signupViewModel = new SignupViewModel();
+        CancelViewModel cancelViewModel = new CancelViewModel();
+        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
+        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
+        MenuViewModel menuViewModel = new MenuViewModel();
+
+
+        // testing userDAO
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+
+        UserDAO userDataAccessObject;
+        try {
+            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        views.add(signupView, signupView.viewName);
+
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        views.add(loginView, loginView.viewName);
+
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        views.add(startView, startView.viewName);
+
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        viewManagerModel1.setActiveViewName(pausedGameView.viewName);
-        viewManagerModel1.firePropertyChanged();
+        viewManagerModel.setActiveViewName(pausedGameView.viewName);
+        viewManagerModel.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);
+
 
     }
 
@@ -99,15 +125,18 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
                           StartViewModel startViewModel,
                           MenuViewModel menuViewModel,
                           ViewManagerModel viewManagerModel,
+                          ResumeGameViewModel resumeGameViewModel,
                           StartController startController,
-                          MenuController menuController) {
+                          MenuController menuController, ResumeGameController resumeGameController) {
         this.pauseGameViewModel = pauseGameViewModel;
         this.startViewModel = startViewModel;
         this.menuViewModel = menuViewModel;
+        this.resumeGameViewModel = resumeGameViewModel;
 
         this.viewManagerModel = viewManagerModel;
         this.startController = startController;
         this.menuController = menuController;
+        this.resumeGameController = resumeGameController;
 
         pauseGameViewModel.addPropertyChangeListener(this);
 
@@ -126,10 +155,7 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
                 new ActionListener() {
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(logOut)) {
-                            StartView startView = new StartView(startController, new StartViewModel());
                             startController.execute("Login");
-                            // PauseGameView.this.viewManagerModel.setActiveViewName(startView.viewName);
-                            // PauseGameView.this.viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
@@ -140,10 +166,7 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(backToMenu)) {
-                            MenuView menuView = new MenuView(menuController, new MenuViewModel());
                             menuController.execute();
-                            // PausedGameView.this.viewManagerModel.setActiveViewName(menuView.viewName);
-                            // PausedGameView.this.viewManagerModel.firePropertyChanged();
                         }
                     }
                 }
@@ -154,7 +177,8 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
                     @Override
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(resumeGame)) {
-                            // TODO: implement when game playing use case is done
+                            ResumeGameState resumeGameState = resumeGameViewModel.getState();
+                            resumeGameController.execute(resumeGameState.getUser());
                         }
                     }
                 }

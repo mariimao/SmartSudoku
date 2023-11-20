@@ -9,9 +9,12 @@ public class ResumeGameOutputData {
     private boolean useCaseFailed;
 
     public ResumeGameOutputData(User user, boolean useCaseFailed) {
+
         this.user = user;
         this.useCaseFailed = useCaseFailed;
     }
 
     public GameState getPausedGame() {return user.getPausedGame();}
+
+    public boolean isUseCaseFailed() {return useCaseFailed;}
 }
