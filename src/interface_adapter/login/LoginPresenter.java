@@ -1,6 +1,7 @@
 package interface_adapter.login;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
@@ -23,6 +24,8 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareSuccessView(LoginOutputData loginOutputData) {
         // changes to menu view
+        MenuState menuState = menuViewModel.getMenuState();
+        this.menuViewModel.setMenuState(menuState);
         menuViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveViewName(menuViewModel.getViewName());
@@ -32,11 +35,12 @@ public class LoginPresenter implements LoginOutputBoundary {
     @Override
     public void prepareFailView(String error) {
         LoginState loginState = loginViewModel.getLoginState();
-        if (error.equals("Username already exists. Please pick a different username.")){
-            loginState.setUsernameError(error);
-        }
-        else {
+        if (error.equals("Incorrect password. Try again.")){
             loginState.setPasswordError(error);
         }
+        else {
+            loginState.setUsernameError(error);
+        }
+        loginViewModel.firePropertyChanged();
     }
 }

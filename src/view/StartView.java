@@ -1,6 +1,8 @@
 package view;
 
+import interface_adapter.signup.SignupState;
 import interface_adapter.start.StartController;
+import interface_adapter.start.StartState;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
@@ -44,7 +46,7 @@ public class StartView  extends JPanel implements ActionListener, PropertyChange
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(signup)) {
-                            startController.execute("Signin");
+                            startController.execute("Signup");
                         }
                     }
                 }
@@ -56,6 +58,7 @@ public class StartView  extends JPanel implements ActionListener, PropertyChange
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(login)) {
                             startController.execute("Login");
+
                         }
                     }
                 }
@@ -70,11 +73,12 @@ public class StartView  extends JPanel implements ActionListener, PropertyChange
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        //JOptionPane.showConfirmDialog(this, " not implemented yet.");
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        //StartState state = (StartState) evt.getNewValue();
 
     }
 }

@@ -32,7 +32,7 @@ public class Main {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        JFrame application = new JFrame("Login Example");
+        JFrame application = new JFrame("SudokuScramble");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -73,19 +73,23 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        views.add(startView, startView.viewName);
+
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, cancelViewModel, startViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
+        // TODO: Update this when you add more views
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, userDataAccessObject);
+        views.add(menuView, menuView.viewName);
 
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        viewManagerModel.setActiveViewName(signupView.viewName);
+        viewManagerModel.setActiveViewName(startView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
