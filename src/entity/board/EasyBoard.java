@@ -9,6 +9,7 @@ public class EasyBoard implements Board {
         System.out.println(testBoard);
         System.out.println(testBoard.toStringPause());
         System.out.println(new EasyBoard("003T00004T004T01F2T00"));
+        System.out.println(new EasyBoard("0000000000000000"));
     }
     private HashMap<Integer, Boolean>[][] currBoard;
     /* A matrix representing the board.

@@ -4,10 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="Made small changes to required class types of MenuUseCaseFactory">
+    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="Create PausedGameUseCaseFactory and added the view to the main file">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PauseGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PauseGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PausedGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PausedGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +30,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Python Script" />
         <option value="Interface" />
         <option value="Class" />
       </list>
@@ -47,7 +61,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "ResumeGame",
     "last_opened_file_path": "C:/Users/Janet/Desktop/CS Work/csc207/SmartSudoku/src",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -57,11 +71,17 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="Application.PauseGameView (1)">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="interface_adapter" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.PausedGameView">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="SmartSudoku" />
@@ -75,8 +95,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PauseGameView (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.PauseGameView" />
+    <configuration name="PausedGameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.PausedGameView" />
       <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
@@ -88,12 +108,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PauseGameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.PauseGameView" />
+    <configuration name="UserDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="data_access.UserDAO" />
       <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.*" />
+          <option name="PATTERN" value="data_access.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -103,9 +123,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PauseGameView (1)" />
+        <item itemvalue="Application.PausedGameView" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="Application.PauseGameView" />
+        <item itemvalue="Application.UserDAO" />
       </list>
     </recent_temporary>
   </component>
@@ -130,294 +150,49 @@
       <option name="project" value="LOCAL" />
       <updated>1699905137433</updated>
     </task>
-    <task id="LOCAL-00002" summary="Fixed Signin and Login screens, but need to fix random pop ups">
+    <task id="LOCAL-00002" summary="committing files asfter resolving conflicts from leaderboard branch">
       <option name="closed" value="true" />
-      <created>1700343432022</created>
+      <created>1700360361246</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1700343432022</updated>
+      <updated>1700360361246</updated>
     </task>
-    <task id="LOCAL-00003" summary="Made small changes to required class types of MenuUseCaseFactory">
+    <task id="LOCAL-00003" summary="Create PausedGameUseCaseFactory and added the view to the main file">
       <option name="closed" value="true" />
-      <created>1700419906219</created>
+      <created>1700431042467</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1700419906219</updated>
+      <updated>1700431042467</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Create PausedGameUseCaseFactory and added the view to the main file">
+      <option name="closed" value="true" />
+      <created>1700431071189</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1700431071189</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.History.Properties">
-    <option name="COLUMN_ID_ORDER">
-      <list>
-        <option value="Default.Root" />
-        <option value="Default.Author" />
-        <option value="Default.Date" />
-        <option value="Default.Subject" />
-        <option value="Space.CommitStatus" />
-      </list>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Completed Signup Use Case, may need to adjust user interaction flow" />
-    <MESSAGE value="Fixed Signin and Login screens, but need to fix random pop ups" />
-    <MESSAGE value="Made small changes to required class types of MenuUseCaseFactory" />
-    <option name="LAST_COMMIT_MESSAGE" value="Made small changes to required class types of MenuUseCaseFactory" />
+    <MESSAGE value="There were issues with the imports because of restructuring the entity package. They should be fixed now." />
+    <MESSAGE value="Create PausedGameUseCaseFactory and added the view to the main file" />
+    <option name="LAST_COMMIT_MESSAGE" value="Create PausedGameUseCaseFactory and added the view to the main file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/StartView.java</url>
-          <line>48</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/start/StartController.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/start/StartController.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/start/StartInteractor.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/start/StartInteractor.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/start/StartPresenter.java</url>
-          <line>35</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/start/StartPresenter.java</url>
-          <line>34</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/start/StartPresenter.java</url>
-          <line>37</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/SignupView.java</url>
-          <line>67</line>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/SignupView.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/SignupView.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java</url>
-          <line>14</line>
-          <option name="timeStamp" value="14" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java</url>
-          <line>15</line>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java</url>
-          <line>33</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java</url>
-          <line>40</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java</url>
-          <line>41</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java</url>
-          <line>25</line>
-          <option name="timeStamp" value="25" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="28" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/LoginView.java</url>
-          <line>68</line>
-          <option name="timeStamp" value="29" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/LoginView.java</url>
-          <line>69</line>
-          <option name="timeStamp" value="30" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/login/LoginController.java</url>
-          <line>13</line>
-          <option name="timeStamp" value="31" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>16</line>
-          <option name="timeStamp" value="32" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="33" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>18</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>21</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>23</line>
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>29</line>
-          <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/use_case/login/LoginInteractor.java</url>
-          <line>19</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java</url>
-          <line>24</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/LoginView.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="47" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java</url>
-          <line>28</line>
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java</url>
-          <line>26</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java</url>
-          <line>27</line>
-          <option name="timeStamp" value="50" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java</url>
-          <line>30</line>
-          <option name="timeStamp" value="52" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java</url>
-          <line>31</line>
-          <option name="timeStamp" value="53" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/PauseGameView.java</url>
-          <line>139</line>
-          <option name="timeStamp" value="54" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/use_case/start/StartInputBoundary.java</url>
-          <line>4</line>
-          <properties class="use_case.start.StartInputBoundary" method="execute">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/use_case/start/StartOutputBoundary.java</url>
-          <line>4</line>
-          <properties class="use_case.start.StartOutputBoundary" method="prepareSuccessView">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/use_case/signup/SignupInputBoundary.java</url>
-          <line>4</line>
-          <properties class="use_case.signup.SignupInputBoundary" method="execute">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="18" />
+          <url>file://$PROJECT_DIR$/src/view/PausedGameView.java</url>
+          <line>175</line>
+          <option name="timeStamp" value="56" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

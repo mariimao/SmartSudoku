@@ -7,7 +7,7 @@ public class MenuController {
 
     final MenuInputBoundary menuUseCaseInteractor;
 
-    public MenuController(MenuInteractor menuUseCaseInteractor) {
+    public MenuController(MenuInputBoundary menuUseCaseInteractor) {
         this.menuUseCaseInteractor = menuUseCaseInteractor;
     }
 

@@ -8,6 +8,8 @@ import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelViewModel;
@@ -51,6 +53,8 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
         CancelViewModel cancelViewModel = new CancelViewModel();
+        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
+        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
         MenuViewModel menuViewModel = new MenuViewModel();
 
 
@@ -81,6 +85,9 @@ public class Main {
         // TODO: Update this when you add more views
         MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, userDataAccessObject);
         views.add(menuView, menuView.viewName);
+
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
+        views.add(pausedGameView, pausedGameView.viewName);
 
         viewManagerModel.setActiveViewName(startView.viewName);
         viewManagerModel.firePropertyChanged();

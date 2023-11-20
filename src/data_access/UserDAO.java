@@ -9,6 +9,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
+import entity.board.Board;
 import entity.user.*;
 import entity.board.EasyBoard;
 import entity.board.GameState;
@@ -20,6 +21,7 @@ import org.bson.types.ObjectId;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.menu.MenuUserDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
+import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.signup.cancel.CancelUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
@@ -27,7 +29,7 @@ import use_case.start.StartUserDataAccessInterface;
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface,
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
         SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface {
     public static void main(String[] args) {
 
@@ -66,8 +68,9 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         userDAO.accounts.forEach((key, value) -> {
             System.out.println("Username: " + key + "  Password: " + value.getPassword() + "  Scores: " + value.getScores() + "  Paused Game: " + value.getPausedGame());
         });
-        userDAO.saveProgress(u1);
-        System.out.println(userDAO.toString());
+        userDAO.setProgress(u1);
+        userDAO.getProgress(u1);
+        System.out.println(u1.getPausedGame());
     }
 
     private final MongoCollection<Document> userCollection;
@@ -188,7 +191,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     }
 
     @Override
-    public boolean saveProgress(User user) {
+    public boolean setProgress(User user) {
         // TODO: if Board implementation changes form HashMap[] to int[][] switch from string rep to array rep
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
         // returns true if game was paused successfully and false otherwise
@@ -199,6 +202,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         Bson updateGameState = Updates.set("pausedgame", pausedGame.toStringPause());    // Creating an update for the game state
         UpdateResult resultGameState = this.userCollection.updateOne(filter, updateGameState);   // Performing the update for the game state
 
+        // TODO: check to see if the "pastgames" field accurately serializes the LinkedList<GameState>
         Bson updatePastGames = Updates.set("pastgames", pausedGame.getPastStates());   // Creating an update for the past games
         UpdateResult resultPastGames = this.userCollection.updateOne(filter, updatePastGames);   // Performing the update for the past games
 
@@ -213,6 +217,35 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             gamePaused = true;
         }
         return gamePaused;
+    }
+
+    public Document getUserDocByName(User user) {
+        return userCollection.find(eq("name", user.getName())).first();
+    }
+
+    @Override
+    public GameState getProgress(User user) {
+        Document userDoc = getUserDocByName(user);
+        if (userDoc != null) {
+            String gameAsString = userDoc.getString("pausedgame");
+
+            // TODO: find a way to set pastgames, the issue is ensuring that the GameState is preserved when taken out of the database
+            if (gameAsString == null) {return null;}  // returns null if there is no game
+            else {  // create a new game state based on the data stored in mongo
+                String[] gameAsArray = gameAsString.split("-");
+                String gameValues = gameAsArray[0];
+                int difficulty = Integer.parseInt(gameAsArray[1]);
+                int lives = Integer.parseInt(gameAsArray[2]);
+
+                GameState gameState = new GameState(difficulty);
+                gameState.setCurrBoard(gameValues);
+                gameState.setLives(lives);
+                user.setPausedGame(gameState);  // set the user's PausedGame attribute to the game state created
+
+                return gameState;
+            }
+        }
+        throw new NoSuchElementException();
     }
 }
 
