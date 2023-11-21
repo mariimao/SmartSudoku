@@ -28,6 +28,10 @@ public class UserMoveInputData {
 
     int getDifficulty() {return current_state.getDifficulty();}
 
+    void scrambleBoard() {current_state.scrambleBoard();}
+
+    int getLives() {return current_state.getLives();}
+
     int getX() {return x;}
     int getY() {return y;}
     int getValue() {return value;}
