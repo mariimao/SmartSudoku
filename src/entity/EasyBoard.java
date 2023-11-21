@@ -92,7 +92,7 @@ public class EasyBoard implements Board{
     }
 
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
-        int[][] possibleValues = generatePossibleEasyBoardValues();
+        int[][] possibleValues = generatePossibleValues();
         // Delete this part later -----------
         String str = "Solution: \n";
         for (int z = 0; z <= 3; z++) {
@@ -113,7 +113,7 @@ public class EasyBoard implements Board{
         return easyBoard;
     }
 
-    private int[][] generatePossibleEasyBoardValues() {
+    public int[][] generatePossibleValues() {
         int[][] possibleValues = new int[4][4];
         boolean badBoard = true;
         while (badBoard) {
@@ -167,7 +167,7 @@ public class EasyBoard implements Board{
         return blankEasyBoard;
     }
 
-    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
+    public boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
