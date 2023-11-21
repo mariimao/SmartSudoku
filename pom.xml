@@ -28,6 +28,20 @@
             <version>4.4.1</version>
         </dependency>
 
+<!--        adding this for testing spotify api-->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.10.0</version> <!-- Replace with the latest version -->
+        </dependency>
+
+<!--        dependencies for json-->
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20230618</version>
+        </dependency>
+
         <!-- AKUNNA: I added this for the logging warning that I was getting -->
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -42,6 +56,7 @@
             <scope>runtime</scope>
         </dependency>
 
+
     </dependencies>
 
     <build>
@@ -51,8 +66,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>${maven-compiler-plugin.version}</version>
                 <configuration>
-                    <source>${maven-compiler-plugin.source}</source>
-                    <target>${maven-compiler-plugin.target}</target>
+                    <source>10</source>
+                    <target>10</target>
                 </configuration>
             </plugin>
         </plugins>

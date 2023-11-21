@@ -9,8 +9,5 @@
         <module name="SmartSudoku" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="java-quick-start" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

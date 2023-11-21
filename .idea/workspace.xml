@@ -4,23 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="Create PausedGameUseCaseFactory and added the view to the main file">
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/data_access/SpotifyAccessTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/Board.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/EasyBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/HardBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/SudokuAI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m__[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_1_33_p_m___Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/PausedGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PausedGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +28,6 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -39,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Chat-Waiting-Room" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,7 +47,7 @@
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2Y8CKw92FXM1O1TUUf1hTqeQ2yS" />
+  <component name="ProjectId" id="2YS4NvHPRZUNUoiAqFgCsCAZq3V" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -61,55 +57,21 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "ResumeGame",
-    "last_opened_file_path": "C:/Users/Janet/Desktop/CS Work/csc207/SmartSudoku/src",
+    "git-widget-placeholder": "Spotify-Retrieval",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="interface_adapter" />
-    </key>
-  </component>
-  <component name="RunManager" selected="Application.PausedGameView">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.Main" />
-      <module name="SmartSudoku" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PausedGameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.PausedGameView" />
-      <module name="SmartSudoku" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="view.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="UserDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data_access.UserDAO" />
+  <component name="RunManager">
+    <configuration name="SpotifyDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="data_access.SpotifyDAO" />
       <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
@@ -123,78 +85,24 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.PausedGameView" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.UserDAO" />
+        <item itemvalue="Application.SpotifyDAO" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="" />
-      <created>1699897760707</created>
+      <changelist id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="" />
+      <created>1700505611173</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1699897760707</updated>
-      <workItem from="1699897762500" duration="6734000" />
-      <workItem from="1699925842618" duration="1317000" />
-      <workItem from="1699927185308" duration="1703000" />
-      <workItem from="1700245285981" duration="9000" />
+      <updated>1700505611173</updated>
+      <workItem from="1700505613602" duration="3436000" />
+      <workItem from="1700542974010" duration="19576000" />
     </task>
-    <task id="LOCAL-00001" summary="Completed Signup Use Case, may need to adjust user interaction flow">
-      <option name="closed" value="true" />
-      <created>1699905137433</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1699905137433</updated>
-    </task>
-    <task id="LOCAL-00002" summary="committing files asfter resolving conflicts from leaderboard branch">
-      <option name="closed" value="true" />
-      <created>1700360361246</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1700360361246</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Create PausedGameUseCaseFactory and added the view to the main file">
-      <option name="closed" value="true" />
-      <created>1700431042467</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1700431042467</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Create PausedGameUseCaseFactory and added the view to the main file">
-      <option name="closed" value="true" />
-      <created>1700431071189</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1700431071189</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Completed Signup Use Case, may need to adjust user interaction flow" />
-    <MESSAGE value="There were issues with the imports because of restructuring the entity package. They should be fixed now." />
-    <MESSAGE value="Create PausedGameUseCaseFactory and added the view to the main file" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create PausedGameUseCaseFactory and added the view to the main file" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/PausedGameView.java</url>
-          <line>175</line>
-          <option name="timeStamp" value="56" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
