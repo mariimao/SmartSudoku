@@ -61,7 +61,7 @@ public class PausedGameUseCaseFactory {
         User user = resumeGameDataAccessInterface.get(username);
 
         ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel);
-        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter, user);
+        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
     }
 

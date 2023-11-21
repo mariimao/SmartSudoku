@@ -49,7 +49,7 @@ public class GameState {
         this.past_states = past_states;
     }
 
-    public void makeMove(char x, int y, int move) {
+    public Board makeMove(int x, int y, int move) {
         currBoard = currBoard.makeMove(x, y, move);
     }
 

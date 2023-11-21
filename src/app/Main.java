@@ -8,6 +8,7 @@ import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
+import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupController;
@@ -56,6 +57,7 @@ public class Main {
         PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
         ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
         MenuViewModel menuViewModel = new MenuViewModel();
+        NewGameViewModel newGameViewModel = new NewGameViewModel();
 
 
 
@@ -83,13 +85,16 @@ public class Main {
         views.add(loginView, loginView.viewName);
 
         // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, userDataAccessObject);
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel,resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject);
         views.add(menuView, menuView.viewName);
 
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        viewManagerModel.setActiveViewName(startView.viewName);
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject);
+        views.add(newGameView, newGameViewModel.getViewName());
+
+        viewManagerModel.setActiveViewName(menuView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 
         application.pack();

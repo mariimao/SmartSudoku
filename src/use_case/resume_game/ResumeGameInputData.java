@@ -12,7 +12,10 @@ public class ResumeGameInputData {
         this.user = user;
     }
 
-    String getUsername() {return user.getName();}
+    String getUsername() {
+        if (user == null) {return null;}
+        return user.getName();
+    }
     GameState getcurrentState() {return user.getPausedGame();}
     LinkedList<GameState> getpastStates() {return user.getPausedGame().getPastStates();}
 }
