@@ -1,11 +1,6 @@
 package use_case.user_move;
 
 import entity.Board;
-import entity.GameState;
-import entity.User;
-import use_case.login.LoginInputData;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginOutputData;
 
 public class UserMoveInteractor implements UserMoveInputBoundary {
 
@@ -31,20 +26,28 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
                 int[][] easyPossibleValues = current_board.generatePossibleValues();
                 if (current_board.valueNotAvailable(easyPossibleValues, value, x, y)) {
                     userMoveInputData.loseLife();
-                    gamePresenter.prepareFailView("Incorrect input. Try again.");
+                    if (userMoveInputData.getLives() == 0) {
+                        gamePresenter.prepareEndView(userMoveOutputData);
+                    } else {
+                        gamePresenter.prepareFailView("Incorrect input. Try again.");
+                    }
                 } else {
-                    Board new_board = userMoveInputData.makeMove();
+                    userMoveInputData.makeMove();
+                    userMoveInputData.scrambleBoard();
                     gamePresenter.prepareSuccessView(userMoveOutputData);
                 }
             } else {
                 int[][] hardPossibleValues = current_board.generatePossibleValues();
                 if (current_board.valueNotAvailable(hardPossibleValues, value, x, y)) {
                     userMoveInputData.loseLife();
-                    gamePresenter.prepareFailView("Incorrect input. Try again.");
-                } else if (userMoveInputData.gameOver()) {
-                    gamePresenter.prepareEndView(userMoveOutputData);
+                    if (userMoveInputData.getLives() == 0) {
+                        gamePresenter.prepareEndView(userMoveOutputData);
+                    } else {
+                        gamePresenter.prepareFailView("Incorrect input. Try again.");
+                    }
                 } else {
                     userMoveInputData.makeMove();
+                    userMoveInputData.scrambleBoard();
                     gamePresenter.prepareSuccessView(userMoveOutputData);
                 }
             }
