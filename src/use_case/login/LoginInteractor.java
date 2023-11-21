@@ -1,6 +1,6 @@
 package use_case.login;
 
-import entity.User;
+import entity.user.User;
 
 public class LoginInteractor implements LoginInputBoundary{
 
@@ -21,7 +21,7 @@ public class LoginInteractor implements LoginInputBoundary{
         } else {
             String correct_password = loginUserDataAccessInterface.get(username).getPassword();
             if (!password.equals(correct_password)) {
-                loginPresenter.prepareFailView("Incorrect password for " + username + ".");
+                loginPresenter.prepareFailView("Incorrect password. Try again.");
             } else {
 
                 User user = loginUserDataAccessInterface.get(loginInputData.getUsername());

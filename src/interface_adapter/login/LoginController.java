@@ -1,6 +1,5 @@
 package interface_adapter.login;
 
-import jdk.jpackage.internal.Log;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInputData;
 
@@ -13,5 +12,7 @@ public class LoginController {
     }
     public void execute(String username, String password) {
         LoginInputData loginInputData = new LoginInputData(username, password);
+
+        loginInteractor.execute(loginInputData);
     }
 }

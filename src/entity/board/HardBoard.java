@@ -2,17 +2,19 @@
     TODO: All of the code in this file is incomplete/broken. Please standby.
  */
 
-package entity;
+package entity.board;
 
 import java.util.*;
 
-import static entity.EasyBoard.getHashMaps;
+import static entity.board.EasyBoard.getHashMaps;
 
 public class HardBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
-    private final Random random = new Random();
+    private int[][] solutionBoard;
+
 
     public HardBoard() {
+        this.solutionBoard = generatePossibleHardBoardValues();
         this.currBoard = this.generateHardBoard();
     }
 
@@ -20,7 +22,7 @@ public class HardBoard implements Board {
 
 
     private HashMap<Integer, Boolean>[][] generateHardBoard1(String str_positions) {
-        HashMap<Integer, Boolean>[][] hardBoard = blankHardBoard();
+        HashMap<Integer, Boolean>[][] hardBoard = generateBlankBoard();
         HashMap<Integer, Boolean> blankValue = new HashMap<>();
         String blankChar = "0"; // how we represent blank squares
 
@@ -31,12 +33,7 @@ public class HardBoard implements Board {
 
 
     private HashMap<Integer, Boolean>[][] generateHardBoard() {
-        /* TODO: return an Arraylist of values that generates a new Hard board.
-            This board will have a 9 x 9 grid.
-            This is the syntax for generating random numbers in python:
-            random.nextInt((max - min) + 1) + min;
-         */
-        int[][] possibleValues = generatePossibleValues();
+        int[][] possibleValues = solutionBoard;
         // Delete this part later -----------
         String str = "Solution: \n";
         for (int z = 0; z <= 8; z++) {
@@ -48,7 +45,7 @@ public class HardBoard implements Board {
         System.out.println(str);
         // -----------------------------------
         int[][] positions = generateHardStartingPositions();
-        HashMap<Integer, Boolean>[][] hardBoard = blankHardBoard();
+        HashMap<Integer, Boolean>[][] hardBoard = generateBlankBoard();
         for (int i = 0; i <= 8; i++) {
             for (int j = 0; j <= 8; j++) {
                 if (positions[i][j] == 1) {
@@ -59,7 +56,7 @@ public class HardBoard implements Board {
         return hardBoard;
     }
 
-    public int[][] generatePossibleValues() {
+    private int[][] generatePossibleHardBoardValues() {
         int[][] possibleValues = new int[9][9];
         boolean badBoard = true;
         while (badBoard) {
@@ -108,7 +105,7 @@ public class HardBoard implements Board {
         return generatedValues;
     }
 
-    private HashMap<Integer, Boolean>[][] blankHardBoard() {
+    public HashMap<Integer, Boolean>[][] generateBlankBoard() {
         HashMap<Integer, Boolean>[][] blankHardBoard = new HashMap[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -119,7 +116,7 @@ public class HardBoard implements Board {
         return blankHardBoard;
     }
 
-    public boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
+    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
@@ -183,6 +180,14 @@ public class HardBoard implements Board {
 
     public HashMap<Integer, Boolean>[][] getCurrBoard() {
         return this.currBoard;
+    }
+
+    public void setBoard(HashMap<Integer, Boolean>[][] newBoard) {
+        this.currBoard = newBoard;
+    }
+
+    public int[][] getSolutionBoard() {
+        return solutionBoard;
     }
 
     @Override

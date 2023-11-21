@@ -1,4 +1,5 @@
-package entity;
+package entity.board;
+
 import java.util. *;
 
 public class GameState {
@@ -7,11 +8,13 @@ public class GameState {
         EasyBoard testBoard = new EasyBoard("003T00004T004T01F2T00");
         GameState testState = new GameState(1);
         System.out.println(testState.currBoard);
-        System.out.println(testState.toStringPause());
+        String stringRep = testState.toStringPause();
+        System.out.println("String Rep of State: " + testState.toStringPause());
+        System.out.println(Arrays.toString(stringRep.split("-")));
     }
 
     private final int difficulty; // 1 - easy, 2 - hard
-    private final SudokuAI sudokuAI;
+    private final SudokuScrambler sudokuScrambler;
     private Board currBoard;
     private int lives;
 
@@ -19,11 +22,12 @@ public class GameState {
 
     public GameState(int difficulty) {
         this.difficulty = difficulty;
-        this.sudokuAI = new SudokuAI(difficulty);
         if (difficulty == 1) {
             currBoard = new EasyBoard();
+            sudokuScrambler = new EasySudokuScrambler((EasyBoard) currBoard);
         } else {
             currBoard = new HardBoard();
+            sudokuScrambler = new HardSudokuScrambler((HardBoard) currBoard);
         }
         this.lives = 5;
         this.past_states = new LinkedList<>();
@@ -33,11 +37,12 @@ public class GameState {
     // seen when necessary
     public GameState(int difficulty, LinkedList<GameState> past_states) {
         this.difficulty = difficulty;
-        this.sudokuAI = new SudokuAI(difficulty);
         if (difficulty == 1) {
             currBoard = new EasyBoard();
+            sudokuScrambler = new EasySudokuScrambler((EasyBoard) currBoard);
         } else {
             currBoard = new HardBoard();
+            sudokuScrambler = new HardSudokuScrambler((HardBoard) currBoard);
         }
         this.lives = 5;
 
@@ -49,7 +54,7 @@ public class GameState {
     }
 
     public void scrambleBoard() {
-        sudokuAI.scramble(currBoard);
+        sudokuScrambler.scramble();
     }
 
     public void loseLife(){
@@ -76,6 +81,8 @@ public class GameState {
     public int getLives() {
         return this.lives;
     }
+
+    public void setLives(int life) {this.lives = life;}
 
     public LinkedList<GameState> getPastStates() {return this.past_states; }
 

@@ -1,24 +1,41 @@
 package data_access;
+
 import java.time.LocalTime;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import entity.*;
+import entity.board.Board;
+import entity.user.*;
+import entity.board.EasyBoard;
+import entity.board.GameState;
+import entity.board.HardBoard;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import use_case.login.LoginUserDataAccessInterface;
+import use_case.menu.MenuUserDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
+import use_case.resume_game.ResumeGameDataAccessInterface;
+import use_case.signup.SignupUserDataAccessInterface;
+import use_case.signup.cancel.CancelUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
-public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface {
+public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface {
     public static void main(String[] args) {
+
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
+
         // TODO: DELETE MAIN, Just for testing this file
 
         // made sample scores, boards, and users
@@ -47,19 +64,29 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         userDAO.accounts.forEach((key, value) -> {
             System.out.println("Username: " + key + "Password: " + value.getPassword() + "Scores: " + value.getScores() + "Paused Game: " + value.getPausedGame());
         });
+        LinkedList<GameState> pastStates = new LinkedList<>();
+        pastStates.add(new GameState(1));
+        pastStates.add(new GameState(1));
 
-        u1.setPausedGame(new GameState(1));
-        userDAO.accounts.forEach((key, value) -> {
-            System.out.println("Username: " + key + "  Password: " + value.getPassword() + "  Scores: " + value.getScores() + "  Paused Game: " + value.getPausedGame());
-        });
-        userDAO.saveProgress(u1);
-        System.out.println(userDAO.toString());
+        u1.setPausedGame(new GameState(1, pastStates));
+        userDAO.setProgress(u1);
+        userDAO.getProgress(u1);
+        System.out.println(u1.getPausedGame());
+        for (int i = 0; i < 2; i++) {
+            Board fromList = pastStates.get(i).getCurrBoard();
+            Board fromDAO = u1.getPausedGame().getPastStates().get(i).getCurrBoard();
+            System.out.println(fromList);
+            System.out.println(fromDAO);
+            System.out.println("\n");
+
+        }
     }
+
     private final MongoCollection<Document> userCollection;
     private final Map<String, User> accounts = new HashMap<>();
     private UserFactory userFactory;
 
-    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception{
+    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception {
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
@@ -80,8 +107,14 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
                 // convert to localtime
                 Map<LocalTime, Integer> scores = new HashMap<>();
-                for (String time : stringScores.keySet()) {
-                    scores.put(LocalTime.parse(time), scores.get(time));
+
+
+                if (stringScores == null) {
+                    scores.put(LocalTime.now(), 0); //TODO: may need to change
+                } else {
+                    for (String time : stringScores.keySet()) {
+                        scores.put(LocalTime.parse(time), scores.get(time));
+                    }
                 }
 
                 User user = userFactory.create(name, password, scores);
@@ -90,7 +123,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
-    public void addUser(User user){
+    @Override
+    public boolean existsbyName(String username) {
+        return false;
+    }
+
+    public void addUser(User user) {
         accounts.put(user.getName(), user);
         this.addUser();
     }
@@ -101,6 +139,11 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             String password = user.getPassword();
             Map<LocalTime, Integer> scores = user.getScores();
             GameState pausedGame = user.getPausedGame();
+
+            String pausedGameStr = "yes";
+            if (pausedGame != null) {
+                pausedGameStr = pausedGame.toStringPause();
+            }
 
             // cannot store LocalTime, so must convert it to String
             Map<String, Integer> stringScores = new HashMap<>();
@@ -114,7 +157,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("name", name)
                         .append("password", password)
                         .append("scores", stringScores)
-                        .append("pausedgame", pausedGame.toStringPause());  // it
+                        .append("pausedGamePastBoards", new ArrayList<>())
+                        .append("pausedgame", null);
                 this.userCollection.insertOne(entry);
             }
         }
@@ -124,19 +168,24 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return accounts.containsKey(name);
     }
 
-    public void delete(String name){
+    @Override
+    public User get(String username) {
+        return accounts.get(username);
+    }
+
+    public void delete(String name) {
         this.userCollection.deleteOne(eq("name", name));
         // below is alternative method that returns info of the deleted user
         //Document user = this.userCollection.findOneAndDelete(eq("username", username));
         accounts.remove(name);
     }
 
-    public void deleteAll(){
+    public void deleteAll() {
         this.userCollection.deleteMany(new Document());
         accounts.clear();
     }
 
-    public void addScore(User user, LocalTime time, Integer score){
+    public void addScore(User user, LocalTime time, Integer score) {
         accounts.get(user.getName()).addScores(time, score);
         this.changeScores(user);
     }
@@ -147,26 +196,85 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 eq("scores", user.getScores())); //update score
     }
 
-    public String toString(){
+    public String toString() {
         return accounts.toString();
     }
 
     @Override
-    public void saveProgress(User user) {
-        // TODO: implement for the PauseGame use case. It should save the user's progress somewhere in their account
+    public boolean setProgress(User user) {
+        // TODO: if Board implementation changes form HashMap[] to int[][] switch from string rep to array rep
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
-        Bson filter = Filters.eq("name", user.getName());  // creating a filter
-        Bson update = Updates.set("pausedgame", user.getPausedGame().toStringPause());  // create an update
-        UpdateResult result = this.userCollection.updateOne(filter, update);  //performing the update
+        // returns true if game was paused successfully and false otherwise
+        String name = user.getName();
+        GameState pausedGame = user.getPausedGame();
 
-        // Check if the document was found and updated
-        if (result.getMatchedCount() == 1) {
-            System.out.println("Game paused and updated successfully.");
-        } else {
-            System.out.println("Game not paused or not updated.");
+        Bson filter = Filters.eq("name", name);   // Creating a filter
+        Bson updateGameState = Updates.set("pausedgame", pausedGame.toStringPause());    // Creating an update for the game state
+        UpdateResult resultGameState = this.userCollection.updateOne(filter, updateGameState);   // Performing the update for the game state
+
+        List<String> pausedGamePastStates = new ArrayList<>();
+        for (GameState state : pausedGame.getPastStates()) {
+            String value = state.getCurrBoard().toStringPause();
+            pausedGamePastStates.add(value);
         }
+        Bson updatePastGames = Updates.set("pausedGamePastBoards", pausedGamePastStates);   // Creating an update for the past games
+        UpdateResult resultPastGames = this.userCollection.updateOne(filter, updatePastGames);   // Performing the update for the past games
+
+        // Check if the document was found and updated for the game state
+        boolean gamePaused = false;
+        if (resultGameState.getMatchedCount() == 1) {
+            gamePaused = true;
+        }
+
+        // Check if the document was found and updated for the past games
+        if (resultPastGames.getMatchedCount() == 1) {
+            gamePaused = true;
+        }
+        return gamePaused;
+    }
+
+    public Document getUserDocByName(User user) {
+        return userCollection.find(eq("name", user.getName())).first();
+    }
+
+    @Override
+    public GameState getProgress(User user) {
+        // retrieves user's data from database then sets user.PauseGame to whatever it finds
+        Document userDoc = getUserDocByName(user);
+        if (userDoc != null) {
+            String gameAsString = userDoc.getString("pausedgame");
+
+            if (gameAsString == null) {
+                return null;
+            }  // returns null if there is no game
+            else {  // create a new game state based on the data stored in mongo
+                String[] gameAsArray = gameAsString.split("-");
+                String gameValues = gameAsArray[0];
+                int difficulty = Integer.parseInt(gameAsArray[1]);
+                int lives = Integer.parseInt(gameAsArray[2]);
+
+                // creates a LinkedList of past game states from data stored in mongoDB
+                List<String> pausedGamePastBoards = (List<String>) userDoc.get("pausedGamePastBoards");  // ignore the warning userDOc.get("pausedGamePastBoards" will always be able tp cast)
+                LinkedList<GameState> pauseGameStates = new LinkedList<>();
+                for (String values : pausedGamePastBoards) {
+                    GameState tempState = new GameState(difficulty);
+                    tempState.setCurrBoard(values);
+                    pauseGameStates.add(tempState);
+                }
+
+                // setting all the data into the given instance of user based on the data collected
+                GameState gameState = new GameState(difficulty, pauseGameStates);
+                gameState.setCurrBoard(gameValues);
+                gameState.setLives(lives);
+                user.setPausedGame(gameState);
+
+                return gameState;
+            }
+        }
+        throw new NoSuchElementException();
     }
 }
+
 
 /*
   Temporary

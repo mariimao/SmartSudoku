@@ -2,7 +2,9 @@ package view;
 
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.start.StartController;
+import interface_adapter.resume_game.ResumeGameController;
+import interface_adapter.resume_game.ResumeGameState;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
@@ -18,6 +20,8 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final MenuViewModel menuViewModel;
 
     private final MenuController menuController;
+    private final ResumeGameController resumeGameController;
+    private final ResumeGameViewModel resumeGameViewModel;
 
     // buttons on menu
     private final JButton loadgame;
@@ -26,9 +30,11 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final JButton pastgames;
 
 
-    public MenuView(MenuController menuController, MenuViewModel menuViewModel) {
+    public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController, ResumeGameViewModel resumeGameViewModel) {
         this.menuViewModel = menuViewModel;
         this.menuController = menuController;
+        this.resumeGameController = resumeGameController;
+        this.resumeGameViewModel = resumeGameViewModel;
 
         menuViewModel.addPropertyChangeListener(this);
 
@@ -53,7 +59,8 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(loadgame)) {
-                            // loadgameController.execute();
+                            ResumeGameState resumeGameState = resumeGameViewModel.getState();
+                            resumeGameController.execute(resumeGameState.getUser());
                         }
                     }
                 }

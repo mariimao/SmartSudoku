@@ -1,15 +1,15 @@
-package entity;
+package entity.board;
 
-import java.awt.image.AreaAveragingScaleFilter;
 import java.util.*;
 
-public class EasyBoard implements Board{
+public class EasyBoard implements Board {
     public static void main(String[] args) {
         //TODO: DELETE MAIN, just for testing
         EasyBoard testBoard = new EasyBoard();
         System.out.println(testBoard);
         System.out.println(testBoard.toStringPause());
         System.out.println(new EasyBoard("003T00004T004T01F2T00"));
+        System.out.println(new EasyBoard("0000000000000000"));
     }
     private HashMap<Integer, Boolean>[][] currBoard;
     /* A matrix representing the board.
@@ -22,7 +22,10 @@ public class EasyBoard implements Board{
                 [{1 = false}, {}, {2 = false}, {}]]
     See http://bit.ly/3tNbWNg for what this board would look like.
      */
+    private int[][] solutionBoard;
+
     public EasyBoard() {
+        this.solutionBoard = generatePossibleEasyBoardValues();
         this.currBoard = this.generateEasyBoard();
     }
 
@@ -38,7 +41,7 @@ public class EasyBoard implements Board{
         //                [{1 = false}, {}, {2 = false}, {}]]
         // the string representation of currBoard should be:  "#2T#4F##3T##3T#1T1F#2F#"
 
-        HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
+        HashMap<Integer, Boolean>[][] easyBoard = generateBlankBoard();
         HashMap<Integer, Boolean> blankValue = new HashMap<>();
         String blankChar = "0"; // how we represent blank squares
 
@@ -92,7 +95,7 @@ public class EasyBoard implements Board{
     }
 
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
-        int[][] possibleValues = generatePossibleValues();
+        int[][] possibleValues = solutionBoard;
         // Delete this part later -----------
         String str = "Solution: \n";
         for (int z = 0; z <= 3; z++) {
@@ -104,7 +107,7 @@ public class EasyBoard implements Board{
         System.out.println(str);
         // -----------------------------------
         ArrayList<Integer> positions = generateEasyStartingPositions();
-        HashMap<Integer, Boolean>[][] easyBoard = blankEasyBoard();
+        HashMap<Integer, Boolean>[][] easyBoard = generateBlankBoard();
         int i = 0;
         for (int position : positions) {
             easyBoard[i][position].put(possibleValues[i][position], true);
@@ -113,7 +116,7 @@ public class EasyBoard implements Board{
         return easyBoard;
     }
 
-    public int[][] generatePossibleValues() {
+    private int[][] generatePossibleEasyBoardValues() {
         int[][] possibleValues = new int[4][4];
         boolean badBoard = true;
         while (badBoard) {
@@ -130,6 +133,7 @@ public class EasyBoard implements Board{
         }
         return possibleValues;
     }
+
     private HashMap<int[][], Boolean> generatePossibleEasyBoardValuesHelper() {
         int[][] possibleValues = {{0, 0, 0, 0},
                     {0, 0, 0, 0},
@@ -156,7 +160,7 @@ public class EasyBoard implements Board{
         return generatedValues;
     }
 
-    private HashMap<Integer, Boolean>[][] blankEasyBoard() {
+    public HashMap<Integer, Boolean>[][] generateBlankBoard() {
         HashMap<Integer, Boolean>[][] blankEasyBoard = new HashMap[4][4];
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
@@ -167,7 +171,7 @@ public class EasyBoard implements Board{
         return blankEasyBoard;
     }
 
-    public boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
+    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
@@ -242,6 +246,13 @@ public class EasyBoard implements Board{
 
     public HashMap<Integer, Boolean>[][] getCurrBoard(){
         return currBoard;
+    }
+
+    public int[][] getSolutionBoard() {
+        return solutionBoard;
+    }
+    public void setBoard(HashMap<Integer, Boolean>[][] newBoard) {
+        this.currBoard = newBoard;
     }
 
     public boolean noSpacesLeft() {

@@ -1,7 +1,7 @@
 package use_case.user_move;
 
-import entity.Board;
-import entity.GameState;
+import entity.board.Board;
+import entity.board.GameState;
 
 public class UserMoveInputData {
 

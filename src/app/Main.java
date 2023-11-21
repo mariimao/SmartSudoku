@@ -1,24 +1,24 @@
 package app;
 
 import data_access.UserDAO;
-import entity.CommonUser;
-import entity.EasyBoard;
-import entity.HardBoard;
-import entity.CommonUserFactory;
+import entity.user.CommonUser;
+import entity.board.EasyBoard;
+import entity.board.HardBoard;
+import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.menu.MenuViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
-import view.LoginView;
-import view.SignupView;
-import view.StartView;
-import view.ViewManager;
+import view.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class Main {
         // various cards, and the layout, and stitch them together.
 
         // The main application window.
-        JFrame application = new JFrame("Login Example");
+        JFrame application = new JFrame("SudokuScramble");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();
@@ -52,6 +52,12 @@ public class Main {
         StartViewModel startViewModel = new StartViewModel();
         LoginViewModel loginViewModel = new LoginViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
+        CancelViewModel cancelViewModel = new CancelViewModel();
+        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
+        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
+        MenuViewModel menuViewModel = new MenuViewModel();
+
+
 
 
 
@@ -66,6 +72,29 @@ public class Main {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        views.add(startView, startView.viewName);
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        views.add(signupView, signupView.viewName);
+
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        views.add(loginView, loginView.viewName);
+
+        // TODO: Update this when you add more views
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel,resumeGameViewModel, loginViewModel, userDataAccessObject);
+        views.add(menuView, menuView.viewName);
+
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
+        views.add(pausedGameView, pausedGameView.viewName);
+
+        viewManagerModel.setActiveViewName(menuView.viewName);  //TODO: change back to startView.viewName
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setVisible(true);
+
 
         //userDataAccessObject.deleteAll(); //for testing
         Map<LocalTime, Integer> sampleScores = new HashMap<>();
@@ -86,15 +115,6 @@ public class Main {
 
 //        userDataAccessObject.delete("user1");
 //        System.out.println(userDataAccessObject.toString());
-
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        viewManagerModel.setActiveViewName(startView.viewName);
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
 
         // board generation
         EasyBoard easyTester = new EasyBoard();
