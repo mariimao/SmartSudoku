@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="updated UserMoveOutputData to include output data">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="2f2e9137-5001-44af-b61e-a1047bd84964" name="Changes" comment="files that updated after updates to the user_move use case">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,7 +75,7 @@
       <workItem from="1699927185308" duration="1703000" />
       <workItem from="1700243303503" duration="8637000" />
       <workItem from="1700438083377" duration="261000" />
-      <workItem from="1700504332761" duration="14899000" />
+      <workItem from="1700504332761" duration="15764000" />
     </task>
     <task id="LOCAL-00001" summary="Completed Signup Use Case, may need to adjust user interaction flow">
       <option name="closed" value="true" />
@@ -164,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700544389745</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="files that updated after updates to the user_move use case">
+      <option name="closed" value="true" />
+      <created>1700544449394</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1700544449394</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -182,6 +191,7 @@
     <MESSAGE value="updated UserMoveInteractor to implement what happens when a user tries to make a move" />
     <MESSAGE value="updated UserMoveOutputBoundary to include the various view types" />
     <MESSAGE value="updated UserMoveOutputData to include output data" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated UserMoveOutputData to include output data" />
+    <MESSAGE value="files that updated after updates to the user_move use case" />
+    <option name="LAST_COMMIT_MESSAGE" value="files that updated after updates to the user_move use case" />
   </component>
 </project>
