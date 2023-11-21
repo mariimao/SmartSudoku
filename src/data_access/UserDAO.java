@@ -21,6 +21,7 @@ import org.bson.types.ObjectId;
 
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.menu.MenuUserDataAccessInterface;
+import use_case.new_game.NewGameDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
@@ -31,7 +32,7 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
-        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface {
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface, NewGameDataAccessInterface {
     public static void main(String[] args) {
 
         Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
