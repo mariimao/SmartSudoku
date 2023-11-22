@@ -19,6 +19,7 @@ import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
+import use_case.leaderboard.LeaderboardDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
 import use_case.menu.MenuUserDataAccessInterface;
 import use_case.new_game.NewGameDataAccessInterface;
@@ -32,7 +33,8 @@ import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
-        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface, NewGameDataAccessInterface {
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface,
+        NewGameDataAccessInterface, LeaderboardDataAccessInterface {
     public static void main(String[] args) {
 
         Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
@@ -172,6 +174,10 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     @Override
     public User get(String username) {
         return accounts.get(username);
+    }
+
+    public Map<String, User> getAccounts() {
+        return accounts;
     }
 
     public void delete(String name) {

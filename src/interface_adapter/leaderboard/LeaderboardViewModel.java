@@ -12,8 +12,6 @@ public class LeaderboardViewModel extends ViewModel {
 
     public static String MENU_BUTTON_LABEL = "Menu";
 
-    public static String CANCEL_BUTTON_LABEL = "Cancel";
-
     public static String SORT_BY_CHOICE_LABEL = "Sort by...";
 
     public static String USER_BUTTON_LABEL = "See my results";
@@ -39,6 +37,6 @@ public class LeaderboardViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public LeaderboardState getLeaderboardState() { return this.leaderboardState; }
+    public LeaderboardState getLeaderboardState() { return leaderboardState; }
 
 }

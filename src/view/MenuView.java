@@ -5,8 +5,12 @@ import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.leaderboard.LeaderboardController;
+import interface_adapter.leaderboard.LeaderboardState;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
+import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGameState;
@@ -40,19 +44,26 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final NewGameViewModel newGameViewModel;
     private final NewGameController newGameController;
 
+    private final LeaderboardViewModel leaderboardViewModel;
+    private final LeaderboardController leaderboardController;
+
     // buttons on menu
     private final JButton loadgame;
     private final JButton newgame;
     private final JButton leaderboard;
     private final JButton pastgames;
 
-    public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController, ResumeGameViewModel resumeGameViewModel, NewGameViewModel newGameViewModel, NewGameController newGameController) {
+    public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController,
+                    ResumeGameViewModel resumeGameViewModel, NewGameViewModel newGameViewModel, NewGameController newGameController,
+                    LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController) {
         this.menuViewModel = menuViewModel;
         this.menuController = menuController;
         this.resumeGameController = resumeGameController;
         this.resumeGameViewModel = resumeGameViewModel;
         this.newGameViewModel = newGameViewModel;
         this.newGameController = newGameController;
+        this.leaderboardViewModel = leaderboardViewModel;
+        this.leaderboardController = leaderboardController;
 
         menuViewModel.addPropertyChangeListener(this);
 
@@ -102,8 +113,11 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(loadgame)) {
-                            // leaderboardController.execute();
+                        if (e.getSource().equals(leaderboard)) {
+                            LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+                            String username = menuViewModel.getMenuState().getUsername(); // get username from menu
+                            String sortingMethod = leaderboardState.getSortingMethod();
+                            leaderboardController.execute(username, sortingMethod, false); // false from menu
                         }
                     }
                 }

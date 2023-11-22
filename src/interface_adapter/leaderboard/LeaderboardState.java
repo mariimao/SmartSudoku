@@ -1,40 +1,47 @@
 package interface_adapter.leaderboard;
 
+import java.util.SortedMap;
+
 public class LeaderboardState {
     private String username = "";
-    private int sortingMethod = 0;
+    private String error = null;
+    private String sortingMethod = "";
 
-    private boolean userView = false;
+    private SortedMap<Object, Object> leaderboard = null;
+
 
     public LeaderboardState(LeaderboardState copy) {
         username = copy.username;
         sortingMethod = copy.sortingMethod;
-        userView = copy.userView;
+        leaderboard = copy.leaderboard;
     }
 
     public LeaderboardState(){}
 
     public String getUsername() {
-        return username;
+        return  username;
+    }
+    public String getError() {
+        return error;
     }
 
-    public int getSortingMethod() {
+    public String getSortingMethod() {
         return sortingMethod;
     }
 
-    public boolean isUserView() {
-        return userView;
+    public SortedMap<Object, Object> getLeaderboard() {
+        return leaderboard;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setError(String error) {
+        this.error = error;
     }
 
-    public void setSortingMethod(int sortingMethod) {
+    public void setSortingMethod(String sortingMethod) {
         this.sortingMethod = sortingMethod;
     }
 
-    public void setUserView(boolean userView) {
-        this.userView = userView;
+    public void setLeaderboard(SortedMap<Object, Object> leaderboard) {
+        this.leaderboard = leaderboard;
     }
 }

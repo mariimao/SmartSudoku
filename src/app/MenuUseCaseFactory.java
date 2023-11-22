@@ -3,6 +3,9 @@ package app;
 import data_access.UserDAO;
 import entity.user.User;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.leaderboard.LeaderboardController;
+import interface_adapter.leaderboard.LeaderboardPresenter;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuPresenter;
@@ -13,6 +16,9 @@ import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGamePresenter;
 import interface_adapter.resume_game.ResumeGameViewModel;
+import use_case.leaderboard.LeaderboardDataAccessInterface;
+import use_case.leaderboard.LeaderboardInteractor;
+import use_case.leaderboard.LeaderboardOutputBoundary;
 import use_case.menu.MenuInteractor;
 import use_case.menu.MenuOutputBoundary;
 import use_case.new_game.NewGameDataAccessInterface;
@@ -31,15 +37,17 @@ public class MenuUseCaseFactory {
     private MenuUseCaseFactory() {}
 
     public static MenuView create(
-            ViewManagerModel viewManagerModel, MenuViewModel menuViewModel, ResumeGameViewModel resumeGameViewModel, LoginViewModel loginViewModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject) {
+            ViewManagerModel viewManagerModel, MenuViewModel menuViewModel, ResumeGameViewModel resumeGameViewModel, LoginViewModel loginViewModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject,
+            LeaderboardViewModel leaderboardViewModel) {
 
         try {
             // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
 
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
             ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject);
-            NewGameController newGameController = creatUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
-            return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController);
+            NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
+            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
+            return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }
@@ -47,7 +55,7 @@ public class MenuUseCaseFactory {
         return null;
     }
 
-    private static NewGameController creatUserNewGameCase(ViewManagerModel viewManagerModel, NewGameViewModel newGameViewModel, NewGameDataAccessInterface newGameDataAccessInterface) {
+    private static NewGameController createUserNewGameCase(ViewManagerModel viewManagerModel, NewGameViewModel newGameViewModel, NewGameDataAccessInterface newGameDataAccessInterface) {
         NewGamePresenter newGamePresenter = new NewGamePresenter(newGameViewModel, viewManagerModel);
         NewGameInputBoundary newGameInteractor = new NewGameInteractor(newGameDataAccessInterface, newGamePresenter);
         return new NewGameController(newGameInteractor);
@@ -74,6 +82,15 @@ public class MenuUseCaseFactory {
         ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel);
         ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
+    }
+
+    private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel,
+                                                             LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
+        LeaderboardOutputBoundary leaderboardOutputBoundary = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel, menuViewModel);
+        LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface,
+                leaderboardOutputBoundary);
+
+        return new LeaderboardController(leaderboardInteractor);
     }
 
 }

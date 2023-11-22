@@ -9,7 +9,8 @@ import interface_adapter.ViewManagerModel;
         import use_case.leaderboard.LeaderboardOutputData;
         import view.LeaderboardView;
 
-        import java.time.LocalDateTime;
+import javax.swing.*;
+import java.time.LocalDateTime;
         import java.time.format.DateTimeFormatter;
 
 public class LeaderboardPresenter implements LeaderboardOutputBoundary {
@@ -27,12 +28,9 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
         this.menuViewModel = menuViewModel;
     }
 
-    public void prepareSuccessView(LeaderboardOutputData response) {
+    public void prepareSuccessView(LeaderboardOutputData leaderboardOutputData) {
         LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
-
-        leaderboardState.setSortingMethod(response.getMethod());
-        leaderboardState.setUserView(response.isUserView());
-        this.leaderboardViewModel.setLeaderboardState(leaderboardState);
+        leaderboardViewModel.setLeaderboardState(leaderboardState);
         leaderboardViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveViewName(leaderboardViewModel.getViewName());
@@ -41,8 +39,9 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        MenuState menuState = menuViewModel.getMenuState();
-        menuState.setUsername(error);
+        LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+        leaderboardState.setError(error);
         leaderboardViewModel.firePropertyChanged();
+        JOptionPane.showMessageDialog(null, error);
     }
 }

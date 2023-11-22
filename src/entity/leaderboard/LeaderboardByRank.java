@@ -22,6 +22,19 @@ public class LeaderboardByRank implements Leaderboard {
         return leaderboard;
     }
 
+    public SortedMap<Integer, String> getUserView(String username) {
+        SortedMap<Integer, String> userInfo = new TreeMap<>();
+        Integer rank = 0;
+        for (Integer i : leaderboard.keySet()) {
+            if (leaderboard.get(i).contains(username)) {
+                rank = i;
+            }
+        }
+
+        userInfo.put(rank, username);
+        return userInfo;
+    }
+
     private SortedMap<Integer, Set<String>> generateLeaderboard() {
         Map<Integer, Set<String>> highScoreToUsers = this.highScoreToUsers();
 

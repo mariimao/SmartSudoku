@@ -4,10 +4,10 @@ public class LeaderboardInputData {
 
     final private String user;
 
-    final private int sortingMethod;
+    final private String sortingMethod;
 
     final boolean userView;
-    public LeaderboardInputData(String user, int sortingMethod, boolean userView){
+    public LeaderboardInputData(String user, String sortingMethod, boolean userView){
         this.user = user;
         this.sortingMethod = sortingMethod;
         this.userView = userView;
@@ -17,7 +17,7 @@ public class LeaderboardInputData {
         return user;
     }
 
-    int getSortingMethod() {
+    String getSortingMethod() {
         return sortingMethod;
     }
 
