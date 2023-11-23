@@ -5,8 +5,12 @@ import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.leaderboard.LeaderboardController;
+import interface_adapter.leaderboard.LeaderboardState;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
+import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGameState;
@@ -20,6 +24,8 @@ import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -40,37 +46,58 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final NewGameViewModel newGameViewModel;
     private final NewGameController newGameController;
 
+    private final LeaderboardViewModel leaderboardViewModel;
+    private final LeaderboardController leaderboardController;
+
     // buttons on menu
     private final JButton loadgame;
     private final JButton newgame;
     private final JButton leaderboard;
     private final JButton pastgames;
 
-    public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController, ResumeGameViewModel resumeGameViewModel, NewGameViewModel newGameViewModel, NewGameController newGameController) {
+    private final Color blue = new Color(97, 150, 242);
+    private final Color darkblue = new Color(50, 78, 156);
+    private final Color white = Color.white;
+    private final Color black = Color.black;
+
+    public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController,
+                    ResumeGameViewModel resumeGameViewModel, NewGameViewModel newGameViewModel, NewGameController newGameController,
+                    LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController) {
         this.menuViewModel = menuViewModel;
         this.menuController = menuController;
         this.resumeGameController = resumeGameController;
         this.resumeGameViewModel = resumeGameViewModel;
         this.newGameViewModel = newGameViewModel;
         this.newGameController = newGameController;
+        this.leaderboardViewModel = leaderboardViewModel;
+        this.leaderboardController = leaderboardController;
 
         menuViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(StartViewModel.TITLE_LABEL);
+        this.setBackground(white);
 
-        JPanel buttons = new JPanel();
+        JLabel title = new JLabel(MenuViewModel.TITLE_LABEL);
+        title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        title.setFont(new Font("Helvetica", Font.BOLD, 50));
+        title.setForeground(darkblue);
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        this.add(title);
 
-        loadgame = new JButton(menuViewModel.LOAD_BUTTON_LABEL);
-        buttons.add(loadgame);
+        loadgame = new CustomButton(menuViewModel.LOAD_BUTTON_LABEL, darkblue, white);
+        loadgame.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        this.add(loadgame);
 
-        newgame = new JButton(menuViewModel.NEW_BUTTON_LABEL);
-        buttons.add(newgame);
+        newgame = new CustomButton(menuViewModel.NEW_BUTTON_LABEL, darkblue, white);
+        newgame.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        this.add(newgame);
 
-        leaderboard = new JButton(menuViewModel.LEADERBOARD_BUTTON_LABEL);
-        buttons.add(leaderboard);
+        leaderboard = new CustomButton(menuViewModel.LEADERBOARD_BUTTON_LABEL, darkblue, white);
+        leaderboard.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        this.add(leaderboard);
 
-        pastgames = new JButton(menuViewModel.PAST_GAMES_BUTTON_LABEL);
-        buttons.add(pastgames);
+        pastgames = new CustomButton(menuViewModel.PAST_GAMES_BUTTON_LABEL, darkblue, white);
+        pastgames.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        this.add(pastgames);
 
         loadgame.addActionListener(
                 new ActionListener() {
@@ -102,8 +129,11 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(loadgame)) {
-                            // leaderboardController.execute();
+                        if (e.getSource().equals(leaderboard)) {
+                            LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+                            String username = menuViewModel.getMenuState().getUsername(); // get username from menu
+                            String sortingMethod = leaderboardState.getSortingMethod();
+                            leaderboardController.execute("mary", sortingMethod, false, false); // false from menu
                         }
                     }
                 }
@@ -121,9 +151,6 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
         );
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-        this.add(title);
-        this.add(buttons);
 
     }
 

@@ -4,24 +4,32 @@ public class LeaderboardInputData {
 
     final private String user;
 
-    final private int sortingMethod;
+    final private String sortingMethod;
 
     final boolean userView;
-    public LeaderboardInputData(String user, int sortingMethod, boolean userView){
+
+    final boolean backView;
+
+    public LeaderboardInputData(String user, String sortingMethod, boolean userView, boolean backView){
         this.user = user;
         this.sortingMethod = sortingMethod;
         this.userView = userView;
+        this.backView = backView;
     }
 
     String getUser() {
         return user;
     }
 
-    int getSortingMethod() {
+    String getSortingMethod() {
         return sortingMethod;
     }
 
     boolean getUserView() {
         return userView;
+    }
+
+    public boolean getBackView() {
+        return backView;
     }
 }

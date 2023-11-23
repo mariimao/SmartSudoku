@@ -51,6 +51,7 @@ public class GameState {
 
     public Board makeMove(int x, int y, int move) {
         currBoard = currBoard.makeMove(x, y, move);
+        return currBoard;
     }
 
     public void scrambleBoard() {

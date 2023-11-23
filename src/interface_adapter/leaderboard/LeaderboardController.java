@@ -7,12 +7,12 @@ public class LeaderboardController {
 
     final LeaderboardInputBoundary leaderboardUseCaseInteractor;
 
-    public LeaderboardController(LeaderboardInputBoundary clearUseCaseInteractor) {
-        this.leaderboardUseCaseInteractor = clearUseCaseInteractor;
+    public LeaderboardController(LeaderboardInputBoundary leaderboardUseCaseInteractor) {
+        this.leaderboardUseCaseInteractor = leaderboardUseCaseInteractor;
     }
 
-    public void execute(String user, int sortingMethod, boolean userView) {
-        LeaderboardInputData leaderboardInputData = new LeaderboardInputData(user, sortingMethod, userView);
+    public void execute(String user, String sortingMethod, boolean userView, boolean backView) {
+        LeaderboardInputData leaderboardInputData = new LeaderboardInputData(user, sortingMethod, userView, backView);
         leaderboardUseCaseInteractor.execute(leaderboardInputData);
     }
 }

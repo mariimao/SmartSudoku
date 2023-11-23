@@ -6,6 +6,7 @@ import entity.board.EasyBoard;
 import entity.board.HardBoard;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameViewModel;
@@ -58,6 +59,7 @@ public class Main {
         ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
         MenuViewModel menuViewModel = new MenuViewModel();
         NewGameViewModel newGameViewModel = new NewGameViewModel();
+        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
 
 
 
@@ -85,7 +87,7 @@ public class Main {
         views.add(loginView, loginView.viewName);
 
         // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel,resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject);
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel,resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel);
         views.add(menuView, menuView.viewName);
 
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
@@ -94,7 +96,10 @@ public class Main {
         NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject);
         views.add(newGameView, newGameViewModel.getViewName());
 
-        viewManagerModel.setActiveViewName(menuView.viewName);  //TODO: change back to startView.viewName
+        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
+        views.add(leaderboardView, leaderboardViewModel.getViewName());
+
+        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 
         application.pack();

@@ -1,27 +1,18 @@
 package use_case.leaderboard;
 
+import java.util.Map;
+import java.util.Objects;
+import java.util.SortedMap;
+
 public class LeaderboardOutputData {
-    private boolean userView;
+    private SortedMap<Object, Object> leaderboard;
 
-    private int method;
 
-    private String user;
-
-    public LeaderboardOutputData(int method, boolean userView, String user) {
-        this.userView = userView;
-        this.method = method;
-        this.user = user;
+    public LeaderboardOutputData(SortedMap<Object, Object> leaderboard) {
+        this.leaderboard = leaderboard;
     }
 
-    public int getMethod() {
-        return method;
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public boolean isUserView() {
-        return userView;
+    public String getLeaderboard() {
+        return getLeaderboard().toString();
     }
 }

@@ -7,8 +7,13 @@ import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelController;
+import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -28,13 +33,17 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
 
     // text input
-    private final JTextField usernameInputField =  new JTextField(15);
-    private final JPasswordField passwordInputField = new JPasswordField(15);
+    private final JTextField usernameInputField =  new JTextField(20);
+    private final JPasswordField passwordInputField = new JPasswordField(20);
 
     // buttons on menu
     private final JButton login;
     private final JButton cancel;
 
+    private final Color blue = new Color(97, 150, 242);
+    private final Color darkblue = new Color(50, 78, 156);
+    private final Color white = Color.white;
+    private final Color black = Color.black;
 
     public LoginView(LoginController loginController, LoginViewModel loginViewModel, CancelController cancelController) {
         this.loginViewModel = loginViewModel;
@@ -43,21 +52,54 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         loginViewModel.addPropertyChangeListener(this);
 
-        JLabel title = new JLabel(SignupViewModel.TITLE_LABEL);
+        this.setBackground(darkblue);
 
-        LabelTextPanel usernameInfo = new LabelTextPanel(
-                new JLabel(SignupViewModel.USERNAME_LABEL), usernameInputField);
-        LabelTextPanel passwordInfo = new LabelTextPanel(
-                new JLabel(SignupViewModel.PASSWORD_LABEL), passwordInputField);
+        JLabel title = new JLabel(LoginViewModel.TITLE_LABEL);
+        title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        title.setFont(new Font("Helvetica", Font.BOLD, 50));
+        title.setForeground(white);
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        this.add(title);
+
+        JLabel username = new JLabel(SignupViewModel.USERNAME_LABEL);
+        username.setFont(new Font("Consolas", Font.ITALIC, 20));
+        username.setForeground(white);
+        usernameInputField.setBorder(new BevelBorder(10, blue, black));
+        usernameInputField.setBackground(white);
+        usernameInputField.setFont(new Font("Consolas", Font.PLAIN, 20));
+        usernameInputField.setForeground(darkblue);
+        LabelTextPanel usernameInfo = new LabelTextPanel(username, usernameInputField);
+        usernameInfo.setBackground(darkblue);
+        this.add(usernameInfo);
+
+        JLabel password = new JLabel(SignupViewModel.PASSWORD_LABEL);
+        password.setFont(new Font("Consolas", Font.ITALIC, 20));
+        password.setForeground(white);
+        passwordInputField.setBorder(new BevelBorder(10, blue, black));
+        passwordInputField.setBackground(white);
+        passwordInputField.setFont(new Font("Consolas", Font.PLAIN, 20));
+        passwordInputField.setForeground(darkblue);
+        LabelTextPanel passwordInfo = new LabelTextPanel(password, passwordInputField);
+        passwordInfo.setBackground(darkblue);
+        this.add(passwordInfo);
 
         JPanel buttons = new JPanel();
-
-        login = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
-        buttons.add(login);
+        buttons.setBackground(darkblue);
 
         cancel = new JButton(loginViewModel.CANCEL_BUTTON_LABEL);
+        cancel.setBackground(white);
+        cancel.setFont(new Font("Verdana", Font.BOLD, 16));
+        cancel.setForeground(darkblue);
         buttons.add(cancel);
 
+        login = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
+        login.setBackground(blue);
+        login.setFont(new Font("Verdana", Font.BOLD, 16));
+        login.setForeground(white);
+        buttons.add(login);
+
+        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        this.add(buttons);
 
         login.addActionListener(
                 new ActionListener() {
@@ -132,10 +174,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.add(title);
-        this.add(buttons);
-        this.add(usernameInfo);
-        this.add(passwordInfo);
 
     }
 

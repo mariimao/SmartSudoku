@@ -13,12 +13,13 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
     }
 
     public void execute(UserMoveInputData userMoveInputData) {
-        Board current_board = userMoveInputData.getCurrent_board();
+        Board current_board = (Board) userMoveInputData.getCurrent_board();
         int difficulty = userMoveInputData.getDifficulty();
         int x = userMoveInputData.getX();
         int y = userMoveInputData.getY();
         int value = userMoveInputData.getValue();
 
+        UserMoveOutputData userMoveOutputData = null;
         if (userMoveInputData.gameOver()) {
             gamePresenter.prepareEndView(userMoveOutputData);
         } else {

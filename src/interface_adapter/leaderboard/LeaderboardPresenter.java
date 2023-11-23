@@ -9,30 +9,31 @@ import interface_adapter.ViewManagerModel;
         import use_case.leaderboard.LeaderboardOutputData;
         import view.LeaderboardView;
 
-        import java.time.LocalDateTime;
+import javax.swing.*;
+import java.time.LocalDateTime;
         import java.time.format.DateTimeFormatter;
 
 public class LeaderboardPresenter implements LeaderboardOutputBoundary {
-
-    private final MenuViewModel menuViewModel;
 
     private final LeaderboardViewModel leaderboardViewModel;
 
     private final ViewManagerModel viewManagerModel;
     public LeaderboardPresenter(ViewManagerModel viewManagerModel,
-                                LeaderboardViewModel leaderboardViewModel,
-                                MenuViewModel menuViewModel) {
+                                LeaderboardViewModel leaderboardViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.leaderboardViewModel = leaderboardViewModel;
-        this.menuViewModel = menuViewModel;
     }
 
-    public void prepareSuccessView(LeaderboardOutputData response) {
-        LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+    @Override
+    public void prepareBackView() {
+        viewManagerModel.setActiveViewName(new MenuViewModel().getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
 
-        leaderboardState.setSortingMethod(response.getMethod());
-        leaderboardState.setUserView(response.isUserView());
-        this.leaderboardViewModel.setLeaderboardState(leaderboardState);
+
+    public void prepareSuccessView(LeaderboardOutputData leaderboardOutputData) {
+        LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+        leaderboardViewModel.setLeaderboardState(leaderboardState);
         leaderboardViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveViewName(leaderboardViewModel.getViewName());
@@ -41,8 +42,9 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
-        MenuState menuState = menuViewModel.getMenuState();
-        menuState.setUsername(error);
+        LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+        leaderboardState.setError(error);
         leaderboardViewModel.firePropertyChanged();
+        JOptionPane.showMessageDialog(null, error);
     }
 }

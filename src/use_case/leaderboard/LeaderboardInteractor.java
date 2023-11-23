@@ -2,31 +2,47 @@ package use_case.leaderboard;
 
 import data_access.UserDAO;
 import entity.leaderboard.Leaderboard;
+import entity.leaderboard.LeaderboardByRank;
+import entity.user.User;
+
+import java.util.*;
 
 public class LeaderboardInteractor  implements LeaderboardInputBoundary{
 
-    final UserDAO userDAO;
-    final Leaderboard leaderboard;
+    final LeaderboardDataAccessInterface leaderboardDataAccessInterface;
     final LeaderboardOutputBoundary leaderboardPresenter;
 
-    public LeaderboardInteractor(UserDAO userDAO,
-                                 Leaderboard leaderboard,
-                                 LeaderboardOutputBoundary leaderboardOutputBoundary) {
-        this.userDAO = userDAO;
-        this.leaderboard = leaderboard;
-        this.leaderboardPresenter = leaderboardOutputBoundary;
+    public LeaderboardInteractor(LeaderboardDataAccessInterface leaderboardDataAccessInterface,
+                                 LeaderboardOutputBoundary leaderboardPresenter) {
+        this.leaderboardDataAccessInterface = leaderboardDataAccessInterface;
+        this.leaderboardPresenter = leaderboardPresenter;
     }
 
     @Override
     public void execute(LeaderboardInputData leaderboardInputData) {
         String user = leaderboardInputData.getUser();
-        int method = leaderboardInputData.getSortingMethod();
+        String method = leaderboardInputData.getSortingMethod();
         boolean userView = leaderboardInputData.getUserView();
-        LeaderboardOutputData leaderboardOutputData = new LeaderboardOutputData(method, userView, user);
-        if (userDAO.existsByName(user)) {
-            leaderboardPresenter.prepareSuccessView(leaderboardOutputData);
+        boolean backView = leaderboardInputData.getBackView();
+        Leaderboard leaderboard = null;
+        SortedMap<Object, Object> output = null;
+        if (backView) {
+            leaderboardPresenter.prepareBackView();
         } else {
-            leaderboardPresenter.prepareFailView("Need an account to see leaderboard.");
+            if (leaderboardDataAccessInterface.existsByName(user)) {
+                if (method.equals("Rank")) { // currently only one sorting method
+                    Map<String, User> accounts = leaderboardDataAccessInterface.getAccounts();
+                    leaderboard = new LeaderboardByRank(accounts);
+                    output = leaderboard.getLeaderboard();
+                }
+                if (userView && leaderboard != null) {
+                    output = leaderboard.getUserView(user);
+                }
+                LeaderboardOutputData leaderboardOutputData = new LeaderboardOutputData(output);
+                leaderboardPresenter.prepareSuccessView(leaderboardOutputData);
+            } else {
+                leaderboardPresenter.prepareFailView("Need an account to see leaderboard.");
+            }
         }
     }
 }

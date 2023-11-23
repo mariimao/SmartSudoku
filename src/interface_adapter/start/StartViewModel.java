@@ -7,10 +7,12 @@ import java.beans.PropertyChangeSupport;
 
 public class StartViewModel extends ViewModel {
 
-    public static final String TITLE_LABEL = "Welcome to Sudoku";
+    public static final String TITLE_LABEL = "smart sudoku";
 
-    public static final String SIGNUP_BUTTON_LABEL = "signup";
-    public static final String LOGIN_BUTTON_LABEL = "login";
+    public static final String WELCOME_LABEL = "SUDOKU WITH A TWIST!";
+
+    public static final String SIGNUP_BUTTON_LABEL = "SIGNUP";
+    public static final String LOGIN_BUTTON_LABEL = "LOGIN";
 
     private StartState startState = new StartState();
 
