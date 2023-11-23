@@ -10,11 +10,11 @@ public class MenuViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Menu";
 
-    public static final String LOAD_BUTTON_LABEL = "Load";
+    public static final String LOAD_BUTTON_LABEL = "LOAD GAME";
 
-    public static final String NEW_BUTTON_LABEL = "New Game";
+    public static final String NEW_BUTTON_LABEL = "NEW GAME";
 
-    public static final String LEADERBOARD_BUTTON_LABEL = "Leaderboard";
+    public static final String LEADERBOARD_BUTTON_LABEL = "LEADERBOARD";
 
     public static final String PAST_GAMES_BUTTON_LABEL = "Past Games";
 

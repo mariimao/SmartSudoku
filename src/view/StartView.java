@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import view.CustomButton;
 
 public class StartView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -58,16 +59,8 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
         JPanel buttons = new JPanel();
         buttons.setBackground(darkblue);
 
-        signup = new JButton(startViewModel.SIGNUP_BUTTON_LABEL);
-        signup.setBackground(blue);
-        signup.setFont(new Font("Verdana", Font.BOLD, 16));
-        signup.setForeground(white);
-
-        login = new JButton(startViewModel.LOGIN_BUTTON_LABEL);
-        login.setBackground(white);
-        login.setFont(new Font("Verdana", Font.BOLD, 16));
-        login.setForeground(blue);
-
+        signup = new CustomButton(startViewModel.SIGNUP_BUTTON_LABEL, blue, white);
+        login = new CustomButton(startViewModel.LOGIN_BUTTON_LABEL, white, blue);
         buttons.add(signup);
         buttons.add(login);
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));

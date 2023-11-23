@@ -96,16 +96,9 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
         JPanel buttons = new JPanel();
         buttons.setBackground(darkblue);
 
-        cancel = new JButton(SignupViewModel.CANCEL_BUTTON_LABEL);
-        cancel.setBackground(white);
-        cancel.setFont(new Font("Verdana", Font.BOLD, 16));
-        cancel.setForeground(darkblue);
+        cancel = new CustomButton(SignupViewModel.CANCEL_BUTTON_LABEL, white, darkblue);
         buttons.add(cancel);
-
-        signup = new JButton(SignupViewModel.SIGNUP_BUTTON_LABEL);
-        signup.setBackground(blue);
-        signup.setFont(new Font("Verdana", Font.BOLD, 16));
-        signup.setForeground(white);
+        signup = new CustomButton(SignupViewModel.SIGNUP_BUTTON_LABEL, blue, white);
         buttons.add(signup);
 
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
