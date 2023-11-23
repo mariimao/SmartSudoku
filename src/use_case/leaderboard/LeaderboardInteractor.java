@@ -23,21 +23,26 @@ public class LeaderboardInteractor  implements LeaderboardInputBoundary{
         String user = leaderboardInputData.getUser();
         String method = leaderboardInputData.getSortingMethod();
         boolean userView = leaderboardInputData.getUserView();
+        boolean backView = leaderboardInputData.getBackView();
         Leaderboard leaderboard = null;
         SortedMap<Object, Object> output = null;
-        if (leaderboardDataAccessInterface.existsByName(user)) {
-            if (method.equals("Rank")) { // currently only one sorting method
-                Map<String, User> accounts = leaderboardDataAccessInterface.getAccounts();
-                leaderboard = new LeaderboardByRank(accounts);
-                output = leaderboard.getLeaderboard();
-            }
-            if (userView && leaderboard != null) {
-                output = leaderboard.getUserView(user);
-            }
-            LeaderboardOutputData leaderboardOutputData = new LeaderboardOutputData(output);
-            leaderboardPresenter.prepareSuccessView(leaderboardOutputData);
+        if (backView) {
+            leaderboardPresenter.prepareBackView();
         } else {
-            leaderboardPresenter.prepareFailView("Need an account to see leaderboard.");
+            if (leaderboardDataAccessInterface.existsByName(user)) {
+                if (method.equals("Rank")) { // currently only one sorting method
+                    Map<String, User> accounts = leaderboardDataAccessInterface.getAccounts();
+                    leaderboard = new LeaderboardByRank(accounts);
+                    output = leaderboard.getLeaderboard();
+                }
+                if (userView && leaderboard != null) {
+                    output = leaderboard.getUserView(user);
+                }
+                LeaderboardOutputData leaderboardOutputData = new LeaderboardOutputData(output);
+                leaderboardPresenter.prepareSuccessView(leaderboardOutputData);
+            } else {
+                leaderboardPresenter.prepareFailView("Need an account to see leaderboard.");
+            }
         }
     }
 }

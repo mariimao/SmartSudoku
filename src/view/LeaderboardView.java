@@ -4,27 +4,30 @@ import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardState;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginState;
+import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.signup.cancel.CancelController;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.SortedMap;
 
 public class LeaderboardView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "leaderboard view";
 
-    private final MenuViewModel menuViewModel;
     private final LeaderboardViewModel leaderboardViewModel;
     private final LeaderboardController leaderboardController;
 
+
     // buttons + options
-    //TODO: back button
     private final JComboBox<String> sortingMethod;
 
     private final JButton userView;
@@ -32,8 +35,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
     private final JButton menu;
 
 
-    public LeaderboardView(MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController) {
-        this.menuViewModel = menuViewModel;
+    public LeaderboardView(LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController) {
         this.leaderboardViewModel = leaderboardViewModel;
         this.leaderboardController = leaderboardController;
 
@@ -67,7 +69,10 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(menu)) {
-                            //menuView.
+                            LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+                            String user = leaderboardState.getUsername();
+                            String sortingMethod = leaderboardState.getSortingMethod();
+                            leaderboardController.execute(user, sortingMethod, false, true);
                         }
                     }
                 }
@@ -76,7 +81,6 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
         JLabel lbl = new JLabel(LeaderboardViewModel.SORT_BY_CHOICE_LABEL);
         String[] choices = { "Rank" };
         sortingMethod = new JComboBox<String>(choices);
-
         sortingMethod.addActionListener(
                 new ActionListener() {
                     @Override
@@ -90,11 +94,26 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 }
         );
 
+
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
         this.add(buttons);
         this.add(sortingMethod);
+
+        // TODO: reorganize this later
+        JTable table;
+        DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
+        if (LeaderboardViewModel.LEADERBOARD!=null) {
+            for (Object i : LeaderboardViewModel.LEADERBOARD.keySet()) {
+                model.addRow(new Object[]{i, LeaderboardViewModel.LEADERBOARD.get(i)});
+            }
+            table = new JTable(model);
+            this.add(table);
+        } else {
+            JLabel labels = new JLabel("no users");
+            this.add(labels);
+        }
 
     }
 

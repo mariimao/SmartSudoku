@@ -117,7 +117,7 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                             LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
                             String username = menuViewModel.getMenuState().getUsername(); // get username from menu
                             String sortingMethod = leaderboardState.getSortingMethod();
-                            leaderboardController.execute(username, sortingMethod, false); // false from menu
+                            leaderboardController.execute("mary", sortingMethod, false, false); // false from menu
                         }
                     }
                 }

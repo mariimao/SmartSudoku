@@ -96,7 +96,7 @@ public class Main {
         NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject);
         views.add(newGameView, newGameViewModel.getViewName());
 
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, menuViewModel, userDataAccessObject);
+        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
         viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName

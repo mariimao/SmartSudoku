@@ -7,10 +7,14 @@ public class LeaderboardInputData {
     final private String sortingMethod;
 
     final boolean userView;
-    public LeaderboardInputData(String user, String sortingMethod, boolean userView){
+
+    final boolean backView;
+
+    public LeaderboardInputData(String user, String sortingMethod, boolean userView, boolean backView){
         this.user = user;
         this.sortingMethod = sortingMethod;
         this.userView = userView;
+        this.backView = backView;
     }
 
     String getUser() {
@@ -23,5 +27,9 @@ public class LeaderboardInputData {
 
     boolean getUserView() {
         return userView;
+    }
+
+    public boolean getBackView() {
+        return backView;
     }
 }

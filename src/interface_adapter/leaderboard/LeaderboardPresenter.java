@@ -15,18 +15,21 @@ import java.time.LocalDateTime;
 
 public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
-    private final MenuViewModel menuViewModel;
-
     private final LeaderboardViewModel leaderboardViewModel;
 
     private final ViewManagerModel viewManagerModel;
     public LeaderboardPresenter(ViewManagerModel viewManagerModel,
-                                LeaderboardViewModel leaderboardViewModel,
-                                MenuViewModel menuViewModel) {
+                                LeaderboardViewModel leaderboardViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.leaderboardViewModel = leaderboardViewModel;
-        this.menuViewModel = menuViewModel;
     }
+
+    @Override
+    public void prepareBackView() {
+        viewManagerModel.setActiveViewName(new MenuViewModel().getViewName());
+        viewManagerModel.firePropertyChanged();
+    }
+
 
     public void prepareSuccessView(LeaderboardOutputData leaderboardOutputData) {
         LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();

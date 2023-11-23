@@ -6,6 +6,7 @@ import view.LeaderboardView;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.SortedMap;
 
 public class LeaderboardViewModel extends ViewModel {
     public static String TITLE_LABEL = "Leaderboard";
@@ -16,10 +17,17 @@ public class LeaderboardViewModel extends ViewModel {
 
     public static String USER_BUTTON_LABEL = "See my results";
 
-    private LeaderboardState leaderboardState = new LeaderboardState();
+    private static LeaderboardState leaderboardState = new LeaderboardState();
+
+
+    public static SortedMap<Object, Object> LEADERBOARD = leaderboardState.getLeaderboard();
 
     public LeaderboardViewModel() {
         super("leaderboard view");
+    }
+
+    public SortedMap<Object, Object> getLeaderboard() {
+        return LEADERBOARD;
     }
 
     public void setLeaderboardState(LeaderboardState leaderboardState) {

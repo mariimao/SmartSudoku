@@ -46,7 +46,7 @@ public class MenuUseCaseFactory {
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
             ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
-            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
+            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
             return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -85,8 +85,8 @@ public class MenuUseCaseFactory {
     }
 
     private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel,
-                                                             LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
-        LeaderboardOutputBoundary leaderboardOutputBoundary = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel, menuViewModel);
+                                                             LeaderboardViewModel leaderboardViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
+        LeaderboardOutputBoundary leaderboardOutputBoundary = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel);
         LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface,
                 leaderboardOutputBoundary);
 
