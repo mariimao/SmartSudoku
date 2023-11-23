@@ -64,9 +64,9 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
         signup.setForeground(white);
 
         login = new JButton(startViewModel.LOGIN_BUTTON_LABEL);
-        login.setBackground(blue);
+        login.setBackground(white);
         login.setFont(new Font("Verdana", Font.BOLD, 16));
-        login.setForeground(white);
+        login.setForeground(blue);
 
         buttons.add(signup);
         buttons.add(login);

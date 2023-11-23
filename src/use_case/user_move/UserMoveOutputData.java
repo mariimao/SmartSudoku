@@ -1,6 +1,6 @@
 package use_case.user_move;
 
-import entity.GameState;
+import entity.board.GameState;
 
 public class UserMoveOutputData {
     private final GameState gameState;

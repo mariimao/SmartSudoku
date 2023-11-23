@@ -42,8 +42,8 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     private final Color blue = new Color(97, 150, 242);
     private final Color darkblue = new Color(50, 78, 156);
-    private final Color white = new Color(255, 255, 255);
-    private final Color black = new Color(0, 0, 0);
+    private final Color white = Color.white;
+    private final Color black = Color.black;
 
     public LoginView(LoginController loginController, LoginViewModel loginViewModel, CancelController cancelController) {
         this.loginViewModel = loginViewModel;
@@ -52,35 +52,35 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         loginViewModel.addPropertyChangeListener(this);
 
-        this.setBackground(blue);
+        this.setBackground(darkblue);
 
         JLabel title = new JLabel(LoginViewModel.TITLE_LABEL);
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
-        title.setForeground(darkblue);
+        title.setForeground(white);
         title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(title);
 
         JLabel username = new JLabel(SignupViewModel.USERNAME_LABEL);
         username.setFont(new Font("Consolas", Font.ITALIC, 20));
-        username.setForeground(darkblue);
+        username.setForeground(white);
         usernameInputField.setBorder(new BevelBorder(10, blue, black));
         usernameInputField.setBackground(white);
         usernameInputField.setFont(new Font("Consolas", Font.PLAIN, 20));
         usernameInputField.setForeground(darkblue);
         LabelTextPanel usernameInfo = new LabelTextPanel(username, usernameInputField);
-        usernameInfo.setBackground(blue);
+        usernameInfo.setBackground(darkblue);
         this.add(usernameInfo);
 
         JLabel password = new JLabel(SignupViewModel.PASSWORD_LABEL);
         password.setFont(new Font("Consolas", Font.ITALIC, 20));
-        password.setForeground(darkblue);
+        password.setForeground(white);
         passwordInputField.setBorder(new BevelBorder(10, blue, black));
         passwordInputField.setBackground(white);
         passwordInputField.setFont(new Font("Consolas", Font.PLAIN, 20));
         passwordInputField.setForeground(darkblue);
         LabelTextPanel passwordInfo = new LabelTextPanel(password, passwordInputField);
-        passwordInfo.setBackground(blue);
+        passwordInfo.setBackground(darkblue);
         this.add(passwordInfo);
 
         JPanel buttons = new JPanel();
