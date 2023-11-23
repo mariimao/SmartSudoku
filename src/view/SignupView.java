@@ -104,21 +104,6 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(buttons);
 
-//        LabelTextPanel usernameInfo = new LabelTextPanel(
-//                new JLabel(SignupViewModel.USERNAME_LABEL), usernameInputField);
-//        LabelTextPanel passwordInfo = new LabelTextPanel(
-//                new JLabel(SignupViewModel.PASSWORD_LABEL), passwordInputField);
-//        LabelTextPanel repeatPasswordInfo = new LabelTextPanel(
-//                new JLabel(SignupViewModel.REPEATPASSWORD_LABEL), repeatPasswordInputField);
-
-//        JPanel buttons = new JPanel();
-
-//        signup = new JButton(signupViewModel.SIGNUP_BUTTON_LABEL);
-//        buttons.add(signup);
-//
-//        cancel = new JButton(signupViewModel.CANCEL_BUTTON_LABEL);
-//        buttons.add(cancel);
-
 
         signup.addActionListener(
                 new ActionListener() {
