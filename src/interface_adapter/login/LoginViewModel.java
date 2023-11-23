@@ -7,10 +7,10 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class LoginViewModel extends ViewModel {
-    public static final String TITLE_LABEL = "Welcome to Sudoku";
+    public static final String TITLE_LABEL = "Login";
 
-    public static final String LOGIN_BUTTON_LABEL = "Log in";
-    public static final String CANCEL_BUTTON_LABEL = "cancel";
+    public static final String LOGIN_BUTTON_LABEL = "LOG IN";
+    public static final String CANCEL_BUTTON_LABEL = "BACK";
 
     private LoginState loginState = new LoginState();
 
