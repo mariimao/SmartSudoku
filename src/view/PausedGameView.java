@@ -18,7 +18,6 @@ import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGameState;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
-import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
@@ -83,7 +82,6 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
         StartViewModel startViewModel = new StartViewModel();
         LoginViewModel loginViewModel = new LoginViewModel();
         SignupViewModel signupViewModel = new SignupViewModel();
-        CancelViewModel cancelViewModel = new CancelViewModel();
         PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
         ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
         MenuViewModel menuViewModel = new MenuViewModel();
@@ -100,10 +98,10 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
             throw new RuntimeException(e);
         }
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, cancelViewModel, startViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, startViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
         StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);

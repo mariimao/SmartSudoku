@@ -26,14 +26,13 @@ import use_case.new_game.NewGameDataAccessInterface;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
-import use_case.signup.cancel.CancelUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
-        SignupUserDataAccessInterface, LoginUserDataAccessInterface, CancelUserDataAccessInterface, MenuUserDataAccessInterface,
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, MenuUserDataAccessInterface,
         NewGameDataAccessInterface, LeaderboardDataAccessInterface {
     public static void main(String[] args) {
 

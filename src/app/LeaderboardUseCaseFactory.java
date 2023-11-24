@@ -8,7 +8,6 @@ import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuPresenter;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.signup.cancel.CancelController;
 import use_case.leaderboard.LeaderboardDataAccessInterface;
 import use_case.leaderboard.LeaderboardInputBoundary;
 import use_case.leaderboard.LeaderboardInteractor;
