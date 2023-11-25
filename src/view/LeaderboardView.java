@@ -7,7 +7,6 @@ import interface_adapter.login.LoginState;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.signup.SignupViewModel;
-import interface_adapter.signup.cancel.CancelController;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

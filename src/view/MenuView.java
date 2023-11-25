@@ -20,7 +20,6 @@ import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGameState;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
-import interface_adapter.signup.cancel.CancelViewModel;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
@@ -54,6 +53,8 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final JButton newgame;
     private final JButton leaderboard;
     private final JButton pastgames;
+
+    private final JButton cancel;
 
     private final Color blue = new Color(97, 150, 242);
     private final Color darkblue = new Color(50, 78, 156);
@@ -98,6 +99,10 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
         pastgames = new CustomButton(menuViewModel.PAST_GAMES_BUTTON_LABEL, darkblue, white);
         pastgames.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(pastgames);
+
+        cancel = new CustomButton(menuViewModel.CANCEL_BUTTON_LABEL, darkblue, white);
+        cancel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+        this.add(cancel);
 
         loadgame.addActionListener(
                 new ActionListener() {
@@ -145,6 +150,19 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(loadgame)) {
                             // pastgamesController.execute();
+                        }
+                    }
+                }
+        );
+
+        cancel.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(cancel)) {
+
+                            setVisible(false);
+                            cancel.setVerifyInputWhenFocusTarget( false );
                         }
                     }
                 }

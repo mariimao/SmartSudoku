@@ -18,6 +18,8 @@ public class MenuViewModel extends ViewModel {
 
     public static final String PAST_GAMES_BUTTON_LABEL = "Past Games";
 
+    public static final String CANCEL_BUTTON_LABEL = "Back";
+
     private MenuState menuState = new MenuState();
 
     public MenuViewModel() {

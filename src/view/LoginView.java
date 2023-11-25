@@ -6,7 +6,6 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
-import interface_adapter.signup.cancel.CancelController;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
@@ -28,8 +27,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     private final LoginController loginController;
 
-    private final CancelController cancelController;
-
 
 
     // text input
@@ -45,10 +42,9 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final Color white = Color.white;
     private final Color black = Color.black;
 
-    public LoginView(LoginController loginController, LoginViewModel loginViewModel, CancelController cancelController) {
+    public LoginView(LoginController loginController, LoginViewModel loginViewModel) {
         this.loginViewModel = loginViewModel;
         this.loginController = loginController;
-        this.cancelController = cancelController;
 
         loginViewModel.addPropertyChangeListener(this);
 
@@ -120,7 +116,8 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(cancel)) {
-                            cancelController.execute();
+                            setVisible(false);
+                            cancel.setVerifyInputWhenFocusTarget( false );
                         }
                     }
                 }
