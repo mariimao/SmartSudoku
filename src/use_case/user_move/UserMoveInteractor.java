@@ -20,7 +20,6 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
         int y = userMoveInputData.getY();
         int value = userMoveInputData.getValue();
 
-        UserMoveOutputData userMoveOutputData = null;
         if (userMoveInputData.gameOver()) {
             UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
             gamePresenter.prepareEndView(userMoveOutputData);

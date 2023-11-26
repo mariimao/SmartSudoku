@@ -27,13 +27,14 @@ import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
+import use_case.user_move.UserMoveDataAccessInterface;
 
 import static com.mongodb.client.model.Filters.eq;
 import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
         SignupUserDataAccessInterface, LoginUserDataAccessInterface, MenuUserDataAccessInterface,
-        NewGameDataAccessInterface, LeaderboardDataAccessInterface {
+        NewGameDataAccessInterface, LeaderboardDataAccessInterface, UserMoveDataAccessInterface {
     public static void main(String[] args) {
 
         Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
@@ -278,6 +279,11 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
             }
         }
         throw new NoSuchElementException();
+    }
+
+    @Override
+    public GameState saveBoard(GameState gameState) {
+        return null;
     }
 }
 

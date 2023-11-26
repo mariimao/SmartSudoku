@@ -3,6 +3,9 @@ package view;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGameViewModel;
+import interface_adapter.leaderboard.LeaderboardController;
+import interface_adapter.leaderboard.LeaderboardState;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.start.StartController;
@@ -30,8 +33,8 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
     private final MenuController menuController;
     private final MenuViewModel menuViewModel;
 
-    private final leaderboardController leaderboardController;
-    private final leaderboardViewModel leaderboardViewModel;
+    private final LeaderboardController leaderboardController;
+    private final LeaderboardViewModel leaderboardViewModel;
 
     final JButton menu;
     final JButton leaderboard;

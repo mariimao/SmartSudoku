@@ -1,6 +1,7 @@
 package interface_adapter.end_game;
 
 import interface_adapter.ViewManagerModel;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.menu.MenuViewModel;
 import use_case.end_game.EndGameOutputBoundary;
 import use_case.end_game.EndGameOutputData;

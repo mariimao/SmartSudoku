@@ -30,4 +30,9 @@ public class EasyGamePresenter implements UserMoveOutputBoundary {
         easyGameState.setEasyGameError(error);
         easyGameViewModel.firePropertyChanged();
     }
+
+    @Override
+    public void prepareEndView(UserMoveOutputData userMoveOutputData) {
+
+    }
 }
