@@ -25,7 +25,7 @@ public class EasyBoard implements Board {
     private int[][] solutionBoard;
 
     public EasyBoard() {
-        this.solutionBoard = generatePossibleEasyBoardValues();
+        this.solutionBoard = generatePossibleValues();
         this.currBoard = this.generateEasyBoard();
     }
 
@@ -116,7 +116,7 @@ public class EasyBoard implements Board {
         return easyBoard;
     }
 
-    private int[][] generatePossibleEasyBoardValues() {
+    public int[][] generatePossibleValues() {
         int[][] possibleValues = new int[4][4];
         boolean badBoard = true;
         while (badBoard) {
@@ -171,7 +171,7 @@ public class EasyBoard implements Board {
         return blankEasyBoard;
     }
 
-    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
+    public boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {

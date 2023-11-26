@@ -14,7 +14,7 @@ public class HardBoard implements Board {
 
 
     public HardBoard() {
-        this.solutionBoard = generatePossibleHardBoardValues();
+        this.solutionBoard = generatePossibleValues();
         this.currBoard = this.generateHardBoard();
     }
 
@@ -56,7 +56,7 @@ public class HardBoard implements Board {
         return hardBoard;
     }
 
-    private int[][] generatePossibleHardBoardValues() {
+    public int[][] generatePossibleValues() {
         int[][] possibleValues = new int[9][9];
         boolean badBoard = true;
         while (badBoard) {
@@ -116,7 +116,7 @@ public class HardBoard implements Board {
         return blankHardBoard;
     }
 
-    private boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
+    public boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
