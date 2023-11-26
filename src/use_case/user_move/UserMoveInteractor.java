@@ -1,6 +1,7 @@
 package use_case.user_move;
 
-import entity.Board;
+import entity.board.Board;
+import use_case.login.LoginOutputData;
 
 public class UserMoveInteractor implements UserMoveInputBoundary {
 
@@ -21,36 +22,23 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
 
         UserMoveOutputData userMoveOutputData = null;
         if (userMoveInputData.gameOver()) {
+            UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
             gamePresenter.prepareEndView(userMoveOutputData);
         } else {
-            if (difficulty == 1) {
-                int[][] easyPossibleValues = current_board.generatePossibleValues();
-                if (current_board.valueNotAvailable(easyPossibleValues, value, x, y)) {
-                    userMoveInputData.loseLife();
-                    if (userMoveInputData.getLives() == 0) {
-                        gamePresenter.prepareEndView(userMoveOutputData);
-                    } else {
-                        gamePresenter.prepareFailView("Incorrect input. Try again.");
-                    }
+            int[][] possibleValues = current_board.generatePossibleValues();
+            if (current_board.valueNotAvailable(possibleValues, value, x, y)) {
+                userMoveInputData.loseLife();
+                if (userMoveInputData.getLives() == 0) {
+                    UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
+                    gamePresenter.prepareEndView(userMoveOutputData);
                 } else {
-                    userMoveInputData.makeMove();
-                    userMoveInputData.scrambleBoard();
-                    gamePresenter.prepareSuccessView(userMoveOutputData);
+                    gamePresenter.prepareFailView("Incorrect input. Try again.");
                 }
             } else {
-                int[][] hardPossibleValues = current_board.generatePossibleValues();
-                if (current_board.valueNotAvailable(hardPossibleValues, value, x, y)) {
-                    userMoveInputData.loseLife();
-                    if (userMoveInputData.getLives() == 0) {
-                        gamePresenter.prepareEndView(userMoveOutputData);
-                    } else {
-                        gamePresenter.prepareFailView("Incorrect input. Try again.");
-                    }
-                } else {
-                    userMoveInputData.makeMove();
-                    userMoveInputData.scrambleBoard();
-                    gamePresenter.prepareSuccessView(userMoveOutputData);
-                }
+                userMoveInputData.makeMove();
+                userMoveInputData.scrambleBoard();
+                UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
+                gamePresenter.prepareSuccessView(userMoveOutputData);
             }
         }
     }
