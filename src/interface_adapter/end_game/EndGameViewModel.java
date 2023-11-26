@@ -1,8 +1,6 @@
 package interface_adapter.end_game;
 
 import interface_adapter.ViewModel;
-import interface_adapter.easy_game.EasyGameState;
-import interface_adapter.new_game.NewGameState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

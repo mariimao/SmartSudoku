@@ -5,10 +5,6 @@ import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.pause_game.PauseGameViewModel;
-import interface_adapter.resume_game.ResumeGameController;
-import interface_adapter.resume_game.ResumeGameState;
-import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
 
