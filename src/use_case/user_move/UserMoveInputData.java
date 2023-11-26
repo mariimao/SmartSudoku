@@ -5,7 +5,7 @@ import entity.board.GameState;
 
 public class UserMoveInputData {
 
-    final private GameState current_state;
+    final public GameState current_state;
     final private int x;
     final private int y;
     final private int value;

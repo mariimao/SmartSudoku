@@ -5,4 +5,3 @@ public interface EndGameOutputBoundary {
     void prepareSuccessView(EndGameOutputData endGameOutputData);
     void prepareFailView(String error);
 }
-}

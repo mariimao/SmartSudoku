@@ -39,4 +39,3 @@ public class EndGamePresenter implements EndGameOutputBoundary {
 
         }
     }
-}

@@ -27,7 +27,7 @@ public class EndGameInputData {
         return current_state;
     }
 
-    int getTime() (return) // implement time
+    int getTime() {return time;} // implement time
 
     int getLives() {
         return lives;

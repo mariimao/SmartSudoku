@@ -15,7 +15,7 @@ public class EndGameController {
     }
 
     public void execute(User user, GameState current_state, int time, int lives) {
-        EndGameInputData endGameInputData = new endGameInputData(user, current_state, time, lives);
+        EndGameInputData endGameInputData = new EndGameInputData(user, current_state, time, lives);
         endGameUseCaseInteractor.execute(endGameInputData);
     }
 }
