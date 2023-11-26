@@ -1,5 +1,6 @@
 package entity.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public interface Board {
@@ -14,4 +15,6 @@ public interface Board {
     public HashMap<Integer, Boolean>[][] generateBlankBoard();
 
     String toStringPause();
+
+    ArrayList toArray();
 }

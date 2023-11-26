@@ -6,6 +6,8 @@ import entity.board.EasyBoard;
 import entity.board.HardBoard;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.easy_game.EasyGameViewModel;
+import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
@@ -58,10 +60,8 @@ public class Main {
         MenuViewModel menuViewModel = new MenuViewModel();
         NewGameViewModel newGameViewModel = new NewGameViewModel();
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-
-
-
-
+        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
+        EndGameViewModel endGameViewModel = new EndGameViewModel();
 
 
         // testing userDAO
@@ -96,6 +96,9 @@ public class Main {
 
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
+
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, newGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, userDataAccessObject );
+        views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
 
         viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();

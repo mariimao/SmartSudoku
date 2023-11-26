@@ -309,4 +309,19 @@ public class EasyBoard implements Board {
 
         return values.toString();
     }
+
+    public ArrayList<Integer> toArray() {
+        // returns a string interpretation of the EasyBoard
+        int sidelength = 4;
+        ArrayList<Integer> values = new ArrayList<>();
+
+        for (int row = 0; row < sidelength; row++) {
+            for (int col = 0; col < sidelength; col++) {
+                HashMap<Integer, Boolean> position = currBoard[row][col];
+                if (position.isEmpty()) {values.add(0);}
+                else {values.add(position.keySet().iterator().next());} // assuming the size of each position's hashmap is 1
+            }
+        }
+        return values;
+    }
 }
