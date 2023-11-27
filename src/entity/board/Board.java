@@ -10,9 +10,9 @@ public interface Board {
     int[][] generatePossibleValues();
     String toString();
     void setBoard(HashMap<Integer, Boolean>[][] newBoard);
-    public HashMap<Integer, Boolean>[][] getCurrBoard();
-    public int[][] getSolutionBoard();
-    public HashMap<Integer, Boolean>[][] generateBlankBoard();
+    HashMap<Integer, Boolean>[][] getCurrBoard();
+    int[][] getSolutionBoard();
+    HashMap<Integer, Boolean>[][] generateBlankBoard();
 
     String toStringPause();
 
