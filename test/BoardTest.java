@@ -14,5 +14,8 @@ public interface BoardTest {
     default void testGenerateBlankBoard(){}
 
     @Test
+    default void testMakeMove(){}
+
+    @Test
     default void testNoSpacesLeft(){}
 }

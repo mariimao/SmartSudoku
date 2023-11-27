@@ -71,7 +71,23 @@ public class EasyBoardTest implements BoardTest{
 
     @Test
     public void testMakeMove() {
-        // TODO: Write test fpr makeMove function
+        boolean allMovesAreValid = true;
+        for (int i = 0; i < 4; i ++) {
+            for (int j = 0; j < 4; j++) {
+                if (currBoard[i][j].isEmpty()) {
+                    easyBoard.makeMove(i, j, solutionBoard[j][i]);
+                    currBoard = easyBoard.getCurrBoard();
+                    int value = 0;
+                    for (Map.Entry<Integer, Boolean> entry : currBoard[j][i].entrySet()) {
+                        value = entry.getKey();
+                    }
+                    if (value != solutionBoard[j][i]) {
+                        allMovesAreValid = false;
+                    }
+                }
+            }
+        }
+        assertTrue(allMovesAreValid);
     }
 
     @After
