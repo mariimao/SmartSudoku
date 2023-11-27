@@ -34,7 +34,7 @@ public class SpotifyDAOTest {
     public void testCorrectDuration() {
         // Tests to see if correct name is returned
         String trackID = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d";
-        Integer expectedTime = 187000;
+        int expectedTime = 187000;
         assertEquals(spotifyDAO.getTrackDuration(trackID), expectedTime);
     }
 
