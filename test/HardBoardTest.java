@@ -1,5 +1,5 @@
-import entity.board.EasyBoard;
 import entity.board.HardBoard;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class HardBoardTest {
+public class HardBoardTest implements BoardTest{
     private HardBoard hardBoard;
     private int[][] solutionBoard;
     HashMap<Integer, Boolean>[][] currBoard;
@@ -71,6 +71,11 @@ public class HardBoardTest {
     }
 
     @Test
+    public void testMakeMove() {
+        // TODO: Write test fpr makeMove function
+    }
+
+    @After
     public void testNoSpacesLeft() {
         boolean noSpacesLeft = true;
 

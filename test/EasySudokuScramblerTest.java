@@ -1,5 +1,5 @@
 import entity.board.EasyBoard;
-import org.junit.After;
+import entity.board.EasySudokuScrambler;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -9,20 +9,21 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class EasyBoardTest implements BoardTest{
+public class EasySudokuScramblerTest implements SudokuScramblerTest {
+
     private EasyBoard easyBoard;
-    private int[][] solutionBoard;
-    HashMap<Integer, Boolean>[][] currBoard;
+    private EasySudokuScrambler easySudokuScrambler;
 
     @Before
     public void init() {
         easyBoard = new EasyBoard();
-        solutionBoard = easyBoard.getSolutionBoard();
-        currBoard = easyBoard.getCurrBoard();
+        easySudokuScrambler = new EasySudokuScrambler(easyBoard);
     }
 
     @Test
-    public void testValidBoard() {
+    public void testValidBoardAfterScramble() {
+        easySudokuScrambler.scramble();
+        HashMap<Integer, Boolean>[][] currBoard = easyBoard.getCurrBoard();
         HashSet<String> seen = new HashSet<>();
         boolean isValidBoard = true;
         for (int i = 0; i < 4; ++i) {
@@ -42,7 +43,9 @@ public class EasyBoardTest implements BoardTest{
     }
 
     @Test
-    public void testIsValidSolutions() {
+    public void testValidSolutionsAfterScramble() {
+        easySudokuScrambler.scramble();
+        int[][] solutionBoard = easyBoard.getSolutionBoard();
         HashSet<String> seen = new HashSet<>();
         boolean isValidTestBoard = true;
         for (int i = 0; i < 4; ++i) {
@@ -56,42 +59,24 @@ public class EasyBoardTest implements BoardTest{
     }
 
     @Test
-    public void testGenerateBlankBoard() {
-        boolean allBlankValues = true;
-        HashMap<Integer, Boolean>[][] blankBoard = easyBoard.generateBlankBoard();
-        for (int i = 0; i < 4; i ++) {
+    public void testScrambledBoardMatchesSolution() {
+        easySudokuScrambler.scramble();
+        HashMap<Integer, Boolean>[][] currBoard = easyBoard.getCurrBoard();
+        boolean isValidScramble = true;
+        int[][] solutionBoard = easyBoard.getSolutionBoard();
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (!blankBoard[i][j].isEmpty()) {
-                    allBlankValues = false;
+                if (!currBoard[i][j].isEmpty()) {
+                    int value = 0;
+                    for (Map.Entry<Integer, Boolean> entry : currBoard[i][j].entrySet()) {
+                        value = entry.getKey();
+                    }
+                    if (value != solutionBoard[i][j]) {
+                        isValidScramble = false;
+                    }
                 }
             }
         }
-        assertTrue(allBlankValues);
-    }
-
-    @Test
-    public void testMakeMove() {
-        // TODO: Write test fpr makeMove function
-    }
-
-    @After
-    public void testNoSpacesLeft() {
-        boolean noSpacesLeft = true;
-
-        HashMap<Integer, Boolean>[][] fullBoard = new HashMap[4][4];
-        for (int i = 0; i < 4; i ++) {
-            for (int j = 0; j < 4; j++) {
-                HashMap<Integer, Boolean> value = new HashMap<>();
-                value.put(solutionBoard[i][j], true);
-                fullBoard[i][j] = value;
-
-                if (currBoard[i][j].isEmpty()) {
-                    noSpacesLeft = false;
-                }
-            }
-        }
-        assertEquals(noSpacesLeft, easyBoard.noSpacesLeft());
-        easyBoard.setBoard(fullBoard);
-        assertTrue(easyBoard.noSpacesLeft());
+        assertTrue(isValidScramble);
     }
 }
