@@ -1,9 +1,25 @@
 package view;
 
+import app.*;
+import data_access.UserDAO;
+import entity.board.GameState;
+import entity.user.CommonUserFactory;
 import entity.user.User;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.easy_game.EasyGameViewModel;
+import interface_adapter.end_game.EndGameViewModel;
+import interface_adapter.leaderboard.LeaderboardViewModel;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameController;
+import interface_adapter.play_game.PlayGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
+import interface_adapter.signup.SignupViewModel;
+import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -13,6 +29,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NewGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "new game view";

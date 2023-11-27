@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="changed NewGameView to use the colours and look better" />
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="changed NewGameView to use the colours and look better">
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/NewGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/NewGameView.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +17,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -63,6 +68,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -78,7 +84,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\view" />
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="view" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -181,6 +191,17 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="changed NewGameView to use the colours and look better" />
