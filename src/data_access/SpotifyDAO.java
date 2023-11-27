@@ -188,10 +188,12 @@ public class SpotifyDAO {
 
     public static void main(String[] args) {
         // TESTING API CALLS
+
         String id = "5069JTmv5ZDyPeZaCCXiCg?si=cb76yjogSJ6xYKQ0uyFcWA"; // wave to earth artist name
         String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
         String search = "bad idea";
         SpotifyDAO spotifyDAO = new SpotifyDAO();
+        System.out.println(spotifyDAO.getAccessCode());
         System.out.println(spotifyDAO.getArtistname(id));
         System.out.println(spotifyDAO.getTrackDuration(songid));
         System.out.println(spotifyDAO.getTrackName(songid));
