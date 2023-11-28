@@ -345,11 +345,10 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(pauseGame)) {
-                            PauseGameState pauseGameState = pauseGameViewModel.getState();
                             pauseGameController.execute(
-                                    pauseGameState.getUser(),
-                                    pauseGameState.getPausedGame(),
-                                    pauseGameState.getPastGames()
+                                    currentState.getUser(),
+                                    currentState.getCurrentGame(),
+                                    currentState.getCurrentGame().getPastStates()
 
                             );
 
