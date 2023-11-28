@@ -1,5 +1,6 @@
 package app;
 
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.user.CommonUser;
 import entity.board.EasyBoard;
@@ -14,6 +15,7 @@ import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.spotify.SpotifyViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
 import view.*;
@@ -58,6 +60,7 @@ public class Main {
         MenuViewModel menuViewModel = new MenuViewModel();
         NewGameViewModel newGameViewModel = new NewGameViewModel();
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
+        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
 
 
 
@@ -71,6 +74,13 @@ public class Main {
         try {
             userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
                     "smartsudoku", "user", new CommonUserFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        SpotifyDAO spotifyDataAccessObject;
+        try {
+            spotifyDataAccessObject = new SpotifyDAO();
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -91,13 +101,16 @@ public class Main {
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject);
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject, spotifyViewModel, spotifyDataAccessObject);
         views.add(newGameView, newGameViewModel.getViewName());
 
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
+        SpotifyView spotifyView = SpotifyUseCaseFactory.create(viewManagerModel, spotifyViewModel, spotifyDataAccessObject, newGameViewModel);
+        views.add(spotifyView, spotifyViewModel.getViewName());
+
+        viewManagerModel.setActiveViewName(newGameView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 
         application.pack();

@@ -8,7 +8,12 @@ import java.beans.PropertyChangeSupport;
 public class NewGameViewModel extends ViewModel {
     public static final String SUCCESS_MESSAGE = "New Game Created Successfully";
     public static final String FAIL_MESSAGE = "Unable to Create New Game. Try Again";
+
+    public static final String SPOTIFY_LABEL = "Choose a song";
+
+    public static final String SEARCH_BUTTON = "Search";
     private NewGameState state = new NewGameState();
+
     public NewGameViewModel() {super("new game view");}
     public NewGameState getState() {return state;}
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);

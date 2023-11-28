@@ -15,27 +15,20 @@ import use_case.new_game.NewGameInteractor;
 import use_case.spotify.SpotifyInputBoundary;
 import use_case.spotify.SpotifyInteractor;
 import view.NewGameView;
+import view.SpotifyView;
 
-public class NewGameUseCaseFactory {
-    private NewGameUseCaseFactory() {}
+public class SpotifyUseCaseFactory {
+    private SpotifyUseCaseFactory() {}
 
-    public static NewGameView create(ViewManagerModel viewManagerModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject,
-                                     SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO) {
-        // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
-        NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
+    public static SpotifyView create(ViewManagerModel viewManagerModel,
+                                     SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO, NewGameViewModel newGameViewModel) {
         SpotifyController spotifyController = createUserSpotifyCase(viewManagerModel, spotifyViewModel, spotifyDAO, newGameViewModel);
-        return new NewGameView(newGameViewModel, newGameController, spotifyViewModel, spotifyController);
+        return new SpotifyView(spotifyViewModel, spotifyController, newGameViewModel);
     }
 
     private static SpotifyController createUserSpotifyCase(ViewManagerModel viewManagerModel, SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO, NewGameViewModel newGameViewModel) {
         SpotifyPresenter spotifyPresenter = new SpotifyPresenter(spotifyViewModel, newGameViewModel, viewManagerModel);
         SpotifyInputBoundary spotifyInteractor = new SpotifyInteractor(spotifyDAO, spotifyPresenter);
         return new SpotifyController(spotifyInteractor);
-    }
-
-    private static NewGameController createUserNewGameCase(ViewManagerModel viewManagerModel, NewGameViewModel newGameViewModel, NewGameDataAccessInterface newGameDataAccessInterface) {
-        NewGamePresenter newGamePresenter = new NewGamePresenter(newGameViewModel, viewManagerModel);
-        NewGameInputBoundary newGameInteractor = new NewGameInteractor(newGameDataAccessInterface, newGamePresenter);
-        return new NewGameController(newGameInteractor);
     }
 }

@@ -2,11 +2,13 @@ package data_access;
 
 import okhttp3.*;
 import org.json.*;
+import use_case.spotify.SpotifyDataAccessInterface;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class SpotifyDAO {
+public class SpotifyDAO implements SpotifyDataAccessInterface {
 
 
     private static final String API_URL = "https://accounts.spotify.com/api/token";

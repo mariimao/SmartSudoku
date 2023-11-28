@@ -14,10 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.SortedMap;
@@ -116,10 +113,10 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 }
         );
 
-        sortingMethod.addActionListener(
-                new ActionListener() {
+        sortingMethod.addItemListener(
+                new ItemListener() {
                     @Override
-                    public void actionPerformed(ActionEvent e) {
+                    public void itemStateChanged(ItemEvent e) {
                         if (e.getSource().equals(sortingMethod)) {
                             LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
                             leaderboardState.setSortingMethod((String) sortingMethod.getSelectedItem());
