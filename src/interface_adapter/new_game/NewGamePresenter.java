@@ -23,7 +23,7 @@ public class NewGamePresenter implements NewGameOutputBoundary {
         newGameState.setUser(newGameOutputData.getUser());
         this.viewManagerModel.setActiveViewName(newGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-        JOptionPane.showMessageDialog(null, "New Game Successfully Created");   // for now I'll just use a popup
+        // JOptionPane.showMessageDialog(null, "New Game Successfully Created");   // for now I'll just use a popup
     }
 
     @Override

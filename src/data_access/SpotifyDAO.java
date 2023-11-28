@@ -13,9 +13,10 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
     private static final String API_URL = "https://accounts.spotify.com/api/token";
     // load API_TOKEN from env variable.
-    private static final String API_TOKEN = System.getenv("API_TOKEN");
-    private static final String CLIENT_ID = "696d348cba294681b77d2dd77768750d";
-    private static final String CLIENT_SECRET = "57025d9e9f6442229e9c2a8b3f7c5f6b";
+    private static final String API_TOKEN =
+            "BQDzgzG3ta5WRw50Uiv5gNmS4E3QwtLdRoUJo7xjTjgM675wg978w5f_PGRjWSANNGGUdmlyyr9ZSKcoJrwZ7N-AP869w4YT-gWGhnkcI58SlzLAaAwXSdSBA8JFmtU7GzTrsfcW5f7ReuMgp6O7XDrG685GFtxG889mlEVU5XMftG_xQXdAWA";
+    private static final String CLIENT_ID = "ba373bd1e8e44eecb52e192d0fbac238";
+    private static final String CLIENT_SECRET = "d99a71ede58b40179cf0946792c7123f";
     private final String client_id;
     private final String client_secret;
 
@@ -30,6 +31,30 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
     public String getClientSecret() {
         return this.client_secret;
+    }
+
+    public String requestAuthorization() {
+        // returns access code
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        String CLIENT_ID = "ba373bd1e8e44eecb52e192d0fbac238";
+        String jsonBody = "https://accounts.spotify.com/authorize?client_id="+CLIENT_ID+"&" +
+                "response_type=code&redirect_uri=http://localhost:8888/callback";
+        Request request = new Request.Builder()
+                .url("https://api.spotify.com/v1/me/player/play?device_id="+jsonBody)
+                .get()
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            String responseString = response.body().string();
+            JSONObject responseBody = new JSONObject(responseString);
+
+            return responseBody.getString("access_token");
+
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     public String getAccessCode() {
@@ -190,14 +215,18 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
     public static void main(String[] args) {
         // TESTING API CALLS
+
+
         String id = "5069JTmv5ZDyPeZaCCXiCg?si=cb76yjogSJ6xYKQ0uyFcWA"; // wave to earth artist name
-        String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
-        String search = "bad idea";
+//        String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
+//        String search = "bad idea";
         SpotifyDAO spotifyDAO = new SpotifyDAO();
+        //System.out.println(spotifyDAO.requestAuthorization());
+       //System.out.println(spotifyDAO.getAccessCode());
         System.out.println(spotifyDAO.getArtistname(id));
-        System.out.println(spotifyDAO.getTrackDuration(songid));
-        System.out.println(spotifyDAO.getTrackName(songid));
-        System.out.println(spotifyDAO.getSuggestions(search));
+//        System.out.println(spotifyDAO.getTrackDuration(songid));
+//        System.out.println(spotifyDAO.getTrackName(songid));
+//        System.out.println(spotifyDAO.getSuggestions(search));
 
     }
 

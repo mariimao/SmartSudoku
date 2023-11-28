@@ -1,66 +1,64 @@
 import entity.board.EasyBoard;
-import org.junit.Assert;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class EasyBoardTest {
-    private EasyBoard easyboard;
+public class EasyBoardTest implements BoardTest{
+    private EasyBoard easyBoard;
     private int[][] solutionBoard;
+    HashMap<Integer, Boolean>[][] currBoard;
 
     @Before
     public void init() {
-        easyboard = new EasyBoard();
-        int[][] solutionBoard = easyboard.getSolutionBoard();
+        easyBoard = new EasyBoard();
+        solutionBoard = easyBoard.getSolutionBoard();
+        currBoard = easyBoard.getCurrBoard();
     }
 
-    /* TODO: WIP */
-//    public void testValidBoard() {
-//        boolean isValidBoard = true;
-//        HashMap<Integer, Boolean>[][] currBoard = easyboard.getCurrBoard();
-//        for(int i = 0; i < 4; i++){
-//            if(!isValidRow(currBoard[i])){
-//                isValidBoard = false;
-//            }
-//        }
-//        for(i = 0; i < 9; i++){
-//            if(!isValidColumn(currBoard, i)){
-//                isValidBoard = false;
-//            }
-//        }
-//        for(i = 0; i < 9; i += 3){
-//            for(let j = 0; j < 9; j += 3){
-//                if(!isValidCell(currBoard, i, j)){
-//                    isValidBoard = false;
-//                }
-//            }
-//        }
-//    }
-//
-//    private boolean isValidRow(HashMap<Integer, Boolean>[] row) {
-//        int checker = 0;
-//        int num;
-//        for (HashMap<Integer, Boolean> map : row) {
-//            if (map.isEmpty()) {
-//                num = row[i].get(i);
-//                if((checker & (1 << num)) > 0)
-//                    return false;
-//                checker = (checker | (1 << num));
-//            } else {
-//                for (Map.Entry<Integer, Boolean> entry : map.entrySet()) {
-//                }
-//            }
-//        }
-//    }
+    @Test
+    public void testValidBoard() {
+        HashSet<String> seen = new HashSet<>();
+        boolean isValidBoard = true;
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                if (!currBoard[i][j].isEmpty()) {
+                    String value = "";
+                    for (Map.Entry<Integer, Boolean> entry : currBoard[i][j].entrySet()) {
+                        value = entry.getKey().toString();
+                    }
+                    String b = "(" + value + ")";
+                    if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i / 2 + b + j / 2))
+                        isValidBoard = false;
+                }
+            }
+        }
+        assertTrue(isValidBoard);
+    }
+
+    @Test
+    public void testIsValidSolutions() {
+        HashSet<String> seen = new HashSet<>();
+        boolean isValidTestBoard = true;
+        for (int i = 0; i < 4; ++i) {
+            for (int j = 0; j < 4; ++j) {
+                String b = "(" + solutionBoard[i][j] + ")";
+                if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i / 2 + b + j / 2))
+                    isValidTestBoard = false;
+            }
+        }
+        assertTrue(isValidTestBoard);
+    }
 
     @Test
     public void testGenerateBlankBoard() {
         boolean allBlankValues = true;
-        HashMap<Integer, Boolean>[][] blankBoard = easyboard.generateBlankBoard();
+        HashMap<Integer, Boolean>[][] blankBoard = easyBoard.generateBlankBoard();
         for (int i = 0; i < 4; i ++) {
             for (int j = 0; j < 4; j++) {
                 if (!blankBoard[i][j].isEmpty()) {
@@ -72,16 +70,44 @@ public class EasyBoardTest {
     }
 
     @Test
+    public void testMakeMove() {
+        boolean allMovesAreValid = true;
+        for (int i = 0; i < 4; i ++) {
+            for (int j = 0; j < 4; j++) {
+                if (currBoard[i][j].isEmpty()) {
+                    easyBoard.makeMove(i, j, solutionBoard[j][i]);
+                    currBoard = easyBoard.getCurrBoard();
+                    int value = 0;
+                    for (Map.Entry<Integer, Boolean> entry : currBoard[j][i].entrySet()) {
+                        value = entry.getKey();
+                    }
+                    if (value != solutionBoard[j][i]) {
+                        allMovesAreValid = false;
+                    }
+                }
+            }
+        }
+        assertTrue(allMovesAreValid);
+    }
+
+    @After
     public void testNoSpacesLeft() {
-        HashMap<Integer, Boolean>[][] testBoard = new HashMap[4][4];
+        boolean noSpacesLeft = true;
+
+        HashMap<Integer, Boolean>[][] fullBoard = new HashMap[4][4];
         for (int i = 0; i < 4; i ++) {
             for (int j = 0; j < 4; j++) {
                 HashMap<Integer, Boolean> value = new HashMap<>();
                 value.put(solutionBoard[i][j], true);
-                testBoard[i][j] = value;
+                fullBoard[i][j] = value;
+
+                if (currBoard[i][j].isEmpty()) {
+                    noSpacesLeft = false;
+                }
             }
         }
-        easyboard.setBoard(testBoard);
-        assertTrue(easyboard.noSpacesLeft());
+        assertEquals(noSpacesLeft, easyBoard.noSpacesLeft());
+        easyBoard.setBoard(fullBoard);
+        assertTrue(easyBoard.noSpacesLeft());
     }
 }
