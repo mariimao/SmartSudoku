@@ -19,6 +19,7 @@ import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGamePresenter;
 import interface_adapter.pause_game.PauseGameState;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartViewModel;
@@ -62,92 +63,6 @@ public class EasyGameView extends JPanel implements ActionListener, PropertyChan
     private final JButton endGame;
     private final JButton pauseGame;
     private final JLabel lives;
-    public static void main(String[] args) {
-        // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
-
-        // The main application window.
-        JFrame application = new JFrame("SudokuScramble");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        CardLayout cardLayout = new CardLayout();
-
-        // The various View objects. Only one view is visible at a time.
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
-        // This keeps track of and manages which view is currently showing.
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
-
-        // The data for the views, such as username and password, are in the ViewModels.
-        // This information will be changed by a presenter object that is reporting the
-        // results from the use case. The ViewModels are observable, and will
-        // be observed by the Views.
-        StartViewModel startViewModel = new StartViewModel();
-        LoginViewModel loginViewModel = new LoginViewModel();
-        SignupViewModel signupViewModel = new SignupViewModel();
-        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
-        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
-        MenuViewModel menuViewModel = new MenuViewModel();
-        NewGameViewModel newGameViewModel = new NewGameViewModel();
-        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-        EasyGameViewModel easyGameViewModel1 = new EasyGameViewModel();
-
-
-        // testing userDAO
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-
-        UserDAO userDataAccessObject;
-        try {
-            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                    "smartsudoku", "user", new CommonUserFactory());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
-
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, startViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
-
-        // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel);
-        views.add(menuView, menuView.viewName);
-
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
-        views.add(pausedGameView, pausedGameView.viewName);
-
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject);
-        views.add(newGameView, newGameViewModel.getViewName());
-
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-        views.add(leaderboardView, leaderboardViewModel.getViewName());
-
-        // DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE
-        UserMoveOutputBoundary easyGamePresenter= new EasyGamePresenter(viewManagerModel, easyGameViewModel1);
-        UserMoveInteractor userMoveInteractor = new UserMoveInteractor(userDataAccessObject, easyGamePresenter);
-        EasyGameController easyGameController1 = new EasyGameController(userMoveInteractor);
-
-
-        EasyGameView easyGameView = new EasyGameView(easyGameViewModel1, easyGameController1, null, pauseGameViewModel, null, new EndGameViewModel());
-        views.add(easyGameView, easyGameView.viewName);
-
-        //easyGameView.setVisible(true);
-
-        // DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE DELETE
-        viewManagerModel.setActiveViewName(easyGameView.viewName);  //TODO: change back to startView.viewName
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
-
-    }
-
     public EasyGameView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController,
                         PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                         EndGameController endGameController, EndGameViewModel endGameViewModel) {
