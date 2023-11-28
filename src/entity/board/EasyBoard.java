@@ -2,6 +2,9 @@ package entity.board;
 
 import java.util.*;
 
+/**
+ * Class representing a 4x4 sudoku puzzle.
+ */
 public class EasyBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
     /* A matrix representing the board.
@@ -360,6 +363,17 @@ public class EasyBoard implements Board {
         value.put(move, true);
         this.currBoard[y][x] = (value);
         return this;
+    }
+
+    /**
+     * Checks if the user placed a correct move on the board.
+     * @param row int object representing the index of the row
+     * @param column int object representing the index of the column
+     * @param move int object representing the value of the user move
+     * @return true if the move was correct (i.e. matches the solution)
+     */
+    public boolean correctMove(int row, int column, int move) {
+        return solutionBoard[row][column] == move;
     }
 
     /**

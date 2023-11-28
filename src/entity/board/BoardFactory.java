@@ -1,7 +1,13 @@
 package entity.board;
 
-import entity.board.Board;
-
+/**
+ * Interface for BoardFactory, used to create new Board objects.
+ * Classes that implement this interface are EasyBoardFactory and HardBoardFactory.
+ */
 public interface BoardFactory {
-    public Board create();
+
+    /**
+     * @return a new Board object
+     */
+    Board create();
 }
