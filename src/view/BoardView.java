@@ -20,6 +20,8 @@ import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGameState;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameState;
+import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartViewModel;
@@ -54,16 +56,17 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     private final EndGameViewModel endGameViewModel;
     private final EndGameController endGameController;
-    private final NewGameViewModel newGameViewModel;
+    private final PlayGameViewModel playGameViewModel;
 
     private static int size = 4; // TODO: change based on newgame input
-    private final NewGameState currentState;
+    private final PlayGameState currentState;
     private final JLabel lives;
     private JPanel board = new JPanel();
     private JTextField[][] box;
     private final JButton endGame;
     private final JButton pauseGame;
     private final JButton makeMove;
+    private final JButton startPlaying;
 
 
     public static void main(String[] args) {
@@ -98,6 +101,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
         EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
         EndGameViewModel endGameViewModel = new EndGameViewModel();
+        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
 
 
         // testing userDAO
@@ -127,13 +131,13 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject);
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1);
         views.add(newGameView, newGameViewModel.getViewName());
 
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, newGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, userDataAccessObject);
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel1, userDataAccessObject);
         views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
 
         viewManagerModel.setActiveViewName(boardView.viewName);  //TODO: change back to startView.viewName
@@ -146,16 +150,17 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController,
                      PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                      EndGameController endGameController, EndGameViewModel endGameViewModel,
-                     NewGameViewModel newGameViewModel) {
+                     PlayGameViewModel playGameViewModel) {
         this.easyGameViewModel = easyGameViewModel;
         this.easyGameController = easyGameController;
         this.pauseGameController = pauseGameController;
         this.pauseGameViewModel = pauseGameViewModel;
         this.endGameController = endGameController;
         this.endGameViewModel = endGameViewModel;
-        this.newGameViewModel = newGameViewModel;
+        this.playGameViewModel = playGameViewModel;
 
-        this.currentState = newGameViewModel.getState();
+        playGameViewModel.addPropertyChangeListener(this);
+        this.currentState = playGameViewModel.getState();
 
         // Creating the Title of the View
         JLabel title = new JLabel("Play Smart Sudoku");
@@ -166,13 +171,14 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.add(title);
 
         // Creating a Random New Game if None is Passed in
-        GameState newGameState = currentState.getGame();
-        if (newGameState == null) {
-            newGameState = new GameState(2);  // TODO: change based currentState.getDifficulty
-        }
+//        GameState newGameState = currentState.getCurrentGame();
+//        if (newGameState == null) {
+//            newGameState = new GameState(2);  // TODO: change based currentState.getDifficulty
+//        }
 
         // Setting the Size of The Board Based on The State's Difficulty
-        if (newGameState.getDifficulty() == 1) {size = 4;}
+        GameState newGameState = new GameState(currentState.getDifficulty());
+        if (currentState.getDifficulty() == 1) {size = 4;}
         else {size = 9;}
 
         // TODO: add this to viewmodel property change listener
@@ -185,24 +191,24 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         // Add Values to The Board Based on The Game State
         ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-        int i = 0;
-
-        for (int row = 0; row < size; row++) {
-            for (int col = 0; col < size; col++) {
-                JTextField number = new JTextField();
-                number.setPreferredSize(new Dimension(20, 20));
-                number.setHorizontalAlignment(JTextField.CENTER);
-                number.setFont(new Font("Arial", Font.PLAIN, 20));
-
-                if (values.get(i) != 0) {
-                    number.setText(String.valueOf(values.get(i)));
-                }
-
-                box[row][col] = number;
-                board.add(number);
-                i++;
-            }
-        }
+//        int i = 0;
+//
+//        for (int row = 0; row < size; row++) {
+//            for (int col = 0; col < size; col++) {
+//                JTextField number = new JTextField();
+//                number.setPreferredSize(new Dimension(20, 20));
+//                number.setHorizontalAlignment(JTextField.CENTER);
+//                number.setFont(new Font("Arial", Font.PLAIN, 20));
+//
+//                if (values.get(i) != 0) {
+//                    number.setText(String.valueOf(values.get(i)));
+//                }
+//
+//                box[row][col] = number;
+//                board.add(number);
+//                i++;
+//            }
+//        }
         this.add(board);
 
 
@@ -247,11 +253,76 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         makeMove.setForeground(darkblue);
         buttons.add(makeMove);
 
+        startPlaying = new JButton("Start Playing Puzzle");
+        startPlaying.setFont(new Font("Verdana", Font.BOLD, 16));
+        startPlaying.setBackground(white);
+        startPlaying.setForeground(darkblue);
+        JPanel startPlayingPanel = new JPanel();
+        startPlayingPanel.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        startPlayingPanel.add(startPlaying);
+
+        this.add(startPlayingPanel);
+
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(buttons);
+        buttons.setVisible(false);
+        timer.setVisible(false);
+        lives.setVisible(false);
 
 
         // Creating Action Listeners
+        startPlaying.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Trigger the property change event when the button is clicked
+                firePropertyChange("startPlaying", false, true);
+                if (e.getSource().equals(startPlaying)) {
+                    // TODO: Change back to just newGameState = currentState.getCurrGame()
+                    // if (currentState.getCurrentGame() == null) {currentState.setCurrentGame(newGameState);}
+                    // Trigger the property change event when the button is clicked
+                    firePropertyChange("startPlaying", false, true);
+
+                    // Set the layout manager to BoxLayout with Y_AXIS
+                    BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+                    GameState newGameState = currentState.getCurrentGame();
+                    if (currentState.getDifficulty() == 1) {size = 4;}
+                    else {size = 9;}
+                    board.removeAll();
+                    box = new JTextField[size][size];
+                    board.setLayout(new GridLayout(size, size));
+
+                    ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
+                    int i = 0;
+
+                    for (int row = 0; row < size; row++) {
+                        for (int col = 0; col < size; col++) {
+                            JTextField number = new JTextField();
+                            number.setPreferredSize(new Dimension(20, 20));
+                            number.setHorizontalAlignment(JTextField.CENTER);
+                            number.setFont(new Font("Arial", Font.PLAIN, 20));
+
+                            if (values.get(i) != 0) {
+                                number.setText(String.valueOf(values.get(i)));
+                            }
+
+                            box[row][col] = number;
+                            board.add(number);
+                            i++;
+                        }
+                    }
+                    board.revalidate();
+                    board.repaint();
+                    startPlaying.setVisible(false);
+                    buttons.setVisible(true);
+                    timer.setVisible(true);
+                    lives.setVisible(true);
+                    BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+
+                }
+            }
+        });
+
         endGame.addActionListener(
                 new ActionListener() {
                     @Override
@@ -314,6 +385,30 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+//        if ("startPlaying".equals(evt.getPropertyName())) {
+//            GameState newGameState = currentState.getCurrentGame();
+//            ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
+//            int i = 0;
+//
+//            for (int row = 0; row < size; row++) {
+//                for (int col = 0; col < size; col++) {
+//                    JTextField number = new JTextField();
+//                    number.setPreferredSize(new Dimension(20, 20));
+//                    number.setHorizontalAlignment(JTextField.CENTER);
+//                    number.setFont(new Font("Arial", Font.PLAIN, 20));
+//
+//                    if (values.get(i) != 0) {
+//                        number.setText(String.valueOf(values.get(i)));
+//                    }
+//
+//                    box[row][col] = number;
+//                    board.add(number);
+//                    i++;
+//                }
+//            }
+//            board.revalidate();
+//            board.repaint();
+//        }
 
     }
 }

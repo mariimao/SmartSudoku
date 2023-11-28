@@ -14,6 +14,7 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyViewModel;
@@ -64,6 +65,7 @@ public class Main {
         SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
         EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
         EndGameViewModel endGameViewModel = new EndGameViewModel();
+        PlayGameViewModel playGameViewModel = new PlayGameViewModel();
 
 
         // testing userDAO
@@ -100,13 +102,14 @@ public class Main {
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject, spotifyViewModel, spotifyDataAccessObject);
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject, playGameViewModel, spotifyViewModel, spotifyDataAccessObject);
+
         views.add(newGameView, newGameViewModel.getViewName());
 
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, newGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, userDataAccessObject );
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, userDataAccessObject );
         views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
 
         viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName

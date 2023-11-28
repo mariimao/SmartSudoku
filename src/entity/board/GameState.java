@@ -2,17 +2,10 @@ package entity.board;
 
 import java.util. *;
 
+/**
+ * A class representing the overall state of the game.
+ */
 public class GameState {
-    public static void main(String[] args) {
-        //TODO: DELETE MAIN, just for testing
-        EasyBoard testBoard = new EasyBoard("003T00004T004T01F2T00");
-        GameState testState = new GameState(1);
-        System.out.println(testState.currBoard);
-        String stringRep = testState.toStringPause();
-        System.out.println("String Rep of State: " + testState.toStringPause());
-        System.out.println(Arrays.toString(stringRep.split("-")));
-    }
-
     private final int difficulty; // 1 - easy, 2 - hard
     private final SudokuScrambler sudokuScrambler;
     private Board currBoard;
@@ -20,6 +13,15 @@ public class GameState {
 
     private LinkedList<GameState> past_states;
 
+    /**
+     * Initializes a new GameState object.
+     * If difficulty is set to 1, then an EasyBoard object is generated, along with an
+     * EasySudokuScrambler object. If difficulty is set to 2, then a HardBoard object is
+     * generated, along with a HardSudokuScrambler object.
+     * This function also initializes lives to 5, and generates an empty LinkedList to
+     * store past states.
+     * @param difficulty is either 1 (easy) or 2 (hard)
+     */
     public GameState(int difficulty) {
         this.difficulty = difficulty;
         if (difficulty == 1) {
@@ -33,6 +35,16 @@ public class GameState {
         this.past_states = new LinkedList<>();
     }
 
+    /**
+     * Alternate initializer for a new GameState object.
+     * The parameter past_states is a collection of the previous GameStates.
+     * If difficulty is set to 1, then an EasyBoard object is generated, along with an
+     * EasySudokuScrambler object. If difficulty is set to 2, then a HardBoard object is
+     * generated, along with a HardSudokuScrambler object.
+     * This function also initializes lives to 5.
+     * @param difficulty is either 1 (easy) or 2 (hard)
+     * @param past_states is a non-empty LinkedList of past GameStates
+     */
     // akunna: overloading the GameState constructor so that it can pass in a linked list for the previous GameStates
     // seen when necessary
     public GameState(int difficulty, LinkedList<GameState> past_states) {
@@ -45,27 +57,45 @@ public class GameState {
             sudokuScrambler = new HardSudokuScrambler((HardBoard) currBoard);
         }
         this.lives = 5;
-
         this.past_states = past_states;
     }
 
+    /**
+     * Makes a move based on the user input.
+     * @param x column value (x coordinate) for user input
+     * @param y row value (y coordinate) for user input
+     * @param move user input value
+     * @return a Board object of the current board
+     */
     public Board makeMove(int x, int y, int move) {
         currBoard = currBoard.makeMove(x, y, move);
         return currBoard;
     }
 
+    /**
+     * Updates the currBoard attribute in the sudoKuScrambler,
+     * then scrambles the board by calling on the sudokuScrambler object.
+     */
     public void scrambleBoard() {
+        sudokuScrambler.updateBoard(currBoard);
         sudokuScrambler.scramble();
     }
 
+    /**
+     * Subtracts 1 from the number of lives.
+     */
     public void loseLife(){
         lives -= 1;
     }
 
+    /**
+     * @return true if the game is over (i.e. there are no more spaces left on the board).
+     */
     public boolean gameOver() {
         return currBoard.noSpacesLeft();
     }
 
+    /* ----- Getters and setters ----- */
     public int getDifficulty() {
         return this.difficulty;
     }
@@ -87,6 +117,8 @@ public class GameState {
 
     public LinkedList<GameState> getPastStates() {return this.past_states; }
 
+    /* ----- toString() methods ----- */
+    // TODO: Figure out which of these to delete later
     public String toStringPause() {
         // should return everything needed to create an exact replica of this state (not counting the past states)
         // board representation-difficulty-lives
@@ -106,6 +138,16 @@ public class GameState {
         representation.add(String.valueOf(lives));
 
         return  representation.toString();
+    }
+
+    public static void main(String[] args) {
+        //TODO: DELETE MAIN, just for testing
+        EasyBoard testBoard = new EasyBoard("003T00004T004T01F2T00");
+        GameState testState = new GameState(1);
+        System.out.println(testState.currBoard);
+        String stringRep = testState.toStringPause();
+        System.out.println("String Rep of State: " + testState.toStringPause());
+        System.out.println(Arrays.toString(stringRep.split("-")));
     }
 
 }

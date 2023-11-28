@@ -4,16 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="changed NewGameView to use the colours and look better">
-      <change afterPath="$PROJECT_DIR$/test/database/SpotifyDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_2_33_p_m__[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2023-11-13_2_33_p_m___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-16_4_47_p_m__[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_2023-11-16_4_47_p_m___Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="committing tests from pull request 53">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartSudoku.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartSudoku.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/NewGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/NewGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EasyGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EasyGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/NewGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/NewGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +79,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "SpotifyDAOTest",
+    "git-widget-placeholder": "PlayGame",
     "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -92,13 +98,13 @@
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="HardBoard" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="entity.HardBoard" />
-      <module name="java-quick-start" />
+  <component name="RunManager" selected="Application.NewGameView">
+    <configuration name="BoardView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.BoardView" />
+      <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="entity.*" />
+          <option name="PATTERN" value="view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -119,12 +125,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="data_access.UserDAO" />
-      <module name="java-quick-start" />
+    <configuration name="NewGameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="view.NewGameView" />
+      <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="data_access.*" />
+          <option name="PATTERN" value="view.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -166,11 +172,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.NewGameView" />
+        <item itemvalue="Application.BoardView" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SpotifyDAOTest.testCorrectTrackID" />
         <item itemvalue="JUnit.SpotifyDAOTest.testCorrectArtistName" />
-        <item itemvalue="Application.UserDAO" />
-        <item itemvalue="Application.Main" />
-        <item itemvalue="Application.HardBoard" />
       </list>
     </recent_temporary>
   </component>
@@ -201,26 +207,76 @@
       <option name="project" value="LOCAL" />
       <updated>1701104316645</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="committing tests from pull request 53">
+      <option name="closed" value="true" />
+      <created>1701113972915</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701113972915</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="a2c57861-dfd7-4eb4-ba4f-46a03617ce56" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="a2c57861-dfd7-4eb4-ba4f-46a03617ce56">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="HEAD" />
+                      </list>
+                    </value>
+                  </entry>
+                  <entry key="structure">
+                    <value>
+                      <list>
+                        <option value="dir:C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added a method that converts boards to arrays and a method that converts arrays to board. I want to use them to try and build a board scrambling function" />
     <MESSAGE value="changed NewGameView to use the colours and look better" />
     <MESSAGE value="Added API calls, need to test with spotify with premium + add proper use case for accessing database" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added API calls, need to test with spotify with premium + add proper use case for accessing database" />
+    <MESSAGE value="small changes to newGame use case" />
+    <MESSAGE value="committing tests from pull request 53" />
+    <option name="LAST_COMMIT_MESSAGE" value="committing tests from pull request 53" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/BoardView.java</url>
-          <line>189</line>
-          <option name="timeStamp" value="7" />
+          <url>file://$PROJECT_DIR$/src/view/NewGameView.java</url>
+          <line>174</line>
+          <option name="timeStamp" value="20" />
         </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
+          <option name="timeStamp" value="22" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
