@@ -5,6 +5,7 @@ import data_access.UserDAO;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import entity.user.User;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
@@ -19,7 +20,6 @@ import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartViewModel;
-import interface_adapter.ViewManagerModel;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
