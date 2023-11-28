@@ -107,10 +107,7 @@ public class Main {
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        SpotifyView spotifyView = SpotifyUseCaseFactory.create(viewManagerModel, spotifyViewModel, spotifyDataAccessObject, newGameViewModel);
-        views.add(spotifyView, spotifyViewModel.getViewName());
-
-        viewManagerModel.setActiveViewName(newGameView.viewName);  //TODO: change back to startView.viewName
+        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 
         application.pack();

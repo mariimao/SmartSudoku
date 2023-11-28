@@ -16,10 +16,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -123,6 +120,26 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                 }
         );
 
+        songOptions.addItemListener(
+            new ItemListener() {
+                @Override
+                public void itemStateChanged(ItemEvent e) {
+                    if(e.getStateChange() == ItemEvent.SELECTED) {
+                        if (e.getSource() instanceof JComboBox) {
+                            JComboBox cb = (JComboBox) e.getSource();
+                            String chosenSong = (String) cb.getSelectedItem();
+
+                            SpotifyState spotifyState = new SpotifyState(spotifyViewModel.getSpotifyState());
+                            spotifyState.setChosenSong(chosenSong);
+                            spotifyViewModel.setSpotifyState(spotifyState);
+
+                            System.out.println(chosenSong); //just for testing
+                        }
+                    }
+                }
+            }
+        );
+
         searchSong.addActionListener(
                 new ActionListener() {
                     @Override
@@ -131,7 +148,7 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             SpotifyState spotifyState = spotifyViewModel.getSpotifyState();
                             spotifyController.execute(spotifyState.getSearch());
 
-
+                            songOptions.removeAllItems(); // starts clean
                             ArrayList<String> suggestions = spotifyViewModel.getSpotifyState().getSearchResults();
                             if (!suggestions.isEmpty()) {
                                 for (String name : suggestions) {
@@ -139,7 +156,6 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                                 }
                             } else {
                                 songOptions.addItem("NONE");
-                                songOptions.addItem("banan");
                             }
                         }
                     }

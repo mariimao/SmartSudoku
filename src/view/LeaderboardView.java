@@ -7,6 +7,7 @@ import interface_adapter.login.LoginState;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.spotify.SpotifyState;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -117,10 +118,15 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        if (e.getSource().equals(sortingMethod)) {
-                            LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
-                            leaderboardState.setSortingMethod((String) sortingMethod.getSelectedItem());
-                            leaderboardViewModel.setLeaderboardState(leaderboardState);
+                        if(e.getStateChange() == ItemEvent.SELECTED) {
+                            if (e.getSource() instanceof JComboBox) {
+                                JComboBox cb = (JComboBox) e.getSource();
+                                String chosenMethod = (String) cb.getSelectedItem();
+
+                                LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
+                                leaderboardState.setSortingMethod((String) sortingMethod.getSelectedItem());
+                                leaderboardViewModel.setLeaderboardState(leaderboardState);
+                            }
                         }
                     }
                 }
