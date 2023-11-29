@@ -44,7 +44,7 @@ public class BoardUseCaseFactory {
                                    StartViewModel startViewModel, PlayGameViewModel playGameViewModel,
                                    UserDAO userDataAccessObject) {
 
-        EasyGameController easyGameController = createUserEasyGameUseCase(viewManagerModel, easyGameViewModel, userDataAccessObject);
+        EasyGameController easyGameController = createUserEasyGameUseCase(viewManagerModel, easyGameViewModel, userDataAccessObject, endGameViewModel);
         PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject);
         EndGameController endGameController = createUserEndGameUseCase(viewManagerModel, leaderboardViewModel, endGameViewModel, menuViewModel, userDataAccessObject);
         PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);
@@ -72,8 +72,8 @@ public class BoardUseCaseFactory {
         return new PauseGameController(pauseGameInteractor);
     }
 
-    private static EasyGameController createUserEasyGameUseCase(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel, UserMoveDataAccessInterface userMoveDataAccessInterface) {
-        EasyGamePresenter easyGamePresenter = new EasyGamePresenter(viewManagerModel, easyGameViewModel);
+    private static EasyGameController createUserEasyGameUseCase(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel, UserMoveDataAccessInterface userMoveDataAccessInterface, EndGameViewModel endGameViewModel) {
+        EasyGamePresenter easyGamePresenter = new EasyGamePresenter(viewManagerModel, easyGameViewModel, endGameViewModel);
         UserMoveInteractor userMoveInteractor = new UserMoveInteractor(userMoveDataAccessInterface, easyGamePresenter);
         return new EasyGameController(userMoveInteractor);
     }

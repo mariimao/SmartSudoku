@@ -27,9 +27,6 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
 
     private final ViewManagerModel viewManagerModel;
 
-    private final StartController startController;
-    private final StartViewModel startViewModel;
-
     private final MenuController menuController;
     private final MenuViewModel menuViewModel;
 
@@ -42,8 +39,6 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
     public EndGameView(EndGameViewModel endGameViewModel,
                        EndGameController endGameController,
                        ViewManagerModel viewManagerModel,
-                       StartController startController,
-                       StartViewModel startViewModel,
                        MenuController menuController,
                        MenuViewModel menuViewModel,
                        LeaderboardController leaderboardController,
@@ -51,8 +46,6 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
         this.endGameViewModel = endGameViewModel;
         this.endGameController = endGameController;
         this.viewManagerModel = viewManagerModel;
-        this.startController = startController;
-        this.startViewModel = startViewModel;
         this.menuController = menuController;
         this.menuViewModel = menuViewModel;
         this.leaderboardController = leaderboardController;

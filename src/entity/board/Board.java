@@ -63,6 +63,9 @@ public interface Board {
     HashMap<Integer, Boolean>[][] getCurrBoard();
     int[][] getSolutionBoard();
 
+
+//    int[][] convertToIntArray(HashMap<Integer, Boolean>[][] currBoard);
+
     /* ----- toString() methods ----- */
     // TODO: Figure out which of these to delete later
     String toString();

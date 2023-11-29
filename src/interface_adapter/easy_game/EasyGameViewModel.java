@@ -14,10 +14,6 @@ public class EasyGameViewModel extends ViewModel {
     public static final String COLUMN_LABEL = "Column";
     public static final String VALUE_LABEL = "Value";
 
-    public static final String END_GAME_BUTTON_LABEL = "End Game";
-    public static final String MAKE_MOVE_BUTTON_LABEL = "Make Move";
-    public static final String PAUSE_GAME_BUTTON_LABEL = "Pause Game";
-
     private EasyGameState state = new EasyGameState();
 
     public EasyGameViewModel() {

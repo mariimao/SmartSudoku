@@ -76,9 +76,12 @@ public class GameState {
      * Updates the currBoard attribute in the sudoKuScrambler,
      * then scrambles the board by calling on the sudokuScrambler object.
      */
-    public void scrambleBoard() {
+    public Board scrambleBoard() {
         sudokuScrambler.updateBoard(currBoard);
-        sudokuScrambler.scramble();
+        Board newBoard = sudokuScrambler.scramble();
+        currBoard.setBoard(newBoard.getCurrBoard());
+
+        return currBoard;
     }
 
     /**
@@ -151,3 +154,4 @@ public class GameState {
     }
 
 }
+
