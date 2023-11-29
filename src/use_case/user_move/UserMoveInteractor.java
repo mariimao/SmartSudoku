@@ -6,38 +6,37 @@ import use_case.login.LoginOutputData;
 public class UserMoveInteractor implements UserMoveInputBoundary {
 
     final UserMoveDataAccessInterface userMoveDataAccessInterface;
-    final UserMoveOutputBoundary gamePresenter;
+    final UserMoveOutputBoundary easyGamePresenter;
 
-    public UserMoveInteractor(UserMoveDataAccessInterface userMoveDataAccessInterface, UserMoveOutputBoundary gamePresenter) {
+    public UserMoveInteractor(UserMoveDataAccessInterface userMoveDataAccessInterface, UserMoveOutputBoundary easyGamePresenter) {
         this.userMoveDataAccessInterface = userMoveDataAccessInterface;
-        this.gamePresenter = gamePresenter;
+        this.easyGamePresenter = easyGamePresenter;
     }
 
     public void execute(UserMoveInputData userMoveInputData) {
-        Board current_board = (Board) userMoveInputData.getCurrent_board();
-        int difficulty = userMoveInputData.getDifficulty();
-        int x = userMoveInputData.getX();
-        int y = userMoveInputData.getY();
+        Board current_board = userMoveInputData.getCurrent_board();
+        int row = userMoveInputData.getRow();
+        int column = userMoveInputData.getColumn();
         int value = userMoveInputData.getValue();
 
-        if (userMoveInputData.gameOver()) {
-            UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
-            gamePresenter.prepareEndView(userMoveOutputData);
-        } else {
-            int[][] possibleValues = current_board.generatePossibleValues();
-            if (current_board.valueNotAvailable(possibleValues, value, x, y)) {
-                userMoveInputData.loseLife();
-                if (userMoveInputData.getLives() == 0) {
-                    UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
-                    gamePresenter.prepareEndView(userMoveOutputData);
-                } else {
-                    gamePresenter.prepareFailView("Incorrect input. Try again.");
-                }
+        if (current_board.correctMove(row, column, value)) {
+            userMoveInputData.loseLife();
+            if (userMoveInputData.getLives() < 1) {
+                UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
+                easyGamePresenter.prepareEndView(userMoveOutputData);
             } else {
-                userMoveInputData.makeMove();
+                easyGamePresenter.prepareFailView("Incorrect input. Try again.");
+            }
+        } else {
+            userMoveInputData.makeMove();
+            if (userMoveInputData.gameOver()) {
+                UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
+                easyGamePresenter.prepareEndView(userMoveOutputData);
+            } else {
+                userMoveDataAccessInterface.saveBoard(userMoveInputData.current_state); // save board before or after scrambling?
                 userMoveInputData.scrambleBoard();
                 UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
-                gamePresenter.prepareSuccessView(userMoveOutputData);
+                easyGamePresenter.prepareSuccessView(userMoveOutputData);
             }
         }
     }

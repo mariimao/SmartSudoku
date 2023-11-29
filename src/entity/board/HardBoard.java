@@ -426,4 +426,26 @@ public class HardBoard implements Board {
         }
         return values;
     }
+
+    // if we end up using valueNotAvailable, this helps convert Board into int[][] for possibleValues
+//    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
+//        int rows = 4;
+//        int cols = 4;
+//
+//        int[][] convertedArray = new int[rows][cols];
+//
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
+//                    int value = currBoard[i][j].keySet().iterator().next();
+//                    convertedArray[i][j] = value;
+//                } else {
+//                    convertedArray[i][j] = 0;
+//                }
+//            }
+//        }
+//
+//        return convertedArray;
+//    }
+
 }
