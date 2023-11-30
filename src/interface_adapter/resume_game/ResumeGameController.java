@@ -13,9 +13,9 @@ public class ResumeGameController {
     public ResumeGameController(ResumeGameInputBoundary resumeGameInteractor) {
         this.userResumeGameInteractor = resumeGameInteractor;
     }
-    public void execute(User user) {
+    public void execute(String userName) {
         // ASSUMPTION: if the User.getProgress() has been called for the user then their paused game and past games have been set into the user attributes
-        ResumeGameInputData resumeGameInputData = new ResumeGameInputData(user);
+        ResumeGameInputData resumeGameInputData = new ResumeGameInputData(userName);
         userResumeGameInteractor.execute(resumeGameInputData);
     }
 

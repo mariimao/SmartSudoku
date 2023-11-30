@@ -5,7 +5,40 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="committing changes from merge main into playgame">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/LoginUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/LoginUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/MenuUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/MenuUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/NewGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/NewGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/menu/MenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/menu/MenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EasyGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EasyGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/NewGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/NewGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PausedGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PausedGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,31 +99,32 @@
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;PlayGame&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.NewGameView">
+  <component name="RunManager" selected="Application.Main">
     <configuration name="BoardView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="view.BoardView" />
       <module name="SmartSudoku" />
@@ -130,18 +164,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SpotifyDAOTest.testCorrectArtistName" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="UserDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="data_access.UserDAO" />
       <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="database.*" />
+          <option name="PATTERN" value="data_access.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="database" />
-      <option name="MAIN_CLASS_NAME" value="database.SpotifyDAOTest" />
-      <option name="METHOD_NAME" value="testCorrectArtistName" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -164,11 +195,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.UserDAO" />
         <item itemvalue="Application.NewGameView" />
         <item itemvalue="Application.BoardView" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SpotifyDAOTest.testCorrectTrackID" />
-        <item itemvalue="JUnit.SpotifyDAOTest.testCorrectArtistName" />
       </list>
     </recent_temporary>
   </component>
@@ -182,6 +213,7 @@
       <updated>1700505611173</updated>
       <workItem from="1700505613602" duration="3436000" />
       <workItem from="1700542974010" duration="19576000" />
+      <workItem from="1701303645790" duration="5211000" />
     </task>
     <task id="LOCAL-00001" summary="changed NewGameView to use the colours and look better">
       <option name="closed" value="true" />
@@ -270,15 +302,24 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/NewGameView.java</url>
-          <line>174</line>
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
           <option name="timeStamp" value="22" />
         </breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="24" />
+        </breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/MenuView.java</url>
+          <line>113</line>
+          <option name="timeStamp" value="36" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/PausedGameView.java</url>
+          <line>132</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>

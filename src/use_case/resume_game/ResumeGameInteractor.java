@@ -16,7 +16,7 @@ public class ResumeGameInteractor implements ResumeGameInputBoundary{
         User user = resumeGameDataAccessInterface.get(resumeGameInputData.getUsername());
         if (user == null) {resumeGamePresenter.prepareFailView("Error: No User is Logged In.");}
         else {
-            boolean useCaseSuccess = user.getPausedGame() != null;
+            boolean useCaseSuccess = resumeGameDataAccessInterface.getProgress(resumeGameInputData.getUsername())!= null;
             ResumeGameOutputData resumeGameOutputData = new ResumeGameOutputData(user, !useCaseSuccess);
             if (useCaseSuccess) {
                 resumeGamePresenter.prepareSuccessView(resumeGameOutputData);

@@ -6,16 +6,13 @@ import entity.user.User;
 import java.util.LinkedList;
 
 public class ResumeGameInputData {
-    final private User user;
+    final private String userName;
 
-    public ResumeGameInputData(User user) {
-        this.user = user;
+    public ResumeGameInputData(String userName) {
+        this.userName = userName;
     }
 
     String getUsername() {
-        if (user == null) {return null;}
-        return user.getName();
+        return userName;
     }
-    GameState getcurrentState() {return user.getPausedGame();}
-    LinkedList<GameState> getpastStates() {return user.getPausedGame().getPastStates();}
 }

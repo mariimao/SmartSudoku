@@ -70,22 +70,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         userDAO.accounts.forEach((key, value) -> {
             System.out.println("Username: " + key + "Password: " + value.getPassword() + "Scores: " + value.getScores() + "Paused Game: " + value.getPausedGame());
         });
-        LinkedList<GameState> pastStates = new LinkedList<>();
-        pastStates.add(new GameState(1));
-        pastStates.add(new GameState(1));
 
-        u1.setPausedGame(new GameState(1, pastStates));
-        userDAO.setProgress(u1);
-        userDAO.getProgress(u1);
-        System.out.println(u1.getPausedGame());
-        for (int i = 0; i < 2; i++) {
-            Board fromList = pastStates.get(i).getCurrBoard();
-            Board fromDAO = u1.getPausedGame().getPastStates().get(i).getCurrBoard();
-            System.out.println(fromList);
-            System.out.println(fromDAO);
-            System.out.println("\n");
-
-        }
     }
 
     private final MongoCollection<Document> userCollection;
@@ -127,6 +112,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 accounts.put(name, user);
             }
         }
+        System.out.println("akunna in accouns: ");
+        System.out.println(accounts.containsKey("akunna"));
     }
 
     @Override
@@ -229,25 +216,16 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
         Bson updatePastGames = Updates.set("pausedGamePastBoards", pausedGamePastStates);   // Creating an update for the past games
         UpdateResult resultPastGames = this.userCollection.updateOne(filter, updatePastGames);   // Performing the update for the past games
+        accounts.put(name, user);
 
-        // Check if the document was found and updated for the game state
-        boolean gamePaused = false;
-        if (resultGameState.getMatchedCount() == 1) {
-            gamePaused = true;
-        }
-
-        // Check if the document was found and updated for the past games
-        if (resultPastGames.getMatchedCount() == 1) {
-            gamePaused = true;
-        }
-        return gamePaused;
+        return accounts.get(user.getName()).getPausedGame() == pausedGame;
     }
 
     public Document getUserDocByName(User user) {
         return userCollection.find(eq("name", user.getName())).first();
     }
 
-    @Override
+
     public GameState getProgress(User user) {
         // retrieves user's data from database then sets user.PauseGame to whatever it finds
         Document userDoc = getUserDocByName(user);
@@ -277,11 +255,21 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 gameState.setCurrBoard(gameValues);
                 gameState.setLives(lives);
                 user.setPausedGame(gameState);
+                accounts.put(user.getName(), user);
 
                 return gameState;
             }
         }
         throw new NoSuchElementException();
+    }
+    public GameState getProgress(String userName) {
+        // return the game state in account that corresponds to this
+        if (accounts.containsKey(userName)) {
+            return accounts.get(userName).getPausedGame();
+        } else {
+            // return null if the user does not exist
+            return null;
+        }
     }
 
     @Override

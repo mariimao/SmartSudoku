@@ -6,6 +6,9 @@ import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.start.StartViewModel;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
@@ -21,12 +24,12 @@ public class LoginUseCaseFactory {
 
     public static LoginView create(
             ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, MenuViewModel menuViewModel,
-            StartViewModel startViewModel,
-            UserDAO userDataAccessObject) {
+            PlayGameViewModel playGameViewModel, PauseGameViewModel pauseGameViewModel,
+            ResumeGameViewModel resumeGameViewModel, StartViewModel startViewModel, UserDAO userDataAccessObject) {
 
         try {
             LoginController loginController = createUserSignupUseCase(viewManagerModel, loginViewModel, menuViewModel, userDataAccessObject);
-            return new LoginView(loginController, loginViewModel);
+            return new LoginView(loginController, loginViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

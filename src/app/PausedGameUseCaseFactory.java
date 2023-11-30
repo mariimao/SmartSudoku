@@ -8,6 +8,7 @@ import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuPresenter;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGamePresenter;
 import interface_adapter.resume_game.ResumeGameViewModel;
@@ -38,12 +39,14 @@ public class PausedGameUseCaseFactory {
     }
 
     public static PausedGameView create(ViewManagerModel viewManagerModel, PauseGameViewModel pauseGameViewModel,
-                                        StartViewModel startViewModel, MenuViewModel menuViewModel, SignupViewModel signupViewModel,
-                                        LoginViewModel loginViewModel, ResumeGameViewModel resumeGameViewModel, UserDAO userDataAccessObject) {
+                                        StartViewModel startViewModel, MenuViewModel menuViewModel,
+                                        SignupViewModel signupViewModel, LoginViewModel loginViewModel,
+                                        ResumeGameViewModel resumeGameViewModel, PlayGameViewModel playGameViewModel,
+                                        UserDAO userDataAccessObject) {
         try {
             StartController startController = createUserStartUseCase(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
             MenuController menuController = createUserMenuUseCase(viewManagerModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject, playGameViewModel);
             return new PausedGameView(pauseGameViewModel, startViewModel, menuViewModel, viewManagerModel, resumeGameViewModel, startController, menuController, resumeGameController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open page.");
@@ -55,12 +58,13 @@ public class PausedGameUseCaseFactory {
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
                                                              LoginViewModel loginViewModel,
-                                                             ResumeGameDataAccessInterface resumeGameDataAccessInterface) {
+                                                             ResumeGameDataAccessInterface resumeGameDataAccessInterface,
+                                                             PlayGameViewModel playGameViewModel) {
         // Going into the LoginState to retrieve the player's username
         String username = loginViewModel.getLoginState().getUsername();  // ASSUMPTION: they have to already be logged in to hit the resume button
         User user = resumeGameDataAccessInterface.get(username);
 
-        ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel);
+        ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel, playGameViewModel);
         ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
     }
@@ -78,7 +82,7 @@ public class PausedGameUseCaseFactory {
                                                         MenuViewModel menuViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel,
                                                         MenuUserDataAccessInterface userDataAccessObject) throws IOException {
 
-        MenuOutputBoundary menuPresenter = new MenuPresenter();
+        MenuOutputBoundary menuPresenter = new MenuPresenter(menuViewModel, viewManagerModel);
         MenuInputBoundary menuInteractor = new MenuInteractor(userDataAccessObject, menuPresenter);
         return new MenuController(menuInteractor);
     }

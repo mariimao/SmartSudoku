@@ -1,10 +1,20 @@
 package view;
 
+import app.*;
+import data_access.UserDAO;
+import entity.user.CommonUserFactory;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.easy_game.EasyGameViewModel;
+import interface_adapter.end_game.EndGameViewModel;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupController;
-import interface_adapter.signup.SignupState;
+import interface_adapter.menu.MenuViewModel;
+import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
+import interface_adapter.play_game.PlayGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartViewModel;
 
@@ -19,13 +29,17 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "login view";
 
     private final LoginViewModel loginViewModel;
-
     private final LoginController loginController;
+    private final PlayGameViewModel playGameViewModel;
+    private final PauseGameViewModel pauseGameViewModel;
+    private final ResumeGameViewModel resumeGameViewModel;
 
 
 
@@ -42,9 +56,13 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final Color white = Color.white;
     private final Color black = Color.black;
 
-    public LoginView(LoginController loginController, LoginViewModel loginViewModel) {
+    public LoginView(LoginController loginController, LoginViewModel loginViewModel, PlayGameViewModel playGameViewModel,
+                     PauseGameViewModel pauseGameViewModel, ResumeGameViewModel resumeGameViewModel) {
         this.loginViewModel = loginViewModel;
         this.loginController = loginController;
+        this.playGameViewModel = playGameViewModel;
+        this.pauseGameViewModel = pauseGameViewModel;
+        this.resumeGameViewModel = resumeGameViewModel;
 
         loginViewModel.addPropertyChangeListener(this);
 
@@ -103,7 +121,8 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(login)) {
                             LoginState currentState = loginViewModel.getLoginState();
-
+                            playGameViewModel.getState().setUserName(currentState.getUsername());
+                            resumeGameViewModel.getState().setUserName(currentState.getUsername());
                             loginController.execute(currentState.getUsername(),
                                     currentState.getPassword());
                         }

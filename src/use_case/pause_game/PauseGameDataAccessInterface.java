@@ -4,4 +4,6 @@ import entity.user.User;
 
 public interface PauseGameDataAccessInterface {
     boolean setProgress(User user);
+
+    User get(String username);
 }

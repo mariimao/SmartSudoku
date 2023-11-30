@@ -1,7 +1,6 @@
 package interface_adapter.play_game;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.new_game.NewGameState;
 import use_case.play_game.PlayGameOutputBoundary;
 import use_case.play_game.PlayGameOutputData;
 
@@ -21,7 +20,7 @@ public class PlayGamePresenter implements PlayGameOutputBoundary {
         PlayGameState playGameState = playGameViewModel.getState();
         playGameState.setCurrentGame(playGameOutputData.getGame());
         playGameState.setDifficulty(playGameOutputData.getGame().getDifficulty());
-        playGameState.setUser(playGameOutputData.getUser());
+        playGameState.setUserName(playGameOutputData.getUser().getName());
         playGameViewModel.firePropertyChanged();
         this.viewManagerModel.setActiveViewName(playGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

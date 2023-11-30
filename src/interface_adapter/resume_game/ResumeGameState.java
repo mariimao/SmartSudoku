@@ -8,14 +8,16 @@ public class ResumeGameState {
     private String errorMessage = "";
     private GameState pausedGame = null;
     private LinkedList<GameState> pastGames = null;
-    private User user = null;
+    private String userName = "";
 
     public ResumeGameState() {}
 
     public void setPausedGame(GameState gameState) {pausedGame = gameState;}
     public void setPastGames(LinkedList<GameState> gameStateLinkedList) {pastGames = gameStateLinkedList;}
     public void setPauseGameError(String e) {errorMessage = e;}
-    public void setUser(User user) {this.user = user;}
+
+    public void setUserName(String userName) {this.userName = userName;}
+
     public GameState getPausedGame() {
         return pausedGame;
     }
@@ -25,5 +27,6 @@ public class ResumeGameState {
     }
 
     public String getPauseGameError() {return errorMessage;}
-    public User getUser() {return user;}
+    public String getUserName() {return userName;}
+
 }

@@ -68,7 +68,7 @@ public class BoardUseCaseFactory {
                                                               PauseGameViewModel pauseGameViewModel,
                                                               ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface) {
         PauseGamePresenter pauseGamePresenter = new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel);
-        PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, pauseGamePresenter, pauseGameViewModel.getState().getUser());
+        PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, pauseGamePresenter);
         return new PauseGameController(pauseGameInteractor);
     }
 

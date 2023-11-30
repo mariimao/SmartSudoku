@@ -6,7 +6,6 @@ import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.easy_game.EasyGameController;
-import interface_adapter.easy_game.EasyGamePresenter;
 import interface_adapter.easy_game.EasyGameState;
 import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
@@ -15,18 +14,14 @@ import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
-import interface_adapter.pause_game.PauseGameState;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameState;
 import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartViewModel;
-import use_case.user_move.UserMoveInteractor;
-import use_case.user_move.UserMoveOutputBoundary;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -46,7 +41,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final Color white = Color.white;
     private final Color black = Color.black;
 
-    public final String viewName = "Board View";
+    public final String viewName = "PLAY GAME";
 
     private final EasyGameViewModel easyGameViewModel;
     private final EasyGameController easyGameController;
@@ -68,85 +63,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton makeMove;
     private final JButton startPlaying;
 
-
-    public static void main(String[] args) {
-        // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
-
-        // The main application window.
-        JFrame application = new JFrame("SudokuScramble");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        CardLayout cardLayout = new CardLayout();
-
-        // The various View objects. Only one view is visible at a time.
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
-        // This keeps track of and manages which view is currently showing.
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
-
-        // The data for the views, such as username and password, are in the ViewModels.
-        // This information will be changed by a presenter object that is reporting the
-        // results from the use case. The ViewModels are observable, and will
-        // be observed by the Views.
-        StartViewModel startViewModel = new StartViewModel();
-        LoginViewModel loginViewModel = new LoginViewModel();
-        SignupViewModel signupViewModel = new SignupViewModel();
-        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
-        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
-        MenuViewModel menuViewModel = new MenuViewModel();
-        NewGameViewModel newGameViewModel = new NewGameViewModel();
-        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
-        EndGameViewModel endGameViewModel = new EndGameViewModel();
-        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
-
-
-        // testing userDAO
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-
-        UserDAO userDataAccessObject;
-        try {
-            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                    "smartsudoku", "user", new CommonUserFactory());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
-
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, startViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
-
-        // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel);
-        views.add(menuView, menuView.viewName);
-
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
-        views.add(pausedGameView, pausedGameView.viewName);
-
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1);
-        views.add(newGameView, newGameViewModel.getViewName());
-
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-        views.add(leaderboardView, leaderboardViewModel.getViewName());
-
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel1, userDataAccessObject);
-        views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
-
-        viewManagerModel.setActiveViewName(boardView.viewName);  //TODO: change back to startView.viewName
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
-    }
-
     public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController,
                      PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                      EndGameController endGameController, EndGameViewModel endGameViewModel,
@@ -166,49 +82,21 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         JLabel title = new JLabel("Play Smart Sudoku");
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 30));
-        title.setForeground(white);
+        title.setForeground(darkblue);
         title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(title);
-
-        // Creating a Random New Game if None is Passed in
-//        GameState newGameState = currentState.getCurrentGame();
-//        if (newGameState == null) {
-//            newGameState = new GameState(2);  // TODO: change based currentState.getDifficulty
-//        }
 
         // Setting the Size of The Board Based on The State's Difficulty
         GameState newGameState = new GameState(currentState.getDifficulty());
         if (currentState.getDifficulty() == 1) {size = 4;}
         else {size = 9;}
 
-        // TODO: add this to viewmodel property change listener
         // Setting Up The Layout of The Board
         box = new JTextField[size][size];
 
         board.setLayout(new GridLayout(size, size));
         board.setAlignmentX(Component.CENTER_ALIGNMENT);
         board.setSize(500, 500);
-
-        // Add Values to The Board Based on The Game State
-        ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-//        int i = 0;
-//
-//        for (int row = 0; row < size; row++) {
-//            for (int col = 0; col < size; col++) {
-//                JTextField number = new JTextField();
-//                number.setPreferredSize(new Dimension(20, 20));
-//                number.setHorizontalAlignment(JTextField.CENTER);
-//                number.setFont(new Font("Arial", Font.PLAIN, 20));
-//
-//                if (values.get(i) != 0) {
-//                    number.setText(String.valueOf(values.get(i)));
-//                }
-//
-//                box[row][col] = number;
-//                board.add(number);
-//                i++;
-//            }
-//        }
         this.add(board);
 
 
@@ -233,30 +121,34 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         // Add Buttons to GUI
         JPanel buttons = new JPanel();
-        endGame = new JButton("End Game");
+        endGame = new CustomButton("End Game", darkblue, white);
         endGame.setFont(new Font("Verdana", Font.BOLD, 16));
         endGame.setBackground(white);
         endGame.setForeground(darkblue);
+        endGame.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(endGame);
 
 
-        pauseGame = new JButton("Pause Game");
+        pauseGame = new CustomButton("Pause Game", darkblue, white);
         pauseGame.setFont(new Font("Verdana", Font.BOLD, 16));
         pauseGame.setBackground(white);
         pauseGame.setForeground(darkblue);
+        pauseGame.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(pauseGame);
 
 
-        makeMove = new JButton("Make Move");
+        makeMove = new CustomButton("Make Move", darkblue, white);
         makeMove.setFont(new Font("Verdana", Font.BOLD, 16));
         makeMove.setBackground(white);
         makeMove.setForeground(darkblue);
+        makeMove.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(makeMove);
 
-        startPlaying = new JButton("Start Playing Puzzle");
+        startPlaying = new CustomButton("Start Playing Puzzle", darkblue, white);
         startPlaying.setFont(new Font("Verdana", Font.BOLD, 16));
         startPlaying.setBackground(white);
         startPlaying.setForeground(darkblue);
+        startPlaying.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         JPanel startPlayingPanel = new JPanel();
         startPlayingPanel.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         startPlayingPanel.add(startPlaying);
@@ -278,8 +170,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                 // Trigger the property change event when the button is clicked
                 firePropertyChange("startPlaying", false, true);
                 if (e.getSource().equals(startPlaying)) {
-                    // TODO: Change back to just newGameState = currentState.getCurrGame()
-                    // if (currentState.getCurrentGame() == null) {currentState.setCurrentGame(newGameState);}
                     // Trigger the property change event when the button is clicked
                     firePropertyChange("startPlaying", false, true);
 
@@ -346,7 +236,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(pauseGame)) {
                             pauseGameController.execute(
-                                    currentState.getUser(),
+                                    currentState.getUserName(),
                                     currentState.getCurrentGame(),
                                     currentState.getCurrentGame().getPastStates()
 
@@ -384,30 +274,5 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-//        if ("startPlaying".equals(evt.getPropertyName())) {
-//            GameState newGameState = currentState.getCurrentGame();
-//            ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-//            int i = 0;
-//
-//            for (int row = 0; row < size; row++) {
-//                for (int col = 0; col < size; col++) {
-//                    JTextField number = new JTextField();
-//                    number.setPreferredSize(new Dimension(20, 20));
-//                    number.setHorizontalAlignment(JTextField.CENTER);
-//                    number.setFont(new Font("Arial", Font.PLAIN, 20));
-//
-//                    if (values.get(i) != 0) {
-//                        number.setText(String.valueOf(values.get(i)));
-//                    }
-//
-//                    box[row][col] = number;
-//                    board.add(number);
-//                    i++;
-//                }
-//            }
-//            board.revalidate();
-//            board.repaint();
-//        }
-
     }
 }

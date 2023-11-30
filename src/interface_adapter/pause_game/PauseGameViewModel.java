@@ -13,7 +13,7 @@ public class PauseGameViewModel extends ViewModel {
 
 
     public PauseGameViewModel() {
-        super("Paused Game");
+        super("GAME PAUSED");
     }
 
     public void setState(PauseGameState state) {this.state = state;}

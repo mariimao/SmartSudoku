@@ -1,7 +1,10 @@
 package interface_adapter.login;
 
+import entity.user.User;
+
 public class LoginState {
     private String username = "";
+    private User user = null;
     private String usernameError = null;
     private String password = "";
     private String passwordError = null;
@@ -30,6 +33,8 @@ public class LoginState {
     public String getPasswordError() {
         return passwordError;
     }
+    public User getUser() {return user;}
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -46,5 +51,7 @@ public class LoginState {
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
     }
+
+    public void setUser(User user) {this.user = user;}
 }
 

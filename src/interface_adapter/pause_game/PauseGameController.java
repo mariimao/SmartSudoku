@@ -14,8 +14,8 @@ public class PauseGameController {
         this.userPauseGameInteractor = userPauseGameInteractor;
     }
 
-    public void execute(User user, GameState pausedGame, LinkedList<GameState> pastGames) {
-        PauseGameInputData pauseGameInputData = new PauseGameInputData(user, pausedGame, pastGames);
+    public void execute(String userName, GameState pausedGame, LinkedList<GameState> pastGames) {
+        PauseGameInputData pauseGameInputData = new PauseGameInputData(userName, pausedGame, pastGames);
         userPauseGameInteractor.execute(pauseGameInputData);
     }
 }

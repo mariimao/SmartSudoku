@@ -150,7 +150,7 @@ public class EasyGameView extends JPanel implements ActionListener, PropertyChan
                         if (e.getSource().equals(pauseGame)) {
                             PauseGameState pauseGameState = pauseGameViewModel.getState();
                             pauseGameController.execute(
-                                    pauseGameState.getUser(),
+                                    pauseGameState.getUser().getName(),
                                     pauseGameState.getPausedGame(),
                                     pauseGameState.getPastGames()
 

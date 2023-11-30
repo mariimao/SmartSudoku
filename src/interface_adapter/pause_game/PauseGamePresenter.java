@@ -26,6 +26,8 @@ public class PauseGamePresenter implements PauseGameOutputBoundary {
         PauseGameState pauseGameState = pauseGameViewModel.getState();
         pauseGameState.setPausedGame(pauseGameOutputData.getCurrentGame());
         pauseGameState.setPastGames(pauseGameOutputData.getCurrentGame().getPastStates());
+        pauseGameState.setUser(pauseGameOutputData.getUser());
+        pauseGameState.setPastGames(pauseGameOutputData.getCurrentGame().getPastStates());
         this.viewManagerModel.setActiveViewName(pauseGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
     }

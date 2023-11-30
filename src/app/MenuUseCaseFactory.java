@@ -13,6 +13,7 @@ import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGamePresenter;
 import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGamePresenter;
 import interface_adapter.resume_game.ResumeGameViewModel;
@@ -38,13 +39,13 @@ public class MenuUseCaseFactory {
 
     public static MenuView create(
             ViewManagerModel viewManagerModel, MenuViewModel menuViewModel, ResumeGameViewModel resumeGameViewModel, LoginViewModel loginViewModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject,
-            LeaderboardViewModel leaderboardViewModel) {
+            LeaderboardViewModel leaderboardViewModel, PlayGameViewModel playGameViewModel) {
 
         try {
             // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
 
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject, playGameViewModel);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
             LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
             return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController);
@@ -64,7 +65,7 @@ public class MenuUseCaseFactory {
     private static MenuController createUserSignupUseCase(ViewManagerModel viewManagerModel,
                                                            MenuViewModel menuViewModel, UserDAO userDataAccessObject) throws IOException {
 
-        MenuOutputBoundary menuOutputBoundary = new MenuPresenter();
+        MenuOutputBoundary menuOutputBoundary = new MenuPresenter(menuViewModel, viewManagerModel);
 
         MenuInteractor menuInteractor = new MenuInteractor(
                 userDataAccessObject, menuOutputBoundary);
@@ -74,12 +75,13 @@ public class MenuUseCaseFactory {
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
                                                              LoginViewModel loginViewModel,
-                                                             ResumeGameDataAccessInterface resumeGameDataAccessInterface) {
+                                                             ResumeGameDataAccessInterface resumeGameDataAccessInterface,
+                                                             PlayGameViewModel playGameViewModel) {
         // Going into the LoginState to retrieve the player's username
         String username = loginViewModel.getLoginState().getUsername();  // ASSUMPTION: they have to already be logged in to hit the resume button
         User user = resumeGameDataAccessInterface.get(username);
 
-        ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel);
+        ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel, playGameViewModel);
         ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
     }
