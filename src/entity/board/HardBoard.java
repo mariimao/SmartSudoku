@@ -2,6 +2,9 @@ package entity.board;
 
 import java.util.*;
 
+/**
+ * Class representing a 9x9 sudoku puzzle.
+ */
 public class HardBoard implements Board {
     private HashMap<Integer, Boolean>[][] currBoard;
     private int[][] solutionBoard;
@@ -320,6 +323,17 @@ public class HardBoard implements Board {
     }
 
     /**
+     * Checks if the user placed a correct move on the board.
+     * @param row int object representing the index of the row
+     * @param column int object representing the index of the column
+     * @param move int object representing the value of the user move
+     * @return true if the move was correct (i.e. matches the solution)
+     */
+    public boolean correctMove(int row, int column, int move) {
+        return solutionBoard[row][column] == move;
+    }
+
+    /**
      * Checks if a board has been completely filled.
      * @return true if there are no spaces left
      */
@@ -412,4 +426,26 @@ public class HardBoard implements Board {
         }
         return values;
     }
+
+    // if we end up using valueNotAvailable, this helps convert Board into int[][] for possibleValues
+//    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
+//        int rows = 4;
+//        int cols = 4;
+//
+//        int[][] convertedArray = new int[rows][cols];
+//
+//        for (int i = 0; i < rows; i++) {
+//            for (int j = 0; j < cols; j++) {
+//                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
+//                    int value = currBoard[i][j].keySet().iterator().next();
+//                    convertedArray[i][j] = value;
+//                } else {
+//                    convertedArray[i][j] = 0;
+//                }
+//            }
+//        }
+//
+//        return convertedArray;
+//    }
+
 }

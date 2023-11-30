@@ -1,12 +1,15 @@
 package entity.board;
 
-import entity.board.Board;
-import entity.board.BoardFactory;
-import entity.board.EasyBoard;
-
+/**
+ * Factory for the creation of EasyBoard objects.
+ */
 public class EasyBoardFactory implements BoardFactory {
+
+    /**
+     * @return a new EasyBoard object
+     */
     @Override
-    public Board create() {
+    public EasyBoard create() {
         return new EasyBoard();
     }
 }

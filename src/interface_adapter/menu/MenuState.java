@@ -1,6 +1,5 @@
 package interface_adapter.menu;
 
-// temporary - for leaderboard - MARY
 public class MenuState {
 
     private String username = "";

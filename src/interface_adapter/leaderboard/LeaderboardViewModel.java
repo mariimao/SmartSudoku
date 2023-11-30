@@ -17,6 +17,10 @@ public class LeaderboardViewModel extends ViewModel {
 
     public static String USER_BUTTON_LABEL = "See my results";
 
+    public static String NO_SCORES_LABEL = "No scores available yet.";
+
+    public String[] CHOICES = {"Rank"};
+
     private static LeaderboardState leaderboardState = new LeaderboardState();
 
 

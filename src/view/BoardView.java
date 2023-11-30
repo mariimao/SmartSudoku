@@ -1,6 +1,7 @@
 package view;
 
 import app.*;
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
@@ -21,6 +22,7 @@ import interface_adapter.play_game.PlayGameState;
 import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
+import interface_adapter.spotify.SpotifyViewModel;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
@@ -29,6 +31,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -62,6 +66,89 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton pauseGame;
     private final JButton makeMove;
     private final JButton startPlaying;
+    private final JTextField rowInputField = new JTextField(1);
+    private final JTextField columnInputField = new JTextField(1);
+    private final JTextField valueInputField = new JTextField(1);
+
+
+    public static void main(String[] args) {
+        // Build the main program window, the main panel containing the
+        // various cards, and the layout, and stitch them together.
+
+        // The main application window.
+        JFrame application = new JFrame("SudokuScramble");
+        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        CardLayout cardLayout = new CardLayout();
+
+        // The various View objects. Only one view is visible at a time.
+        JPanel views = new JPanel(cardLayout);
+        application.add(views);
+
+        // This keeps track of and manages which view is currently showing.
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        new ViewManager(views, cardLayout, viewManagerModel);
+
+        // The data for the views, such as username and password, are in the ViewModels.
+        // This information will be changed by a presenter object that is reporting the
+        // results from the use case. The ViewModels are observable, and will
+        // be observed by the Views.
+        StartViewModel startViewModel = new StartViewModel();
+        LoginViewModel loginViewModel = new LoginViewModel();
+        SignupViewModel signupViewModel = new SignupViewModel();
+        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
+        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
+        MenuViewModel menuViewModel = new MenuViewModel();
+        NewGameViewModel newGameViewModel = new NewGameViewModel();
+        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
+        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
+        EndGameViewModel endGameViewModel = new EndGameViewModel();
+        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
+        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
+
+
+        // testing userDAO
+        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+
+        UserDAO userDataAccessObject;
+        try {
+            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        views.add(startView, startView.viewName);
+
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
+        views.add(signupView, signupView.viewName);
+
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, startViewModel, userDataAccessObject);
+        views.add(loginView, loginView.viewName);
+
+        // TODO: Update this when you add more views
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel);
+        views.add(menuView, menuView.viewName);
+
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, userDataAccessObject);
+        views.add(pausedGameView, pausedGameView.viewName);
+
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, spotifyViewModel, new SpotifyDAO() );
+        views.add(newGameView, newGameViewModel.getViewName());
+
+        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
+        views.add(leaderboardView, leaderboardViewModel.getViewName());
+
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel1, userDataAccessObject);
+        views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
+
+        viewManagerModel.setActiveViewName(boardView.viewName);  //TODO: change back to startView.viewName
+        viewManagerModel.firePropertyChanged();
+
+        application.pack();
+        application.setVisible(true);
+    }
 
     public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController,
                      PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
@@ -76,6 +163,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.playGameViewModel = playGameViewModel;
 
         playGameViewModel.addPropertyChangeListener(this);
+        easyGameViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
 
         // Creating the Title of the View
@@ -155,8 +243,33 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         this.add(startPlayingPanel);
 
+        LabelTextPanel rowInfo = new LabelTextPanel(
+                new JLabel(EasyGameViewModel.ROW_LABEL), rowInputField);
+        rowInfo.setFont(new Font("Verdana", Font.BOLD, 16));
+        rowInfo.setBackground(white);
+        rowInfo.setForeground(darkblue);
+        this.add(rowInfo);
+
+        LabelTextPanel columnInfo = new LabelTextPanel(
+                new JLabel(EasyGameViewModel.COLUMN_LABEL), columnInputField);
+        columnInfo.setFont(new Font("Verdana", Font.BOLD, 16));
+        columnInfo.setBackground(white);
+        columnInfo.setForeground(darkblue);
+        this.add(columnInfo);
+
+        LabelTextPanel valueInfo = new LabelTextPanel(
+                new JLabel(EasyGameViewModel.VALUE_LABEL), valueInputField);
+        valueInfo.setFont(new Font("Verdana", Font.BOLD, 16));
+        valueInfo.setBackground(white);
+        valueInfo.setForeground(darkblue);
+        this.add(valueInfo);
+
+
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(buttons);
+        rowInfo.setVisible(false);
+        columnInfo.setVisible(false);
+        valueInfo.setVisible(false);
         buttons.setVisible(false);
         timer.setVisible(false);
         lives.setVisible(false);
@@ -204,6 +317,9 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     board.revalidate();
                     board.repaint();
                     startPlaying.setVisible(false);
+                    rowInfo.setVisible(true);
+                    columnInfo.setVisible(true);
+                    valueInfo.setVisible(true);
                     buttons.setVisible(true);
                     timer.setVisible(true);
                     lives.setVisible(true);
@@ -252,6 +368,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(makeMove)) {
+                            easyGameViewModel.getState().setEasyGame(newGameState);
                             EasyGameState currentState = BoardView.this.easyGameViewModel.getState();
                             BoardView.this.easyGameController.execute(
                                     currentState.getEasyGame(),
@@ -259,7 +376,112 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                     currentState.getColumn(),
                                     currentState.getValue()
                             );
+
+                            BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+                            GameState newGameState = currentState.getEasyGame();
+                            if (currentState.getDifficulty() == 1) {size = 4;}
+                            else {size = 9;}
+                            board.removeAll();
+                            box = new JTextField[size][size];
+                            board.setLayout(new GridLayout(size, size));
+
+                            ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
+                            int i = 0;
+
+                            for (int row = 0; row < size; row++) {
+                                for (int col = 0; col < size; col++) {
+                                    JTextField number = new JTextField();
+                                    number.setPreferredSize(new Dimension(20, 20));
+                                    number.setHorizontalAlignment(JTextField.CENTER);
+                                    number.setFont(new Font("Arial", Font.PLAIN, 20));
+
+                                    if (values.get(i) != 0) {
+                                        number.setText(String.valueOf(values.get(i)));
+                                    }
+
+                                    box[row][col] = number;
+                                    board.add(number);
+                                    i++;
+                                }
+                            }
+                            lives.setText("LIVES: ".concat(String.valueOf(newGameState.getLives())));
+                            board.revalidate();
+                            board.repaint();
+                            startPlaying.setVisible(false);
+                            rowInfo.setVisible(true);
+                            columnInfo.setVisible(true);
+                            valueInfo.setVisible(true);
+                            buttons.setVisible(true);
+                            timer.setVisible(true);
+                            lives.setVisible(true);
+                            BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
                         }
+                    }
+                }
+        );
+
+        rowInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EasyGameState currentState = easyGameViewModel.getState();
+                        int row = Integer.parseInt(rowInputField.getText() + e.getKeyChar());
+                        currentState.setRow(row-1);
+                        easyGameViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        columnInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EasyGameState currentState = easyGameViewModel.getState();
+                        int column = Integer.parseInt(columnInputField.getText() + e.getKeyChar());
+                        currentState.setColumn(column-1);
+                        easyGameViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
+                    }
+                }
+        );
+
+        valueInputField.addKeyListener(
+                new KeyListener() {
+                    @Override
+                    public void keyTyped(KeyEvent e) {
+                        EasyGameState currentState = easyGameViewModel.getState();
+                        int value = Integer.parseInt(valueInputField.getText() + e.getKeyChar());
+                        currentState.setValue(value);
+                        easyGameViewModel.setState(currentState);
+                    }
+
+                    @Override
+                    public void keyPressed(KeyEvent e) {
+
+                    }
+
+                    @Override
+                    public void keyReleased(KeyEvent e) {
+
                     }
                 }
         );
