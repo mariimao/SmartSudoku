@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="committing changes from resolving conflicts after pulling from main">
-      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
-    </list>
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="resolved build errors caused by conflicts" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -223,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701310263375</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="resolved build errors caused by conflicts">
+      <option name="closed" value="true" />
+      <created>1701310765448</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701310765448</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +280,8 @@
     <MESSAGE value="committing changes from merge main into playgame" />
     <MESSAGE value="Fixed the bugs in the pause and resume buttons for all views that call the controllers for those use cases" />
     <MESSAGE value="committing changes from resolving conflicts after pulling from main" />
-    <option name="LAST_COMMIT_MESSAGE" value="committing changes from resolving conflicts after pulling from main" />
+    <MESSAGE value="resolved build errors caused by conflicts" />
+    <option name="LAST_COMMIT_MESSAGE" value="resolved build errors caused by conflicts" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
