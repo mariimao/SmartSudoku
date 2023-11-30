@@ -15,13 +15,8 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
 
     public SpotifyPlayer (SpotifyDAO spotifyDAO) {
 
-        this.token = "BQCcl0NLK3rQEjcSnKmkXsGooWVOKCGIsQyHKfU9QB5mvSvETTukZtB9EKSIV-t6ftM3awXGdxCEdJeNpCIMmro5IBex3aR3tmHVhyUpF7Pl_S1BmQvJbrUlFo2HcyI2FIDaGbf9a2V-gBZHFyMhAisJzcaRH4c4J_m6DecUunwPwAxtbJOotYosyOw";
+        this.token = spotifyDAO.getApiToken();
     }
-
-    // should database be a attribute of the player
-//    public void setToken() {
-//        getAccessCode();
-//    }
 
     public void play(String id) {
         // Just for testing api calling
@@ -183,16 +178,8 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
         String search = "bad idea";
         SpotifyDAO spotifyDAO = new SpotifyDAO();
-//        System.out.println(spotifyDAO.getAccessCode());
-//        System.out.println(spotifyDAO.getArtistname(id));
-//        System.out.println(spotifyDAO.getTrackDuration(songid));
-//        System.out.println(spotifyDAO.getTrackName(songid));
-//        System.out.println(spotifyDAO.getSuggestions(search));
+        spotifyDAO.getRefreshToken();
         SpotifyPlayer spotifyPlayer = new SpotifyPlayer(spotifyDAO);
-        //spotifyPlayer.requestAuthorization();
         System.out.println(spotifyPlayer.getDevices());
-        spotifyPlayer.play("4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d");
-        //spotifyPlayer.play("4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d");
-
     }
 }
