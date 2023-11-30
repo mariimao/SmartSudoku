@@ -62,10 +62,10 @@ public class Main {
         MenuViewModel menuViewModel = new MenuViewModel();
         NewGameViewModel newGameViewModel = new NewGameViewModel();
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
         EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
         EndGameViewModel endGameViewModel = new EndGameViewModel();
-        PlayGameViewModel playGameViewModel = new PlayGameViewModel();
+        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
+        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
 
 
         // testing userDAO
@@ -79,73 +79,37 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-        SpotifyDAO spotifyDataAccessObject;
-        try {
-            spotifyDataAccessObject = new SpotifyDAO();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
         StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
         views.add(startView, startView.viewName);
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel1, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
         // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel,resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel);
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel1);
         views.add(menuView, menuView.viewName);
 
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel, userDataAccessObject);
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel1, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel,newGameViewModel, userDataAccessObject, playGameViewModel, loginViewModel spotifyViewModel, spotifyDataAccessObject);
-
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, loginViewModel, spotifyViewModel, new SpotifyDAO() );
         views.add(newGameView, newGameViewModel.getViewName());
 
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel,leaderboardViewModel, userDataAccessObject);
+        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, userDataAccessObject );
-        views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel1, userDataAccessObject);
+        views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
 
-        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
+        viewManagerModel.setActiveViewName(boardView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);
-
-
-        //userDataAccessObject.deleteAll(); //for testing
-        Map<LocalTime, Integer> sampleScores = new HashMap<>();
-        sampleScores.put(LocalTime.now(), 4);
-        sampleScores.put(LocalTime.of(12, 30, 1), 3);
-        CommonUser user1 = new CommonUser("user1", "pass2", sampleScores);
-        userDataAccessObject.addUser(user1);
-        sampleScores.put(LocalTime.of(12, 31, 1), 4);
-        CommonUser user2 = new CommonUser("user2", "pass", sampleScores);
-        userDataAccessObject.addUser(user2);
-//        System.out.println(userDataAccessObject.toString());
-//        System.out.println(user1.getName());
-//        System.out.println(user1.getPassword());
-//        System.out.println(user1.getScores());
-//        System.out.println(user2.getName());
-//        System.out.println(user2.getPassword());
-//        System.out.println(user2.getScores());
-
-//        userDataAccessObject.delete("user1");
-//        System.out.println(userDataAccessObject.toString());
-
-        // board generation
-        EasyBoard easyTester = new EasyBoard();
-        System.out.println(easyTester);
-
-        HardBoard hardTester = new HardBoard();
-        System.out.println(hardTester);
-
-
     }
+
+
 }

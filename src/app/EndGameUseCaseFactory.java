@@ -56,7 +56,7 @@ public class EndGameUseCaseFactory {
                                                         MenuViewModel menuViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel,
                                                         MenuUserDataAccessInterface userDataAccessObject) {
 
-        MenuOutputBoundary menuPresenter = new MenuPresenter();
+        MenuOutputBoundary menuPresenter = new MenuPresenter(menuViewModel, viewManagerModel);
         MenuInputBoundary menuInteractor = new MenuInteractor(userDataAccessObject, menuPresenter);
         return new MenuController(menuInteractor);
     }
