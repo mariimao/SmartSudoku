@@ -96,6 +96,35 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 String password = account.getString("password");
                 Map<String, Integer> stringScores = account.get("scores", Map.class);
 
+                // retrieving their game from mongo and setting it into their user in accounts
+                GameState gameState = null;
+                String gameAsString = account.getString("pausedgame");
+                if (gameAsString != null && gameAsString.contains("-")) {
+                    ArrayList<String> lastPauseGamePastStates = (ArrayList<String>) account.get("pausedGamePastBoards");
+
+
+                    String[] gameAsArray = gameAsString.split("-");
+                    String gameValues = gameAsArray[0];
+                    int difficulty = Integer.parseInt(gameAsArray[1]);
+                    int lives = Integer.parseInt(gameAsArray[2]);
+
+                    // creates a LinkedList of past game states from data stored in mongoDB
+                    List<String> pausedGamePastBoards = (List<String>) account.get("pausedGamePastBoards");  // ignore the warning userDOc.get("pausedGamePastBoards" will always be able tp cast)
+                    LinkedList<GameState> pauseGameStates = new LinkedList<>();
+                    for (String values : pausedGamePastBoards) {
+                        GameState tempState = new GameState(difficulty);
+                        tempState.setCurrBoard(values);
+                        pauseGameStates.add(tempState);
+                    }
+
+                    // setting all the data into the given instance of user based on the data collected
+                    gameState = new GameState(difficulty, pauseGameStates);
+                    gameState.setCurrBoard(gameValues);
+                    gameState.setLives(lives);
+
+                }
+
+
                 // convert to localtime
                 Map<LocalTime, Integer> scores = new HashMap<>();
 
@@ -109,11 +138,10 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                 }
 
                 User user = userFactory.create(name, password, scores);
+                user.setPausedGame(gameState);
                 accounts.put(name, user);
             }
         }
-        System.out.println("akunna in accouns: ");
-        System.out.println(accounts.containsKey("akunna"));
     }
 
     @Override
@@ -150,7 +178,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                         .append("name", name)
                         .append("password", password)
                         .append("scores", stringScores)
-                        .append("pausedGamePastBoards", new ArrayList<>())
+                        .append("pausedGamePastBoards", new ArrayList<String>())
                         .append("pausedgame", null);
                 this.userCollection.insertOne(entry);
             }
@@ -199,7 +227,6 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
     @Override
     public boolean setProgress(User user) {
-        // TODO: if Board implementation changes form HashMap[] to int[][] switch from string rep to array rep
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
         // returns true if game was paused successfully and false otherwise
         String name = user.getName();
@@ -288,7 +315,6 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
   https://www.baeldung.com/java-mongodb
   https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
 
-  TODO: SLFJ4 logger warning:
   https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
   https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
   https://www.slf4j.org/codes.html#StaticLoggerBinder

@@ -29,10 +29,7 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -184,7 +181,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         board.setLayout(new GridLayout(size, size));
         board.setAlignmentX(Component.CENTER_ALIGNMENT);
-        board.setSize(500, 500);
+        // board.setSize(500, 500);
         this.add(board);
 
 
@@ -297,16 +294,20 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
                     ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
                     int i = 0;
+                    int cellsize = 5;
+                    JTextField lastFocusedTextField;
+                    lastFocusedTextField = null;
 
                     for (int row = 0; row < size; row++) {
                         for (int col = 0; col < size; col++) {
                             JTextField number = new JTextField();
-                            number.setPreferredSize(new Dimension(20, 20));
+                            number.setSize(new Dimension(cellsize, cellsize));
                             number.setHorizontalAlignment(JTextField.CENTER);
                             number.setFont(new Font("Arial", Font.PLAIN, 20));
 
                             if (values.get(i) != 0) {
                                 number.setText(String.valueOf(values.get(i)));
+                                number.setEditable(false);
                             }
 
                             box[row][col] = number;
