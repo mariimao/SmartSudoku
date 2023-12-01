@@ -215,29 +215,28 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         timer.setForeground(black);
         timer.setAlignmentX(Component.LEFT_ALIGNMENT);
 
-        Timer timer1 = new Timer(1000, new ActionListener() {
-            private int song_length = 180;
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (song_length == 0) {
-                    ((Timer)e.getSource()).stop(); // stops timer
-                } else {
-                    // add use case that retrieves info about time
-                    String time_remaining = "";
-                    song_length -= 1;
-                    long current_time = System.currentTimeMillis();
-                    UpdateTimer.execute(current_time); // update current time to csv file
-                    long time_remaining = song_length - current_time;
-                    GetTimer.execute(time_remaining); // retrieves output data that is converted into mintues and seconds
-
-                    timer.setText(time_remaining);
-                }
-            }
-        });
-        // TODO: add use case that makes timer object
-        timer1.start();
-        long start_time = System.currentTimeMillis();
-        SetTimerController.execute(start_time);
+//        Timer timer1 = new Timer(1000, new ActionListener() {
+//            private int song_length = 180;
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if (song_length == 0) {
+//                    ((Timer)e.getSource()).stop(); // stops timer
+//                } else {
+//                    // add use case that retrieves info about time
+//                    song_length -= 1;
+//                    long current_time = System.currentTimeMillis();
+//                    UpdateTimer.execute(current_time); // update current time to csv file
+//                    long time_remaining = song_length - current_time;
+//                    GetTimer.execute(time_remaining); // retrieves output data that is converted into mintues and seconds
+//
+//                    timer.setText(time_remaining);
+//                }
+//            }
+//        });
+//        // TODO: add use case that makes timer object
+//        timer1.start();
+//        long start_time = System.currentTimeMillis();
+//        SetTimerController.execute(start_time);
 
 
         this.add(timer);
