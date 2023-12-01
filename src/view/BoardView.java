@@ -297,7 +297,19 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(rules)) {
-                            JOptionPane.showMessageDialog(board, "Write Out The Game Rules");
+                            JOptionPane.showMessageDialog(board,
+                                    "Welcome to SmartSudoku. We're playing sudoku with a twist.\n" +
+                                            "Here are the rules: \n" +
+                                            "We have a n x n board where squares need to be filled in with numbers from 1 to n with no repeated numbers in each line, horizontally and vertically.\n" +
+                                            "There are also sqrt(n) boxes⏹️ that need to be filled with numbers from 1 to n without repeating.\n" +
+                                            "Each time you input a number from 1 to n:\n" +
+                                            "- If it is correct, the board will shift 🔀 to a new board with new numbers. The numbers you inputted will stay the same.\n" +
+                                            "- If it is wrong, then you lose a life. You have 5 lives in total ♥️♥️♥️♥️♥️\n" +
+                                            "You can always pause at any time.\n" +
+                                            "There is a timer that keeps track of how long you've spent on the game.\n" +
+                                            "HAVE FUN AND ENJOY THE MUSIC!");
+
+
                         }
                     }
                 }
