@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="just changed Main.main to match the updated code for the board view">
-      <change afterPath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" afterDir="false" />
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SmartSudoku.iml" beforeDir="false" afterPath="$PROJECT_DIR$/SmartSudoku.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +93,7 @@
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.EasySudokuScramblerTest.testValidBoardAfterScramble">
+  <component name="RunManager" selected="Application.SudokuDAO">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="app.Main" />
       <module name="SmartSudoku" />
@@ -109,12 +107,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NewGameView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="view.NewGameView" />
+    <configuration name="SudokuDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="data_access.SudokuDAO" />
       <module name="SmartSudoku" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="view.*" />
+          <option name="PATTERN" value="data_access.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -163,11 +161,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.SudokuDAO" />
         <item itemvalue="JUnit.EasySudokuScramblerTest.testValidBoardAfterScramble" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SpotifyDAOTest.testCorrectTrackID" />
         <item itemvalue="Application.UserDAO" />
-        <item itemvalue="Application.NewGameView" />
       </list>
     </recent_temporary>
   </component>
@@ -239,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701311305131</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="made methods for validating boards for api calling + generating solutions if needed">
+      <option name="closed" value="true" />
+      <created>1701404724024</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1701404724024</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,7 +299,8 @@
     <MESSAGE value="committing changes from resolving conflicts after pulling from main" />
     <MESSAGE value="resolved build errors caused by conflicts" />
     <MESSAGE value="just changed Main.main to match the updated code for the board view" />
-    <option name="LAST_COMMIT_MESSAGE" value="just changed Main.main to match the updated code for the board view" />
+    <MESSAGE value="made methods for validating boards for api calling + generating solutions if needed" />
+    <option name="LAST_COMMIT_MESSAGE" value="made methods for validating boards for api calling + generating solutions if needed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -315,6 +322,16 @@
           <url>file://$PROJECT_DIR$/src/view/PausedGameView.java</url>
           <line>132</line>
           <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>93</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>94</line>
+          <option name="timeStamp" value="66" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

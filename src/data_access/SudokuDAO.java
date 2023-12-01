@@ -79,13 +79,13 @@ public class SudokuDAO {
             String responseString = response.body().string();
             JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-            return responseBody.toString();
+            return responseBody.getJSONArray("solution").toString();
 
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
     }
-    public String verifyBoard(int[][] board) {
+    public Boolean verifyBoard(int[][] board) {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -105,7 +105,11 @@ public class SudokuDAO {
             String responseString = response.body().string();
             JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-            return responseBody.getString("status");
+            if (responseBody.get("status").equals("unsolvable")) {
+                // means input is false
+                return false;
+            }
+            return true;
 
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
@@ -115,7 +119,34 @@ public class SudokuDAO {
     public static void main(String[] args) {
         // TESTING API CALLS
         SudokuDAO sudokuDAO = new SudokuDAO();
-        //System.out.println(sudokuDAO.verifyBoard());
+        // should be true
+        int [][] board = {
+                {0,0,0,0,0,0,8,0,0},
+                {0,0,4,0,0,8,0,0,9},
+                {0,7,0,0,0,0,0,0,5},
+                {0,1,0,0,7,5,0,0,8},
+                {0,5,6,0,9,1,3,0,0},
+                {7,8,0,0,0,0,0,0,0},
+                {0,2,0,0,0,0,0,0,0},
+                {0,0,0,9,3,0,0,1,0},
+                {0,0,5,7,0,0,4,0,3}
+        };
+        System.out.println(sudokuDAO.verifyBoard(board));
+        //should be false
+        int [][] board2 = {
+                {0,0,0,0,0,0,8,8,0},
+                {0,0,4,0,0,8,0,0,9},
+                {0,7,0,0,0,0,0,0,5},
+                {0,1,0,0,7,5,0,0,8},
+                {0,5,6,0,9,1,3,0,0},
+                {7,8,0,0,0,0,0,0,0},
+                {0,2,0,0,0,0,0,0,0},
+                {0,0,0,9,3,0,0,1,0},
+                {0,0,5,7,0,0,4,0,3}
+        };
+        System.out.println(sudokuDAO.verifyBoard(board2));
+
+        System.out.print(sudokuDAO.generateSolution(board));
     }
 
 
