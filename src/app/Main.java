@@ -11,6 +11,7 @@ import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.make_move.MakeMoveViewModel;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
@@ -66,6 +67,7 @@ public class Main {
         EndGameViewModel endGameViewModel = new EndGameViewModel();
         PlayGameViewModel playGameViewModel = new PlayGameViewModel();
         SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
+        MakeMoveViewModel makeMoveViewModel = new MakeMoveViewModel();
 
 
         // testing userDAO
@@ -101,7 +103,7 @@ public class Main {
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, userDataAccessObject);
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject);
         views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
 
         viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName

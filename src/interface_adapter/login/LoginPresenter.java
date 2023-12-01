@@ -8,6 +8,8 @@ import interface_adapter.signup.SignupViewModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
+import javax.swing.*;
+
 public class LoginPresenter implements LoginOutputBoundary {
 
     private final ViewManagerModel viewManagerModel;
@@ -40,7 +42,7 @@ public class LoginPresenter implements LoginOutputBoundary {
         }
         else {
             loginState.setUsernameError(error);
+            JOptionPane.showMessageDialog(null, "User Does Not Exist. Go To Signup Page");
         }
-        loginViewModel.firePropertyChanged();
     }
 }

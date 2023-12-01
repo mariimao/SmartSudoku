@@ -113,6 +113,8 @@ public class GameState {
         if (difficulty == 1) {this.currBoard = new EasyBoard(values);}
         else {this.currBoard = new HardBoard(values);}
     }
+    public void setCurrBoard(Board board) {
+        this.currBoard = board;}
 
     public int getLives() {
         return this.lives;
