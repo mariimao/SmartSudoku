@@ -18,21 +18,21 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         this.token = spotifyDAO.getApiToken();
     }
 
-    public void play(String id) {
+    public void play(String album_id, String song_id, String device) {
         // Just for testing api calling
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         // Testing String
-        String jsonBody = "'{\n" +
-                "    \"context_uri\": \"spotify:album:track:4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d\",\n" +
+        String jsonBody = "{\n" +
+                "    \"context_uri\": \"spotify:album:"+album_id+"\",\n" +
                 "    \"offset\": {\n" +
-                "        \"position\": 5\n" +
+                "        \"position\": 5 \n" +
                 "    },\n" +
                 "    \"position_ms\": 0\n" +
-                "}'";
+                "}";
         RequestBody requestBody = RequestBody.create(MediaType.get("application/x-www-form-urlencoded"), jsonBody);
         Request request = new Request.Builder()
-                .url("https://api.spotify.com/v1/me/player/play?device_id=1dcaf4a91fd95baa4e919d0de916814c385a8ff3")
+                .url("https://api.spotify.com/v1/me/player/play?device_id=" + device)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .addHeader("Authorization", "Bearer " + (this.token))
                 .put(requestBody)
@@ -47,15 +47,16 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         }
     }
 
-    public void pause() {
+    public void pause(String device) {
         // pauses current song playing
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         // Testing String
+        RequestBody requestBody = RequestBody.create(MediaType.get("application/x-www-form-urlencoded"), "");
         Request request = new Request.Builder()
-                .url("https://api.spotify.com/v1/me/player/pause")
-                .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                .url("https://api.spotify.com/v1/me/player/pause?device_id=" + device)
                 .addHeader("Authorization", "Bearer " + (this.token))
+                .put(requestBody)
                 .build();
         try {
             Response response = client.newCall(request).execute();
@@ -180,6 +181,11 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         SpotifyDAO spotifyDAO = new SpotifyDAO();
         spotifyDAO.getRefreshToken();
         SpotifyPlayer spotifyPlayer = new SpotifyPlayer(spotifyDAO);
+        String device = spotifyPlayer.getDevices().get(0);
         System.out.println(spotifyPlayer.getDevices());
+        String song_id = "1fOMMLeB2L150LYZ0s7TKP?si=ac8290c0385245d1";
+        String album_id = "1NSS3nU2Nus4U8VPzGF8st?si=5SZTv1gESp2BZxIMjMUl9w";
+        //spotifyPlayer.play(album_id, song_id, device);
+        spotifyPlayer.pause(device);
     }
 }
