@@ -9,7 +9,7 @@ import java.util.LinkedList;
 public class EndGameState {
     private String errorMessage = "";
     private GameState finalGame = null;
-    private User user = null;
+    private String user = null;
     private Scores score = null;
 
 
@@ -24,7 +24,7 @@ public class EndGameState {
         errorMessage = e;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 
@@ -42,7 +42,7 @@ public class EndGameState {
         return score;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 }

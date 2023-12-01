@@ -12,6 +12,8 @@ public class PlayGameState {
     private int time = 0;
     private int lives = 0;
     private Scores scores = null;
+    private int spacesLeft = 0;
+    private boolean isCompleted = false;
 
     public PlayGameState() {}
     public void setCurrentGame(GameState gameState) { currentGame = gameState;}
@@ -31,7 +33,18 @@ public class PlayGameState {
 
     public int getTime() {return this.time;}
 
-    public void setLives(int live) {lives = currentGame.getLives();}
+    public void setLives(int lives) {this.lives = lives;}
+    public void setSpacesLeft(int spacesLeft) {this.spacesLeft = spacesLeft;}
+
+    public int getSpacesLeft() {
+        return spacesLeft;
+    }
+
+    public void setIsCompleted(boolean isCompleted) {this.isCompleted = isCompleted;}
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
 
     public int getLives() {return lives;}
 
