@@ -63,6 +63,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton pauseGame;
     private final JButton makeMove;
     private final JButton startPlaying;
+    private final JButton rules;
     private final JTextField rowInputField = new JTextField(1);
     private final JTextField columnInputField = new JTextField(1);
     private final JTextField valueInputField = new JTextField(1);
@@ -229,6 +230,13 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         makeMove.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(makeMove);
 
+        rules = new CustomButton("Game Rules", darkblue, white);
+        rules.setFont(new Font("Verdana", Font.BOLD, 16));
+        rules.setBackground(white);
+        rules.setForeground(darkblue);
+        rules.setAlignmentX(JLabel.TOP_ALIGNMENT);
+        buttons.add(rules);
+
         startPlaying = new CustomButton("Start Playing Puzzle", darkblue, white);
         startPlaying.setFont(new Font("Verdana", Font.BOLD, 16));
         startPlaying.setBackground(white);
@@ -271,6 +279,16 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         timer.setVisible(false);
         lives.setVisible(false);
 
+        rules.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(rules)) {
+                            JOptionPane.showMessageDialog(board, "Write Out The Game Rules");
+                        }
+                    }
+                }
+        );
 
         // Creating Action Listeners
         startPlaying.addActionListener(new ActionListener() {

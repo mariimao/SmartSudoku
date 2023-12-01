@@ -4,14 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="added tests for UserDAO and deleted some non-useful methods in the class">
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="Fixed the bug in the NewGame use case.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/MenuUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/MenuUseCaseFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -253,7 +248,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701391087344</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Fixed the bug in the NewGame use case.">
+      <option name="closed" value="true" />
+      <created>1701392824950</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1701392824950</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,7 +312,8 @@
     <MESSAGE value="just changed Main.main to match the updated code for the board view" />
     <MESSAGE value="Updated UserDAO so that it loads the paused game from mongo" />
     <MESSAGE value="added tests for UserDAO and deleted some non-useful methods in the class" />
-    <option name="LAST_COMMIT_MESSAGE" value="added tests for UserDAO and deleted some non-useful methods in the class" />
+    <MESSAGE value="Fixed the bug in the NewGame use case." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed the bug in the NewGame use case." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
