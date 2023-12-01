@@ -48,7 +48,7 @@ public class MenuUseCaseFactory {
             ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject, playGameViewModel);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
             LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-            return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController);
+            return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController, loginViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

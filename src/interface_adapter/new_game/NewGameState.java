@@ -12,6 +12,7 @@ public class NewGameState {
     private int difficulty = 1; // will make an easyboard automatically if not otherwise instructed
 
     private String searchName = "";
+    private String userName = "";
 
     public NewGameState() {}
     public void setGame(GameState gameState) { game = gameState;}
@@ -33,4 +34,7 @@ public class NewGameState {
     public String getSearchName() {
         return searchName;
     }
+    public String getUserName() {return userName;}
+
+    public void setUserName(String username) { this.userName = username;}
 }

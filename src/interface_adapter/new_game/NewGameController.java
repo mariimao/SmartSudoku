@@ -6,8 +6,8 @@ import use_case.new_game.NewGameInputData;
 public class NewGameController {
     final NewGameInputBoundary newGameInteractor;
     public NewGameController(NewGameInputBoundary newGameInteractor) {this.newGameInteractor = newGameInteractor;}
-    public void execute(User user, int difficulty) {
-        NewGameInputData newGameInputData = new NewGameInputData(user, difficulty);
+    public void execute(String userName, int difficulty) {
+        NewGameInputData newGameInputData = new NewGameInputData(userName, difficulty);
         newGameInteractor.execute(newGameInputData);
     }
 }

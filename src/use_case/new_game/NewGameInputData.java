@@ -3,18 +3,15 @@ package use_case.new_game;
 import entity.user.User;
 
 public class NewGameInputData {
-    final private User user;
+    final private String userName;
     final private int difficulty;
 
-    public NewGameInputData(User user, int difficulty) {
-        this.user = user;
+
+    public NewGameInputData(String userName, int difficulty) {
+        this.userName = userName;
         this.difficulty = difficulty;
     }
 
-    String getUsername() {
-        if (user == null) {return null;}
-        else {return user.getName();}
-    }
+    String getUsername() {return userName;}
     int getDifficulty() {return difficulty;}
-    // TODO: figure out how song timer will fit in to this use case
 }
