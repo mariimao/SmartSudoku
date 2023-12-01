@@ -86,7 +86,28 @@ public class SudokuDAO {
         return boardlist;
     }
 
+    private static int[][] insertCorrectMoves(int[][] current_grid,
+                                              int[][] solution, int correct_moves) {
+        int i = 0;
+        int j = 0;
+        int correct_counter = correct_moves;
+        for (i = 0; i < 9; i++) {
+            for (j = 0; j < 9; j++) {
+                if (correct_counter > 0) {
+                    if (current_grid[i][j] == 0) {
+                        current_grid[i][j] = solution[i][j];
+                        correct_counter -= 1;
+                    }
+                }
+            }
+        }
+
+        return current_grid;
+
+    }
+
     public int[][] generateBoard(int number_correct_moves) {
+        // generates a new board with n number of additional square prefilled
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}")
@@ -99,9 +120,17 @@ public class SudokuDAO {
             JSONObject grids = board.getJSONArray("grids").getJSONObject(0);
             JSONArray value = grids.getJSONArray("value");
 
-            System.out.println(value.toString());
+            int[][] result = stringToArray(value.toString());
+            int[][] solution = stringToArray(generateSolution(result));
 
-           return stringToArray(value.toString());
+            //System.out.println(value.toString());
+
+            if (number_correct_moves == 0) {
+                return result;
+            }
+            else {
+                return insertCorrectMoves(result, solution, number_correct_moves);
+            }
 
 
         } catch (IOException | JSONException e) {
@@ -193,8 +222,8 @@ public class SudokuDAO {
                 {0,0,5,7,0,0,4,0,3}
         };
         //System.out.println(sudokuDAO.verifyBoard(board2));
-        System.out.println(sudokuDAO.generateBoard(5));
-        System.out.print(sudokuDAO.generateSolution(board));
+        System.out.println(sudokuDAO.generateBoard(2));
+        System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
     }
 
 
