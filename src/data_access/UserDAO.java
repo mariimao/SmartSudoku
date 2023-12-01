@@ -144,10 +144,6 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
-    @Override
-    public boolean existsbyName(String username) {
-        return false;
-    }
 
     public void addUser(User user) {
         accounts.put(user.getName(), user);
@@ -248,47 +244,6 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return accounts.get(user.getName()).getPausedGame() == pausedGame;
     }
 
-    public Document getUserDocByName(User user) {
-        return userCollection.find(eq("name", user.getName())).first();
-    }
-
-
-    public GameState getProgress(User user) {
-        // retrieves user's data from database then sets user.PauseGame to whatever it finds
-        Document userDoc = getUserDocByName(user);
-        if (userDoc != null) {
-            String gameAsString = userDoc.getString("pausedgame");
-
-            if (gameAsString == null) {
-                return null;
-            }  // returns null if there is no game
-            else {  // create a new game state based on the data stored in mongo
-                String[] gameAsArray = gameAsString.split("-");
-                String gameValues = gameAsArray[0];
-                int difficulty = Integer.parseInt(gameAsArray[1]);
-                int lives = Integer.parseInt(gameAsArray[2]);
-
-                // creates a LinkedList of past game states from data stored in mongoDB
-                List<String> pausedGamePastBoards = (List<String>) userDoc.get("pausedGamePastBoards");  // ignore the warning userDOc.get("pausedGamePastBoards" will always be able tp cast)
-                LinkedList<GameState> pauseGameStates = new LinkedList<>();
-                for (String values : pausedGamePastBoards) {
-                    GameState tempState = new GameState(difficulty);
-                    tempState.setCurrBoard(values);
-                    pauseGameStates.add(tempState);
-                }
-
-                // setting all the data into the given instance of user based on the data collected
-                GameState gameState = new GameState(difficulty, pauseGameStates);
-                gameState.setCurrBoard(gameValues);
-                gameState.setLives(lives);
-                user.setPausedGame(gameState);
-                accounts.put(user.getName(), user);
-
-                return gameState;
-            }
-        }
-        throw new NoSuchElementException();
-    }
     public GameState getProgress(String userName) {
         // return the game state in account that corresponds to this
         if (accounts.containsKey(userName)) {
