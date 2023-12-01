@@ -1,5 +1,6 @@
 package entity.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -37,10 +38,14 @@ public class EasySudokuScrambler implements SudokuScrambler {
         EasyBoard newBoard = new EasyBoard();
         int[][] newBoardSolutions = newBoard.getSolutionBoard();
         HashMap<Integer, Boolean>[][] newBoardValues = newBoard.generateBlankBoard();
+        int x = -1; int y = -1;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (!currBoardValues[i][j].isEmpty()) {
-                    newBoardValues[i][j].put(newBoardSolutions[i][j], true);
+                    newBoardValues[i][j].put(newBoardSolutions[i][j], false);
+                } else if (x == -1 && y == -1) {
+                    x = i; y = j;
+                    newBoardValues[i][j].put(newBoardSolutions[i][j], false);
                 }
             }
         }

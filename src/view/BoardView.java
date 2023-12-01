@@ -3,6 +3,7 @@ package view;
 import app.*;
 import data_access.SpotifyDAO;
 import data_access.UserDAO;
+import entity.GameTimer;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -11,6 +12,7 @@ import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
+import interface_adapter.get_time.GetTimeController;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.make_move.MakeMoveController;
@@ -204,12 +206,39 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         // Add Timer to GUI
         JLabel timer = new JLabel(); // TODO: implement timer
-        timer.setText("PLACEHOLDER TIMER");
+        timer.setText("Current Time: ".concat(String.valueOf(new GameTimer(true).getDisplayTimeData())));
         timer.setFont(new Font("Consolas", Font.ITALIC, 20));
         timer.setBackground(darkblue);
         timer.setForeground(black);
         timer.setAlignmentX(Component.LEFT_ALIGNMENT);
+
+        Timer timer1 = new Timer(1000, new ActionListener() {
+            private int song_length = 180;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (song_length == 0) {
+                    ((Timer)e.getSource()).stop(); // stops timer
+                } else {
+                    // add use case that retrieves info about time
+                    String time_remaining = "";
+                    song_length -= 1;
+                    long current_time = System.currentTimeMillis();
+                    UpdateTimer.execute(current_time); // update current time to csv file
+                    long time_remaining = song_length - current_time;
+                    GetTimer.execute(time_remaining); // retrieves output data that is converted into mintues and seconds
+
+                    timer.setText(time_remaining);
+                }
+            }
+        });
+        // TODO: add use case that makes timer object
+        timer1.start();
+        long start_time = System.currentTimeMillis();
+        SetTimerController.execute(start_time);
+
+
         this.add(timer);
+
 
         // Add Buttons to GUI
         JPanel buttons = new JPanel();

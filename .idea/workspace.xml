@@ -13,6 +13,20 @@
       <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/data_access/TimerDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/get_time/GetTimeController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/get_time/GetTimePresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/set_timer/SetTimerController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/get_time/GetTimeInputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/get_time/GetTimeInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/get_time/GetTimeOutputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/get_time/GetTimeOutputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerInputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerInputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,6 +36,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -80,6 +95,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "board__view",
+    "git-widget-placeholder": "TimerView",
     "ignore.virus.scanning.warn.message": "true",
     "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move",
     "node.js.detected.package.eslint": "true",
@@ -374,6 +390,9 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="55" />
+        </line-breakpoint>
+          <line>397</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
