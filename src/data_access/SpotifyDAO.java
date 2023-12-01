@@ -28,7 +28,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         this.client_id = CLIENT_ID;
         this.client_secret = CLIENT_SECRET;
         this.current_token = "";
-        this.refresh_token = "AQCsY2fz7cW2EbTm-_yzem-FGoq6nDSrQQVEfc20C3rC54k7P-TSRdAT4BI_7uWPGUF0h8JmIumBHb7NJh3-kJMAxA5dVKImprTQzsJN1k3pk6BgORhSn8OKOcSJgPau8v4";
+        this.refresh_token = "AQDkEZahVWGy-Hamvdi6NXFqLGQQPXSDmELmRGEZnISrfqUkZH4D8Rw11cp3P--ShzWS_e2yA-TZS8fXJTzGekELnkIdWUNN8K3i931y_Exo0aBdR7R18CVDMeKvvR33uO4";
     }
 
     public String getClientId() {
