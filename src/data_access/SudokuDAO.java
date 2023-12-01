@@ -1,12 +1,15 @@
 package data_access;
 
 import okhttp3.*;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -59,6 +62,51 @@ public class SudokuDAO {
             }
         }
         return true;
+    }
+
+    private static int[][] stringToArray(String grid) {
+        int[][] boardlist = new int[9][9];
+        char[] charBoardArray = grid.toCharArray();
+        ArrayList<Integer> newList = new ArrayList<Integer>();
+        for (char c : charBoardArray) {
+            if (!(c == '[' || c == ']' || c == ',')) {
+                newList.add(Character.getNumericValue(c));
+            }
+        }
+        int i = 0;
+        int j = 0;
+        int k = 0;
+        for (i = 0; i < 9; i++){
+            for (j = 0; j < 9; j++) {
+                int input = newList.get(k);
+                boardlist[i][j] = input;
+                k += 1;
+            }
+        }
+        return boardlist;
+    }
+
+    public int[][] generateBoard(int number_correct_moves) {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}")
+                .build();
+        try {
+            Response response = client.newCall(request).execute();
+            String responseString = response.body().string();
+            JSONObject responseBody = new JSONObject(responseString);
+            JSONObject board = responseBody.getJSONObject("newboard");
+            JSONObject grids = board.getJSONArray("grids").getJSONObject(0);
+            JSONArray value = grids.getJSONArray("value");
+
+            System.out.println(value.toString());
+
+           return stringToArray(value.toString());
+
+
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public String generateSolution(int [][] board) {
@@ -131,7 +179,7 @@ public class SudokuDAO {
                 {0,0,0,9,3,0,0,1,0},
                 {0,0,5,7,0,0,4,0,3}
         };
-        System.out.println(sudokuDAO.verifyBoard(board));
+        //System.out.println(sudokuDAO.verifyBoard(board));
         //should be false
         int [][] board2 = {
                 {0,0,0,0,0,0,8,8,0},
@@ -144,8 +192,8 @@ public class SudokuDAO {
                 {0,0,0,9,3,0,0,1,0},
                 {0,0,5,7,0,0,4,0,3}
         };
-        System.out.println(sudokuDAO.verifyBoard(board2));
-
+        //System.out.println(sudokuDAO.verifyBoard(board2));
+        System.out.println(sudokuDAO.generateBoard(5));
         System.out.print(sudokuDAO.generateSolution(board));
     }
 
