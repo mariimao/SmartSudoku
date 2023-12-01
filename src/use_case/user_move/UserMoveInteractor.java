@@ -33,7 +33,6 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
                 UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
                 easyGamePresenter.prepareEndView(userMoveOutputData);
             } else {
-                userMoveDataAccessInterface.saveBoard(userMoveInputData.current_state); // save board before or after scrambling?
                 userMoveInputData.scrambleBoard();
                 UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
                 easyGamePresenter.prepareSuccessView(userMoveOutputData);

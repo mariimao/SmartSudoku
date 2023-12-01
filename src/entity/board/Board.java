@@ -58,6 +58,8 @@ public interface Board {
      */
     boolean noSpacesLeft();
 
+    int spacesLeft();
+
     /* ----- Getters and setters ----- */
     void setBoard(HashMap<Integer, Boolean>[][] newBoard);
     HashMap<Integer, Boolean>[][] getCurrBoard();

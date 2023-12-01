@@ -98,6 +98,8 @@ public class GameState {
         return currBoard.noSpacesLeft();
     }
 
+    public int spacesLeft() {return currBoard.spacesLeft();}
+
     /* ----- Getters and setters ----- */
     public int getDifficulty() {
         return this.difficulty;

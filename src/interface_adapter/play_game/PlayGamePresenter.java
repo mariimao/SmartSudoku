@@ -21,6 +21,9 @@ public class PlayGamePresenter implements PlayGameOutputBoundary {
         playGameState.setCurrentGame(playGameOutputData.getGame());
         playGameState.setDifficulty(playGameOutputData.getGame().getDifficulty());
         playGameState.setUserName(playGameOutputData.getUser().getName());
+        playGameState.setLives(playGameOutputData.getGame().getLives());
+        playGameState.setSpacesLeft(playGameOutputData.getGame().spacesLeft());
+        playGameState.setIsCompleted(playGameOutputData.getGame().gameOver());
         playGameViewModel.firePropertyChanged();
         this.viewManagerModel.setActiveViewName(playGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();

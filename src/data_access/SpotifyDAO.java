@@ -172,7 +172,6 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
-        // System.out.println(access_token);
         Request request = new Request.Builder()
                 .url("https://api.spotify.com/v1/tracks/" + id)
                 .addHeader("Authorization", "Bearer " + (access_token))
@@ -262,6 +261,9 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 //        String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
 //        String search = "bad idea";
         SpotifyDAO spotifyDAO = new SpotifyDAO();
+        //System.out.println(spotifyDAO.requestAuthorization());
+       //System.out.println(spotifyDAO.getAccessCode());
+        System.out.println(spotifyDAO.getArtistname(id));
         System.out.println(spotifyDAO.getRefreshToken());
 
     }

@@ -17,6 +17,10 @@ public interface User {
 
     void setPausedGame(GameState currentGame);
 
+    void setFinalGame(GameState currentGame);
+
+    GameState getFinalGame();
+
     GameState getPausedGame();
 
 }
