@@ -1,5 +1,6 @@
 package interface_adapter.end_game;
 
+import entity.Scores;
 import entity.board.GameState;
 import entity.user.User;
 import use_case.end_game.EndGameInputBoundary;
@@ -14,8 +15,8 @@ public class EndGameController {
         this.endGameUseCaseInteractor = endGameUseCaseInteractor;
     }
 
-    public void execute(User user, GameState current_state, int time, int lives) {
-        EndGameInputData endGameInputData = new EndGameInputData(user, current_state, time, lives);
+    public void execute(String user, GameState current_state, int time, int lives, Scores scores) {
+        EndGameInputData endGameInputData = new EndGameInputData(user, current_state, time, lives, scores);
         endGameUseCaseInteractor.execute(endGameInputData);
     }
 }

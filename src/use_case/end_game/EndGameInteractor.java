@@ -1,5 +1,7 @@
 package use_case.end_game;
 
+import entity.Scores;
+import entity.board.GameState;
 import entity.user.User;
 
 public class EndGameInteractor implements EndGameInputBoundary {
@@ -14,9 +16,10 @@ public class EndGameInteractor implements EndGameInputBoundary {
     @Override
     public void execute(EndGameInputData endGameInputData) {
         User user = endGameDataAccessInterface.get(endGameInputData.getUsername());
-        int score = 0; // TODO: change this
-        // akunna: i had to make score point to something and also change the user name into a user
-        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score);
+        Scores score = new Scores(endGameInputData.getTime(), endGameInputData.spacesLeft(), endGameInputData.getLives(), endGameInputData.isCompleted());
+        user.setFinalGame(endGameInputData.getCurrent_state());
+        boolean useCaseSuccess = endGameDataAccessInterface.setFinalGame(user);
+        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score, useCaseSuccess);
         endGamePresenter.prepareSuccessView(endGameOutputData);
     }
 }

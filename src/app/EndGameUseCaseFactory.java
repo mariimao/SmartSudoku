@@ -2,6 +2,7 @@ package app;
 
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameViewModel;

@@ -6,8 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="just changed Main.main to match the updated code for the board view">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/EndGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/EndGameUseCaseFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Scores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Scores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/CommonUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EasyGameView.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/GameView.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +84,7 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2YS4NvHPRZUNUoiAqFgCsCAZq3V" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -73,7 +94,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;board__view&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -165,9 +186,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.BoardView" />
         <item itemvalue="Application.UserDAO" />
         <item itemvalue="Application.NewGameView" />
-        <item itemvalue="Application.BoardView" />
         <item itemvalue="JUnit.SpotifyDAOTest.testCorrectTrackID" />
       </list>
     </recent_temporary>
@@ -183,6 +204,7 @@
       <workItem from="1700505613602" duration="3436000" />
       <workItem from="1700542974010" duration="19576000" />
       <workItem from="1701303645790" duration="5211000" />
+      <workItem from="1701435838645" duration="2002000" />
     </task>
     <task id="LOCAL-00001" summary="changed NewGameView to use the colours and look better">
       <option name="closed" value="true" />
