@@ -18,7 +18,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         this.token = spotifyDAO.getApiToken();
     }
 
-    public void play(String album_id, String song_id, String device) {
+    public void play(String album_id, String position, String device) {
         // Just for testing api calling
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -26,7 +26,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         String jsonBody = "{\n" +
                 "    \"context_uri\": \"spotify:album:"+album_id+"\",\n" +
                 "    \"offset\": {\n" +
-                "        \"position\": 5 \n" +
+                "        \"position\": "+position+ "\n" +
                 "    },\n" +
                 "    \"position_ms\": 0\n" +
                 "}";
@@ -183,9 +183,9 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         SpotifyPlayer spotifyPlayer = new SpotifyPlayer(spotifyDAO);
         String device = spotifyPlayer.getDevices().get(0);
         System.out.println(spotifyPlayer.getDevices());
-        String song_id = "1fOMMLeB2L150LYZ0s7TKP?si=ac8290c0385245d1";
+        String position = "4";
         String album_id = "1NSS3nU2Nus4U8VPzGF8st?si=5SZTv1gESp2BZxIMjMUl9w";
-        //spotifyPlayer.play(album_id, song_id, device);
+        //spotifyPlayer.play(album_id, position, device);
         spotifyPlayer.pause(device);
     }
 }
