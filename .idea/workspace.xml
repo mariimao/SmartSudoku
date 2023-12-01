@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="Fixed the bug in the NewGame use case.">
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="deleted EasyGameView.java and added a button to pop-up rules.">
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMovePresenter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveViewModel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveDataAccessInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputBoundary.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameDataAccessInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -72,9 +87,9 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "MakeMove",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game",
+    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,7 +104,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\make_move" />
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="view" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Main">
@@ -256,7 +275,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701392824950</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="deleted EasyGameView.java and added a button to pop-up rules.">
+      <option name="closed" value="true" />
+      <created>1701394845355</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1701394845355</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -313,7 +340,8 @@
     <MESSAGE value="Updated UserDAO so that it loads the paused game from mongo" />
     <MESSAGE value="added tests for UserDAO and deleted some non-useful methods in the class" />
     <MESSAGE value="Fixed the bug in the NewGame use case." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed the bug in the NewGame use case." />
+    <MESSAGE value="deleted EasyGameView.java and added a button to pop-up rules." />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted EasyGameView.java and added a button to pop-up rules." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -331,9 +359,9 @@
           <option name="timeStamp" value="42" />
         </breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/LoginView.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="45" />
+          <url>file://$PROJECT_DIR$/src/view/BoardView.java</url>
+          <line>368</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
