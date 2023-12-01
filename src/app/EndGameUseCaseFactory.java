@@ -2,6 +2,7 @@ package app;
 
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameViewModel;
@@ -46,30 +47,31 @@ public class EndGameUseCaseFactory {
     private EndGameUseCaseFactory() {}
 
     public static EndGameView create(ViewManagerModel viewManagerModel, EndGameViewModel endGameViewModel, UserDAO userDataAccessObject, MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, StartViewModel startViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel) {
+
         EndGameController endGameController = createUserEndGameUserCase(viewManagerModel, endGameViewModel, menuViewModel, leaderboardViewModel, userDataAccessObject);
         MenuController menuController = createUserMenuUseCase(viewManagerModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, userDataAccessObject);
         LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-        return new EndGameView(endGameViewModel, endGameController, viewManagerModel, menuController, menuViewModel, leaderboardController, leaderboardViewModel);
+        return new EndGameView(endGameViewModel, endGameController, viewManagerModel, menuController, menuViewModel, leaderboardController, leaderboardViewModel, new PlayGameViewModel());
     }
 
     private static MenuController createUserMenuUseCase(ViewManagerModel viewManagerModel, StartViewModel startViewModel,
                                                         MenuViewModel menuViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel,
                                                         MenuUserDataAccessInterface userDataAccessObject) {
 
-        MenuOutputBoundary menuPresenter = new MenuPresenter(menuViewModel, viewManagerModel);
-        MenuInputBoundary menuInteractor = new MenuInteractor(userDataAccessObject, menuPresenter);
+        MenuPresenter menuPresenter = new MenuPresenter(menuViewModel, viewManagerModel);
+        MenuInteractor menuInteractor = new MenuInteractor(userDataAccessObject, menuPresenter);
         return new MenuController(menuInteractor);
     }
     private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
         LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel);
-        LeaderboardInputBoundary leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface, leaderboardPresenter);
+        LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface, leaderboardPresenter);
         return new LeaderboardController(leaderboardInteractor);
 
     }
 
     private static EndGameController createUserEndGameUserCase(ViewManagerModel viewManagerModel, EndGameViewModel endGameViewModel, MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, EndGameDataAccessInterface endGameDataAccessInterface) {
-        EndGameOutputBoundary endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
-        EndGameInputBoundary endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);
+        EndGamePresenter endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
+        EndGameInteractor endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);
         return new EndGameController(endGameInteractor);
 
     }

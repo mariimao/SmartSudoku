@@ -4,4 +4,6 @@ import entity.user.User;
 
 public interface EndGameDataAccessInterface {
     User get(String username);
+
+    boolean setFinalGame(User user);
 }

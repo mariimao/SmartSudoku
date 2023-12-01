@@ -19,6 +19,7 @@ import interface_adapter.make_move.MakeMoveController;
 import interface_adapter.make_move.MakeMovePresenter;
 import interface_adapter.make_move.MakeMoveViewModel;
 import interface_adapter.menu.MenuViewModel;
+import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGamePresenter;
@@ -362,12 +363,12 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
-                            EndGameState endGameState = endGameViewModel.getState();
                             endGameController.execute(
-                                    endGameState.getUser(),
-                                    endGameState.getEndGame(),
-                                    endGameState.getTime(),
-                                    endGameState.getLives()
+                                    currentState.getUserName(),
+                                    currentState.getCurrentGame(),
+                                    currentState.getTime(),
+                                    currentState.getLives(),
+                                    currentState.getScores()
                             );
                         }
                     }

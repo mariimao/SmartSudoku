@@ -11,12 +11,14 @@ public class CommonUser implements User {
     private final String password;
     private final Map<LocalTime, Integer> scores;
     private GameState pausedGame;
+    private GameState finalGame;
 
     public CommonUser(String name, String password, Map<LocalTime, Integer> scores){
         this.name = name;
         this.password = password;
         this.scores = scores;
         this.pausedGame = null;
+        this.finalGame = null;
     }
 
     public String getName() { return name;}
@@ -33,6 +35,11 @@ public class CommonUser implements User {
 
     @Override
     public void setPausedGame(GameState currentGame) {this.pausedGame = currentGame;}
+
+    @Override
+    public void setFinalGame (GameState currentGame) {this.finalGame = currentGame;}
+
+    public GameState getFinalGame() {return this.finalGame;}
 
     @Override
     public GameState getPausedGame() {return this.pausedGame;}  // you will get a null pointer exception if this returns null and a method is applied to it
