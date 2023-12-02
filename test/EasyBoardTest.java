@@ -1,4 +1,5 @@
 import entity.board.EasyBoard;
+import entity.board.EasyBoardFactory;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,14 +12,21 @@ import static org.junit.Assert.*;
 
 public class EasyBoardTest implements BoardTest{
     private EasyBoard easyBoard;
+    private EasyBoard easyBoard2;
     private int[][] solutionBoard;
+    private int[][] solutionBoard2;
     HashMap<Integer, Boolean>[][] currBoard;
+    HashMap<Integer, Boolean>[][] currBoard2;
 
     @Before
     public void init() {
-        easyBoard = new EasyBoard();
+        easyBoard = new EasyBoardFactory().create();
         solutionBoard = easyBoard.getSolutionBoard();
         currBoard = easyBoard.getCurrBoard();
+        String positions = "004T04T00003T00001T0";
+        easyBoard2 = new EasyBoardFactory().create(positions);
+        solutionBoard2 = easyBoard2.getSolutionBoard();
+        currBoard2 = easyBoard2.getCurrBoard();
     }
 
     @Test
@@ -63,10 +71,45 @@ public class EasyBoardTest implements BoardTest{
             for (int j = 0; j < 4; j++) {
                 if (!blankBoard[i][j].isEmpty()) {
                     allBlankValues = false;
+                    break;
                 }
             }
         }
         assertTrue(allBlankValues);
+    }
+
+    @Test
+    public void testCorrectMove() {
+        boolean correctMoveIsValid = true;
+        for (int i = 0; i < 4; i ++) {
+            for (int j = 0; j < 4; j++) {
+                if (!easyBoard.correctMove(i, j, solutionBoard[i][j])) {
+                    correctMoveIsValid = false;
+                }
+            }
+        }
+        assertTrue(correctMoveIsValid);
+    }
+
+    @Test
+    public void testSpacesLeft() {
+        EasyBoard testerBoard = new EasyBoard();
+        HashMap<Integer, Boolean>[][] setBoard = testerBoard.generateBlankBoard();
+        testerBoard.setBoard(setBoard);
+        boolean isValidSpacesLeft = true;
+        int increment = 16;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j ++) {
+                increment -= 1;
+                setBoard[i][j] = new HashMap<>();
+                setBoard[i][j].put(testerBoard.getSolutionBoard()[i][j], false);
+                testerBoard.setBoard(setBoard);
+                if (testerBoard.spacesLeft() != increment) {
+                    isValidSpacesLeft = false;
+                }
+            }
+        }
+        assertTrue(isValidSpacesLeft);
     }
 
     @Test

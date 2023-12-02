@@ -37,9 +37,27 @@ import view.NewGameView;
 
 import java.io.IOException;
 
+/**
+ * Use case factory for the NewGame state.
+ * This class creates the data for the views in a NewGameView object, which are the new game state,
+ * play game state, spotify state, and login state.
+ */
 public class NewGameUseCaseFactory {
+
+    /** Prevent instantiation. */
     private NewGameUseCaseFactory() {}
 
+    /**
+     * Creates a new NewGameView object.
+     * @param viewManagerModel is a new ViewManagerModel object
+     * @param newGameViewModel is a new NewGameViewModel object
+     * @param userDataAccessObject is a new UserDataAccessObject
+     * @param playGameViewModel is a new PlayGameViewModel object
+     * @param loginViewModel is a new LoginViewModel object
+     * @param spotifyViewModel is a new SpotifyViewModel object
+     * @param spotifyDAO is a new SpotifyDAO object
+     * @return NewGameView object, with parameters for newly created relevant models and controllers
+     */
     public static NewGameView create(ViewManagerModel viewManagerModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject, PlayGameViewModel playGameViewModel, LoginViewModel loginViewModel,
                                      SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO) {
         // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
