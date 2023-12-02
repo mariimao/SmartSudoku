@@ -158,7 +158,6 @@ public class EasyBoard implements Board {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
-                System.out.println("value: " + value + " item: " + item);
                 return true;
             }
         }
@@ -401,7 +400,6 @@ public class EasyBoard implements Board {
             }
         }
     }
-
         return spacesCount;
     }
 

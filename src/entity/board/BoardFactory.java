@@ -10,4 +10,5 @@ public interface BoardFactory {
      * @return a new Board object
      */
     Board create();
+    Board create(String positions);
 }
