@@ -20,9 +20,25 @@ import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Use case factory for the SignUpUseCaseFactory state.
+ * This class creates the data for the views in a SignupView object.
+ */
 public class SignupUseCaseFactory {
+
+    /** Prevent instantiation. */
     private SignupUseCaseFactory() {}
 
+    /**
+     * Creates a new SignupView object. If the data file could not be read, a JDialogue showing the error
+     * will display.
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param loginViewModel is a LoginViewModel object
+     * @param signupViewModel is a SignupViewModel object
+     * @param startViewModel is a StartViewModel object
+     * @param userDataAccessObject is a UserDataAccessObject
+     * @return SignupView object, with parameters for newly created relevant models and controllers
+     */
     public static SignupView create(
             ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, SignupViewModel signupViewModel,
             StartViewModel startViewModel,
