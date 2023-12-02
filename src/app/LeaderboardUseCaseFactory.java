@@ -18,9 +18,22 @@ import view.LeaderboardView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Use case factory for the Leaderboard state.
+ * This class creates the data for the views in a LeaderboardView object.
+ */
 public class LeaderboardUseCaseFactory {
+
+    /** Prevent instantiation. */
     private LeaderboardUseCaseFactory() {}
 
+    /**
+     *
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param leaderboardViewModel is a LeaderboardViewModel object
+     * @param userDataAccessObject is a UserDataAccessObject
+     * @return LeaderboardView object, with parameters for newly created relevant models and controllers
+     */
     public static LeaderboardView create(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, UserDAO userDataAccessObject) {
         LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
         return new LeaderboardView(leaderboardViewModel, leaderboardController);
