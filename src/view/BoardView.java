@@ -223,20 +223,20 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     ((Timer)e.getSource()).stop(); // stops timer
                 } else {
                     // add use case that retrieves info about time
-                    song_length -= 1;
-                    long current_time = System.currentTimeMillis();
-                    UpdateTimer.execute(current_time); // update current time to csv file
-                    long time_remaining = song_length - current_time;
-                    GetTimer.execute(time_remaining); // retrieves output data that is converted into mintues and seconds
-
-                    timer.setText(time_remaining);
+//                    song_length -= 1;
+//                    long current_time = System.currentTimeMillis();
+//                    UpdateTimer.execute(current_time); // update current time to csv file
+//                    long time_remaining = song_length - current_time;
+//                    GetTimer.execute(time_remaining); // retrieves output data that is converted into mintues and seconds
+//
+//                    timer.setText(time_remaining);
                 }
             }
         });
         // TODO: add use case that makes timer object
         timer1.start();
         long start_time = System.currentTimeMillis();
-        SetTimerController.execute(start_time);
+        //SetTimerController.execute(start_time);
 
 
         this.add(timer);
@@ -411,6 +411,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                             String enteredNumber = "";
                             int x = -1;
                             int y = -1;
+                            int inputCount = 0;
 
                             // When this is clicked, we parse through board to gather the info from what was inputted
                             for (int row = 0; row < size; row++) {
@@ -421,66 +422,81 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                         x = col;
                                         y = row;
                                         box[row][col].setEditable(false);
+                                        inputCount ++;
 
-                                        // Disable all other JTextFields
-                                        for (int i = 0; i < size; i++) {
-                                            for (int j = 0; j < size; j++) {
-                                                if (!(i == row && j == col)) {
-                                                    box[i][j].setEditable(false);
-                                                }
-                                            }
-                                        }
                                     }
+                                    // Disable Editting Temporarily
+                                    box[row][col].setEditable(false);
                                 }
                             }
 
-                            try {
-                                // Checks to see if the user inputted an integer
-                                int enteredNum = Integer.parseInt(enteredNumber);
+                            // Checks to see if the user inputted exactly one value
+                            if (!(inputCount == 1)) {
+                                JOptionPane.showMessageDialog(board, "Please Enter Exactly One Value Per Round");
+                                boardReset(buttons, timer);
+                            }
+                            else {
 
-                                // Checks to see if the integer entered is a valid number for the board size
-                                if (enteredNum > size || enteredNum < 1) {
-                                    JOptionPane.showMessageDialog(board, "Input must be less than or equal to ".concat(String.valueOf(size)).concat(" and greater than 0"));
+                                try {
+                                    // Checks to see if the user inputted an integer
+                                    int enteredNum = Integer.parseInt(enteredNumber);
+
+                                    // Checks to see if the integer entered is a valid number for the board size
+                                    if (enteredNum > size || enteredNum < 1) {
+                                        JOptionPane.showMessageDialog(board, "Input must be less than or equal to ".concat(String.valueOf(size)).concat(" and greater than 0"));
+                                        // Re-enable editing
+                                        // Disable all other JTextFields
+                                        for (int i = 0; i < size; i++) {
+                                            for (int j = 0; j < size; j++) {
+                                                if (!box[i][j].getText().isEmpty()) {
+                                                    int cellValue = Integer.parseInt(box[i][j].getText());
+                                                    if (cellValue > size || cellValue < 1) {  // the box that was inputted a number that was too gets reset to being empty
+                                                        box[i][j].setText("");
+                                                    }
+                                                }
+                                                if (box[i][j].getText().isEmpty()) {
+                                                    box[i][j].setEditable(true);
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    // if everything is fine, update the view
+                                    else {
+                                        // calling the controller to scramble the board
+                                        makeMoveController.execute(enteredNum, x, y, playGameViewModel.getState().getCurrentGame());
+                                        playGameViewModel.getState().setCurrentGame(makeMoveViewModel.getState().getGameBeingPlayed());
+
+                                        // recreate the board based on the new scrambled board
+                                        // ASSUMPTION: playgameviewmodel.getState.currentGame has been set to the new scrambled board
+                                        boardReset(buttons, timer);
+
+                                        if (playGameViewModel.getState().getCurrentGame().getCurrBoard().noSpacesLeft()) {
+                                            JOptionPane.showMessageDialog(board, " Congratulations!!! You Solved The Puzzle!!!");
+                                            endGameController.execute(
+                                                    currentState.getUserName(),
+                                                    currentState.getCurrentGame(),
+                                                    currentState.getTime(),
+                                                    currentState.getLives(),
+                                                    currentState.getScores()
+                                            );
+                                        }
+                                    }
+
+
+                                } catch (NumberFormatException ignored) {
+                                    JOptionPane.showMessageDialog(board, "Input Must Be an Integer");
+
                                     // Re-enable editing
-                                    // Disable all other JTextFields
                                     for (int i = 0; i < size; i++) {
                                         for (int j = 0; j < size; j++) {
-                                            if (!box[i][j].getText().isEmpty()) {
-                                                int cellValue = Integer.parseInt(box[i][j].getText());
-                                                if (cellValue > size || cellValue < 1) {  // the box that was inputted a number that was too gets reset to being empty
-                                                    box[i][j].setText("");
-                                                }
+                                            if (!(box[i][j].getText().matches("\\d+"))) {  // the box that was inputted a non-integer gets reset to being empty
+                                                box[i][j].setText("");
                                             }
                                             if (box[i][j].getText().isEmpty()) {
                                                 box[i][j].setEditable(true);
                                             }
-                                        }
-                                    }
-
-                                }
-
-                                // if everything is fine, update the view
-                                else {
-                                    // calling the controller to scramble the board
-                                    makeMoveController.execute(enteredNum, x, y, playGameViewModel.getState().getCurrentGame());
-                                    playGameViewModel.getState().setCurrentGame(makeMoveViewModel.getState().getGameBeingPlayed());
-
-                                    // recreate the board based on the new scrambled board
-                                    // ASSUMPTION: playgameviewmodel.getState.currentGame has been set to the new scrambled board
-                                    boardReset(buttons, timer);
-                                }
-
-                            } catch (NumberFormatException ignored) {
-                                JOptionPane.showMessageDialog(board, "Input Must Be an Integer");
-
-                                // Re-enable editing
-                                for (int i = 0; i < size; i++) {
-                                    for (int j = 0; j < size; j++) {
-                                        if (!(box[i][j].getText().matches("\\d+"))) {  // the box that was inputted a non-integer gets reset to being empty
-                                            box[i][j].setText("");
-                                        }
-                                        if (box[i][j].getText().isEmpty()) {
-                                            box[i][j].setEditable(true);
                                         }
                                     }
                                 }

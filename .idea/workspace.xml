@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="Committing changes from merging">
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="Committing BoardView">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/TimerDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/TimerDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -283,7 +287,23 @@
       <option name="project" value="LOCAL" />
       <updated>1701461197349</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Committing BoardView">
+      <option name="closed" value="true" />
+      <created>1701462243447</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1701462243447</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Committing BoardView">
+      <option name="closed" value="true" />
+      <created>1701462359235</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1701462359235</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -350,7 +370,8 @@
     <MESSAGE value="Committing changes from merging origin/SudokuDAO into main and fixing conflicts." />
     <MESSAGE value="Cleaned up the BoardView and re-aligned calling a new game with new functionality" />
     <MESSAGE value="Committing changes from merging" />
-    <option name="LAST_COMMIT_MESSAGE" value="Committing changes from merging" />
+    <MESSAGE value="Committing BoardView" />
+    <option name="LAST_COMMIT_MESSAGE" value="Committing BoardView" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -367,6 +388,11 @@
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="42" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/StartView.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">

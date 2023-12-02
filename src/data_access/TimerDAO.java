@@ -30,23 +30,23 @@ public class TimerDAO {
         }
     }
     private void save() {
-        BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(csvFile));
-            writer.write(String.join(",", headers.keySet()));
-            writer.newLine();
-
-            for (int time : accounts.values()) {
-                String line = String.format("%s,%s,%s",
-                        user.getName(), user.getPassword(), user.getCreationTime());
-                writer.write(line);
-                writer.newLine();
-            }
-
-            writer.close();
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+//        BufferedWriter writer;
+//        try {
+//            writer = new BufferedWriter(new FileWriter(csvFile));
+//            writer.write(String.join(",", headers.keySet()));
+//            writer.newLine();
+//
+//            for (int time : accounts.values()) {
+//                String line = String.format("%s,%s,%s",
+//                        user.getName(), user.getPassword(), user.getCreationTime());
+//                writer.write(line);
+//                writer.newLine();
+//            }
+//
+//            writer.close();
+//
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 }
