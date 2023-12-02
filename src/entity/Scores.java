@@ -8,6 +8,8 @@ public class Scores {
         this.scores = scores;
     }
 
+    public Scores() {}
+
     public int getScores() {
         return this.scores;
     }

@@ -16,6 +16,7 @@ import interface_adapter.login.LoginViewModel;
 import interface_adapter.make_move.MakeMoveController;
 import interface_adapter.make_move.MakeMovePresenter;
 import interface_adapter.make_move.MakeMoveViewModel;
+import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
@@ -39,6 +40,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -200,15 +203,32 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         lives.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.add(lives);
 
+        JLabel timerLabel = new JLabel();
+        String start = LocalDateTime.now().toString(); // initialize outside of action listener
+        currentState.setStartTime(LocalDateTime.parse(start));
 
-        // Add Timer to GUI
-        JLabel timer = new JLabel(); // TODO: implement timer
-        timer.setText("PLACEHOLDER TIMER");
-        timer.setFont(new Font("Consolas", Font.ITALIC, 20));
-        timer.setBackground(darkblue);
-        timer.setForeground(black);
-        timer.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.add(timer);
+        //TODO: it starts counting from newGameView, not sure how to fix
+        // ALSO, cannot pause count when pressing pause
+        Timer timer = new Timer(1000, new ActionListener() { //delay is 1 second
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentState.setTimePlayed(currentState.getTimePlayed() + 1); // increases time played every 1 sec
+                int hours = currentState.getTimePlayed() / 60 / 60;
+                int minutes = currentState.getTimePlayed() / 60;
+                int seconds = currentState.getTimePlayed() % 60;
+                timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
+
+//        // Add Timer to GUI
+        //timer.setText();
+        timerLabel.setFont(new Font("Consolas", Font.ITALIC, 20));
+        timerLabel.setBackground(darkblue);
+        timerLabel.setForeground(black);
+        timerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.add(timerLabel);
 
         // Add Buttons to GUI
         JPanel buttons = new JPanel();
@@ -259,7 +279,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.add(buttons);
 
         buttons.setVisible(false);
-        timer.setVisible(false);
+        timerLabel.setVisible(false);
         lives.setVisible(false);
 
         rules.addActionListener(
@@ -332,7 +352,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     board.repaint();
                     startPlaying.setVisible(false);
                     buttons.setVisible(true);
-                    timer.setVisible(true);
+                    timerLabel.setVisible(true);
                     lives.setVisible(true);
                     BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
 
@@ -346,6 +366,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
                             EndGameState endGameState = endGameViewModel.getState();
+                            endGameState.setUser(new MenuState().getUsername());
+                            endGameState.setTime(currentState.getTimePlayed());
                             endGameController.execute(
                                     endGameState.getUser(),
                                     endGameState.getEndGame(),
@@ -478,7 +500,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                     board.repaint();
                                     startPlaying.setVisible(false);
                                     buttons.setVisible(true);
-                                    timer.setVisible(true);
+                                    timerLabel.setVisible(true);
                                     lives.setVisible(true);
                                 }
 
