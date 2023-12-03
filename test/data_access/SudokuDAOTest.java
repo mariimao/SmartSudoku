@@ -3,6 +3,7 @@ package data_access;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
@@ -14,7 +15,7 @@ public class SudokuDAOTest {
     public void init() { sudokuDAO = new SudokuDAO(); }
 
     @Test
-    public void testCorrectSolution() {
+    public void testCorrectSolution() throws IOException {
         // Tests to see if correct solution is generated
         int [][] board = {
                 {0,0,0,0,0,0,8,0,0},
@@ -33,7 +34,7 @@ public class SudokuDAOTest {
     }
 
     @Test
-    public void testCorrectVerificationTrue() {
+    public void testCorrectVerificationTrue() throws IOException {
         int [][] board = {
                 {0,0,0,0,0,0,8,0,0},
                 {0,0,4,0,0,8,0,0,9},
@@ -51,7 +52,7 @@ public class SudokuDAOTest {
     }
 
     @Test
-    public void testCorrectVerificationFalse() {
+    public void testCorrectVerificationFalse() throws IOException {
         int [][] board = {
                 {0,0,0,0,0,0,8,8,0},
                 {0,0,4,0,0,8,0,0,9},
@@ -69,7 +70,7 @@ public class SudokuDAOTest {
     }
 
     @Test
-    public void testValidBoardGeneration() {
+    public void testValidBoardGeneration() throws IOException {
         int[][] actual_board = sudokuDAO.generateBoard(3);
         Boolean actual = sudokuDAO.verifyBoard(actual_board);
         Boolean expected = true;
@@ -77,7 +78,17 @@ public class SudokuDAOTest {
     }
 
     @Test
-    public void testConvertToArraytoHashmap() {
+    public void testNotValidBoardGeneration() throws IOException {
+        int[][] actual_board = sudokuDAO.generateBoard(3);
+        actual_board[0][0] = 1;
+        actual_board[0][1] = 1;
+        Boolean actual = sudokuDAO.verifyBoard(actual_board);
+        Boolean expected = false;
+        assertEquals(false, actual);
+    }
+
+    @Test
+    public void testConvertToArraytoHashmap() throws IOException {
         int[][] expected_board = sudokuDAO.generateBoard(3);
         int[][] converted_board = new int[9][9];
         HashMap<Integer, Boolean>[][] convertedHashmap;
@@ -88,8 +99,5 @@ public class SudokuDAOTest {
 
         assertEquals(expected_board, converted_board);
 
-    }
-
-    public static void main(String[] args) {
     }
 }

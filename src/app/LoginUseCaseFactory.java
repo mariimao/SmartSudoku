@@ -55,7 +55,7 @@ public class LoginUseCaseFactory {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        return new LoginView(loginController, loginViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel);
+        return new LoginView(loginController, loginViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, menuViewModel);
     }
 
     /**
