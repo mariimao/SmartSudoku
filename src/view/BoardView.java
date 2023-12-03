@@ -10,13 +10,19 @@ import interface_adapter.easy_game.EasyGameController;
 import interface_adapter.easy_game.EasyGameState;
 import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
+import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.make_move.MakeMoveController;
+import interface_adapter.make_move.MakeMovePresenter;
+import interface_adapter.make_move.MakeMoveViewModel;
+import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
+import interface_adapter.pause_game.PauseGamePresenter;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameState;
 import interface_adapter.play_game.PlayGameViewModel;
@@ -24,6 +30,9 @@ import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyViewModel;
 import interface_adapter.start.StartViewModel;
+import use_case.end_game.EndGameInteractor;
+import use_case.make_move.MakeMoveInteractor;
+import use_case.pause_game.PauseGameInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -32,6 +41,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,8 +63,10 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final EndGameViewModel endGameViewModel;
     private final EndGameController endGameController;
     private final PlayGameViewModel playGameViewModel;
+    private final MakeMoveViewModel makeMoveViewModel;
+    private final MakeMoveController makeMoveController;
 
-    private static int size = 4; // TODO: change based on newgame input
+    private static int size = 4;
     private final PlayGameState currentState;
     private final JLabel lives;
     private JPanel board = new JPanel();
@@ -63,6 +75,9 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton pauseGame;
     private final JButton makeMove;
     private final JButton startPlaying;
+    private final JButton rules;
+    private final JPanel buttons;
+    private final JLabel timerLabel;
     private final JTextField rowInputField = new JTextField(1);
     private final JTextField columnInputField = new JTextField(1);
     private final JTextField valueInputField = new JTextField(1);
@@ -102,6 +117,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         EndGameViewModel endGameViewModel = new EndGameViewModel();
         PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
         SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
+        MakeMoveViewModel makeMoveViewModel1 = new MakeMoveViewModel();
 
 
         // testing userDAO
@@ -137,20 +153,24 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        //BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel1, userDataAccessObject);
-        //views.add(boardView, "Board View");  // TODO: link neccessary views and viewmodels
+        EndGameController endGameController1 = new EndGameController(new EndGameInteractor(userDataAccessObject, new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel)));
+        PauseGameController pauseGameController1 = new PauseGameController(new PauseGameInteractor(userDataAccessObject, new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel)));
+        MakeMoveController makeMoveController1 = new MakeMoveController(new MakeMoveInteractor(userDataAccessObject, new MakeMovePresenter(makeMoveViewModel1, viewManagerModel)));
 
-       //viewManagerModel.setActiveViewName(boardView.viewName);  //TODO: change back to startView.viewName
+        BoardView boardView = new BoardView(pauseGameController1, pauseGameViewModel, endGameController1, endGameViewModel, playGameViewModel1, makeMoveViewModel1, makeMoveController1);
+        views.add(boardView, boardView.viewName);  // TODO: link neccessary views and viewmodels
+
+        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 
         application.pack();
         application.setVisible(true);
     }
 
-    public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController,
-                     PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
-                     EndGameController endGameController, EndGameViewModel endGameViewModel,
-                     PlayGameViewModel playGameViewModel) {
+    public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController, PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
+                                 EndGameController endGameController, EndGameViewModel endGameViewModel,
+                                 PlayGameViewModel playGameViewModel, MakeMoveViewModel makeMoveViewModel,
+                                 MakeMoveController makeMoveController) {
         this.easyGameViewModel = easyGameViewModel;
         this.easyGameController = easyGameController;
         this.pauseGameController = pauseGameController;
@@ -158,6 +178,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.endGameController = endGameController;
         this.endGameViewModel = endGameViewModel;
         this.playGameViewModel = playGameViewModel;
+        this.makeMoveViewModel = makeMoveViewModel;
+        this.makeMoveController = makeMoveController;
 
         playGameViewModel.addPropertyChangeListener(this);
         easyGameViewModel.addPropertyChangeListener(this);
@@ -194,18 +216,35 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         lives.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.add(lives);
 
+        timerLabel = new JLabel();
+        String start = LocalDateTime.now().toString(); // initialize outside of action listener
+        currentState.setStartTime(LocalDateTime.parse(start));
 
-        // Add Timer to GUI
-        JLabel timer = new JLabel(); // TODO: implement timer
-        timer.setText("PLACEHOLDER TIMER");
-        timer.setFont(new Font("Consolas", Font.ITALIC, 20));
-        timer.setBackground(darkblue);
-        timer.setForeground(black);
-        timer.setAlignmentX(Component.LEFT_ALIGNMENT);
-        this.add(timer);
+        //TODO: it starts counting from newGameView, not sure how to fix
+        // ALSO, cannot pause count when pressing pause
+        Timer timer = new Timer(1000, new ActionListener() { //delay is 1 second
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                currentState.setTimePlayed(currentState.getTimePlayed() + 1); // increases time played every 1 sec
+                int hours = currentState.getTimePlayed() / 60 / 60;
+                int minutes = currentState.getTimePlayed() / 60;
+                int seconds = currentState.getTimePlayed() % 60;
+                timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+            }
+        });
+        timer.setRepeats(true);
+        timer.start();
+
+//        // Add Timer to GUI
+        //timer.setText();
+        timerLabel.setFont(new Font("Consolas", Font.ITALIC, 20));
+        timerLabel.setBackground(darkblue);
+        timerLabel.setForeground(black);
+        timerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.add(timerLabel);
 
         // Add Buttons to GUI
-        JPanel buttons = new JPanel();
+        buttons = new JPanel();
         endGame = new CustomButton("End Game", darkblue, white);
         endGame.setFont(new Font("Verdana", Font.BOLD, 16));
         endGame.setBackground(white);
@@ -228,6 +267,13 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         makeMove.setForeground(darkblue);
         makeMove.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(makeMove);
+
+        rules = new CustomButton("Game Rules", darkblue, white);
+        rules.setFont(new Font("Verdana", Font.BOLD, 16));
+        rules.setBackground(white);
+        rules.setForeground(darkblue);
+        rules.setAlignmentX(JLabel.TOP_ALIGNMENT);
+        buttons.add(rules);
 
         startPlaying = new CustomButton("Start Playing Puzzle", darkblue, white);
         startPlaying.setFont(new Font("Verdana", Font.BOLD, 16));
@@ -268,9 +314,31 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         columnInfo.setVisible(false);
         valueInfo.setVisible(false);
         buttons.setVisible(false);
-        timer.setVisible(false);
+        timerLabel.setVisible(false);
         lives.setVisible(false);
 
+        rules.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        if (e.getSource().equals(rules)) {
+                            JOptionPane.showMessageDialog(board,
+                                    "Welcome to SmartSudoku. We're playing sudoku with a twist.\n" +
+                                            "Here are the rules: \n" +
+                                            "We have a n x n board where squares need to be filled in with numbers from 1 to n with no repeated numbers in each line, horizontally and vertically.\n" +
+                                            "There are also sqrt(n) boxes⏹️ that need to be filled with numbers from 1 to n without repeating.\n" +
+                                            "Each time you input a number from 1 to n:\n" +
+                                            "- If it is correct, the board will shift 🔀 to a new board with new numbers. The numbers you inputted will stay the same.\n" +
+                                            "- If it is wrong, then you lose a life. You have 5 lives in total ♥️♥️♥️♥️♥️\n" +
+                                            "You can always pause at any time.\n" +
+                                            "There is a timer that keeps track of how long you've spent on the game.\n" +
+                                            "HAVE FUN AND ENJOY THE MUSIC!");
+
+
+                        }
+                    }
+                }
+        );
 
         // Creating Action Listeners
         startPlaying.addActionListener(new ActionListener() {
@@ -282,50 +350,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                 if (e.getSource().equals(startPlaying)) {
                     // Trigger the property change event when the button is clicked
                     firePropertyChange("startPlaying", false, true);
-
-                    // Set the layout manager to BoxLayout with Y_AXIS
-                    BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
-                    GameState newGameState = currentState.getCurrentGame();
-                    if (currentState.getDifficulty() == 1) {size = 4;}
-                    else {size = 9;}
-                    board.removeAll();
-                    box = new JTextField[size][size];
-                    board.setLayout(new GridLayout(size, size));
-
-                    ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-                    int i = 0;
-                    int cellsize = 5;
-                    JTextField lastFocusedTextField;
-                    lastFocusedTextField = null;
-
-                    for (int row = 0; row < size; row++) {
-                        for (int col = 0; col < size; col++) {
-                            JTextField number = new JTextField();
-                            number.setSize(new Dimension(cellsize, cellsize));
-                            number.setHorizontalAlignment(JTextField.CENTER);
-                            number.setFont(new Font("Arial", Font.PLAIN, 20));
-
-                            if (values.get(i) != 0) {
-                                number.setText(String.valueOf(values.get(i)));
-                                number.setEditable(false);
-                            }
-
-                            box[row][col] = number;
-                            board.add(number);
-                            i++;
-                        }
-                    }
-                    board.revalidate();
-                    board.repaint();
-                    startPlaying.setVisible(false);
-                    rowInfo.setVisible(true);
-                    columnInfo.setVisible(true);
-                    valueInfo.setVisible(true);
-                    buttons.setVisible(true);
-                    timer.setVisible(true);
-                    lives.setVisible(true);
-                    BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
-
+                    boardReset(buttons, timerLabel);
                 }
             }
         });
@@ -336,12 +361,14 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
                             EndGameState endGameState = endGameViewModel.getState();
+                            endGameState.setUser(new MenuState().getUsername());
+                            endGameState.setTime(currentState.getTimePlayed());
                             endGameController.execute(
                                     endGameState.getUser(),
                                     endGameState.getEndGame(),
                                     endGameState.getTime(),
-                                    endGameState.getLives()
-                            );
+                                    endGameState.getLives(),
+                                    currentState.getScores());
                         }
                     }
                 }
@@ -369,124 +396,106 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(makeMove)) {
-                            easyGameViewModel.getState().setEasyGame(newGameState);
-                            EasyGameState currentState = BoardView.this.easyGameViewModel.getState();
-                            BoardView.this.easyGameController.execute(
-                                    currentState.getEasyGame(),
-                                    currentState.getRow(),
-                                    currentState.getColumn(),
-                                    currentState.getValue()
-                            );
+                            String enteredNumber = "";
+                            int x = -1;
+                            int y = -1;
+                            int inputCount = 0;
 
-                            BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
-                            GameState newGameState = currentState.getEasyGame();
-                            if (currentState.getDifficulty() == 1) {size = 4;}
-                            else {size = 9;}
-                            board.removeAll();
-                            box = new JTextField[size][size];
-                            board.setLayout(new GridLayout(size, size));
-
-                            ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-                            int i = 0;
-
+                            // When this is clicked, we parse through board to gather the info from what was inputted
                             for (int row = 0; row < size; row++) {
                                 for (int col = 0; col < size; col++) {
-                                    JTextField number = new JTextField();
-                                    number.setPreferredSize(new Dimension(20, 20));
-                                    number.setHorizontalAlignment(JTextField.CENTER);
-                                    number.setFont(new Font("Arial", Font.PLAIN, 20));
+                                    if (box[row][col].isEditable() && !box[row][col].getText().isEmpty()) {
+                                        // Lock the entered number and disable all other JTextFields
+                                        enteredNumber = box[row][col].getText();
+                                        x = col;
+                                        y = row;
+                                        box[row][col].setEditable(false);
+                                        inputCount ++;
 
-                                    if (values.get(i) != 0) {
-                                        number.setText(String.valueOf(values.get(i)));
                                     }
-
-                                    box[row][col] = number;
-                                    board.add(number);
-                                    i++;
+                                    // Disable Editting Temporarily
+                                    box[row][col].setEditable(false);
                                 }
                             }
-                            lives.setText("LIVES: ".concat(String.valueOf(newGameState.getLives())));
-                            board.revalidate();
-                            board.repaint();
-                            startPlaying.setVisible(false);
-                            rowInfo.setVisible(true);
-                            columnInfo.setVisible(true);
-                            valueInfo.setVisible(true);
-                            buttons.setVisible(true);
-                            timer.setVisible(true);
-                            lives.setVisible(true);
+
+                            // Checks to see if the user inputted exactly one value
+                            if (!(inputCount == 1)) {
+                                JOptionPane.showMessageDialog(board, "Please Enter Exactly One Value Per Round");
+                                boardReset(buttons, timerLabel);
+                            }
+                            else {
+
+                                try {
+                                    // Checks to see if the user inputted an integer
+                                    int enteredNum = Integer.parseInt(enteredNumber);
+
+                                    // Checks to see if the integer entered is a valid number for the board size
+                                    if (enteredNum > size || enteredNum < 1) {
+                                        JOptionPane.showMessageDialog(board, "Input must be less than or equal to ".concat(String.valueOf(size)).concat(" and greater than 0"));
+                                        // Re-enable editing
+                                        // Disable all other JTextFields
+                                        for (int i = 0; i < size; i++) {
+                                            for (int j = 0; j < size; j++) {
+                                                if (!box[i][j].getText().isEmpty()) {
+                                                    int cellValue = Integer.parseInt(box[i][j].getText());
+                                                    if (cellValue > size || cellValue < 1) {  // the box that was inputted a number that was too gets reset to being empty
+                                                        box[i][j].setText("");
+                                                    }
+                                                }
+                                                if (box[i][j].getText().isEmpty()) {
+                                                    box[i][j].setEditable(true);
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                    // if everything is fine, update the view
+                                    else {
+                                        // calling the controller to scramble the board
+                                        makeMoveController.execute(enteredNum, x, y, playGameViewModel.getState().getCurrentGame());
+                                        playGameViewModel.getState().setCurrentGame(makeMoveViewModel.getState().getGameBeingPlayed());
+
+                                        // recreate the board based on the new scrambled board
+                                        // ASSUMPTION: playgameviewmodel.getState.currentGame has been set to the new scrambled board
+                                        boardReset(buttons, timerLabel);
+
+                                        if (playGameViewModel.getState().getCurrentGame().getCurrBoard().noSpacesLeft()) {
+                                            JOptionPane.showMessageDialog(board, " Congratulations!!! You Solved The Puzzle!!!");
+                                            endGameController.execute(
+                                                    currentState.getUserName(),
+                                                    currentState.getCurrentGame(),
+                                                    currentState.getTime(),
+                                                    currentState.getLives(),
+                                                    currentState.getScores()
+                                            );
+                                        }
+                                    }
+
+
+                                } catch (NumberFormatException ignored) {
+                                    JOptionPane.showMessageDialog(board, "Input Must Be an Integer");
+
+                                    // Re-enable editing
+                                    for (int i = 0; i < size; i++) {
+                                        for (int j = 0; j < size; j++) {
+                                            if (!(box[i][j].getText().matches("\\d+"))) {  // the box that was inputted a non-integer gets reset to being empty
+                                                box[i][j].setText("");
+                                            }
+                                            if (box[i][j].getText().isEmpty()) {
+                                                box[i][j].setEditable(true);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+
                             BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+
                         }
                     }
                 }
         );
-
-        rowInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EasyGameState currentState = easyGameViewModel.getState();
-                        int row = Integer.parseInt(rowInputField.getText() + e.getKeyChar());
-                        currentState.setRow(row-1);
-                        easyGameViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-
-        columnInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EasyGameState currentState = easyGameViewModel.getState();
-                        int column = Integer.parseInt(columnInputField.getText() + e.getKeyChar());
-                        currentState.setColumn(column-1);
-                        easyGameViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-
-        valueInputField.addKeyListener(
-                new KeyListener() {
-                    @Override
-                    public void keyTyped(KeyEvent e) {
-                        EasyGameState currentState = easyGameViewModel.getState();
-                        int value = Integer.parseInt(valueInputField.getText() + e.getKeyChar());
-                        currentState.setValue(value);
-                        easyGameViewModel.setState(currentState);
-                    }
-
-                    @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
-
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
-                }
-        );
-
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
@@ -495,7 +504,52 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     public void actionPerformed(ActionEvent e) {
     }
 
+    public void boardReset(JPanel buttons, JLabel timer) {
+            // Set the layout manager to BoxLayout with Y_AXIS
+            BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+            GameState newGameState = currentState.getCurrentGame();
+            if (currentState.getDifficulty() == 1) {size = 4;}
+            else {size = 9;}
+            board.removeAll();
+            box = new JTextField[size][size];
+            board.setLayout(new GridLayout(size, size));
+
+            ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
+            int i = 0;
+            int cellsize = 5;
+            for (int row = 0; row < size; row++) {
+                for (int col = 0; col < size; col++) {
+                    JTextField number = new JTextField();
+                    number.setSize(new Dimension(cellsize, cellsize));
+                    number.setHorizontalAlignment(JTextField.CENTER);
+                    number.setFont(new Font("Arial", Font.PLAIN, 20));
+
+                    if (values.get(i) != 0) {
+                        number.setText(String.valueOf(values.get(i)));
+                        number.setEditable(false);
+                    }
+
+                    box[row][col] = number;
+                    board.add(number);
+                    i++;
+                }
+            }
+        board.revalidate();
+        board.repaint();
+        startPlaying.setVisible(false);
+        rowInfo.setVisible(true);
+        columnInfo.setVisible(true);
+        valueInfo.setVisible(true);
+        buttons.setVisible(true);
+        timer.setVisible(true);
+        lives.setVisible(true);
+        BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        if (evt.getPropertyName().equals("PLAYGAMESTATE")) {
+            boardReset(buttons, timerLabel);
+        }
     }
 }

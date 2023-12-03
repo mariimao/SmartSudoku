@@ -76,6 +76,10 @@ public class UserDAOTest {
 
     }
 
+    public UserDAO getUserDAO() {
+        return userDAO;
+    }
+
     // Add more test methods based on your requirements
 
 

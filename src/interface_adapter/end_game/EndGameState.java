@@ -1,5 +1,6 @@
 package interface_adapter.end_game;
 
+import entity.Scores;
 import entity.board.GameState;
 import entity.user.User;
 
@@ -8,7 +9,7 @@ import java.util.LinkedList;
 public class EndGameState {
     private String errorMessage = "";
     private GameState endGame = null;
-    private User user = null;
+    private String username = "";
     private int time = 0;
     private int lives = 0;
     private int score = 0;
@@ -25,8 +26,8 @@ public class EndGameState {
         errorMessage = e;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(String username) {
+        this.username = username;
     }
 
     public void setTime(int time) {
@@ -55,7 +56,7 @@ public class EndGameState {
 
     public int getLives() {return lives;}
 
-    public User getUser() {
-        return user;
+    public String getUser() {
+        return username;
     }
 }

@@ -112,6 +112,9 @@ public class Main {
         BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, userDataAccessObject, boardDataAccessObject);
        views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
 
+        EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel, startViewModel, signupViewModel, loginViewModel);
+        views.add(endGameView, endGameViewModel.getViewName());
+
         viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
         viewManagerModel.firePropertyChanged();
 

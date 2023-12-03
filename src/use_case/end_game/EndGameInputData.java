@@ -6,13 +6,13 @@ import entity.user.User;
 import java.util.LinkedList;
 
 public class EndGameInputData {
-    final private User user;
+    final private String user;
     final private GameState current_state;
     final private int time;
     final private int lives;
 
 
-    public EndGameInputData(User user, GameState current_state, int time, int lives) {
+    public EndGameInputData(String user, GameState current_state, int time, int lives) {
         this.user = user;
         this.current_state = current_state;
         this.time = time;
@@ -20,19 +20,27 @@ public class EndGameInputData {
     }
 
     String getUsername() {
-        return user.getName();
+        return user;
     }
 
     GameState getCurrent_state() {
         return current_state;
     }
 
-    int getTime() {return time;} // implement time
+    boolean isCompleted() {
+        return current_state.gameOver();
+    }
+
+    int spacesLeft() {
+        return current_state.spacesLeft();
+    }
+
+    int getTime() {
+        return this.time;
+    }
 
     int getLives() {
-        return lives;
+        return this.lives;
     }
 }
 
-// Need:
-// user, final game state, time,

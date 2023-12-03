@@ -31,7 +31,7 @@ public class PlayGameInteractor implements PlayGameInputBoundary {
 
             // If game holds an instance of GameState then the board will be scrambled and passed on
             else {
-                game.scrambleBoard();
+                game.scrambleBoard();  // TODO: remove and check behaviour
                 PlayGameOutputData playGameOutputData = new PlayGameOutputData(user, game);
                 playGamePresenter.prepareSuccessView(playGameOutputData);
             }

@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="deleted EasyGameView.java and added a button to pop-up rules." />
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -64,26 +67,26 @@
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\make_move" />
@@ -265,7 +268,47 @@
       <option name="project" value="LOCAL" />
       <updated>1701394845355</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Committing changes from merging origin/SudokuDAO into main and fixing conflicts.">
+      <option name="closed" value="true" />
+      <created>1701407183989</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1701407183989</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Committing changes from merging">
+      <option name="closed" value="true" />
+      <created>1701461197349</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1701461197349</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Committing BoardView">
+      <option name="closed" value="true" />
+      <created>1701462243447</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1701462243447</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Committing BoardView">
+      <option name="closed" value="true" />
+      <created>1701462359235</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1701462359235</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo">
+      <option name="closed" value="true" />
+      <created>1701475524871</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1701475524871</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,7 +371,13 @@
     <MESSAGE value="added tests for UserDAO and deleted some non-useful methods in the class" />
     <MESSAGE value="Fixed the bug in the NewGame use case." />
     <MESSAGE value="deleted EasyGameView.java and added a button to pop-up rules." />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted EasyGameView.java and added a button to pop-up rules." />
+    <MESSAGE value="committing changes from resolving conflicts for SpotifyTrackPlayer" />
+    <MESSAGE value="Committing changes from merging origin/SudokuDAO into main and fixing conflicts." />
+    <MESSAGE value="Cleaned up the BoardView and re-aligned calling a new game with new functionality" />
+    <MESSAGE value="Committing changes from merging" />
+    <MESSAGE value="Committing BoardView" />
+    <MESSAGE value="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -345,10 +394,10 @@
           <properties class="java.lang.RuntimeException" package="java.lang" />
           <option name="timeStamp" value="42" />
         </breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/BoardView.java</url>
-          <line>368</line>
-          <option name="timeStamp" value="52" />
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/StartView.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="60" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

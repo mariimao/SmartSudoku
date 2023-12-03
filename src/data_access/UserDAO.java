@@ -223,6 +223,26 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     }
 
     @Override
+    public boolean setFinalGame(User user) {
+        String name = user.getName();
+        GameState finalGame = user.getFinalGame();
+
+        Bson filter = Filters.eq("name", name);   // Creating a filter
+        Bson updateGameState = Updates.set("finalgame", finalGame.toStringPause());    // Creating an update for the game state
+        UpdateResult resultGameState = this.userCollection.updateOne(filter, updateGameState);   // Performing the update for the game state
+
+        List<String> finalGamePastStates = new ArrayList<>();
+        for (GameState state : finalGame.getPastStates()) {
+            String value = state.getCurrBoard().toStringPause();
+            finalGamePastStates.add(value);
+        }
+        Bson updateFinalGames = Updates.set("finalGamePastBoards", finalGamePastStates);   // Creating an update for the past games
+        UpdateResult resultFinalGames = this.userCollection.updateOne(filter, updateFinalGames);   // Performing the update for the past games
+        accounts.put(name, user);
+
+        return accounts.get(user.getName()).getFinalGame() == finalGame;
+    }
+
     public boolean setProgress(User user) {
         // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
         // returns true if game was paused successfully and false otherwise
@@ -260,19 +280,3 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return null;
     }
 }
-
-
-/*
-  Temporary
-  GUIDES/DOCUMENTATION:
-  https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html
-  https://www.mongodb.com/products/tools/compass
-  https://www.mongodb.com/developer/languages/java/java-setup-crud-operations/#delete-documents
-  https://www.baeldung.com/java-mongodb
-  https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
-
-  https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
-  https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
-  https://www.slf4j.org/codes.html#StaticLoggerBinder
-  https://stackoverflow.com/questions/23775906/maven-dependency-and-logging-slf4j-and-log4j
- */

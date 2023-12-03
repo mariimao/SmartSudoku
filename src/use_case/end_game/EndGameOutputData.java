@@ -1,16 +1,18 @@
 package use_case.end_game;
 
+import entity.Scores;
+import entity.board.GameState;
 import entity.user.User;
 
 public class EndGameOutputData {
-    private final User user;
+    private final String user;
     private final int score;
 
-    public EndGameOutputData(User user, int score) {
+    public EndGameOutputData(String user, int score) {
 
         this.user = user;
         this.score = score;
     }
     public int getScore() {return score;}
-    public User getUser() {return user;}
+    public String getUser() {return user;}
 }

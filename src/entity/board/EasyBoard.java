@@ -158,7 +158,6 @@ public class EasyBoard implements Board {
         // Checking if the row is okay
         for (int item : possibleValues[x]) {
             if (value == item) {
-                System.out.println("value: " + value + " item: " + item);
                 return true;
             }
         }
@@ -389,6 +388,19 @@ public class EasyBoard implements Board {
             }
         }
         return true;
+    }
+
+    public int spacesLeft() {
+    int spacesCount = 0;
+        for (int row = 0; row < 4; row++) {
+            for (int col = 0; col < 4; col++) {
+                HashMap<Integer, Boolean> position = currBoard[row][col];
+                if (position == null || position.isEmpty()) {
+                    spacesCount++;
+            }
+        }
+    }
+        return spacesCount;
     }
 
     /* ----- Getters and setters ----- */

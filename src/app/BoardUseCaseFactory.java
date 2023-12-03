@@ -37,9 +37,28 @@ import view.PausedGameView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Use case factory for the Board state.
+ * This class creates the data for the views in a BoardView object, which are the pause game state,
+ * end game state, play game state, and make move state.
+ */
 public class BoardUseCaseFactory {
+    /** Prevent instantiation. */
     private BoardUseCaseFactory(){}
 
+    /**
+     * Creates a new BoardView object.
+     * @param viewManagerModel is a new ViewManagerModel object
+     * @param easyGameViewModel is a new EasyGameViewModel object
+     * @param pauseGameViewModel is a new PauseGameViewModel object
+     * @param endGameViewModel is a new EndGameViewModel object
+     * @param leaderboardViewModel is a new LeaderboardViewModel object
+     * @param menuViewModel is a new MenuViewModel object
+     * @param startViewModel is a new StartViewModel object
+     * @param playGameViewModel is a new PlayGameViewModel object
+     * @param userDataAccessObject is a new UserDataAccessObject
+     * @return BoardView object, with parameters for newly created relevant models and controllers
+     */
     public static BoardView create(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel,
                                    PauseGameViewModel pauseGameViewModel, EndGameViewModel endGameViewModel,
                                    LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,
@@ -56,6 +75,15 @@ public class BoardUseCaseFactory {
 
     }
 
+    /**
+     * Helper function for the BoardView constructor. Creates a new MakeMoveController object.
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param leaderboardViewModel is a LeaderboardViewModel object
+     * @param endGameViewModel is an EndGameViewModel object
+     * @param menuViewModel is a MenuViewModel object
+     * @param endGameDataAccessInterface is an EndGameDataAccessInterface object
+     * @return an EndGameController object, to be passed into the constructor
+     */
     private static EndGameController createUserEndGameUseCase(ViewManagerModel viewManagerModel,
                                                               LeaderboardViewModel leaderboardViewModel,
                                                               EndGameViewModel endGameViewModel,
@@ -66,6 +94,15 @@ public class BoardUseCaseFactory {
         return new EndGameController(endGameInteractor);
     }
 
+    /**
+     * Helper function for the BoardView constructor. Creates a new PauseGameController object.
+     * @param startViewModel is a StartViewModel object
+     * @param menuViewModel is a MenuViewModel object
+     * @param pauseGameViewModel is a PauseGameViewModel object
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param pauseGameDataAccessInterface is a PauseGameDataAccessInterface object
+     * @return a PauseGameController object, to be passed into the constructor
+     */
     private static PauseGameController createUserPauseUseCase(StartViewModel startViewModel, MenuViewModel menuViewModel,
                                                               PauseGameViewModel pauseGameViewModel,
                                                               ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface) {
@@ -74,15 +111,30 @@ public class BoardUseCaseFactory {
         return new PauseGameController(pauseGameInteractor);
     }
 
+    /**
+     * Helper function for the BoardView constructor. Creates a new EasyGameController object.
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param easyGameViewModel is an EasyGameViewModel object
+     * @param userMoveDataAccessInterface is a UserMoveDataAccessInterface object
+     * @param endGameViewModel is an EndGameViewModel object
+     * @return an EasyGameController object, to be passed into the constructor
+     */
     private static EasyGameController createUserEasyGameUseCase(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel, UserMoveDataAccessInterface userMoveDataAccessInterface, UserMoveBoardDataAccessInterface userMoveBoardDataAccessInterface, EndGameViewModel endGameViewModel) {
         EasyGamePresenter easyGamePresenter = new EasyGamePresenter(viewManagerModel, easyGameViewModel, endGameViewModel);
         UserMoveInteractor userMoveInteractor = new UserMoveInteractor(userMoveDataAccessInterface, userMoveBoardDataAccessInterface, easyGamePresenter);
         return new EasyGameController(userMoveInteractor);
     }
 
+    /**
+     * Helper function for the BoardView constructor. Creates a new PlayGameController object.
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param playGameViewModel is a PlayGameViewModel object
+     * @param playGameDataAccessInterface is a PlayGameDataAccessInterface object
+     * @return a PlayGameController object, to be passed into the constructor
+     */
     private static PlayGameController createUserPlayGameUseCase(ViewManagerModel viewManagerModel,
-                                                           PlayGameViewModel playGameViewModel,
-                                                           PlayGameDataAccessInterface playGameDataAccessInterface) {
+                                                                PlayGameViewModel playGameViewModel,
+                                                                PlayGameDataAccessInterface playGameDataAccessInterface) {
         PlayGamePresenter playGamePresenter = new PlayGamePresenter(playGameViewModel, viewManagerModel);
         PlayGameInputBoundary playGameInteractor = new PlayGameInteractor(playGameDataAccessInterface, playGamePresenter);
         return new PlayGameController(playGameInteractor);
