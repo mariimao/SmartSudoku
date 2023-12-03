@@ -1,3 +1,5 @@
+package entity.board;
+
 import entity.board.HardBoard;
 import org.junit.After;
 import org.junit.Before;
@@ -9,7 +11,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class HardBoardTest implements BoardTest{
+public class HardBoardTest {
     private HardBoard hardBoard;
     private int[][] solutionBoard;
     HashMap<Integer, Boolean>[][] currBoard;

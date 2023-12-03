@@ -1,3 +1,5 @@
+package entity.board;
+
 import entity.board.EasyBoard;
 import entity.board.EasyBoardFactory;
 import org.junit.After;
@@ -10,7 +12,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class EasyBoardTest implements BoardTest{
+public class EasyBoardTest {
     private EasyBoard easyBoard;
     private EasyBoard easyBoard2;
     private int[][] solutionBoard;
