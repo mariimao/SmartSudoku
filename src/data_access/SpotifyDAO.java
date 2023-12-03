@@ -23,9 +23,8 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
     private static final String CLIENT_SECRET = "d99a71ede58b40179cf0946792c7123f";
     private final String client_id;
     private final String client_secret;
-
-    private String current_token;
     private final String refresh_token;
+    private String current_token;
 
     /**
      * Initializes a new SpotifyDAO object.
@@ -268,6 +267,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
     /**
      * Gets the song playback
+     *
      * @param id the song identification
      */
     public void getPlayback(String id) {

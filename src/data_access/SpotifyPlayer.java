@@ -15,18 +15,20 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
 
     /**
      * Constructor for spotify player
+     *
      * @param spotifyDAO is the spotify data access object, it gets song data
      */
-    public SpotifyPlayer (SpotifyDAO spotifyDAO) {
+    public SpotifyPlayer(SpotifyDAO spotifyDAO) {
 
         this.token = spotifyDAO.getApiToken();
     }
 
     /**
      * Plays the music
+     *
      * @param album_id the album identification
      * @param position position in the album
-     * @param device the device the song will play on
+     * @param device   the device the song will play on
      */
     public void play(String album_id, String position, String device) {
         // Just for testing api calling
@@ -34,9 +36,9 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
                 .build();
         // Testing String
         String jsonBody = "{\n" +
-                "    \"context_uri\": \"spotify:album:"+album_id+"\",\n" +
+                "    \"context_uri\": \"spotify:album:" + album_id + "\",\n" +
                 "    \"offset\": {\n" +
-                "        \"position\": "+position+ "\n" +
+                "        \"position\": " + position + "\n" +
                 "    },\n" +
                 "    \"position_ms\": 0\n" +
                 "}";
@@ -59,6 +61,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
 
     /**
      * Pauses current song playing
+     *
      * @param device the device the song is playing on
      */
     public void pause(String device) {
@@ -84,6 +87,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
 
     /**
      * Changes the volume
+     *
      * @param percent the percentage for volume.
      */
     public void setVolume(int percent) {
@@ -92,7 +96,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
                 .build();
         // Testing String
         Request request = new Request.Builder()
-                .url("https://api.spotify.com/v1/me/player/volume?volume_percent="+percent) // might need to cast
+                .url("https://api.spotify.com/v1/me/player/volume?volume_percent=" + percent) // might need to cast
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .addHeader("Authorization", "Bearer " + (this.token))
                 .build();
@@ -126,7 +130,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
             JSONObject responseBody = new JSONObject(responseString);
             JSONArray items = responseBody.getJSONArray("devices");
 
-            for (int i = 0; i < items.length(); i++ ) {
+            for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.getJSONObject(i);
                 String id = item.getString("id");
                 devicesID.add(id);
@@ -140,6 +144,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
 
     /**
      * Sets the device tha the song is played on
+     *
      * @param deviceID the device identification
      */
     public void setDevice(String deviceID) {
@@ -148,7 +153,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         // Testing String
         String jsonBody = "{\n" +
                 "    \"device_ids\": [\n" +
-                "        \""+deviceID+"\"\n" +
+                "        \"" + deviceID + "\"\n" +
                 "    ]\n" +
                 "}'";
         RequestBody requestBody = RequestBody.create(MediaType.get("application/x-www-form-urlencoded"), jsonBody);

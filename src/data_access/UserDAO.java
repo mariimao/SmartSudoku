@@ -1,24 +1,17 @@
 package data_access;
 
-import java.time.LocalTime;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.mongodb.MongoException;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 import com.mongodb.client.result.UpdateResult;
-import entity.board.Board;
-import entity.user.*;
-import entity.board.EasyBoard;
 import entity.board.GameState;
-import entity.board.HardBoard;
+import entity.user.User;
+import entity.user.UserFactory;
 import org.bson.Document;
 import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
-
 import use_case.end_game.EndGameDataAccessInterface;
 import use_case.leaderboard.LeaderboardDataAccessInterface;
 import use_case.login.LoginUserDataAccessInterface;
@@ -32,61 +25,40 @@ import use_case.signup.SignupUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
 import use_case.user_move.UserMoveDataAccessInterface;
 
+import java.time.LocalTime;
+import java.util.*;
+
 import static com.mongodb.client.model.Filters.eq;
-import static com.mongodb.client.model.Filters.regex;
 
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
-                                SignupUserDataAccessInterface, LoginUserDataAccessInterface, MenuUserDataAccessInterface,
-                                NewGameDataAccessInterface, LeaderboardDataAccessInterface, UserMoveDataAccessInterface,
-                                EndGameDataAccessInterface, PlayGameDataAccessInterface, MakeMoveDataAccessInterface {
-    public static void main(String[] args) {
-
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF); //FOR LOGGER
-
-        // TODO: DELETE MAIN, Just for testing this file
-
-        // made sample scores, boards, and users
-        Map<LocalTime, Integer> scores1 = new HashMap<>();
-        scores1.put(LocalTime.now(), 4);
-        scores1.put(LocalTime.of(12, 30, 1), 3);
-        Map<LocalTime, Integer> scores2 = new HashMap<>();
-        scores2.put(LocalTime.now(), 2);
-        scores2.put(LocalTime.of(12, 30, 1), 1);
-        EasyBoard easyBoard = new EasyBoard();
-        HardBoard hardBoard = new HardBoard();
-        CommonUser u1 = new CommonUser("u1", "p1", scores1);
-        CommonUser u2 = new CommonUser("u2", "p2", scores2);
-
-        // adding the users to a DAO
-        UserDAO userDAO;
-        try {
-            userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                    "smartsudoku", "user", new CommonUserFactory());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-        userDAO.addUser(u1);
-        userDAO.addUser(u2);
-
-        userDAO.accounts.forEach((key, value) -> {
-            System.out.println("Username: " + key + "Password: " + value.getPassword() + "Scores: " + value.getScores() + "Paused Game: " + value.getPausedGame());
-        });
-
-    }
+        SignupUserDataAccessInterface, LoginUserDataAccessInterface, MenuUserDataAccessInterface,
+        NewGameDataAccessInterface, LeaderboardDataAccessInterface, UserMoveDataAccessInterface,
+        EndGameDataAccessInterface, PlayGameDataAccessInterface, MakeMoveDataAccessInterface {
 
     private final MongoCollection<Document> userCollection;
-    private final Map<String, User> accounts = new HashMap<>();
-    private UserFactory userFactory;
+    private final Map<String, User> accounts = new HashMap<>(); // a map of usernames to the associated User object
+    private final UserFactory userFactory;
 
+    /**
+     * Initializes the userdao.
+     *
+     * @param uri         the uri of the mongoclient
+     * @param database    the name of the database
+     * @param collection  the collection name
+     * @param userFactory
+     * @throws Exception
+     */
     public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception {
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
-        //TODO: add a try catch statement
-        // exception: https://mongodb.github.io/mongo-csharp-driver/2.6/apidocs/html/T_MongoDB_Driver_MongoException.htm
-        this.userCollection = MongoClients.create(uri)
-                .getDatabase(database)
-                .getCollection(collection);
+        try {
+            this.userCollection = MongoClients.create(uri)
+                    .getDatabase(database)
+                    .getCollection(collection);
+        } catch (MongoException e) {
+            throw new MongoException("Could not get database");
+        }
 
         // gets info from mongo and creates account object
         // creates list of accounts (in document form)
@@ -110,7 +82,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                     int lives = Integer.parseInt(gameAsArray[2]);
 
                     // creates a LinkedList of past game states from data stored in mongoDB
-                    List<String> pausedGamePastBoards = (List<String>) account.get("pausedGamePastBoards");  // ignore the warning userDOc.get("pausedGamePastBoards" will always be able tp cast)
+                    List<String> pausedGamePastBoards = (List<String>) account.get("pausedGamePastBoards");
+                    // ignore the warning userDOc.get("pausedGamePastBoards" will always be able tp cast)
                     LinkedList<GameState> pauseGameStates = new LinkedList<>();
                     for (String values : pausedGamePastBoards) {
                         GameState tempState = new GameState(difficulty);
@@ -146,12 +119,21 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     }
 
 
+    /**
+     * adds a new user
+     *
+     * @param user is a User type
+     */
     public void addUser(User user) {
         accounts.put(user.getName(), user);
         this.addUser();
     }
 
-    private void addUser() { //does NOT add it name is already in database
+    /**
+     * adds users to the MongoDB database based on the accounts map.
+     * Does not add if the name of a user is in the database
+     */
+    private void addUser() {
         for (User user : accounts.values()) {
             String name = user.getName();
             String password = user.getPassword();
@@ -182,19 +164,39 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
+    /**
+     * Checks if the name appears in the accounts map
+     *
+     * @param name the name we want to check
+     * @return true if it does appear
+     */
     public boolean existsByName(String name) {
         return accounts.containsKey(name);
     }
 
+    /**
+     * returns the user based off the name
+     *
+     * @param username the username we want to look for
+     * @return the user
+     */
     @Override
     public User get(String username) {
         return accounts.get(username);
     }
 
+    /**
+     * @return the accounts map
+     */
     public Map<String, User> getAccounts() {
         return accounts;
     }
 
+    /**
+     * deletes the user from accounts
+     *
+     * @param name the username we want to delete
+     */
     public void delete(String name) {
         this.userCollection.deleteOne(eq("name", name));
         // below is alternative method that returns info of the deleted user
@@ -202,27 +204,52 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         accounts.remove(name);
     }
 
+    /**
+     * deletes all user from database and accounts map
+     */
     public void deleteAll() {
         this.userCollection.deleteMany(new Document());
         accounts.clear();
     }
 
+    /**
+     * adds a score to the user
+     *
+     * @param user  the user who achieved the score
+     * @param time  the time they completed it
+     * @param score the score they achieved
+     */
     public void addScore(User user, LocalTime time, Integer score) {
         accounts.get(user.getName()).addScores(time, score);
         this.changeScores(user);
     }
 
+    /**
+     * updates the user in the database to include their new score
+     *
+     * @param user
+     */
     private void changeScores(User user) {
         this.userCollection.findOneAndUpdate(
                 eq("name", user.getName()), //find by name
                 eq("scores", user.getScores())); //update score
     }
 
+    /**
+     * string representation of accounts
+     *
+     * @return a string
+     */
     public String toString() {
         return accounts.toString();
     }
 
-    @Override
+    /**
+     * sets the final game
+     *
+     * @param user
+     * @return
+     */
     public boolean setFinalGame(User user) {
         String name = user.getName();
         GameState finalGame = user.getFinalGame();
@@ -243,9 +270,14 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return accounts.get(user.getName()).getFinalGame() == finalGame;
     }
 
+    /**
+     * Sets the progress of the user.
+     * ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
+     *
+     * @param user
+     * @return true if game was paused successfully and false otherwise
+     */
     public boolean setProgress(User user) {
-        // ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
-        // returns true if game was paused successfully and false otherwise
         String name = user.getName();
         GameState pausedGame = user.getPausedGame();
 
@@ -265,6 +297,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return accounts.get(user.getName()).getPausedGame() == pausedGame;
     }
 
+    /**
+     * gets the progress of the user
+     *
+     * @param userName name of the user
+     * @return gameState
+     */
     public GameState getProgress(String userName) {
         // return the game state in account that corresponds to this
         if (accounts.containsKey(userName)) {
@@ -275,6 +313,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
+    /**
+     * The state of the game TODO: implement
+     *
+     * @param gameState
+     * @return
+     */
     @Override
     public GameState saveBoard(GameState gameState) {
         return null;
