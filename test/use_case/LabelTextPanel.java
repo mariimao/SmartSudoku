@@ -1,8 +1,8 @@
-package view;
+package use_case;
 
 import javax.swing.*;
 
-public class LabelTextPanel extends JPanel {
+class LabelTextPanel extends JPanel {
     LabelTextPanel(JLabel label, JTextField textField) {
         this.add(label);
         this.add(textField);

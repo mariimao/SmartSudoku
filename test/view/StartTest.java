@@ -1,12 +1,9 @@
-package use_case;
+package view;
 
 import app.Main;
 import app.StartUseCaseFactory;
 import database.UserDAOTest;
 import use_case.UseCaseTestObjects;
-import view.LoginView;
-import view.SignupView;
-import view.StartView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +11,6 @@ import java.awt.*;
 import static org.junit.Assert.assertNotNull;
 
 public class StartTest {
-
     public JPanel getStartViewLabels() {
         JFrame app = null;
         Window[] windows = Window.getWindows();

@@ -1,6 +1,5 @@
 package view;
 
-import interface_adapter.login.LoginViewModel;
 import interface_adapter.signup.SignupController;
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
@@ -140,14 +139,10 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
                     }
 
                     @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
+                    public void keyPressed(KeyEvent e) {}
 
                     @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
+                    public void keyReleased(KeyEvent e) {}
                 }
         );
 
@@ -162,14 +157,10 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
                     }
 
                     @Override
-                    public void keyPressed(KeyEvent e) {
-
-                    }
+                    public void keyPressed(KeyEvent e) {}
 
                     @Override
-                    public void keyReleased(KeyEvent e) {
-
-                    }
+                    public void keyReleased(KeyEvent e) {}
                 }
         );
 
@@ -200,9 +191,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }
+    public void actionPerformed(ActionEvent e) {}
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {

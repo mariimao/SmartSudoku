@@ -1,20 +1,36 @@
 package use_case;
 
+import app.Main;
+import app.SignupUseCaseFactory;
+import app.StartUseCaseFactory;
 import data_access.UserDAO;
+import entity.board.EasyBoard;
+import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import entity.user.UserFactory;
+import interface_adapter.signup.SignupController;
+import interface_adapter.signup.SignupPresenter;
+import interface_adapter.signup.SignupViewModel;
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import use_case.signup.*;
+import view.SignupView;
+import view.StartView;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
 import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SigninTest {
-
+public class SignupTest {
     SignupUserDataAccessInterface userDataBase;
 
     @Test

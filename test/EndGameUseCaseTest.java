@@ -4,13 +4,9 @@ import database.UserDAOTest;
 import interface_adapter.end_game.EndGamePresenter;
 import org.junit.Before;
 import org.junit.Test;
+import use_case.UseCaseTestObjects;
 import use_case.end_game.EndGameInteractor;
 import view.EndGameView;
-
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static org.junit.Assert.*;
 
 public class EndGameUseCaseTest {
 
