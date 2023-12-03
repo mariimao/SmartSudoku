@@ -55,13 +55,9 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
-        try {
-            this.userCollection = MongoClients.create(uri)
-                    .getDatabase(database)
-                    .getCollection(collection);
-        } catch (MongoException e) {
-            throw new MongoException("Could not get database");
-        }
+        this.userCollection = MongoClients.create(uri)
+                .getDatabase(database)
+                .getCollection(collection);
 
         // gets info from mongo and creates account object
         // creates list of accounts (in document form)
@@ -107,7 +103,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
 
                 if (stringScores == null) {
-                    scores.put(LocalTime.now(), 0); //TODO: may need to change
+                    scores.put(LocalTime.now(), 0);
                 } else {
                     for (String time : stringScores.keySet()) {
                         scores.put(LocalTime.parse(time), scores.get(time));

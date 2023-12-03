@@ -61,8 +61,6 @@ public class MenuUseCaseFactory {
             LeaderboardViewModel leaderboardViewModel, PlayGameViewModel playGameViewModel) {
 
         try {
-            // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
-
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
             ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject, playGameViewModel);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);

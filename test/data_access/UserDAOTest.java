@@ -35,14 +35,6 @@ public class UserDAOTest {
     }
 
     @Test
-    void testMongoException() throws Exception {
-        UserDAO userdao = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                "b", "c", null);
-        ExpectedException expectedException = ExpectedException.none();
-        expectedException.expect(MongoException.class);
-    }
-
-    @Test
     void testAddUser() {
         Map<LocalTime, Integer> scores = new HashMap<>();
         scores.put(LocalTime.now(), 4);
