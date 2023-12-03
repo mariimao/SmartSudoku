@@ -3,9 +3,6 @@ package app;
 import data_access.SpotifyDAO;
 import data_access.SudokuDAO;
 import data_access.UserDAO;
-import entity.user.CommonUser;
-import entity.board.EasyBoard;
-import entity.board.HardBoard;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.easy_game.EasyGameViewModel;
@@ -20,15 +17,11 @@ import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyViewModel;
-import interface_adapter.start.StartController;
 import interface_adapter.start.StartViewModel;
 import view.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -105,14 +98,14 @@ public class Main {
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel, userDataAccessObject);
         views.add(pausedGameView, pausedGameView.viewName);
 
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel, loginViewModel, spotifyViewModel, new SpotifyDAO() );
+        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel, loginViewModel, spotifyViewModel, new SpotifyDAO());
         views.add(newGameView, newGameViewModel.getViewName());
 
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
         BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject, boardDataAccessObject);
-       views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
+        views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
 
         EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel, startViewModel, signupViewModel, loginViewModel);
         views.add(endGameView, endGameViewModel.getViewName());
