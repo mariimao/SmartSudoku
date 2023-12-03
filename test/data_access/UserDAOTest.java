@@ -1,9 +1,7 @@
-package database;
+package data_access;
 
-import data_access.UserDAO;
 import entity.board.EasyBoard;
 import entity.board.GameState;
-import entity.board.HardBoard;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
 import org.junit.jupiter.api.AfterEach;

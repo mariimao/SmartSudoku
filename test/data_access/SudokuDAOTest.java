@@ -1,6 +1,5 @@
-package database;
+package data_access;
 
-import data_access.SudokuDAO;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -8,7 +7,7 @@ import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
 
-public class SudokuAPITest {
+public class SudokuDAOTest {
 
     private SudokuDAO sudokuDAO;
     @Before
