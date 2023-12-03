@@ -1,6 +1,5 @@
-package database;
+package data_access;
 
-import data_access.SpotifyDAO;
 import org.junit.Before;
 import org.junit.Test;
 

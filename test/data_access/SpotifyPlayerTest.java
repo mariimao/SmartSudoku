@@ -1,7 +1,5 @@
-package database;
+package data_access;
 
-import data_access.SpotifyDAO;
-import data_access.SpotifyPlayer;
 import org.junit.Before;
 import org.junit.Test;
 

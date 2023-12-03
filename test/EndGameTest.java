@@ -1,6 +1,6 @@
 import app.EndGameUseCaseFactory;
 import data_access.UserDAO;
-import database.UserDAOTest;
+import data_access.UserDAOTest;
 import interface_adapter.end_game.EndGamePresenter;
 import org.junit.Before;
 import org.junit.Test;
