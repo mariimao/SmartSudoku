@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Objects;
 
+/**
+ * A data access object for spotify making use of the spotify API
+ */
 public class SpotifyDAO implements SpotifyDataAccessInterface {
 
 

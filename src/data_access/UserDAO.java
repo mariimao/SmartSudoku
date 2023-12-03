@@ -30,6 +30,9 @@ import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
 
+/**
+ * The user data access object. Retrieves data from MongoDB and creates map containing information about the users.
+ */
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
         SignupUserDataAccessInterface, LoginUserDataAccessInterface, MenuUserDataAccessInterface,
         NewGameDataAccessInterface, LeaderboardDataAccessInterface, UserMoveDataAccessInterface,

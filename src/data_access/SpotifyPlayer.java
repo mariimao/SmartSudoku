@@ -9,6 +9,9 @@ import use_case.startplayer.StartPlayerDataAccessInterface;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * A data access object for getting the playback of spotify songs
+ */
 public class SpotifyPlayer implements StartPlayerDataAccessInterface {
 
     private final String token;

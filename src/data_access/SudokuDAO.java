@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -17,14 +18,13 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     /**
      * Helper function for encoding board
-     *
      * @param board a 2-dimensional array of int
      * @return a string
      */
     private static String encodeBoardHelper(int[][] board) {
         StringBuilder result = new StringBuilder();
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board[i].length; j++) {
+        for (int i = 0; i < board.length; i ++) {
+            for (int j = 0; j < board[i].length; j ++ ) {
                 result.append(URLEncoder.encode(Integer.toString(board[i][j]), StandardCharsets.UTF_8));
                 if (j < board[i].length - 1) {
                     result.append("%2C");
@@ -38,14 +38,15 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
     }
 
     /**
+     *
      * @param input
      * @return
      */
     private static String encoder(Map<String, int[][]> input) {
         StringBuilder result = new StringBuilder();
-        for (Map.Entry<String, int[][]> entry : input.entrySet()) {
+        for (Map.Entry<String, int[][]> entry: input.entrySet()) {
             String key = entry.getKey();
-            int[][] board = entry.getValue();
+            int [][] board = entry.getValue();
 
             result.append(key).append("=").append("%5B%5B");
             result.append(encodeBoardHelper(board));
@@ -56,7 +57,6 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     /**
      * tests if there is a valid encoder
-     *
      * @param s1
      * @param s2
      * @return
@@ -82,7 +82,6 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     /**
      * converts the string to a 2-dimensional array
-     *
      * @param grid the string
      * @return a 2-dimensional array that represents the board
      */
@@ -96,7 +95,7 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
             }
         }
         int k = 0;
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 9; i++){
             for (int j = 0; j < 9; j++) {
                 int input = newList.get(k);
                 boardlist[i][j] = input;
@@ -107,10 +106,61 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
     }
 
     /**
+     * Converts the current board into an int array. This is ONLY for hard board.
+     * @param currBoard
+     * @return a 2-dimensional array
+     */
+    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
+        int rows = 9;
+        int cols = 9;
+
+        int[][] convertedArray = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
+                    int value = currBoard[i][j].keySet().iterator().next();
+                    convertedArray[i][j] = value;
+                } else {
+                    convertedArray[i][j] = 0;
+                }
+            }
+        }
+
+        return convertedArray;
+    }
+
+    /**
+     * Converts the current board into a hashmap. This is ONLY for hard board.
+     * @param currBoard
+     * @return a hashmap of the numbers and if they are empty or not
+     */
+    public HashMap<Integer, Boolean>[][] convertToHashMap (int [][]  currBoard) {
+        // for hard board only
+        int rows = 9;
+        int cols = 9;
+
+        HashMap<Integer, Boolean>[][] convertedHashmap;
+        convertedHashmap = new HashMap[9][9];
+
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (currBoard[i][j] != 0) { // if spot isn't empty
+                    HashMap<Integer, Boolean> value = new HashMap();
+                    value.put(currBoard[i][j], false);
+                    convertedHashmap[i][j] = value;
+                }
+            }
+        }
+
+        return convertedHashmap;
+    }
+
+    /**
      * Inputs a correct move into the current board
-     *
-     * @param current_grid  the current board
-     * @param solution      the current solution to the board
+     * @param current_grid the current board
+     * @param solution the current solution to the board
      * @param correct_moves the possible correct moves for the user
      * @return a new board with the correct move inside
      */
@@ -134,62 +184,7 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
     }
 
     /**
-     * Converts the current board into an int array. This is ONLY for hard board.
-     *
-     * @param currBoard
-     * @return a 2-dimensional array
-     */
-    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][] currBoard) {
-        int rows = 9;
-        int cols = 9;
-
-        int[][] convertedArray = new int[rows][cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
-                    int value = currBoard[i][j].keySet().iterator().next();
-                    convertedArray[i][j] = value;
-                } else {
-                    convertedArray[i][j] = 0;
-                }
-            }
-        }
-
-        return convertedArray;
-    }
-
-    /**
-     * Converts the current board into a hashmap. This is ONLY for hard board.
-     *
-     * @param currBoard
-     * @return a hashmap of the numbers and if they are empty or not
-     */
-    public HashMap<Integer, Boolean>[][] convertToHashMap(int[][] currBoard) {
-        // for hard board only
-        int rows = 9;
-        int cols = 9;
-
-        HashMap<Integer, Boolean>[][] convertedHashmap;
-        convertedHashmap = new HashMap[9][9];
-
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (currBoard[i][j] != 0) { // if spot isn't empty
-                    HashMap<Integer, Boolean> value = new HashMap();
-                    value.put(currBoard[i][j], false);
-                    convertedHashmap[i][j] = value;
-                }
-            }
-        }
-
-        return convertedHashmap;
-    }
-
-    /**
      * Generates a new board with n number of additional square prefilled
-     *
      * @param number_correct_moves the number of moves to fill
      * @return a 2-dimensional array representing the board
      */
@@ -211,7 +206,8 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
             if (number_correct_moves == 0) {
                 return result;
-            } else {
+            }
+            else {
                 return insertCorrectMoves(result, solution, number_correct_moves);
             }
 
@@ -223,11 +219,10 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     /**
      * generates the solutions using the sudoku api
-     *
      * @param board the current board
      * @return a string representing the solutions
      */
-    public String generateSolution(int[][] board) {
+    public String generateSolution(int [][] board) {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         Map<String, int[][]> input = new HashMap<>();
@@ -254,7 +249,6 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     /**
      * verifies if the board is solvable and follows the rules
-     *
      * @param board the current board
      * @return true if it is valid or not
      */
@@ -265,7 +259,7 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
         Map<String, int[][]> input = new HashMap<>();
         input.put("board", board);
         String testinput = encoder(input);
-        RequestBody body = RequestBody.create(mediaType, testinput);
+        RequestBody body = RequestBody.create(mediaType, testinput) ;
         //RequestBody body = RequestBody.create(mediaType, Arrays.toString(test));
         Request request = new Request.Builder()
                 .url("https://sugoku.onrender.com/solve")
@@ -278,11 +272,52 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
             String responseString = response.body().string();
             JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-            // means input is false
-            return !responseBody.get("status").equals("unsolvable");
+            if (responseBody.get("status").equals("unsolvable")) {
+                // means input is false
+                return false;
+            }
+            return true;
 
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
     }
+
+    public static void main(String[] args) {
+        // TESTING API CALLS
+        SudokuDAO sudokuDAO = new SudokuDAO();
+        // should be true
+        int [][] board = {
+                {0,0,0,0,0,0,8,0,0},
+                {0,0,4,0,0,8,0,0,9},
+                {0,7,0,0,0,0,0,0,5},
+                {0,1,0,0,7,5,0,0,8},
+                {0,5,6,0,9,1,3,0,0},
+                {7,8,0,0,0,0,0,0,0},
+                {0,2,0,0,0,0,0,0,0},
+                {0,0,0,9,3,0,0,1,0},
+                {0,0,5,7,0,0,4,0,3}
+        };
+        //System.out.println(sudokuDAO.verifyBoard(board));
+        //should be false
+        int [][] board2 = {
+                {0,0,0,0,0,0,8,8,0},
+                {0,0,4,0,0,8,0,0,9},
+                {0,7,0,0,0,0,0,0,5},
+                {0,1,0,0,7,5,0,0,8},
+                {0,5,6,0,9,1,3,0,0},
+                {7,8,0,0,0,0,0,0,0},
+                {0,2,0,0,0,0,0,0,0},
+                {0,0,0,9,3,0,0,1,0},
+                {0,0,5,7,0,0,4,0,3}
+        };
+        //System.out.println(sudokuDAO.verifyBoard(board2));
+        System.out.println(sudokuDAO.generateBoard(2));
+        //System.out.println(Arrays.deepToString(board2));
+        //System.out.println(sudokuDAO.generateBoard(2));
+        System.out.println(Arrays.deepToString(board2));
+        //System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
+    }
+
+
 }
