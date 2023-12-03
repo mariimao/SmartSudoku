@@ -5,6 +5,7 @@ import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
+import entity.user.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.easy_game.EasyGameController;
 import interface_adapter.easy_game.EasyGameState;
@@ -31,8 +32,10 @@ import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyViewModel;
 import interface_adapter.start.StartViewModel;
 import use_case.end_game.EndGameInteractor;
+import use_case.make_move.MakeMoveInputData;
 import use_case.make_move.MakeMoveInteractor;
 import use_case.pause_game.PauseGameInteractor;
+import use_case.user_move.UserMoveInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -43,6 +46,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -63,9 +67,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final EndGameViewModel endGameViewModel;
     private final EndGameController endGameController;
     private final PlayGameViewModel playGameViewModel;
-    private final MakeMoveViewModel makeMoveViewModel;
-    private final MakeMoveController makeMoveController;
-
     private static int size = 4;
     private final PlayGameState currentState;
     private final JLabel lives;
@@ -81,96 +82,98 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JTextField rowInputField = new JTextField(1);
     private final JTextField columnInputField = new JTextField(1);
     private final JTextField valueInputField = new JTextField(1);
+    private final MakeMoveController makeMoveController;
 
 
-    public static void main(String[] args) {
-        // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
-
-        // The main application window.
-        JFrame application = new JFrame("SudokuScramble");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        CardLayout cardLayout = new CardLayout();
-
-        // The various View objects. Only one view is visible at a time.
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
-        // This keeps track of and manages which view is currently showing.
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
-
-        // The data for the views, such as username and password, are in the ViewModels.
-        // This information will be changed by a presenter object that is reporting the
-        // results from the use case. The ViewModels are observable, and will
-        // be observed by the Views.
-        StartViewModel startViewModel = new StartViewModel();
-        LoginViewModel loginViewModel = new LoginViewModel();
-        SignupViewModel signupViewModel = new SignupViewModel();
-        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
-        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
-        MenuViewModel menuViewModel = new MenuViewModel();
-        NewGameViewModel newGameViewModel = new NewGameViewModel();
-        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
-        EndGameViewModel endGameViewModel = new EndGameViewModel();
-        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
-        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
-        MakeMoveViewModel makeMoveViewModel1 = new MakeMoveViewModel();
-
-
-        // testing userDAO
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-
-        UserDAO userDataAccessObject;
-        try {
-            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                    "smartsudoku", "user", new CommonUserFactory());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
-
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel1, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
-
-        // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel1);
-        views.add(menuView, menuView.viewName);
-
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel1, userDataAccessObject);
-        views.add(pausedGameView, pausedGameView.viewName);
-
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, loginViewModel, spotifyViewModel, new SpotifyDAO() );
-        views.add(newGameView, newGameViewModel.getViewName());
-
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-        views.add(leaderboardView, leaderboardViewModel.getViewName());
-
-        EndGameController endGameController1 = new EndGameController(new EndGameInteractor(userDataAccessObject, new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel)));
-        PauseGameController pauseGameController1 = new PauseGameController(new PauseGameInteractor(userDataAccessObject, new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel)));
-        MakeMoveController makeMoveController1 = new MakeMoveController(new MakeMoveInteractor(userDataAccessObject, new MakeMovePresenter(makeMoveViewModel1, viewManagerModel)));
-
-        BoardView boardView = new BoardView(pauseGameController1, pauseGameViewModel, endGameController1, endGameViewModel, playGameViewModel1, makeMoveViewModel1, makeMoveController1);
-        views.add(boardView, boardView.viewName);  // TODO: link neccessary views and viewmodels
-
-        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        // Build the main program window, the main panel containing the
+//        // various cards, and the layout, and stitch them together.
+//
+//        // The main application window.
+//        JFrame application = new JFrame("SudokuScramble");
+//        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//
+//        CardLayout cardLayout = new CardLayout();
+//
+//        // The various View objects. Only one view is visible at a time.
+//        JPanel views = new JPanel(cardLayout);
+//        application.add(views);
+//
+//        // This keeps track of and manages which view is currently showing.
+//        ViewManagerModel viewManagerModel = new ViewManagerModel();
+//        new ViewManager(views, cardLayout, viewManagerModel);
+//
+//        // The data for the views, such as username and password, are in the ViewModels.
+//        // This information will be changed by a presenter object that is reporting the
+//        // results from the use case. The ViewModels are observable, and will
+//        // be observed by the Views.
+//        StartViewModel startViewModel = new StartViewModel();
+//        LoginViewModel loginViewModel = new LoginViewModel();
+//        SignupViewModel signupViewModel = new SignupViewModel();
+//        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
+//        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
+//        MenuViewModel menuViewModel = new MenuViewModel();
+//        NewGameViewModel newGameViewModel = new NewGameViewModel();
+//        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
+//        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
+//        EndGameViewModel endGameViewModel = new EndGameViewModel();
+//        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
+//        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
+//        MakeMoveViewModel makeMoveViewModel1 = new MakeMoveViewModel();
+//
+//
+//        // testing userDAO
+//        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
+//
+//        UserDAO userDataAccessObject;
+//        try {
+//            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+//                    "smartsudoku", "user", new CommonUserFactory());
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
+//
+//        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+//        views.add(startView, startView.viewName);
+//
+//        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
+//        views.add(signupView, signupView.viewName);
+//
+//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel1, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
+//        views.add(loginView, loginView.viewName);
+//
+//        // TODO: Update this when you add more views
+//        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel1);
+//        views.add(menuView, menuView.viewName);
+//
+//        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel1, userDataAccessObject);
+//        views.add(pausedGameView, pausedGameView.viewName);
+//
+//        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, loginViewModel, spotifyViewModel, new SpotifyDAO() );
+//        views.add(newGameView, newGameViewModel.getViewName());
+//
+//        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
+//        views.add(leaderboardView, leaderboardViewModel.getViewName());
+//
+//        EndGameController endGameController1 = new EndGameController(new EndGameInteractor(userDataAccessObject, new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel)));
+//        PauseGameController pauseGameController1 = new PauseGameController(new PauseGameInteractor(userDataAccessObject, new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel)));
+//        MakeMoveController makeMoveController1 = new MakeMoveController(new MakeMoveInteractor(userDataAccessObject, new MakeMovePresenter(makeMoveViewModel1, viewManagerModel)));
+//
+//        EasyGameController easyGameController1 = new EasyGameController(new UserMoveInteractor(userDataAccessObject, new));
+//
+//        BoardView boardView = new BoardView(easyGameViewModel, pauseGameController1, pauseGameViewModel, endGameController1, endGameViewModel, playGameViewModel1, makeMoveViewModel1, makeMoveController1);
+//        views.add(boardView, boardView.viewName);  // TODO: link neccessary views and viewmodels
+//
+//        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
+//        viewManagerModel.firePropertyChanged();
+//
+//        application.pack();
+//        application.setVisible(true);
+//    }
 
     public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController, PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
-                                 PlayGameViewModel playGameViewModel, MakeMoveViewModel makeMoveViewModel,
-                                 MakeMoveController makeMoveController) {
+                                 PlayGameViewModel playGameViewModel, MakeMoveController makeMoveController) {
         this.easyGameViewModel = easyGameViewModel;
         this.easyGameController = easyGameController;
         this.pauseGameController = pauseGameController;
@@ -178,7 +181,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.endGameController = endGameController;
         this.endGameViewModel = endGameViewModel;
         this.playGameViewModel = playGameViewModel;
-        this.makeMoveViewModel = makeMoveViewModel;
         this.makeMoveController = makeMoveController;
 
         playGameViewModel.addPropertyChangeListener(this);
@@ -452,13 +454,20 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
                                     // if everything is fine, update the view
                                     else {
-                                        // calling the controller to scramble the board
-                                        makeMoveController.execute(enteredNum, x, y, playGameViewModel.getState().getCurrentGame());
-                                        playGameViewModel.getState().setCurrentGame(makeMoveViewModel.getState().getGameBeingPlayed());
-
                                         // recreate the board based on the new scrambled board
                                         // ASSUMPTION: playgameviewmodel.getState.currentGame has been set to the new scrambled board
+
+                                        System.out.println("BoardView");
+                                        System.out.println(currentState.getCurrentGame().getCurrBoard());
+
+                                        System.out.println("BoardView solutions");
+                                        System.out.println(Arrays.deepToString(currentState.getCurrentGame().getCurrBoard().getSolutionBoard()));
+
+                                        currentState.setCurrentGame(makeMoveController.execute(Integer.parseInt(enteredNumber), x, y, currentState.getCurrentGame()));
+
                                         boardReset(buttons, timerLabel);
+
+
 
                                         if (playGameViewModel.getState().getCurrentGame().getCurrBoard().noSpacesLeft()) {
                                             JOptionPane.showMessageDialog(board, " Congratulations!!! You Solved The Puzzle!!!");
@@ -537,9 +546,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         board.revalidate();
         board.repaint();
         startPlaying.setVisible(false);
-        rowInfo.setVisible(true);
-        columnInfo.setVisible(true);
-        valueInfo.setVisible(true);
         buttons.setVisible(true);
         timer.setVisible(true);
         lives.setVisible(true);

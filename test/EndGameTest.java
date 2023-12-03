@@ -7,12 +7,7 @@ import org.junit.Test;
 import use_case.end_game.EndGameInteractor;
 import view.EndGameView;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import static org.junit.Assert.*;
-
-public class EndGameUseCaseTest {
+public class EndGameTest {
 
     private EndGameInteractor endGameInteractor;
     @Before

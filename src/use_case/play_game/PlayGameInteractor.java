@@ -16,6 +16,7 @@ public class PlayGameInteractor implements PlayGameInputBoundary {
     @Override
     public void execute(PlayGameInputData playGameInputData) {
         // if there is no User logged in, try again maybe take them back to login view
+
         User user = playGameDataAccessInterface.get(playGameInputData.getUsername());
         if (user == null) {playGamePresenter.prepareFailView("Error: No User is Logged In");}
         else {

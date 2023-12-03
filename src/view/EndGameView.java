@@ -151,9 +151,6 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
         PauseGameController pauseGameController1 = new PauseGameController(new PauseGameInteractor(userDataAccessObject, new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel)));
         MakeMoveController makeMoveController1 = new MakeMoveController(new MakeMoveInteractor(userDataAccessObject, new MakeMovePresenter(makeMoveViewModel1, viewManagerModel)));
 
-        BoardView boardView = new BoardView(pauseGameController1, pauseGameViewModel, endGameController1, endGameViewModel, playGameViewModel1, makeMoveViewModel1, makeMoveController1);
-        views.add(boardView, boardView.viewName);  // TODO: link neccessary views and viewmodels
-
         EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel, startViewModel, signupViewModel, loginViewModel);
         views.add(endGameView, endGameView.viewName);
 

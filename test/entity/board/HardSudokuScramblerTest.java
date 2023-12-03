@@ -1,3 +1,5 @@
+package entity.board;
+
 import entity.board.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,7 +10,7 @@ import java.util.Map;
 
 import static org.junit.Assert.*;
 
-public class HardSudokuScramblerTest implements SudokuScramblerTest {
+public class HardSudokuScramblerTest {
 
     private HardBoard hardBoard;
     private HardSudokuScrambler hardSudokuScrambler;

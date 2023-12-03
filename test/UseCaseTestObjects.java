@@ -21,8 +21,8 @@ import java.awt.*;
 
 public class UseCaseTestObjects {
 
-    private StartViewModel startViewModel;
-    private LoginViewModel loginViewModel;
+    private final StartViewModel startViewModel;
+    private final LoginViewModel loginViewModel;
     private EndGameViewModel endGameViewModel;
     private ViewManagerModel viewManagerModel;
     private SignupViewModel signupViewModel;
@@ -31,6 +31,10 @@ public class UseCaseTestObjects {
     private MenuViewModel menuViewModel;
     private NewGameViewModel newGameViewModel;
     private LeaderboardViewModel leaderboardViewModel;
+    private EasyGameViewModel easyGameViewModel;
+    private PlayGameViewModel playGameViewModel;
+    private SpotifyViewModel spotifyViewModel;
+    private MakeMoveViewModel makeMoveViewModel;
 
     public UseCaseTestObjects() {
         JFrame application = new JFrame("SudokuScramble");
@@ -52,11 +56,11 @@ public class UseCaseTestObjects {
         menuViewModel = new MenuViewModel();
         newGameViewModel = new NewGameViewModel();
         leaderboardViewModel = new LeaderboardViewModel();
-        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
+        easyGameViewModel = new EasyGameViewModel();
         endGameViewModel = new EndGameViewModel();
-        PlayGameViewModel playGameViewModel = new PlayGameViewModel();
-        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
-        MakeMoveViewModel makeMoveViewModel = new MakeMoveViewModel();
+        playGameViewModel = new PlayGameViewModel();
+        spotifyViewModel = new SpotifyViewModel();
+        makeMoveViewModel = new MakeMoveViewModel();
     }
 
     public StartViewModel getStartViewModel() {
@@ -97,5 +101,21 @@ public class UseCaseTestObjects {
 
     public NewGameViewModel getNewGameViewModel() {
         return newGameViewModel;
+    }
+
+    public EasyGameViewModel getEasyGameViewModel() {
+        return easyGameViewModel;
+    }
+
+    public MakeMoveViewModel getMakeMoveViewModel() {
+        return makeMoveViewModel;
+    }
+
+    public PlayGameViewModel getPlayGameViewModel() {
+        return playGameViewModel;
+    }
+
+    public SpotifyViewModel getSpotifyViewModel() {
+        return spotifyViewModel;
     }
 }

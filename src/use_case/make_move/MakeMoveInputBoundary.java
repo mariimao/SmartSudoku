@@ -1,5 +1,7 @@
 package use_case.make_move;
 
+import entity.board.GameState;
+
 public interface MakeMoveInputBoundary {
-    void execute(MakeMoveInputData makeMoveInputData);
+    GameState execute(MakeMoveInputData makeMoveInputData);
 }

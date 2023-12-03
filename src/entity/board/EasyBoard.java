@@ -352,15 +352,15 @@ public class EasyBoard implements Board {
     /**
      * This function stores the user's current move into the board, then sends an
      * updated board to the GameState.
-     * @param x is the x-coordinate of the user's move
-     * @param y is the y-coordinate of the user's move
+     * @param row is the y-coordinate of the user's move
+     * @param column is the x-coordinate of the user's move
      * @param move is the integer value of the user's move
      * @return an updated EasyBoard
      */
-    public EasyBoard makeMove(int x, int y, int move) {
+    public EasyBoard makeMove(int row, int column, int move) {
         HashMap<Integer, Boolean> value = new HashMap<>();
         value.put(move, true);
-        this.currBoard[y][x] = (value);
+        this.currBoard[row][column] = value;
         return this;
     }
 
@@ -372,6 +372,21 @@ public class EasyBoard implements Board {
      * @return true if the move was correct (i.e. matches the solution)
      */
     public boolean correctMove(int row, int column, int move) {
+        int[][] arrayBoard = new int[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (currBoard[i][j].isEmpty()) {
+                    arrayBoard[i][j] = 0;
+                }
+                else {
+                    for (Map.Entry<Integer, Boolean> entry : currBoard[i][j].entrySet()) {
+                        arrayBoard[i][j] = entry.getKey();
+                    }
+                }
+            }
+        }
+        solve(arrayBoard);
+        solutionBoard = arrayBoard;
         return solutionBoard[row][column] == move;
     }
 
@@ -410,6 +425,21 @@ public class EasyBoard implements Board {
 
     public void setBoard(HashMap<Integer, Boolean>[][] newBoard) {
         this.currBoard = newBoard;
+        int[][] arrayBoard = new int[4][4];
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (newBoard[i][j].isEmpty()) {
+                    arrayBoard[i][j] = 0;
+                }
+                else {
+                    for (Map.Entry<Integer, Boolean> entry : newBoard[i][j].entrySet()) {
+                        arrayBoard[i][j] = entry.getKey();
+                    }
+                }
+            }
+        }
+        solve(arrayBoard);
+        solutionBoard = arrayBoard;
     }
 
     public int[][] getSolutionBoard() {
