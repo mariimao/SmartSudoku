@@ -8,4 +8,5 @@ public interface LoginUserDataAccessInterface {
 
     User get(String username);
 
+    void addUser(User user);
 }

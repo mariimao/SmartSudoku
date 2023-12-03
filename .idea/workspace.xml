@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo">
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="Finished test files for CommonUserTest">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SigninTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SigninTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +17,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -63,10 +64,31 @@
   &quot;associatedIndex&quot;: 5
 }</component>
   <component name="ProjectId" id="2YS4NvHPRZUNUoiAqFgCsCAZq3V" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "TestCases",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
@@ -92,59 +114,51 @@
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\make_move" />
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="view" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="app.Main" />
-      <module name="SmartSudoku" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="app.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="HardBoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.test in SmartSudoku">
+    <configuration name="SigninTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SmartSudoku" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="HardBoardTest" />
+      <option name="MAIN_CLASS_NAME" value="SigninTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDAOTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SigninTest.testExistingUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SmartSudoku" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="database.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="database" />
-      <option name="MAIN_CLASS_NAME" value="database.UserDAOTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SigninTest" />
+      <option name="METHOD_NAME" value="testExistingUser" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserDAOTest.testGetProgress" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SigninTest.testIncorrectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="SmartSudoku" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="database.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="database" />
-      <option name="MAIN_CLASS_NAME" value="database.UserDAOTest" />
-      <option name="METHOD_NAME" value="testGetProgress" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SigninTest" />
+      <option name="METHOD_NAME" value="testIncorrectTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SigninTest.testSuccessCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="SmartSudoku" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SigninTest" />
+      <option name="METHOD_NAME" value="testSuccessCreation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -160,11 +174,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.test in SmartSudoku" />
-        <item itemvalue="JUnit.UserDAOTest" />
-        <item itemvalue="JUnit.HardBoardTest" />
-        <item itemvalue="JUnit.UserDAOTest.testGetProgress" />
+        <item itemvalue="JUnit.SigninTest" />
+        <item itemvalue="JUnit.SigninTest.testSuccessCreation" />
+        <item itemvalue="JUnit.SigninTest.testExistingUser" />
+        <item itemvalue="JUnit.SigninTest.testIncorrectTest" />
       </list>
     </recent_temporary>
   </component>
@@ -371,13 +385,8 @@
     <MESSAGE value="added tests for UserDAO and deleted some non-useful methods in the class" />
     <MESSAGE value="Fixed the bug in the NewGame use case." />
     <MESSAGE value="deleted EasyGameView.java and added a button to pop-up rules." />
-    <MESSAGE value="committing changes from resolving conflicts for SpotifyTrackPlayer" />
-    <MESSAGE value="Committing changes from merging origin/SudokuDAO into main and fixing conflicts." />
-    <MESSAGE value="Cleaned up the BoardView and re-aligned calling a new game with new functionality" />
-    <MESSAGE value="Committing changes from merging" />
-    <MESSAGE value="Committing BoardView" />
-    <MESSAGE value="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo" />
+    <MESSAGE value="Finished test files for CommonUserTest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Finished test files for CommonUserTest" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -399,20 +408,62 @@
           <line>86</line>
           <option name="timeStamp" value="60" />
         </line-breakpoint>
-      </breakpoints>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>165</line>
+          <option name="timeStamp" value="130" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>166</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>168</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>169</line>
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
+          <line>173</line>
+          <option name="timeStamp" value="134" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/test/CommonUserTest.java</url>
+          <line>42</line>
+          <properties class="CommonUserTest" method="testAddScores">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
           </properties>
-        </breakpoint>
-      </default-breakpoints>
+          <option name="timeStamp" value="129" />
+        </line-breakpoint>
+      </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartSudoku$HardBoardTest.ic" NAME="HardBoardTest Coverage Results" MODIFIED="1701385637532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$test_in_SmartSudoku.ic" NAME="test in SmartSudoku Coverage Results" MODIFIED="1701385692086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701385664456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/SmartSudoku$EasyBoardTest.ic" NAME="EasyBoardTest Coverage Results" MODIFIED="1701564248440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$test_in_SmartSudoku.ic" NAME="test in SmartSudoku Coverage Results" MODIFIED="1701574947806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701458020332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>database.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$SpotifyDAOTest.ic" NAME="SpotifyDAOTest Coverage Results" MODIFIED="1701457975204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>database.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$CommonUserTest.ic" NAME="CommonUserTest Coverage Results" MODIFIED="1701572027270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuAPITest_testCorrectVerificationFalse.ic" NAME="SudokuAPITest.testCorrectVerificationFalse Coverage Results" MODIFIED="1701564159481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>database.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuAPITest.ic" NAME="SudokuAPITest Coverage Results" MODIFIED="1701572941412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>database.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$database_in_SmartSudoku.ic" NAME="database in SmartSudoku Coverage Results" MODIFIED="1701567499601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuAPITest_testCorrectSolution.ic" NAME="SudokuAPITest.testCorrectSolution Coverage Results" MODIFIED="1701572930983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>database.*</FILTER>
     </SUITE>
   </component>

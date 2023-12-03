@@ -268,6 +268,8 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
                 {0,0,5,7,0,0,4,0,3}
         };
         //System.out.println(sudokuDAO.verifyBoard(board2));
+        System.out.println(sudokuDAO.generateBoard(2));
+        //System.out.println(Arrays.deepToString(board2));
         //System.out.println(sudokuDAO.generateBoard(2));
         System.out.println(Arrays.deepToString(board2));
         //System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
