@@ -16,4 +16,9 @@ public class HardBoardFactory implements BoardFactory {
     public Board create() {
         return new HardBoard();
     }
+
+    @Override
+    public HardBoard create(String positions) {
+        return new HardBoard(positions);
+    }
 }

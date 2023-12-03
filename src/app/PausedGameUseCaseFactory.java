@@ -33,11 +33,31 @@ import view.PausedGameView;
 import javax.swing.*;
 import java.io.IOException;
 
-
+/**
+ * Use case factory for the PausedGame state.
+ * This class creates the data for the views in a PauseGameView object, which are the pause game state,
+ * start state, menu state, resume game state, and play game state.
+ */
 public class PausedGameUseCaseFactory {
+
+    /** Prevent instantiation. */
     private PausedGameUseCaseFactory() {
     }
 
+    /**
+     * Creates a new PausedGameView object. If the object could not be created, an error will be
+     * shown using a JDialog.
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param pauseGameViewModel is a PauseGameViewModel object
+     * @param startViewModel is a StartViewModel object
+     * @param menuViewModel is a MenuViewModel object
+     * @param signupViewModel is a SignupViewModel object
+     * @param loginViewModel is a LoginViewModel object
+     * @param resumeGameViewModel is a ResumeGameViewModel object
+     * @param playGameViewModel is a PlayGameViewModel object
+     * @param userDataAccessObject is a UserDataAccessObject
+     * @return PausedGameView object, with parameters for newly created relevant models and controllers
+     */
     public static PausedGameView create(ViewManagerModel viewManagerModel, PauseGameViewModel pauseGameViewModel,
                                         StartViewModel startViewModel, MenuViewModel menuViewModel,
                                         SignupViewModel signupViewModel, LoginViewModel loginViewModel,

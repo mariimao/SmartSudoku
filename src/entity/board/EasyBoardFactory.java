@@ -12,4 +12,9 @@ public class EasyBoardFactory implements BoardFactory {
     public EasyBoard create() {
         return new EasyBoard();
     }
+
+    @Override
+    public EasyBoard create(String positions) {
+        return new EasyBoard(positions);
+    }
 }

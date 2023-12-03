@@ -4,7 +4,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-//import use_case.user_move.UserMoveBoardDataAccessInterface;
+import use_case.user_move.UserMoveBoardDataAccessInterface;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -15,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SudokuDAO {
+public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     private static String encodeBoardHelper(int[][] board) {
         StringBuilder result = new StringBuilder();
@@ -270,6 +270,8 @@ public class SudokuDAO {
         //System.out.println(sudokuDAO.verifyBoard(board2));
         System.out.println(sudokuDAO.generateBoard(2));
         //System.out.println(Arrays.deepToString(board2));
+        //System.out.println(sudokuDAO.generateBoard(2));
+        System.out.println(Arrays.deepToString(board2));
         //System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
     }
 

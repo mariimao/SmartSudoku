@@ -34,9 +34,28 @@ import view.MenuView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Use case factory for the Menu state.
+ * This class creates the data for the views in a MenuView object, which are the menu state,
+ * resume state, new game state, leaderboard state, and login state.
+ */
 public class MenuUseCaseFactory {
+
+    /** Prevent instantiation. */
     private MenuUseCaseFactory() {}
 
+    /**
+     * Creates a new MenuView object. If the data file could not be opened, then the function throws an error.
+     * @param viewManagerModel is a new ViewManagerModel object
+     * @param menuViewModel is a new MenuViewModel object
+     * @param resumeGameViewModel is a new ResumeGameViewModel object
+     * @param loginViewModel is a new LoginViewModel object
+     * @param newGameViewModel is a new NewGameViewModel object
+     * @param userDataAccessObject is a new UserDataAccessObject
+     * @param leaderboardViewModel is a new LeaderboardViewModel object
+     * @param playGameViewModel is a new PlayGameViewModel object
+     * @return MenuView object, with parameters for newly created relevant models and controllers
+     */
     public static MenuView create(
             ViewManagerModel viewManagerModel, MenuViewModel menuViewModel, ResumeGameViewModel resumeGameViewModel, LoginViewModel loginViewModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject,
             LeaderboardViewModel leaderboardViewModel, PlayGameViewModel playGameViewModel) {

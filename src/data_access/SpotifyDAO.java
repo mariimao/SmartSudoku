@@ -28,7 +28,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         this.client_id = CLIENT_ID;
         this.client_secret = CLIENT_SECRET;
         this.current_token = "";
-        this.refresh_token = "AQCsY2fz7cW2EbTm-_yzem-FGoq6nDSrQQVEfc20C3rC54k7P-TSRdAT4BI_7uWPGUF0h8JmIumBHb7NJh3-kJMAxA5dVKImprTQzsJN1k3pk6BgORhSn8OKOcSJgPau8v4";
+        this.refresh_token = "AQDkEZahVWGy-Hamvdi6NXFqLGQQPXSDmELmRGEZnISrfqUkZH4D8Rw11cp3P--ShzWS_e2yA-TZS8fXJTzGekELnkIdWUNN8K3i931y_Exo0aBdR7R18CVDMeKvvR33uO4";
     }
 
     public String getClientId() {
@@ -172,7 +172,6 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
-        // System.out.println(access_token);
         Request request = new Request.Builder()
                 .url("https://api.spotify.com/v1/tracks/" + id)
                 .addHeader("Authorization", "Bearer " + (access_token))
@@ -262,6 +261,9 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 //        String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
 //        String search = "bad idea";
         SpotifyDAO spotifyDAO = new SpotifyDAO();
+        //System.out.println(spotifyDAO.requestAuthorization());
+       //System.out.println(spotifyDAO.getAccessCode());
+        System.out.println(spotifyDAO.getArtistname(id));
         System.out.println(spotifyDAO.getRefreshToken());
 
     }
