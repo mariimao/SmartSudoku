@@ -1,7 +1,5 @@
 package use_case.get_time;
 
-import entity.GameTimer;
-
 public class GetTimeInteractor implements GetTimeInputBoundary {
 
     final GetTimeOutputBoundary getTimePresenter;
