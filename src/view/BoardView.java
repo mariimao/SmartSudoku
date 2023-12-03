@@ -224,6 +224,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         //TODO: it starts counting from newGameView, not sure how to fix
         // ALSO, cannot pause count when pressing pause
+
         Timer timer = new Timer(1000, new ActionListener() { //delay is 1 second
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -363,14 +364,15 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
                             EndGameState endGameState = endGameViewModel.getState();
-                            endGameState.setUser(new MenuState().getUsername());
+                            endGameState.setUser(playGameViewModel.getState().getUserName());
                             endGameState.setTime(currentState.getTimePlayed());
+                            endGameState.setLives(currentState.getLives());
+                            endGameState.setEndGame(currentState.getCurrentGame());
                             endGameController.execute(
                                     endGameState.getUser(),
                                     endGameState.getEndGame(),
                                     endGameState.getTime(),
-                                    endGameState.getLives(),
-                                    currentState.getScores());
+                                    endGameState.getLives());
                         }
                     }
                 }
@@ -475,8 +477,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                                     currentState.getUserName(),
                                                     currentState.getCurrentGame(),
                                                     currentState.getTime(),
-                                                    currentState.getLives(),
-                                                    currentState.getScores()
+                                                    currentState.getLives()
                                             );
                                         }
                                     }

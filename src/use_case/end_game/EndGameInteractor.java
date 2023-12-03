@@ -20,7 +20,7 @@ public class EndGameInteractor implements EndGameInputBoundary {
     @Override
     public void execute(EndGameInputData endGameInputData) {
         String user = endGameInputData.getUsername();
-        boolean completed = true; // why not
+        boolean completed = !endGameInputData.getCurrent_state().gameOver();
         int lives = endGameInputData.getLives();
         int timePlayed = endGameInputData.getTime();
         Scores score = new Scores();

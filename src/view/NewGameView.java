@@ -120,8 +120,8 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             int difficulty = 1;
                             newGameViewModel.getState().setDifficulty(difficulty);
                             playGameViewModel.getState().setCurrentGame(new GameState(difficulty));
-                            playGameViewModel.getState().setUserName(loginViewModel.getLoginState().getUsername());
-                            playGameController.execute(loginViewModel.getLoginState().getUsername(), playGameViewModel.getState().getCurrentGame(), difficulty );
+                            playGameViewModel.getState().setUserName(newGameViewModel.getState().getUserName());
+                            playGameController.execute(newGameViewModel.getState().getUserName(), playGameViewModel.getState().getCurrentGame(), difficulty );
                         }
                     }
                 }

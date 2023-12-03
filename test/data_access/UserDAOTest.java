@@ -1,15 +1,12 @@
 package data_access;
 
-import com.mongodb.MongoException;
 import entity.board.EasyBoard;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
-import entity.user.UserFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.rules.ExpectedException;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -45,6 +42,17 @@ public class UserDAOTest {
 
         assertTrue(userDAO.existsByName("testUser"));
         assertEquals(user, userDAO.get("testUser"));
+    }
+
+    @Test
+    public void testScores() {
+        Map<LocalTime, Integer> scores = new HashMap<>();
+        scores.put(LocalTime.now(), 4);
+        scores.put(LocalTime.now(), 9);
+        CommonUser user = new CommonUser("other", "testPassword", scores);
+        userDAO.addUser(user);
+        userDAO.addScore(user, LocalTime.now(), 18);
+        assert(user.getScores().values().contains(18));
     }
 
     @Test

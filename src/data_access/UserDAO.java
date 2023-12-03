@@ -229,9 +229,20 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * @param user
      */
     private void changeScores(User user) {
-        this.userCollection.findOneAndUpdate(
-                eq("name", user.getName()), //find by name
-                eq("scores", user.getScores())); //update score
+        Map<String, Integer> stringScores = new HashMap<>();
+        for (LocalTime time : user.getScores().keySet()) {
+            stringScores.put(time.toString(), user.getScores().get(time));
+        }
+
+        this.userCollection.deleteOne(eq("name", user.getName()));
+        Document entry = new Document()
+                .append("_id", new ObjectId())
+                .append("name", user.getName())
+                .append("password", user.getPassword())
+                .append("scores", stringScores)
+                .append("pausedGamePastBoards", user.getPausedGame())
+                .append("pausedgame", null);
+        this.userCollection.insertOne(entry);
     }
 
     /**

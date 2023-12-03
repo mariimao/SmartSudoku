@@ -24,6 +24,8 @@ public class EndGamePresenter implements EndGameOutputBoundary {
 
         @Override
         public void prepareSuccessView(EndGameOutputData endGameOutputData) {
+        viewManagerModel.setActiveViewName(menuViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
         }
 
         @Override
