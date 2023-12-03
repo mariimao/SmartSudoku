@@ -1,8 +1,8 @@
-package use_case.user_move;
+package use_case.make_move;
 
 import java.util.HashMap;
 
-public interface UserMoveBoardDataAccessInterface {
+public interface MakeMoveBoardDataAccessInterface {
     int [][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard);
 
     HashMap<Integer, Boolean>[][] convertToHashMap (int [][]  currBoard);

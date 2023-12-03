@@ -20,5 +20,7 @@ public class MakeMoveInputData {
     int getMoveRow() {return moveRow;}
     int getMoveCol() {return moveCol;}
     GameState getGameBeingPlayed() {return gameBeingPlayed;}
+    void loseLife() {gameBeingPlayed.loseLife();}
+    int getLives() {return gameBeingPlayed.getLives();}
 
 }

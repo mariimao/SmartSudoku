@@ -1,19 +1,19 @@
 package use_case.user_move;
 
 import entity.board.Board;
-import use_case.login.LoginOutputData;
+import use_case.make_move.MakeMoveBoardDataAccessInterface;
 
 public class UserMoveInteractor implements UserMoveInputBoundary {
 
     final UserMoveDataAccessInterface userMoveDataAccessInterface;
     final UserMoveOutputBoundary easyGamePresenter;
-    final UserMoveBoardDataAccessInterface userMoveBoardDataAccessInterface;
+    final MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface;
 
     public UserMoveInteractor(UserMoveDataAccessInterface userMoveDataAccessInterface,
-                              UserMoveBoardDataAccessInterface userMoveBoardDataAccessInterface,
+                              MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface,
                               UserMoveOutputBoundary easyGamePresenter) {
         this.userMoveDataAccessInterface = userMoveDataAccessInterface;
-        this.userMoveBoardDataAccessInterface = userMoveBoardDataAccessInterface;
+        this.makeMoveBoardDataAccessInterface = makeMoveBoardDataAccessInterface;
         this.easyGamePresenter = easyGamePresenter;
     }
 
@@ -44,7 +44,7 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
                     easyGamePresenter.prepareSuccessView(userMoveOutputData);
                 } else { // hard mode
                     int correct_moves = userMoveInputData.current_state.getPastStates().size();
-                    userMoveInputData.current_state.getCurrBoard().setBoard(userMoveBoardDataAccessInterface.convertToHashMap(userMoveBoardDataAccessInterface.generateBoard(correct_moves))); // returns int [][]
+                    userMoveInputData.current_state.getCurrBoard().setBoard(makeMoveBoardDataAccessInterface.convertToHashMap(makeMoveBoardDataAccessInterface.generateBoard(correct_moves))); // returns int [][]
 
                     UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
                     easyGamePresenter.prepareSuccessView(userMoveOutputData);

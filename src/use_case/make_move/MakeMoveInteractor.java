@@ -3,16 +3,19 @@ package use_case.make_move;
 import entity.board.Board;
 import entity.board.GameState;
 import entity.user.User;
+import use_case.user_move.UserMoveOutputData;
 
 import java.util.Arrays;
 
 public class MakeMoveInteractor implements MakeMoveInputBoundary {
     final MakeMoveDataAccessInterface makeMoveDataAccessInterface;
     final MakeMoveOutputBoundary makeMovePresenter;
+    final MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface;
 
-    public MakeMoveInteractor(MakeMoveDataAccessInterface makeMoveDataAccessInterface, MakeMoveOutputBoundary makeMovePresenter) {
+    public MakeMoveInteractor(MakeMoveDataAccessInterface makeMoveDataAccessInterface, MakeMoveOutputBoundary makeMovePresenter, MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface) {
         this.makeMoveDataAccessInterface = makeMoveDataAccessInterface;
         this.makeMovePresenter = makeMovePresenter;
+        this.makeMoveBoardDataAccessInterface = makeMoveBoardDataAccessInterface;
     }
 
     @Override
@@ -30,11 +33,19 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
 
             if (gameBeingPlayed.correctMove(x, y, val)) {
                 gameBeingPlayed.setCurrBoard(gameBeingPlayed.makeMove(x, y, val));
-                Board scrambledBoard = gameBeingPlayed.scrambleBoard();
-                gameBeingPlayed.setCurrBoard(scrambledBoard);
-                MakeMoveOutputData makeMoveOutputData = new MakeMoveOutputData(gameBeingPlayed);
-                return makeMovePresenter.prepareSuccessView(makeMoveOutputData);
+                if (makeMoveInputData.getGameBeingPlayed().getDifficulty() == 1) {
+                    Board scrambledBoard = gameBeingPlayed.scrambleBoard();
+                    gameBeingPlayed.setCurrBoard(scrambledBoard);
+                    MakeMoveOutputData makeMoveOutputData = new MakeMoveOutputData(gameBeingPlayed);
+                    return makeMovePresenter.prepareSuccessView(makeMoveOutputData);
+                } else {
+                    int correct_moves = makeMoveInputData.getGameBeingPlayed().getPastStates().size();
+                    makeMoveInputData.getGameBeingPlayed().getCurrBoard().setBoard(makeMoveBoardDataAccessInterface.convertToHashMap(makeMoveBoardDataAccessInterface.generateBoard(correct_moves))); // returns int [][]
+                    MakeMoveOutputData makeMoveOutputData = new MakeMoveOutputData(gameBeingPlayed);
+                    return makeMovePresenter.prepareSuccessView(makeMoveOutputData);
+                }
             } else {
+                makeMoveInputData.loseLife();
                 makeMovePresenter.prepareFailView("Your Move is Incorrect");
             }
         }

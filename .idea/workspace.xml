@@ -4,20 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c908897d-ac1f-4e0f-b68b-b15e855c7eef" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c908897d-ac1f-4e0f-b68b-b15e855c7eef" name="Changes" comment="fixed end game bug but there's still an issue with saving the time of the score to the database">
       <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entity/Scores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Scores.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveBoardDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveBoardDataAccessInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,7 +25,20 @@
   }
 }]]></component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="fixed end game bug but there's still an issue with saving the time of the score to the database">
+      <option name="closed" value="true" />
+      <created>1701619501167</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701619501167</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed end game bug but there's still an issue with saving the time of the score to the database" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed end game bug but there's still an issue with saving the time of the score to the database" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
