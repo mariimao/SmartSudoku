@@ -1,16 +1,11 @@
-package use_case;
-
 import app.Main;
 import app.SignupUseCaseFactory;
 import app.StartUseCaseFactory;
 import data_access.UserDAO;
-import entity.board.EasyBoard;
-import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import entity.user.UserFactory;
 import interface_adapter.signup.SignupController;
-import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
 import org.junit.Assert;
 import org.junit.Before;
