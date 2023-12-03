@@ -72,6 +72,10 @@ public class GameState {
         return currBoard;
     }
 
+    public boolean correctMove(int row, int column, int move) {
+        return currBoard.correctMove(row, column, move);
+    }
+
     /**
      * Updates the currBoard attribute in the sudoKuScrambler,
      * then scrambles the board by calling on the sudokuScrambler object.
@@ -114,7 +118,8 @@ public class GameState {
         else {this.currBoard = new HardBoard(values);}
     }
     public void setCurrBoard(Board board) {
-        this.currBoard = board;}
+        this.currBoard = board;
+    }
 
     public int getLives() {
         return this.lives;

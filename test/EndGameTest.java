@@ -4,7 +4,6 @@ import database.UserDAOTest;
 import interface_adapter.end_game.EndGamePresenter;
 import org.junit.Before;
 import org.junit.Test;
-import use_case.UseCaseTestObjects;
 import use_case.end_game.EndGameInteractor;
 import view.EndGameView;
 

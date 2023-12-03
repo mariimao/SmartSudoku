@@ -1,5 +1,6 @@
 package interface_adapter.make_move;
 
+import entity.board.GameState;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
@@ -13,6 +14,7 @@ import javax.swing.*;
 public class MakeMovePresenter implements MakeMoveOutputBoundary {
     private final MakeMoveViewModel makeMoveViewModel;
     private ViewManagerModel viewManagerModel;
+    private MakeMoveState makeMoveState;
 
     public MakeMovePresenter(MakeMoveViewModel makeMoveViewModel, ViewManagerModel viewManagerModel) {
         this.makeMoveViewModel = makeMoveViewModel;
@@ -20,7 +22,7 @@ public class MakeMovePresenter implements MakeMoveOutputBoundary {
     }
 
     @Override
-    public void prepareSuccessView(MakeMoveOutputData makeMoveOutputData) {
+    public GameState prepareSuccessView(MakeMoveOutputData makeMoveOutputData) {
         MakeMoveState makeMoveState = makeMoveViewModel.getState();
         makeMoveState.setGameBeingPlayed(makeMoveOutputData.getGameBeingPlayed());
         makeMoveState.setCol(makeMoveState.getCol());
@@ -29,6 +31,7 @@ public class MakeMovePresenter implements MakeMoveOutputBoundary {
         // this.viewManagerModel.setActiveViewName(makeMoveViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
         // JOptionPane.showMessageDialog(null, "New Game Successfully Created");   // for now I'll just use a popup
+        return makeMoveState.getGameBeingPlayed();
     }
 
     @Override
@@ -39,4 +42,5 @@ public class MakeMovePresenter implements MakeMoveOutputBoundary {
         JOptionPane.showMessageDialog(null, error);
 
     }
+
 }

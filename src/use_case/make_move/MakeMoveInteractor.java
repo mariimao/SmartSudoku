@@ -4,6 +4,8 @@ import entity.board.Board;
 import entity.board.GameState;
 import entity.user.User;
 
+import java.util.Arrays;
+
 public class MakeMoveInteractor implements MakeMoveInputBoundary {
     final MakeMoveDataAccessInterface makeMoveDataAccessInterface;
     final MakeMoveOutputBoundary makeMovePresenter;
@@ -14,23 +16,29 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
     }
 
     @Override
-    public void execute(MakeMoveInputData makeMoveInputData) {
+    public GameState execute(MakeMoveInputData makeMoveInputData) {
         GameState gameBeingPlayed = makeMoveInputData.getGameBeingPlayed();
         int x = makeMoveInputData.getMoveCol();
         int y = makeMoveInputData.getMoveRow();
         int val = makeMoveInputData.getMoveValue();
-
         if (gameBeingPlayed == null) {makeMovePresenter.prepareFailView("Error, Make Move Clicked While No Game Is Being Played");}
         else{
-            gameBeingPlayed.setCurrBoard(gameBeingPlayed.makeMove(x, y, val));
-            Board scrambledBoard = gameBeingPlayed.scrambleBoard();
-            if (scrambledBoard == null) {makeMovePresenter.prepareFailView("Invalid Input: Your Move is Incorrect");}
-            else {
-                gameBeingPlayed.setCurrBoard(scrambledBoard);  // TODO: scramble Board needs to return null if there is no valid permutation
+            System.out.println("hello");
+            System.out.println(gameBeingPlayed.getCurrBoard());
+            System.out.println("solutions");
+            System.out.println(Arrays.deepToString(gameBeingPlayed.getCurrBoard().getSolutionBoard()));
+
+            if (gameBeingPlayed.correctMove(x, y, val)) {
+                gameBeingPlayed.setCurrBoard(gameBeingPlayed.makeMove(x, y, val));
+                Board scrambledBoard = gameBeingPlayed.scrambleBoard();
+                gameBeingPlayed.setCurrBoard(scrambledBoard);
                 MakeMoveOutputData makeMoveOutputData = new MakeMoveOutputData(gameBeingPlayed);
-                makeMovePresenter.prepareSuccessView(makeMoveOutputData);
+                return makeMovePresenter.prepareSuccessView(makeMoveOutputData);
+            } else {
+                makeMovePresenter.prepareFailView("Your Move is Incorrect");
             }
         }
+        return gameBeingPlayed;
     }
 }
 

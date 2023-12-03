@@ -1,5 +1,3 @@
-package view;
-
 import javax.swing.*;
 
 class LabelTextPanel extends JPanel {

@@ -10,6 +10,9 @@ import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
+import interface_adapter.make_move.MakeMoveController;
+import interface_adapter.make_move.MakeMovePresenter;
+import interface_adapter.make_move.MakeMoveViewModel;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGamePresenter;
@@ -23,6 +26,9 @@ import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.start.StartViewModel;
 import use_case.end_game.EndGameDataAccessInterface;
 import use_case.end_game.EndGameInteractor;
+import use_case.make_move.MakeMoveDataAccessInterface;
+import use_case.make_move.MakeMoveInteractor;
+import use_case.make_move.MakeMoveOutputBoundary;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.pause_game.PauseGameInteractor;
 import use_case.play_game.PlayGameDataAccessInterface;
@@ -62,15 +68,18 @@ public class BoardUseCaseFactory {
     public static BoardView create(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel,
                                    PauseGameViewModel pauseGameViewModel, EndGameViewModel endGameViewModel,
                                    LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,
-                                   StartViewModel startViewModel, PlayGameViewModel playGameViewModel,
+                                   StartViewModel startViewModel, PlayGameViewModel playGameViewModel, MakeMoveViewModel
+                                    makeMoveViewModel,
                                    UserDAO userDataAccessObject, SudokuDAO boardDataAccessObject) {
 
         EasyGameController easyGameController = createUserEasyGameUseCase(viewManagerModel, easyGameViewModel, userDataAccessObject, boardDataAccessObject, endGameViewModel);
         PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject);
         EndGameController endGameController = createUserEndGameUseCase(viewManagerModel, leaderboardViewModel, endGameViewModel, menuViewModel, userDataAccessObject);
         PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);
+        MakeMoveController makeMoveController = createUserMakeMoveUseCase(userDataAccessObject, makeMoveViewModel, viewManagerModel);
 
-        return new BoardView(easyGameViewModel, easyGameController, pauseGameController, pauseGameViewModel, endGameController, endGameViewModel, playGameViewModel);
+        return new BoardView(easyGameViewModel, easyGameController, pauseGameController, pauseGameViewModel, endGameController, endGameViewModel, playGameViewModel,
+                makeMoveController);
 
 
     }
@@ -138,5 +147,13 @@ public class BoardUseCaseFactory {
         PlayGamePresenter playGamePresenter = new PlayGamePresenter(playGameViewModel, viewManagerModel);
         PlayGameInputBoundary playGameInteractor = new PlayGameInteractor(playGameDataAccessInterface, playGamePresenter);
         return new PlayGameController(playGameInteractor);
+    }
+
+    private static MakeMoveController createUserMakeMoveUseCase(MakeMoveDataAccessInterface makeMoveDataAccessInterface,
+                                                                MakeMoveViewModel makeMoveViewModel,
+                                                                ViewManagerModel viewManagerModel) {
+        MakeMovePresenter makeMovePresenter = new MakeMovePresenter(makeMoveViewModel, viewManagerModel);
+        MakeMoveInteractor makeMoveInteractor = new MakeMoveInteractor(makeMoveDataAccessInterface, makeMovePresenter);
+        return new MakeMoveController(makeMoveInteractor);
     }
 }

@@ -27,7 +27,6 @@ public class PlayGamePresenter implements PlayGameOutputBoundary {
         playGameViewModel.firePropertyChanged();
         this.viewManagerModel.setActiveViewName(playGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-
     }
 
     @Override

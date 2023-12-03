@@ -10,8 +10,8 @@ public class MakeMoveController {
         this.makeMoveInteractor = makeMoveInteractor;
     }
 
-    public void execute(int value, int x, int y, GameState gameBeingPlayed) { // x is the column, y is the row
+    public GameState execute(int value, int x, int y, GameState gameBeingPlayed) { // x is the column, y is the row
         MakeMoveInputData makeMoveInputData = new MakeMoveInputData(value,x, y, gameBeingPlayed);
-        makeMoveInteractor.execute(makeMoveInputData);
+        return makeMoveInteractor.execute(makeMoveInputData);
     }
 }
