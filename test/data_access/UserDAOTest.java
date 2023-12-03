@@ -1,12 +1,15 @@
 package data_access;
 
+import com.mongodb.MongoException;
 import entity.board.EasyBoard;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
+import entity.user.UserFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.rules.ExpectedException;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -28,7 +31,15 @@ public class UserDAOTest {
     @AfterEach
     void tearDown() {
         // Clean up any resources or data created during tests
-        userDAO.deleteAll();
+        userDAO.delete("testUser");
+    }
+
+    @Test
+    void testMongoException() throws Exception {
+        UserDAO userdao = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                "b", "c", null);
+        ExpectedException expectedException = ExpectedException.none();
+        expectedException.expect(MongoException.class);
     }
 
     @Test

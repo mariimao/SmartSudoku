@@ -56,31 +56,6 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
     }
 
     /**
-     * tests if there is a valid encoder
-     * @param s1
-     * @param s2
-     * @return
-     */
-    private static Boolean testEncoder(String s1, String s2) {
-        int length1 = s1.length();
-        int length2 = s2.length();
-        if (s1.length() != s2.length()) {
-            return false;
-        }
-        int i = 0;
-        char[] charArray1 = s1.toCharArray();
-        char[] charArray2 = s2.toCharArray();
-        for (i = 0; i < s1.length(); i++) {
-            if (charArray1[i] != charArray2[i]) {
-                char a = charArray1[i];
-                char b = charArray2[i];
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * converts the string to a 2-dimensional array
      * @param grid the string
      * @return a 2-dimensional array that represents the board

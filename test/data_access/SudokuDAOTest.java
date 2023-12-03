@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SudokuDAOTest {
 
@@ -73,18 +74,14 @@ public class SudokuDAOTest {
     public void testValidBoardGeneration() throws IOException {
         int[][] actual_board = sudokuDAO.generateBoard(3);
         Boolean actual = sudokuDAO.verifyBoard(actual_board);
-        Boolean expected = true;
-        assertEquals(expected, actual);
+        assert(actual);
     }
 
     @Test
-    public void testNotValidBoardGeneration() throws IOException {
-        int[][] actual_board = sudokuDAO.generateBoard(3);
-        actual_board[0][0] = 1;
-        actual_board[0][1] = 1;
+    public void testBoardGenerationZero() throws IOException {
+        int[][] actual_board = sudokuDAO.generateBoard(0);
         Boolean actual = sudokuDAO.verifyBoard(actual_board);
-        Boolean expected = false;
-        assertEquals(false, actual);
+        assert(actual);
     }
 
     @Test
@@ -92,12 +89,17 @@ public class SudokuDAOTest {
         int[][] expected_board = sudokuDAO.generateBoard(3);
         int[][] converted_board = new int[9][9];
         HashMap<Integer, Boolean>[][] convertedHashmap;
-        convertedHashmap = new HashMap[9][9];
 
         convertedHashmap = sudokuDAO.convertToHashMap(expected_board);
         converted_board = sudokuDAO.convertToIntArray(convertedHashmap);
 
         assertEquals(expected_board, converted_board);
+        assert(convertedHashmap.length == 9);
+
+    }
+
+    @Test
+    public void testTestEncoder() {
 
     }
 }

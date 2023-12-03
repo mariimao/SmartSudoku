@@ -51,7 +51,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * @param userFactory
      * @throws Exception
      */
-    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception {
+    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws MongoException {
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
