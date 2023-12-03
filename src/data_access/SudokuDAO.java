@@ -4,6 +4,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import use_case.user_move.UserMoveBoardDataAccessInterface;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -14,7 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SudokuDAO {
+public class SudokuDAO implements UserMoveBoardDataAccessInterface {
 
     private static String encodeBoardHelper(int[][] board) {
         StringBuilder result = new StringBuilder();
@@ -84,6 +85,51 @@ public class SudokuDAO {
             }
         }
         return boardlist;
+    }
+
+    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
+        // for hard board only
+        int rows = 9;
+        int cols = 9;
+
+        int[][] convertedArray = new int[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
+                    int value = currBoard[i][j].keySet().iterator().next();
+                    convertedArray[i][j] = value;
+                } else {
+                    convertedArray[i][j] = 0;
+                }
+            }
+        }
+
+        return convertedArray;
+    }
+
+    public HashMap<Integer, Boolean>[][] convertToHashMap (int [][]  currBoard) {
+        // for hard board only
+        int rows = 9;
+        int cols = 9;
+
+        HashMap<Integer, Boolean>[][] convertedHashmap;
+        convertedHashmap = new HashMap[9][9];
+
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (currBoard[i][j] != 0) { // if spot isnt empty
+                    HashMap<Integer, Boolean> value = new HashMap();
+                    value.put(currBoard[i][j], false);
+                    convertedHashmap[i][j] = value;
+//                } else {
+//                    convertedArray[i][j] = 0;
+                }
+            }
+        }
+
+        return convertedHashmap;
     }
 
     private static int[][] insertCorrectMoves(int[][] current_grid,
@@ -222,8 +268,9 @@ public class SudokuDAO {
                 {0,0,5,7,0,0,4,0,3}
         };
         //System.out.println(sudokuDAO.verifyBoard(board2));
-        System.out.println(sudokuDAO.generateBoard(2));
-        System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
+        //System.out.println(sudokuDAO.generateBoard(2));
+        System.out.println(Arrays.deepToString(board2));
+        //System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
     }
 
 

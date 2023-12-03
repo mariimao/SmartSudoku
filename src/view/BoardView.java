@@ -6,6 +6,8 @@ import data_access.UserDAO;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
+import interface_adapter.easy_game.EasyGameController;
+import interface_adapter.easy_game.EasyGameState;
 import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
@@ -36,8 +38,7 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalDateTime;
@@ -52,6 +53,10 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final Color black = Color.black;
 
     public final String viewName = "PLAY GAME";
+
+    private final EasyGameViewModel easyGameViewModel;
+    private final EasyGameController easyGameController;
+
     private final PauseGameController pauseGameController;
     private final PauseGameViewModel pauseGameViewModel;
 
@@ -73,6 +78,10 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton rules;
     private final JPanel buttons;
     private final JLabel timerLabel;
+    private final JTextField rowInputField = new JTextField(1);
+    private final JTextField columnInputField = new JTextField(1);
+    private final JTextField valueInputField = new JTextField(1);
+
 
     public static void main(String[] args) {
         // Build the main program window, the main panel containing the
@@ -158,10 +167,12 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         application.setVisible(true);
     }
 
-    public BoardView(PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
+    public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController, PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
                                  PlayGameViewModel playGameViewModel, MakeMoveViewModel makeMoveViewModel,
                                  MakeMoveController makeMoveController) {
+        this.easyGameViewModel = easyGameViewModel;
+        this.easyGameController = easyGameController;
         this.pauseGameController = pauseGameController;
         this.pauseGameViewModel = pauseGameViewModel;
         this.endGameController = endGameController;
@@ -171,6 +182,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.makeMoveController = makeMoveController;
 
         playGameViewModel.addPropertyChangeListener(this);
+        easyGameViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
 
         // Creating the Title of the View
@@ -274,9 +286,33 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         this.add(startPlayingPanel);
 
+        LabelTextPanel rowInfo = new LabelTextPanel(
+                new JLabel(EasyGameViewModel.ROW_LABEL), rowInputField);
+        rowInfo.setFont(new Font("Verdana", Font.BOLD, 16));
+        rowInfo.setBackground(white);
+        rowInfo.setForeground(darkblue);
+        this.add(rowInfo);
+
+        LabelTextPanel columnInfo = new LabelTextPanel(
+                new JLabel(EasyGameViewModel.COLUMN_LABEL), columnInputField);
+        columnInfo.setFont(new Font("Verdana", Font.BOLD, 16));
+        columnInfo.setBackground(white);
+        columnInfo.setForeground(darkblue);
+        this.add(columnInfo);
+
+        LabelTextPanel valueInfo = new LabelTextPanel(
+                new JLabel(EasyGameViewModel.VALUE_LABEL), valueInputField);
+        valueInfo.setFont(new Font("Verdana", Font.BOLD, 16));
+        valueInfo.setBackground(white);
+        valueInfo.setForeground(darkblue);
+        this.add(valueInfo);
+
+
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(buttons);
-
+        rowInfo.setVisible(false);
+        columnInfo.setVisible(false);
+        valueInfo.setVisible(false);
         buttons.setVisible(false);
         timerLabel.setVisible(false);
         lives.setVisible(false);
@@ -498,13 +534,16 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     i++;
                 }
             }
-            board.revalidate();
-            board.repaint();
-            startPlaying.setVisible(false);
-            buttons.setVisible(true);
-            timer.setVisible(true);
-            lives.setVisible(true);
-            BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+        board.revalidate();
+        board.repaint();
+        startPlaying.setVisible(false);
+        rowInfo.setVisible(true);
+        columnInfo.setVisible(true);
+        valueInfo.setVisible(true);
+        buttons.setVisible(true);
+        timer.setVisible(true);
+        lives.setVisible(true);
+        BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
     }
 
     @Override

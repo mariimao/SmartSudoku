@@ -7,9 +7,13 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
 
     final UserMoveDataAccessInterface userMoveDataAccessInterface;
     final UserMoveOutputBoundary easyGamePresenter;
+    final UserMoveBoardDataAccessInterface userMoveBoardDataAccessInterface;
 
-    public UserMoveInteractor(UserMoveDataAccessInterface userMoveDataAccessInterface, UserMoveOutputBoundary easyGamePresenter) {
+    public UserMoveInteractor(UserMoveDataAccessInterface userMoveDataAccessInterface,
+                              UserMoveBoardDataAccessInterface userMoveBoardDataAccessInterface,
+                              UserMoveOutputBoundary easyGamePresenter) {
         this.userMoveDataAccessInterface = userMoveDataAccessInterface;
+        this.userMoveBoardDataAccessInterface = userMoveBoardDataAccessInterface;
         this.easyGamePresenter = easyGamePresenter;
     }
 
@@ -33,9 +37,18 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
                 UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
                 easyGamePresenter.prepareEndView(userMoveOutputData);
             } else {
-                userMoveInputData.scrambleBoard();
-                UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
-                easyGamePresenter.prepareSuccessView(userMoveOutputData);
+                userMoveDataAccessInterface.saveBoard(userMoveInputData.current_state); // save board before or after scrambling?
+                if (userMoveInputData.current_state.getDifficulty() == 1) {
+                    userMoveInputData.scrambleBoard();
+                    UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
+                    easyGamePresenter.prepareSuccessView(userMoveOutputData);
+                } else { // hard mode
+                    int correct_moves = userMoveInputData.current_state.getPastStates().size();
+                    userMoveInputData.current_state.getCurrBoard().setBoard(userMoveBoardDataAccessInterface.convertToHashMap(userMoveBoardDataAccessInterface.generateBoard(correct_moves))); // returns int [][]
+
+                    UserMoveOutputData userMoveOutputData = new UserMoveOutputData(userMoveInputData.current_state);
+                    easyGamePresenter.prepareSuccessView(userMoveOutputData);
+                }
             }
         }
     }
