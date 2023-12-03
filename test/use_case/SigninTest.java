@@ -28,6 +28,7 @@ public class SigninTest {
             throw new RuntimeException(e);
         }
         userDataBase = userDataAccessObject;
+        userDataBase.delete("name");
 
         SignupOutputBoundary creationPresenter = new SignupOutputBoundary() {
             @Override
@@ -49,7 +50,7 @@ public class SigninTest {
     }
 
     @Test
-    public void testIncorrectUsername() {
+    public void testIncorrectPassword() {
         SignupInputData inputData = new SignupInputData("name", "pass", "wrong");
         SignupUserDataAccessInterface userDataAccessObject;
         try {
@@ -68,7 +69,7 @@ public class SigninTest {
 
             @Override
             public void prepareFailView(String error) {
-                assertEquals("Passwords do not match. Try again.", error);
+                assertEquals("Username already exists. Please pick a different username.", error);
             }
         };
 
