@@ -1,5 +1,3 @@
-package use_case;
-
 import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import entity.user.User;
