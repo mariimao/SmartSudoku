@@ -27,8 +27,7 @@ public class EndGameInteractor implements EndGameInputBoundary {
         score.setScores(timePlayed, 0, lives, completed); //no deduct on boards
         endGameDataAccessInterface.addScore(endGameDataAccessInterface.get(user), LocalTime.from(LocalDateTime.now()), (Integer) timePlayed);
 
-        // akunna: i had to make score point to something and also change the user name into a user
-        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score.getScores());
+        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score.getScores(), endGameDataAccessInterface.get(user).getFinalGame());
         endGamePresenter.prepareSuccessView(endGameOutputData);
     }
 }

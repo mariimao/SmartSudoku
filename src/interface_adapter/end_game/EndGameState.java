@@ -59,4 +59,7 @@ public class EndGameState {
     public String getUser() {
         return username;
     }
+
+    public void setFinalGame(Object finalGame) {
+    }
 }

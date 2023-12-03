@@ -16,7 +16,7 @@ public class MakeMoveViewModel extends ViewModel {
     public MakeMoveState getState() {return state;}
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     @Override
-    public void firePropertyChanged() {support.firePropertyChange("state", null, this.state);}
+    public void firePropertyChanged() {support.firePropertyChange("MAKEMOVESTATE", null, this.state);}
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {support.addPropertyChangeListener(listener);}
 

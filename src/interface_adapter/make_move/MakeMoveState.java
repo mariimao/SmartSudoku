@@ -8,6 +8,9 @@ public class MakeMoveState {
     private int value = 0;
     private int row = 0;
     private int col = 0;
+    private boolean gameFinshedLost = false;
+    private boolean gameFinishedWin = false;
+    private boolean userInputWrong = false;
 
 
     public MakeMoveState() {}
@@ -22,6 +25,15 @@ public class MakeMoveState {
     public void setCol(int col) {this.col = col;}
     public int getCol() {return col;}
 
+    public boolean isGameFinishedWin() {return gameFinishedWin;}
 
+    public boolean isGameFinshedLost() {return gameFinshedLost;}
 
+    public void setGameFinishedWin(boolean gameFinishedWin) {this.gameFinishedWin = gameFinishedWin;}
+
+    public void setGameFinishedLost(boolean gameFinshedLost) {this.gameFinshedLost = gameFinshedLost;}
+
+    public void setUserInputWrong(boolean userInputWrong) {this.userInputWrong = userInputWrong;}
+
+    public boolean isUserInputWrong() {return userInputWrong;}
 }

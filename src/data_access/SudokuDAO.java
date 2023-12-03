@@ -64,6 +64,17 @@ public class SudokuDAO implements UserMoveBoardDataAccessInterface {
         }
         return true;
     }
+    public String arrayToString(int[][] boardList) {
+        String boardString = "";
+        int size = boardList.length;
+        for (int i = 0; i < size; i++) {
+            for(int j = 0; j < size; j++){
+                int value = boardList[i][j];
+                boardString = boardString.concat(String.valueOf(value));
+            }
+        }
+        return boardString;
+    }
 
     private static int[][] stringToArray(String grid) {
         int[][] boardlist = new int[9][9];

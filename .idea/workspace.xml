@@ -4,9 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo">
+    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="commiting changes from merging origin/TestingSudokuAPI, will try to fix bugs in the game now">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMovePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMovePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveBoardDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveBoardDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/database/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/database/UserDAOTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,26 +86,26 @@
     <option name="autoscrollFromSource" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "TestingSudokuAPI",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\make_move" />
@@ -308,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1701475524871</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="commiting changes from merging origin/TestingSudokuAPI, will try to fix bugs in the game now">
+      <option name="closed" value="true" />
+      <created>1701563934168</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1701563934168</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -377,7 +404,8 @@
     <MESSAGE value="Committing changes from merging" />
     <MESSAGE value="Committing BoardView" />
     <MESSAGE value="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo" />
+    <MESSAGE value="commiting changes from merging origin/TestingSudokuAPI, will try to fix bugs in the game now" />
+    <option name="LAST_COMMIT_MESSAGE" value="commiting changes from merging origin/TestingSudokuAPI, will try to fix bugs in the game now" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -397,7 +425,12 @@
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/view/StartView.java</url>
           <line>86</line>
-          <option name="timeStamp" value="60" />
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/BoardView.java</url>
+          <line>374</line>
+          <option name="timeStamp" value="67" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

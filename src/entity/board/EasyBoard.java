@@ -360,8 +360,11 @@ public class EasyBoard implements Board {
     public EasyBoard makeMove(int x, int y, int move) {
         HashMap<Integer, Boolean> value = new HashMap<>();
         value.put(move, true);
-        this.currBoard[y][x] = (value);
-        return this;
+        String boardAsString = this.toStringPause();
+        EasyBoard newBoard = new EasyBoard(boardAsString);
+        newBoard.currBoard[y][x] = value;
+
+        return newBoard;
     }
 
     /**

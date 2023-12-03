@@ -27,12 +27,6 @@ public class UserDAOTest {
                 "smartsudoku", "user", new CommonUserFactory());
     }
 
-    @AfterEach
-    void tearDown() {
-        // Clean up any resources or data created during tests
-        userDAO.deleteAll();
-    }
-
     @Test
     void testAddUser() {
         Map<LocalTime, Integer> scores = new HashMap<>();

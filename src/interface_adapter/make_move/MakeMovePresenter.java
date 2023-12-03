@@ -3,6 +3,7 @@ package interface_adapter.make_move;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
+import use_case.end_game.EndGameOutputData;
 import use_case.make_move.MakeMoveInputBoundary;
 import use_case.make_move.MakeMoveOutputBoundary;
 import use_case.make_move.MakeMoveOutputData;
@@ -26,17 +27,35 @@ public class MakeMovePresenter implements MakeMoveOutputBoundary {
         makeMoveState.setCol(makeMoveState.getCol());
         makeMoveState.setRow(makeMoveState.getRow());
 
-        // this.viewManagerModel.setActiveViewName(makeMoveViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-        // JOptionPane.showMessageDialog(null, "New Game Successfully Created");   // for now I'll just use a popup
+    }
+
+    public void prepareWrongMoveView(MakeMoveOutputData makeMoveOutputData) {
+        MakeMoveState makeMoveState = makeMoveViewModel.getState();
+        makeMoveState.setGameBeingPlayed(makeMoveOutputData.getGameBeingPlayed());
+        makeMoveState.setCol(makeMoveState.getCol());
+        makeMoveState.setRow(makeMoveState.getRow());
+        makeMoveState.setUserInputWrong(true);
+        this.viewManagerModel.firePropertyChanged();
     }
 
     @Override
     public void prepareFailView(String error) {
-
-
-        makeMoveViewModel.firePropertyChanged();
         JOptionPane.showMessageDialog(null, error);
+
+    }
+
+    @Override
+    public void prepareEndLostView(MakeMoveOutputData makeMoveOutputData) {
+        makeMoveViewModel.getState().setGameFinishedLost(true);
+        this.viewManagerModel.firePropertyChanged();
+
+    }
+
+    @Override
+    public void prepareEndWonView(MakeMoveOutputData makeMoveOutputData) {
+        makeMoveViewModel.getState().setGameFinishedWin(true);
+        this.viewManagerModel.firePropertyChanged();
 
     }
 }

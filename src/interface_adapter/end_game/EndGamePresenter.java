@@ -25,12 +25,25 @@ public class EndGamePresenter implements EndGameOutputBoundary {
         @Override
         public void prepareSuccessView(EndGameOutputData endGameOutputData) {
             EndGameState endGameState = endGameViewModel.getState();
-            endGameState.setUser(endGameOutputData.getUser().getName());
+            endGameState.setUser(endGameOutputData.getUser());
             endGameState.setFinalGame(endGameOutputData.getFinalGame());
             endGameState.setScore(endGameOutputData.getScore());
             this.viewManagerModel.setActiveViewName(endGameViewModel.getViewName());
             this.viewManagerModel.firePropertyChanged();
+            JOptionPane.showMessageDialog(null, "Congratulations, You Won. Try Playing Another Round");
+
         }
+
+    public void prepareFailedGameView(EndGameOutputData endGameOutputData) {
+        EndGameState endGameState = endGameViewModel.getState();
+        endGameState.setUser(endGameOutputData.getUser());
+        endGameState.setFinalGame(endGameOutputData.getFinalGame());
+        endGameState.setScore(endGameOutputData.getScore());
+        this.viewManagerModel.setActiveViewName(endGameViewModel.getViewName());
+        this.viewManagerModel.firePropertyChanged();
+        JOptionPane.showMessageDialog(null, "You Lost The Game. Try Playing Another Round");
+
+    }
 
         @Override
         public void prepareFailView(String error) {

@@ -81,91 +81,9 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JTextField rowInputField = new JTextField(1);
     private final JTextField columnInputField = new JTextField(1);
     private final JTextField valueInputField = new JTextField(1);
-
-
-    public static void main(String[] args) {
-        // Build the main program window, the main panel containing the
-        // various cards, and the layout, and stitch them together.
-
-        // The main application window.
-        JFrame application = new JFrame("SudokuScramble");
-        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        CardLayout cardLayout = new CardLayout();
-
-        // The various View objects. Only one view is visible at a time.
-        JPanel views = new JPanel(cardLayout);
-        application.add(views);
-
-        // This keeps track of and manages which view is currently showing.
-        ViewManagerModel viewManagerModel = new ViewManagerModel();
-        new ViewManager(views, cardLayout, viewManagerModel);
-
-        // The data for the views, such as username and password, are in the ViewModels.
-        // This information will be changed by a presenter object that is reporting the
-        // results from the use case. The ViewModels are observable, and will
-        // be observed by the Views.
-        StartViewModel startViewModel = new StartViewModel();
-        LoginViewModel loginViewModel = new LoginViewModel();
-        SignupViewModel signupViewModel = new SignupViewModel();
-        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
-        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
-        MenuViewModel menuViewModel = new MenuViewModel();
-        NewGameViewModel newGameViewModel = new NewGameViewModel();
-        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
-        EndGameViewModel endGameViewModel = new EndGameViewModel();
-        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
-        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
-        MakeMoveViewModel makeMoveViewModel1 = new MakeMoveViewModel();
-
-
-        // testing userDAO
-        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-
-        UserDAO userDataAccessObject;
-        try {
-            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-                    "smartsudoku", "user", new CommonUserFactory());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-
-        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        views.add(startView, startView.viewName);
-
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
-        views.add(signupView, signupView.viewName);
-
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel1, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
-        views.add(loginView, loginView.viewName);
-
-        // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel1);
-        views.add(menuView, menuView.viewName);
-
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel1, userDataAccessObject);
-        views.add(pausedGameView, pausedGameView.viewName);
-
-        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, loginViewModel, spotifyViewModel, new SpotifyDAO() );
-        views.add(newGameView, newGameViewModel.getViewName());
-
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-        views.add(leaderboardView, leaderboardViewModel.getViewName());
-
-        EndGameController endGameController1 = new EndGameController(new EndGameInteractor(userDataAccessObject, new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel)));
-        PauseGameController pauseGameController1 = new PauseGameController(new PauseGameInteractor(userDataAccessObject, new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel)));
-        MakeMoveController makeMoveController1 = new MakeMoveController(new MakeMoveInteractor(userDataAccessObject, new MakeMovePresenter(makeMoveViewModel1, viewManagerModel)));
-
-        BoardView boardView = new BoardView(pauseGameController1, pauseGameViewModel, endGameController1, endGameViewModel, playGameViewModel1, makeMoveViewModel1, makeMoveController1);
-        views.add(boardView, boardView.viewName);  // TODO: link neccessary views and viewmodels
-
-        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
-        viewManagerModel.firePropertyChanged();
-
-        application.pack();
-        application.setVisible(true);
-    }
+    private final LabelTextPanel rowInfo;
+    private final LabelTextPanel columnInfo;
+    private final LabelTextPanel valueInfo;
 
     public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController, PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
@@ -183,6 +101,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         playGameViewModel.addPropertyChangeListener(this);
         easyGameViewModel.addPropertyChangeListener(this);
+        // makeMoveViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
 
         // Creating the Title of the View
@@ -286,21 +205,21 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         this.add(startPlayingPanel);
 
-        LabelTextPanel rowInfo = new LabelTextPanel(
+        rowInfo = new LabelTextPanel(
                 new JLabel(EasyGameViewModel.ROW_LABEL), rowInputField);
         rowInfo.setFont(new Font("Verdana", Font.BOLD, 16));
         rowInfo.setBackground(white);
         rowInfo.setForeground(darkblue);
         this.add(rowInfo);
 
-        LabelTextPanel columnInfo = new LabelTextPanel(
+        columnInfo = new LabelTextPanel(
                 new JLabel(EasyGameViewModel.COLUMN_LABEL), columnInputField);
         columnInfo.setFont(new Font("Verdana", Font.BOLD, 16));
         columnInfo.setBackground(white);
         columnInfo.setForeground(darkblue);
         this.add(columnInfo);
 
-        LabelTextPanel valueInfo = new LabelTextPanel(
+        valueInfo = new LabelTextPanel(
                 new JLabel(EasyGameViewModel.VALUE_LABEL), valueInputField);
         valueInfo.setFont(new Font("Verdana", Font.BOLD, 16));
         valueInfo.setBackground(white);
@@ -453,7 +372,12 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                     // if everything is fine, update the view
                                     else {
                                         // calling the controller to scramble the board
-                                        makeMoveController.execute(enteredNum, x, y, playGameViewModel.getState().getCurrentGame());
+                                        makeMoveController.execute(enteredNum, x, y, playGameViewModel.getState().getCurrentGame(), currentState.getUserName());
+
+                                        // if makeMoveController did not affect it's board state then the input was wrong
+                                        if (makeMoveViewModel.getState().getGameBeingPlayed().getCurrBoard() == currentState.getCurrentGame().getCurrBoard()) {
+                                            JOptionPane.showMessageDialog(board, "Your Input Was Incorrect.\nYou've Lost A life\nTry Again");
+                                        }
                                         playGameViewModel.getState().setCurrentGame(makeMoveViewModel.getState().getGameBeingPlayed());
 
                                         // recreate the board based on the new scrambled board
@@ -462,13 +386,13 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
                                         if (playGameViewModel.getState().getCurrentGame().getCurrBoard().noSpacesLeft()) {
                                             JOptionPane.showMessageDialog(board, " Congratulations!!! You Solved The Puzzle!!!");
-                                            endGameController.execute(
-                                                    currentState.getUserName(),
-                                                    currentState.getCurrentGame(),
-                                                    currentState.getTime(),
-                                                    currentState.getLives(),
-                                                    currentState.getScores()
-                                            );
+//                                            endGameController.execute(
+//                                                    currentState.getUserName(),
+//                                                    currentState.getCurrentGame(),
+//                                                    currentState.getTime(),
+//                                                    currentState.getLives(),
+//                                                    currentState.getScores()
+//                                            );
                                         }
                                     }
 
@@ -550,6 +474,23 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("PLAYGAMESTATE")) {
             boardReset(buttons, timerLabel);
+        }
+
+        if (evt.getPropertyName().equals("MAKEMOVESTATE")) {
+            if (makeMoveViewModel.getState().isGameFinishedWin() || makeMoveViewModel.getState().isGameFinshedLost()) {
+                endGameController.execute(
+                        currentState.getUserName(),
+                        currentState.getCurrentGame(),
+                        currentState.getTime(),
+                        currentState.getLives(),
+                        currentState.getScores()
+                );
+            }
+
+            if (makeMoveViewModel.getState().isUserInputWrong()) {
+                boardReset(buttons, timerLabel);
+                JOptionPane.showMessageDialog(board, "Move Inputted is Incorrect.\n You've Lost a Life. \n Try Again.");
+            }
         }
     }
 }

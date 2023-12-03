@@ -318,8 +318,11 @@ public class HardBoard implements Board {
     public HardBoard makeMove(int x, int y, int move) {
         HashMap<Integer, Boolean> value = new HashMap<>();
         value.put(move, true);
-        this.currBoard[y][x] = (value);
-        return this;
+        String boardAsString = this.toStringPause();
+        HardBoard newBoard = new HardBoard(boardAsString);
+        newBoard.currBoard[y][x] = value;
+
+        return newBoard;
     }
 
     /**
