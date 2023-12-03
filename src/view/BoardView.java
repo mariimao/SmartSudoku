@@ -362,19 +362,18 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
-                            EndGameState endGameState = endGameViewModel.getState();
-                            endGameState.setUser(new MenuState().getUsername());
-                            endGameState.setTime(currentState.getTimePlayed());
+                            currentState.setTime(currentState.getTimePlayed());
                             endGameController.execute(
-                                    endGameState.getUser(),
-                                    endGameState.getEndGame(),
-                                    endGameState.getTime(),
-                                    endGameState.getLives(),
+                                    currentState.getUserName(),
+                                    currentState.getCurrentGame(),
+                                    currentState.getTime(),
+                                    currentState.getLives(),
                                     currentState.getScores());
                         }
                     }
                 }
         );
+
 
         pauseGame.addActionListener(
                 new ActionListener() {
@@ -464,6 +463,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                         System.out.println(Arrays.deepToString(currentState.getCurrentGame().getCurrBoard().getSolutionBoard()));
 
                                         currentState.setCurrentGame(makeMoveController.execute(Integer.parseInt(enteredNumber), x, y, currentState.getCurrentGame()));
+                                        lives.setText("LIVES: ".concat(String.valueOf(currentState.getCurrentGame().getLives())));
 
                                         boardReset(buttons, timerLabel);
 
