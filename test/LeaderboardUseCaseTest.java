@@ -1,5 +1,5 @@
 import data_access.UserDAO;
-import database.UserDAOTest;
+import data_access.UserDAOTest;
 import interface_adapter.leaderboard.LeaderboardPresenter;
 import org.junit.Before;
 import org.junit.Test;

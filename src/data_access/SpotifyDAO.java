@@ -1,7 +1,9 @@
 package data_access;
 
 import okhttp3.*;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import use_case.spotify.SpotifyDataAccessInterface;
 
 import java.io.IOException;
@@ -9,21 +11,27 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Objects;
 
+/**
+ * A data access object for spotify making use of the spotify API
+ */
 public class SpotifyDAO implements SpotifyDataAccessInterface {
 
 
     private static final String API_URL = "https://accounts.spotify.com/api/token";
     // load API_TOKEN from env variable.
     private static final String API_TOKEN =
-            "BQDzgzG3ta5WRw50Uiv5gNmS4E3QwtLdRoUJo7xjTjgM675wg978w5f_PGRjWSANNGGUdmlyyr9ZSKcoJrwZ7N-AP869w4YT-gWGhnkcI58SlzLAaAwXSdSBA8JFmtU7GzTrsfcW5f7ReuMgp6O7XDrG685GFtxG889mlEVU5XMftG_xQXdAWA";
+            "BQDzgzG3ta5WRw50Uiv5gNmS4E3QwtLdRoUJo7xjTjgM675wg978w5f_PGRjWSANNGGUdmlyyr9ZSKcoJrwZ7N-AP869w4YT-" +
+                    "gWGhnkcI58SlzLAaAwXSdSBA8JFmtU7GzTrsfcW5f7ReuMgp6O7XDrG685GFtxG889mlEVU5XMftG_xQXdAWA";
     private static final String CLIENT_ID = "ba373bd1e8e44eecb52e192d0fbac238";
     private static final String CLIENT_SECRET = "d99a71ede58b40179cf0946792c7123f";
     private final String client_id;
     private final String client_secret;
-
+    private final String refresh_token;
     private String current_token;
-    private String refresh_token;
 
+    /**
+     * Initializes a new SpotifyDAO object.
+     */
     public SpotifyDAO() {
         this.client_id = CLIENT_ID;
         this.client_secret = CLIENT_SECRET;
@@ -31,27 +39,37 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         this.refresh_token = "AQDkEZahVWGy-Hamvdi6NXFqLGQQPXSDmELmRGEZnISrfqUkZH4D8Rw11cp3P--ShzWS_e2yA-TZS8fXJTzGekELnkIdWUNN8K3i931y_Exo0aBdR7R18CVDMeKvvR33uO4";
     }
 
+    /**
+     * @return the client id
+     */
     public String getClientId() {
         return this.client_id;
     }
 
+    /**
+     * @return the client secret
+     */
     public String getClientSecret() {
         return this.client_secret;
     }
 
+    /**
+     * @return the api token
+     */
     public String getApiToken() {
         return this.current_token;
     }
 
+    /**
+     * @return returns the access code
+     */
     public String requestAuthorization() {
-        // returns access code
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
-        String CLIENT_ID = "ba373bd1e8e44eecb52e192d0fbac238";
         String scope = "app-remote-control streaming user-read-playback-state";
-        String jsonBody = "https://accounts.spotify.com/authorize"+
+        String jsonBody = "https://accounts.spotify.com/authorize" +
                 "?response_type=code" +
-                "&client_id="+ CLIENT_ID +
+                "&client_id=" + client_id +
                 "&scope=" + scope +
                 "&redirect_uri=http://localhost:8888/callback";
 
@@ -72,6 +90,9 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
     }
 
+    /**
+     * @return refresh token
+     */
     public String getRefreshToken() {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -98,10 +119,13 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         }
     }
 
+    /**
+     * @return the access code
+     */
     public String getAccessCode() {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
-        String jsonBody = "grant_type=client_credentials&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET;
+        String jsonBody = "grant_type=client_credentials&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
         RequestBody requestBody = RequestBody.create(MediaType.get("application/x-www-form-urlencoded"), jsonBody);
         Request request = new Request.Builder()
                 .url("https://accounts.spotify.com/api/token")
@@ -120,6 +144,10 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         }
     }
 
+    /**
+     * @param id the song identification
+     * @return returns the song artists name
+     */
     public String getArtistname(String id) {
         // Just for testing api calling
         OkHttpClient client = new OkHttpClient().newBuilder()
@@ -143,6 +171,10 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         }
     }
 
+    /**
+     * @param id the song identification
+     * @return returns the track name
+     */
     public String getTrackName(String id) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -168,6 +200,10 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         }
     }
 
+    /**
+     * @param id the song identification
+     * @return returns the track duration
+     */
     public int getTrackDuration(String id) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -192,13 +228,17 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         }
     }
 
+    /**
+     * @param search the search phrase
+     * @return a list of song ids
+     */
     public ArrayList<String> getSuggestions(String search) {
         // should return a list of id suggestions
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
         // currently only searching by type
-        String input = "https://api.spotify.com/v1/search?q=remaster%2520track%3A"+search+"%2520artist%3A&type=track&market=US&include_external=audio";
+        String input = "https://api.spotify.com/v1/search?q=remaster%2520track%3A" + search + "%2520artist%3A&type=track&market=US&include_external=audio";
 
         Request request = new Request.Builder()
                 .url(input)
@@ -213,12 +253,12 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
             JSONObject tracks = responseBody.getJSONObject("tracks");
             JSONArray items = tracks.getJSONArray("items");
 
-            for (int i = 0; i < items.length(); i++ ) {
+            for (int i = 0; i < items.length(); i++) {
                 JSONObject item = items.getJSONObject(i);
                 String id = item.getString("id");
                 songs.add(id);
                 // checking if it is the correct id
-                assert(Objects.equals(getTrackName(id), item.getString("name")));
+                assert (Objects.equals(getTrackName(id), item.getString("name")));
             }
             return songs;
 
@@ -228,11 +268,15 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
         }
     }
 
+    /**
+     * Gets the song playback
+     *
+     * @param id the song identification
+     */
     public void getPlayback(String id) {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
-        // System.out.println(access_token);
         Request request = new Request.Builder()
                 .url("https://api.spotify.com/v1/tracks/" + id)
                 .addHeader("Authorization", "Bearer " + (access_token))
@@ -246,26 +290,9 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
             int duration = responseBody.getInt("duration_ms");
 
 
-
         } catch (IOException | JSONException e) {
             throw new RuntimeException(e);
         }
-    }
-
-
-    public static void main(String[] args) {
-        // TESTING API CALLS
-
-
-        String id = "5069JTmv5ZDyPeZaCCXiCg?si=cb76yjogSJ6xYKQ0uyFcWA"; // wave to earth artist name
-//        String songid = "4YaKlkNVJNbrIqN82EKFsQ?si=898dc4d49ee24c9d"; // A thought on an autumn night
-//        String search = "bad idea";
-        SpotifyDAO spotifyDAO = new SpotifyDAO();
-        //System.out.println(spotifyDAO.requestAuthorization());
-       //System.out.println(spotifyDAO.getAccessCode());
-        System.out.println(spotifyDAO.getArtistname(id));
-        System.out.println(spotifyDAO.getRefreshToken());
-
     }
 
 }
