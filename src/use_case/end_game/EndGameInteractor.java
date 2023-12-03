@@ -1,8 +1,12 @@
 package use_case.end_game;
 
 import entity.Scores;
+import entity.Scores;
 import entity.board.GameState;
 import entity.user.User;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class EndGameInteractor implements EndGameInputBoundary {
     final EndGameDataAccessInterface endGameDataAccessInterface;
@@ -15,11 +19,16 @@ public class EndGameInteractor implements EndGameInputBoundary {
 
     @Override
     public void execute(EndGameInputData endGameInputData) {
-        User user = endGameDataAccessInterface.get(endGameInputData.getUsername());
-        Scores score = new Scores(endGameInputData.getTime(), endGameInputData.spacesLeft(), endGameInputData.getLives(), endGameInputData.isCompleted());
-        user.setFinalGame(endGameInputData.getCurrent_state());
-        boolean useCaseSuccess = endGameDataAccessInterface.setFinalGame(user);
-        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score, useCaseSuccess);
+        String user = endGameInputData.getUsername();
+        boolean completed = true; // why not
+        int lives = endGameInputData.getLives();
+        int timePlayed = endGameInputData.getTime();
+        Scores score = new Scores();
+        score.setScores(timePlayed, 0, lives, completed); //no deduct on boards
+        endGameDataAccessInterface.addScore(endGameDataAccessInterface.get(user), LocalTime.from(LocalDateTime.now()), (Integer) timePlayed);
+
+        // akunna: i had to make score point to something and also change the user name into a user
+        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score.getScores());
         endGamePresenter.prepareSuccessView(endGameOutputData);
     }
 }

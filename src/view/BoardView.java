@@ -3,7 +3,6 @@ package view;
 import app.*;
 import data_access.SpotifyDAO;
 import data_access.UserDAO;
-import entity.GameTimer;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
@@ -12,14 +11,13 @@ import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
-import interface_adapter.get_time.GetTimeController;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.make_move.MakeMoveController;
 import interface_adapter.make_move.MakeMovePresenter;
 import interface_adapter.make_move.MakeMoveViewModel;
+import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGamePresenter;
@@ -42,6 +40,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,9 +71,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton makeMove;
     private final JButton startPlaying;
     private final JButton rules;
-    private final JLabel timer;
-
     private final JPanel buttons;
+    private final JLabel timerLabel;
 
     public static void main(String[] args) {
         // Build the main program window, the main panel containing the
@@ -206,41 +204,32 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         lives.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.add(lives);
 
+        timerLabel = new JLabel();
+        String start = LocalDateTime.now().toString(); // initialize outside of action listener
+        currentState.setStartTime(LocalDateTime.parse(start));
 
-        // Add Timer to GUI
-        timer = new JLabel(); // TODO: implement timer
-        timer.setText("Current Time: ".concat(String.valueOf(new GameTimer(true).getDisplayTimeData())));
-        timer.setFont(new Font("Consolas", Font.ITALIC, 20));
-        timer.setBackground(darkblue);
-        timer.setForeground(black);
-        timer.setAlignmentX(Component.LEFT_ALIGNMENT);
-
-        Timer timer1 = new Timer(1000, new ActionListener() {
-            private int song_length = 180;
+        //TODO: it starts counting from newGameView, not sure how to fix
+        // ALSO, cannot pause count when pressing pause
+        Timer timer = new Timer(1000, new ActionListener() { //delay is 1 second
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (song_length == 0) {
-                    ((Timer)e.getSource()).stop(); // stops timer
-                } else {
-                    // add use case that retrieves info about time
-//                    song_length -= 1;
-//                    long current_time = System.currentTimeMillis();
-//                    UpdateTimer.execute(current_time); // update current time to csv file
-//                    long time_remaining = song_length - current_time;
-//                    GetTimer.execute(time_remaining); // retrieves output data that is converted into mintues and seconds
-//
-//                    timer.setText(time_remaining);
-                }
+                currentState.setTimePlayed(currentState.getTimePlayed() + 1); // increases time played every 1 sec
+                int hours = currentState.getTimePlayed() / 60 / 60;
+                int minutes = currentState.getTimePlayed() / 60;
+                int seconds = currentState.getTimePlayed() % 60;
+                timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
             }
         });
-        // TODO: add use case that makes timer object
-        timer1.start();
-        long start_time = System.currentTimeMillis();
-        //SetTimerController.execute(start_time);
+        timer.setRepeats(true);
+        timer.start();
 
-
-        this.add(timer);
-
+//        // Add Timer to GUI
+        //timer.setText();
+        timerLabel.setFont(new Font("Consolas", Font.ITALIC, 20));
+        timerLabel.setBackground(darkblue);
+        timerLabel.setForeground(black);
+        timerLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        this.add(timerLabel);
 
         // Add Buttons to GUI
         buttons = new JPanel();
@@ -289,7 +278,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.add(buttons);
 
         buttons.setVisible(false);
-        timer.setVisible(false);
+        timerLabel.setVisible(false);
         lives.setVisible(false);
 
         rules.addActionListener(
@@ -325,46 +314,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                 if (e.getSource().equals(startPlaying)) {
                     // Trigger the property change event when the button is clicked
                     firePropertyChange("startPlaying", false, true);
-                    boardReset(buttons, timer);
-//                    // Set the layout manager to BoxLayout with Y_AXIS
-//                    BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
-//                    GameState newGameState = currentState.getCurrentGame();
-//                    if (currentState.getDifficulty() == 1) {size = 4;}
-//                    else {size = 9;}
-//                    board.removeAll();
-//                    box = new JTextField[size][size];
-//                    board.setLayout(new GridLayout(size, size));
-//
-//                    ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-//                    int i = 0;
-//                    int cellsize = 5;
-//                    JTextField lastFocusedTextField;
-//                    lastFocusedTextField = null;
-//
-//                    for (int row = 0; row < size; row++) {
-//                        for (int col = 0; col < size; col++) {
-//                            JTextField number = new JTextField();
-//                            number.setSize(new Dimension(cellsize, cellsize));
-//                            number.setHorizontalAlignment(JTextField.CENTER);
-//                            number.setFont(new Font("Arial", Font.PLAIN, 20));
-//
-//                            if (values.get(i) != 0) {
-//                                number.setText(String.valueOf(values.get(i)));
-//                                number.setEditable(false);
-//                            }
-//
-//                            box[row][col] = number;
-//                            board.add(number);
-//                            i++;
-//                        }
-//                    }
-//                    board.revalidate();
-//                    board.repaint();
-//                    startPlaying.setVisible(false);
-//                    buttons.setVisible(true);
-//                    timer.setVisible(true);
-//                    lives.setVisible(true);
-//                    BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+                    boardReset(buttons, timerLabel);
                 }
             }
         });
@@ -374,13 +324,15 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
+                            EndGameState endGameState = endGameViewModel.getState();
+                            endGameState.setUser(new MenuState().getUsername());
+                            endGameState.setTime(currentState.getTimePlayed());
                             endGameController.execute(
-                                    currentState.getUserName(),
-                                    currentState.getCurrentGame(),
-                                    currentState.getTime(),
-                                    currentState.getLives(),
-                                    currentState.getScores()
-                            );
+                                    endGameState.getUser(),
+                                    endGameState.getEndGame(),
+                                    endGameState.getTime(),
+                                    endGameState.getLives(),
+                                    currentState.getScores());
                         }
                     }
                 }
@@ -433,7 +385,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                             // Checks to see if the user inputted exactly one value
                             if (!(inputCount == 1)) {
                                 JOptionPane.showMessageDialog(board, "Please Enter Exactly One Value Per Round");
-                                boardReset(buttons, timer);
+                                boardReset(buttons, timerLabel);
                             }
                             else {
 
@@ -470,7 +422,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
                                         // recreate the board based on the new scrambled board
                                         // ASSUMPTION: playgameviewmodel.getState.currentGame has been set to the new scrambled board
-                                        boardReset(buttons, timer);
+                                        boardReset(buttons, timerLabel);
 
                                         if (playGameViewModel.getState().getCurrentGame().getCurrBoard().noSpacesLeft()) {
                                             JOptionPane.showMessageDialog(board, " Congratulations!!! You Solved The Puzzle!!!");
@@ -558,7 +510,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("PLAYGAMESTATE")) {
-            boardReset(buttons, timer);
+            boardReset(buttons, timerLabel);
         }
     }
 }

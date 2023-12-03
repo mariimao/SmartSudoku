@@ -5,20 +5,14 @@ import entity.board.GameState;
 import entity.user.User;
 
 public class EndGameOutputData {
-    private final User user;
-    private final Scores score;
-    private boolean useCaseFailed;
+    private final String user;
+    private final int score;
 
-    public EndGameOutputData(User user, Scores score, boolean useCaseFailed) {
+    public EndGameOutputData(String user, int score) {
 
         this.user = user;
         this.score = score;
-        this.useCaseFailed = useCaseFailed;
     }
-
-
-    public Scores getScore() {return score;}
-    public User getUser() {return user;}
-    public GameState getFinalGame() {return user.getFinalGame();}
-    public boolean isUseCaseFailed() {return useCaseFailed;}
+    public int getScore() {return score;}
+    public String getUser() {return user;}
 }

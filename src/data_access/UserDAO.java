@@ -280,19 +280,3 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         return null;
     }
 }
-
-
-/*
-  Temporary
-  GUIDES/DOCUMENTATION:
-  https://www.jetbrains.com/help/idea/convert-a-regular-project-into-a-maven-project.html
-  https://www.mongodb.com/products/tools/compass
-  https://www.mongodb.com/developer/languages/java/java-setup-crud-operations/#delete-documents
-  https://www.baeldung.com/java-mongodb
-  https://hevodata.com/learn/mongodb-java/#Step_10_Query_Documents
-
-  https://www.mongodb.com/docs/drivers/java/sync/v4.3/fundamentals/logging/
-  https://stackoverflow.com/questions/7421612/slf4j-failed-to-load-class-org-slf4j-impl-staticloggerbinder
-  https://www.slf4j.org/codes.html#StaticLoggerBinder
-  https://stackoverflow.com/questions/23775906/maven-dependency-and-logging-slf4j-and-log4j
- */

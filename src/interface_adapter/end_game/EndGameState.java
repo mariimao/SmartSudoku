@@ -8,41 +8,55 @@ import java.util.LinkedList;
 
 public class EndGameState {
     private String errorMessage = "";
-    private GameState finalGame = null;
-    private String user = null;
-    private Scores score = null;
+    private GameState endGame = null;
+    private String username = "";
+    private int time = 0;
+    private int lives = 0;
+    private int score = 0;
 
 
     public EndGameState() {
     }
 
-    public void setFinalGame(GameState gameState) {
-        finalGame = gameState;
+    public void setEndGame(GameState gameState) {
+        endGame = gameState;
     }
 
     public void setEndGameError(String e) {
         errorMessage = e;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setUser(String username) {
+        this.username = username;
     }
 
-    public void setScore(Scores score) {this.score = score;}
+    public void setTime(int time) {
+        this.time = time;
+    }
 
-    public GameState getFinalGame() {
-        return finalGame;
+    public void setScore(int score) {this.score = score;}
+
+    public void setLives(int lives) {this.lives = lives;}
+
+    public GameState getEndGame() {
+        return endGame;
     }
 
     public String getEndGameError() {
         return errorMessage;
     }
 
-    public Scores getScore() {
+    public int getTime() {
+        return time;
+    }
+
+    public int getScore() {
         return score;
     }
 
+    public int getLives() {return lives;}
+
     public String getUser() {
-        return user;
+        return username;
     }
 }

@@ -29,6 +29,8 @@ public class Scores {
         this.scores = current_score;
     }
 
+    public Scores() {}
+
     public int getScores() {
         return this.scores;
     }
@@ -41,7 +43,7 @@ public class Scores {
         int current_score = 400;
         // if board is completed
         if (!isCompleted) {
-            current_score = 300; // players lose 100 points if they don't complete the game
+           current_score = 300; // players lose 100 points if they don't complete the game
         } else {
             // deduct by how much time is left
             current_score = current_score - board_deduct;
