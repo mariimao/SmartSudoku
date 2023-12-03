@@ -7,7 +7,7 @@ import org.junit.Test;
 import use_case.end_game.EndGameInteractor;
 import view.EndGameView;
 
-public class EndGameUseCaseTest {
+public class EndGameTest {
 
     private EndGameInteractor endGameInteractor;
     @Before

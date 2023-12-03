@@ -1,5 +1,3 @@
-package use_case;
-
 import interface_adapter.ViewManagerModel;
 import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameViewModel;

@@ -3,7 +3,6 @@ import database.UserDAOTest;
 import interface_adapter.leaderboard.LeaderboardPresenter;
 import org.junit.Before;
 import org.junit.Test;
-import use_case.UseCaseTestObjects;
 import use_case.leaderboard.LeaderboardInteractor;
 
 public class LeaderboardUseCaseTest {
