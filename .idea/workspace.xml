@@ -4,27 +4,117 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973ec056-f744-46ce-b7a3-40968cd9639e" name="Changes" comment="deleted user_move use case">
-      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+    <list default="true" id="f504582d-aebb-4b86-b5f3-29eac2c87bb8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="main" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "git-widget-placeholder": "Javadoc",
     "git-widget-placeholder": "board__view",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="added javadoc to signup use case">
+      <option name="closed" value="true" />
+      <created>1701663626563</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701663626563</updated>
+    </task>
+    <task id="LOCAL-00002" summary="added javadoc to login use case">
+      <option name="closed" value="true" />
+      <created>1701664487890</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701664487890</updated>
+    </task>
+    <task id="LOCAL-00003" summary="added api call that returns album id based on track id">
+      <option name="closed" value="true" />
+      <created>1701665125772</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1701665125772</updated>
+    </task>
+    <task id="LOCAL-00004" summary="updated javadoc for spotify use case">
+      <option name="closed" value="true" />
+      <created>1701666592389</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1701666592389</updated>
+    </task>
+    <task id="LOCAL-00005" summary="added position for album">
+      <option name="closed" value="true" />
+      <created>1701666851191</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1701666851191</updated>
+    </task>
+    <task id="LOCAL-00006" summary="editing added position for album to integer">
+      <option name="closed" value="true" />
+      <created>1701668944836</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1701668944836</updated>
+    </task>
+    <task id="LOCAL-00007" summary="added javadoc for signup and start view">
+      <option name="closed" value="true" />
+      <created>1701672115061</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1701672115061</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added javadoc to signup use case" />
+    <MESSAGE value="added javadoc to login use case" />
+    <MESSAGE value="added api call that returns album id based on track id" />
+    <MESSAGE value="updated javadoc for spotify use case" />
+    <MESSAGE value="added position for album" />
+    <MESSAGE value="editing added position for album to integer" />
+    <MESSAGE value="added javadoc for signup and start view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added javadoc for signup and start view" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SmartSudoku$HardBoardTest.ic" NAME="HardBoardTest Coverage Results" MODIFIED="1701385637532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$LeaderboardUseCaseTest.ic" NAME="LeaderboardUseCaseTest Coverage Results" MODIFIED="1701655377792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$test_in_SmartSudoku.ic" NAME="test in SmartSudoku Coverage Results" MODIFIED="1701385692086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$SpotifyUseCaseTest.ic" NAME="SpotifyUseCaseTest Coverage Results" MODIFIED="1701654581973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701385664456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>database.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuDAOTest.ic" NAME="SudokuDAOTest Coverage Results" MODIFIED="1701657061556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>data_access.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$All_in_SmartSudoku.ic" NAME="All in SmartSudoku Coverage Results" MODIFIED="1701657980849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$data_access_in_SmartSudoku.ic" NAME="data_access in SmartSudoku Coverage Results" MODIFIED="1701657069050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>data_access.*</FILTER>
     <task id="LOCAL-00001" summary="deleted user_move use case">
       <option name="closed" value="true" />
       <created>1701663791485</created>

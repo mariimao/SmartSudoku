@@ -22,6 +22,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * View for the MenuView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class MenuView  extends JPanel implements ActionListener, PropertyChangeListener{
 
     public final String viewName = "menu view";
@@ -50,6 +53,18 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final Color white = Color.white;
     private final Color black = Color.black;
 
+    /**
+     * Constructor for Menu View
+     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
+     * @param menuViewModel the view model for the menu usecase, is a MenuViewModel object
+     * @param resumeGameViewModel the view model for the resume usecase, is a ResumeGameViewModel object
+     * @param leaderboardController the controller for the leaderboard, is LeaderboardController object
+     * @param leaderboardViewModel the view model for the leaderboard, is LeaderboardViewModel object
+     * @param menuController the controller for the menu, is MenuController object
+     * @param newGameController the controller for new game, is NewGameController object
+     * @param newGameViewModel the view model for new game, is NewGameViewModel object
+     * @param resumeGameController the controller for resuming the game, is ResumeGameController object
+     */
     public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController,
                     ResumeGameViewModel resumeGameViewModel, NewGameViewModel newGameViewModel, NewGameController newGameController,
                     LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController, LoginViewModel loginViewModel) {
@@ -149,11 +164,19 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
 
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 
