@@ -30,7 +30,9 @@ public class PlayMusicInteractor implements PlayMusicInputBoundary{
             String name = playMusicDataAccessInterface.getTrackName(songID);
             ArrayList<String> devices = spotifyPlayer.getDevices();
             if (!devices.isEmpty()) {
-                spotifyPlayer.play(album_id, positions, devices.get(0));
+                String token2 = playMusicDataAccessInterface.getRefreshToken();
+                SpotifyPlayer spotifyPlayer1 = new SpotifyPlayer(token2);
+                spotifyPlayer1.play(album_id, positions, devices.get(0));
 
                 PlayMusicOutputData playMusicOutputData = new PlayMusicOutputData(name);
                 playMusicPresenter.prepareSuccessView(playMusicOutputData);
