@@ -7,5 +7,8 @@ import java.util.Map;
 
 public interface LeaderboardDataAccessInterface {
     boolean existsByName(String username);
+
+    void addUser(User user);
+
     Map<String, User> getAccounts();
 }
