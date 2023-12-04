@@ -1,6 +1,5 @@
 package entity.board;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 /**

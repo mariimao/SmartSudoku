@@ -41,6 +41,7 @@ public class UserDAOTest {
         userDAO.addUser(user);
 
         assertTrue(userDAO.existsByName("testUser"));
+        assertFalse(userDAO.getAccounts().isEmpty());
         assertEquals(user, userDAO.get("testUser"));
     }
 
@@ -85,11 +86,24 @@ public class UserDAOTest {
 
     }
 
+    @Test
     public UserDAO getUserDAO() {
         return userDAO;
     }
 
     // Add more test methods based on your requirements
+    @Test
+    public void testDeleteAccount() {
+        Map<LocalTime, Integer> scores = new HashMap<>();
+        scores.put(LocalTime.now(), 4);
 
+        CommonUser user = new CommonUser("testUser", "testPassword", scores);
+        String userName = "testUser";
+        userDAO.addUser(user);
+
+        userDAO.delete(userName);
+
+        assertFalse(userDAO.existsByName("testUser"));
+    }
 
 }

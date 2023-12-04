@@ -17,6 +17,12 @@ public interface LeaderboardDataAccessInterface {
      */
     boolean existsByName(String username);
 
+    /**
+     * Adds a new user.
+     * @param user is a User type
+     */
+    void addUser(User user);
+  
     /* ----- Getters and setters ----- */
     Map<String, User> getAccounts();
 }

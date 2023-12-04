@@ -1,8 +1,6 @@
 package view;
 
-import interface_adapter.signup.SignupState;
 import interface_adapter.start.StartController;
-import interface_adapter.start.StartState;
 import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
@@ -11,10 +9,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import view.CustomButton;
 
 public class StartView extends JPanel implements ActionListener, PropertyChangeListener {
 

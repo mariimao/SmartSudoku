@@ -1,19 +1,15 @@
 package app;
 
-import data_access.UserDAO;
-import entity.user.CommonUserFactory;
-import entity.user.UserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.signup.SignupController;
-import interface_adapter.signup.SignupPresenter;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartController;
 import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
-import use_case.signup.SignupInputBoundary;
-import use_case.signup.SignupOutputBoundary;
-import use_case.start.*;
+import use_case.start.StartInputBoundary;
+import use_case.start.StartInteractor;
+import use_case.start.StartOutputBoundary;
+import use_case.start.StartUserDataAccessInterface;
 import view.StartView;
 
 import javax.swing.*;

@@ -3,9 +3,6 @@ package app;
 import data_access.SudokuDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.easy_game.EasyGameController;
-import interface_adapter.easy_game.EasyGamePresenter;
-import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameViewModel;
@@ -31,8 +28,6 @@ import use_case.play_game.PlayGameDataAccessInterface;
 import use_case.play_game.PlayGameInputBoundary;
 import use_case.play_game.PlayGameInteractor;
 import use_case.make_move.MakeMoveBoardDataAccessInterface;
-import use_case.user_move.UserMoveDataAccessInterface;
-import use_case.user_move.UserMoveInteractor;
 import view.BoardView;
 
 /**
@@ -51,7 +46,6 @@ public class BoardUseCaseFactory {
      * Creates a new BoardView object.
      *
      * @param viewManagerModel     is a new ViewManagerModel object
-     * @param easyGameViewModel    is a new EasyGameViewModel object
      * @param pauseGameViewModel   is a new PauseGameViewModel object
      * @param endGameViewModel     is a new EndGameViewModel object
      * @param leaderboardViewModel is a new LeaderboardViewModel object
@@ -61,20 +55,19 @@ public class BoardUseCaseFactory {
      * @param userDataAccessObject is a new UserDataAccessObject
      * @return BoardView object, with parameters for newly created relevant models and controllers
      */
-    public static BoardView create(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel,
+    public static BoardView create(ViewManagerModel viewManagerModel,
                                    PauseGameViewModel pauseGameViewModel, EndGameViewModel endGameViewModel,
                                    LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,
                                    StartViewModel startViewModel, PlayGameViewModel playGameViewModel, MakeMoveViewModel
                                            makeMoveViewModel,
                                    UserDAO userDataAccessObject, SudokuDAO boardDataAccessObject) {
 
-        EasyGameController easyGameController = createUserEasyGameUseCase(viewManagerModel, easyGameViewModel, userDataAccessObject, boardDataAccessObject, endGameViewModel);
         PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject);
         EndGameController endGameController = createUserEndGameUseCase(viewManagerModel, leaderboardViewModel, endGameViewModel, menuViewModel, userDataAccessObject);
         PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);
         MakeMoveController makeMoveController = createUserMakeMoveUseCase(userDataAccessObject, makeMoveViewModel, viewManagerModel, boardDataAccessObject);
 
-        return new BoardView(easyGameViewModel, easyGameController, pauseGameController, pauseGameViewModel, endGameController, endGameViewModel, playGameViewModel,
+        return new BoardView(pauseGameController, pauseGameViewModel, endGameController, endGameViewModel, playGameViewModel,
                 makeMoveController);
 
 
@@ -118,20 +111,6 @@ public class BoardUseCaseFactory {
         return new PauseGameController(pauseGameInteractor);
     }
 
-    /**
-     * Helper function for the BoardView constructor. Creates a new EasyGameController object.
-     *
-     * @param viewManagerModel            is a ViewManagerModel object
-     * @param easyGameViewModel           is an EasyGameViewModel object
-     * @param userMoveDataAccessInterface is a UserMoveDataAccessInterface object
-     * @param endGameViewModel            is an EndGameViewModel object
-     * @return an EasyGameController object, to be passed into the constructor
-     */
-    private static EasyGameController createUserEasyGameUseCase(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel, UserMoveDataAccessInterface userMoveDataAccessInterface, MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface, EndGameViewModel endGameViewModel) {
-        EasyGamePresenter easyGamePresenter = new EasyGamePresenter(viewManagerModel, easyGameViewModel, endGameViewModel);
-        UserMoveInteractor userMoveInteractor = new UserMoveInteractor(userMoveDataAccessInterface, makeMoveBoardDataAccessInterface, easyGamePresenter);
-        return new EasyGameController(userMoveInteractor);
-    }
 
     /**
      * Helper function for the BoardView constructor. Creates a new PlayGameController object.
