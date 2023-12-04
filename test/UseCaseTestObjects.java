@@ -3,7 +3,6 @@ import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.make_move.MakeMoveViewModel;
-import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
@@ -99,7 +98,6 @@ public class UseCaseTestObjects {
     public NewGameViewModel getNewGameViewModel() {
         return newGameViewModel;
     }
-
 
     public MakeMoveViewModel getMakeMoveViewModel() {
         return makeMoveViewModel;

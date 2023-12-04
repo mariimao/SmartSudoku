@@ -1,15 +1,25 @@
+import app.LeaderboardUseCaseFactory;
+import app.PausedGameUseCaseFactory;
 import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import data_access.UserDAOTest;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import entity.user.UserFactory;
+import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardPresenter;
+import interface_adapter.leaderboard.LeaderboardViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.leaderboard.*;
 import use_case.spotify.*;
+import view.LeaderboardView;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -20,13 +30,22 @@ public class LeaderboardUseCaseTest {
 
     private LeaderboardInteractor leaderboardInteractor;
     private LeaderboardDataAccessInterface userDataBase;
+    private LeaderboardView leaderboardView;
+    private Component[] leaderboardComponents;
     @Before
     public void init() {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
-        UserDAO userDAO = new UserDAOTest().getUserDAO();
+        UserDAO userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                "smartsudoku", "user", new CommonUserFactory());
         LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getMenuViewModel());
         leaderboardInteractor = new LeaderboardInteractor(userDAO, leaderboardPresenter);
+
+        leaderboardView = LeaderboardUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
+                useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getMenuViewModel(),
+                userDAO);
+
+        leaderboardComponents = leaderboardView.getComponents();
     }
 
     @Test
@@ -65,7 +84,8 @@ public class LeaderboardUseCaseTest {
         };
 
         LeaderboardInteractor interactor = new LeaderboardInteractor(userDataAccessObject, leaderboardPresenter);
-        interactor.execute(inputData);
+        LeaderboardController leaderboardController = new LeaderboardController(interactor);
+        leaderboardController.execute("name", "rank", true, false);
     }
 
     @Test
@@ -137,6 +157,48 @@ public class LeaderboardUseCaseTest {
 
         LeaderboardInteractor interactor = new LeaderboardInteractor(userDataAccessObject, leaderboardPresenter);
         interactor.execute(inputData);
+    }
+
+    @Test
+    public void testLeaderboardView() {
+        JFrame jf = new JFrame();
+        jf.setContentPane(leaderboardView); jf.pack(); jf.setVisible(true);
+        JPanel buttons = (JPanel) leaderboardComponents[1];
+        view.CustomButton resultsButton = (view.CustomButton) buttons.getComponent(0);
+        view.CustomButton menuButton = (view.CustomButton) buttons.getComponent(1);
+
+        createCloseTimer().start();
+        resultsButton.doClick();
+        menuButton.doClick();
+        System.out.println("Buttons clicked successfully");
+    }
+
+    private Timer createCloseTimer() {
+        ActionListener close = new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                Window[] windows = Window.getWindows();
+                for (Window window : windows) {
+
+                    if (window instanceof JDialog) {
+
+                        JDialog dialog = (JDialog)window;
+
+                        // this ignores old dialogs
+                        if (dialog.isVisible()) {
+                            window.dispose();
+                        }
+                    }
+                }
+            }
+
+        };
+
+        Timer t = new Timer(300, close);
+        t.setRepeats(false);
+        return t;
     }
 }
 
