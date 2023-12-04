@@ -64,7 +64,7 @@ public class MenuUseCaseFactory {
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
             ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject, playGameViewModel);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
-            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
+            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
             return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController, loginViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -104,8 +104,8 @@ public class MenuUseCaseFactory {
     }
 
     private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel,
-                                                             LeaderboardViewModel leaderboardViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
-        LeaderboardOutputBoundary leaderboardOutputBoundary = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel);
+                                                             LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
+        LeaderboardOutputBoundary leaderboardOutputBoundary = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel, menuViewModel);
         LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface,
                 leaderboardOutputBoundary);
 

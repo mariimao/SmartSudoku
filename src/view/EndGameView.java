@@ -144,7 +144,7 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
         NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, loginViewModel, spotifyViewModel, new SpotifyDAO() );
         views.add(newGameView, newGameViewModel.getViewName());
 
-        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
+        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
         EndGameController endGameController1 = new EndGameController(new EndGameInteractor(userDataAccessObject, new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel)));

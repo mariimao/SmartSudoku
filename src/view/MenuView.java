@@ -1,6 +1,7 @@
 package view;
 
 import entity.user.User;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardState;
 import interface_adapter.leaderboard.LeaderboardViewModel;
@@ -125,6 +126,8 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                             LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
                             String username = menuViewModel.getMenuState().getUsername(); // get username from menu
                             String sortingMethod = leaderboardState.getSortingMethod();
+                            leaderboardState.setUsername(username);
+                            leaderboardViewModel.setLeaderboardState(leaderboardState);
                             leaderboardController.execute(username, sortingMethod, false, false); // false from menu
                         }
                     }

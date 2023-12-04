@@ -106,7 +106,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
                     scores.put(LocalTime.now(), 0);
                 } else {
                     for (String time : stringScores.keySet()) {
-                        scores.put(LocalTime.parse(time), scores.get(time));
+                        scores.put(LocalTime.parse(time), stringScores.get(time));
                     }
                 }
 
