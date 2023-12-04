@@ -3,6 +3,7 @@ package view;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardState;
 import interface_adapter.leaderboard.LeaderboardViewModel;
+import interface_adapter.menu.MenuViewModel;
 
 import javax.swing.*;
 import javax.swing.Timer;
@@ -13,6 +14,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.time.LocalTime;
+import java.util.SortedMap;
 
 public class LeaderboardView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "leaderboard view";
