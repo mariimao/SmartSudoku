@@ -1,27 +1,14 @@
 package view;
 
-import app.LoginUseCaseFactory;
-import app.SignupUseCaseFactory;
-import app.StartUseCaseFactory;
-import data_access.UserDAO;
-import entity.user.CommonUser;
-import entity.user.CommonUserFactory;
-import entity.user.User;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
-import interface_adapter.menu.MenuPresenter;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGameState;
 import interface_adapter.resume_game.ResumeGameViewModel;
-import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartController;
-import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
-import use_case.menu.MenuInteractor;
-import use_case.start.StartInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -31,11 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 // when the game is paused I want it to move from the GameView to this one
 // It should have two buttons, "Go Back to Menu", "Log Out", "Resume Game
