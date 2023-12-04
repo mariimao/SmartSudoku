@@ -4,24 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="973ec056-f744-46ce-b7a3-40968cd9639e" name="Changes" comment="fixed end game bug but there's still an issue with saving the time of the score to the database">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/LeaderboardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/LeaderboardUseCaseFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/easy_game/EasyGameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/easy_game/EasyGamePresenter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/easy_game/EasyGameState.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/interface_adapter/easy_game/EasyGameViewModel.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveDataAccessInterface.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputBoundary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInputData.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveOutputBoundary.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveOutputData.java" beforeDir="false" />
+    <list default="true" id="973ec056-f744-46ce-b7a3-40968cd9639e" name="Changes" comment="deleted user_move use case">
+      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LeaderboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LeaderboardView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,11 +25,21 @@
   }
 }]]></component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="deleted user_move use case">
+      <option name="closed" value="true" />
+      <created>1701663791485</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701663791485</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fixed end game bug but there's still an issue with saving the time of the score to the database" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed end game bug but there's still an issue with saving the time of the score to the database" />
+    <MESSAGE value="deleted user_move use case" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted user_move use case" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701385664456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

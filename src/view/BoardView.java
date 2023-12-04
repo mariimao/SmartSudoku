@@ -8,9 +8,6 @@ import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.easy_game.EasyGameController;
-import interface_adapter.easy_game.EasyGameState;
-import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameState;
@@ -36,7 +33,6 @@ import use_case.end_game.EndGameInteractor;
 import use_case.make_move.MakeMoveInputData;
 import use_case.make_move.MakeMoveInteractor;
 import use_case.pause_game.PauseGameInteractor;
-import use_case.user_move.UserMoveInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -61,9 +57,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     public final String viewName = "PLAY GAME";
 
-    private final EasyGameViewModel easyGameViewModel;
-    private final EasyGameController easyGameController;
-
     private final PauseGameController pauseGameController;
     private final PauseGameViewModel pauseGameViewModel;
 
@@ -82,16 +75,11 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton rules;
     private final JPanel buttons;
     private final JLabel timerLabel;
-    private final JTextField rowInputField = new JTextField(1);
-    private final JTextField columnInputField = new JTextField(1);
-    private final JTextField valueInputField = new JTextField(1);
     private final MakeMoveController makeMoveController;
 
-    public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController, PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
+    public BoardView(PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
                                  PlayGameViewModel playGameViewModel, MakeMoveController makeMoveController) {
-        this.easyGameViewModel = easyGameViewModel;
-        this.easyGameController = easyGameController;
         this.pauseGameController = pauseGameController;
         this.pauseGameViewModel = pauseGameViewModel;
         this.endGameController = endGameController;
@@ -100,7 +88,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.makeMoveController = makeMoveController;
 
         playGameViewModel.addPropertyChangeListener(this);
-        easyGameViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
 
         // Creating the Title of the View
@@ -211,33 +198,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         this.add(startPlayingPanel);
 
-        LabelTextPanel rowInfo = new LabelTextPanel(
-                new JLabel(EasyGameViewModel.ROW_LABEL), rowInputField);
-        rowInfo.setFont(new Font("Verdana", Font.BOLD, 16));
-        rowInfo.setBackground(white);
-        rowInfo.setForeground(darkblue);
-        this.add(rowInfo);
-
-        LabelTextPanel columnInfo = new LabelTextPanel(
-                new JLabel(EasyGameViewModel.COLUMN_LABEL), columnInputField);
-        columnInfo.setFont(new Font("Verdana", Font.BOLD, 16));
-        columnInfo.setBackground(white);
-        columnInfo.setForeground(darkblue);
-        this.add(columnInfo);
-
-        LabelTextPanel valueInfo = new LabelTextPanel(
-                new JLabel(EasyGameViewModel.VALUE_LABEL), valueInputField);
-        valueInfo.setFont(new Font("Verdana", Font.BOLD, 16));
-        valueInfo.setBackground(white);
-        valueInfo.setForeground(darkblue);
-        this.add(valueInfo);
-
-
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(buttons);
-        rowInfo.setVisible(false);
-        columnInfo.setVisible(false);
-        valueInfo.setVisible(false);
         buttons.setVisible(false);
         timerLabel.setVisible(false);
         lives.setVisible(false);

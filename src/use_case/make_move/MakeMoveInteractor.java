@@ -3,7 +3,6 @@ package use_case.make_move;
 import entity.board.Board;
 import entity.board.GameState;
 import entity.user.User;
-import use_case.user_move.UserMoveOutputData;
 
 import java.io.IOException;
 import java.util.Arrays;

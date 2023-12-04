@@ -8,8 +8,6 @@ import entity.Scores;
 import entity.board.GameState;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.easy_game.EasyGameState;
-import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameState;

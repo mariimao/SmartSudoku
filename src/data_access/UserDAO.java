@@ -23,7 +23,6 @@ import use_case.play_game.PlayGameDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.signup.SignupUserDataAccessInterface;
 import use_case.start.StartUserDataAccessInterface;
-import use_case.user_move.UserMoveDataAccessInterface;
 
 import java.time.LocalTime;
 import java.util.*;
@@ -35,7 +34,7 @@ import static com.mongodb.client.model.Filters.eq;
  */
 public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAccessInterface, ResumeGameDataAccessInterface,
         SignupUserDataAccessInterface, LoginUserDataAccessInterface, MenuUserDataAccessInterface,
-        NewGameDataAccessInterface, LeaderboardDataAccessInterface, UserMoveDataAccessInterface,
+        NewGameDataAccessInterface, LeaderboardDataAccessInterface,
         EndGameDataAccessInterface, PlayGameDataAccessInterface, MakeMoveDataAccessInterface {
 
     private final MongoCollection<Document> userCollection;
@@ -329,8 +328,5 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * @param gameState
      * @return
      */
-    @Override
-    public GameState saveBoard(GameState gameState) {
-        return null;
-    }
+
 }
