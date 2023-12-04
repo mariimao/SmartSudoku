@@ -145,7 +145,8 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
             SortedMap<Object, Object> leaderboard = state.getLeaderboard();
 
             JTable table;
-            JLabel time = new JLabel(LocalTime.now().toString());
+            JLabel time = new JLabel("Updated as of " + LocalTime.now().toString());
+            this.add(time);
             DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
             if (leaderboard!=null) {
                 for (Object i : leaderboard.keySet()) {

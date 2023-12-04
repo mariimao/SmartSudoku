@@ -44,6 +44,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -494,6 +495,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                             }
                                         }
                                     }
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
                                 }
                             }
 
