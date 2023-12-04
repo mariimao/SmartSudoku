@@ -323,13 +323,9 @@ public class HardBoard implements Board {
     }
 
     /**
-     * Checks if the user placed a correct move on the board.
-     * @param row int object representing the index of the row
-     * @param column int object representing the index of the column
-     * @param move int object representing the value of the user move
-     * @return true if the move was correct (i.e. matches the solution)
+     * Updates the solution board.
      */
-    public boolean correctMove(int row, int column, int move) {
+    public void updateSolutionBoard() {
         int[][] arrayBoard = new int[9][9];
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
@@ -345,6 +341,16 @@ public class HardBoard implements Board {
         }
         solve(arrayBoard);
         solutionBoard = arrayBoard;
+    }
+
+    /**
+     * Checks if the user placed a correct move on the board.
+     * @param row int object representing the index of the row
+     * @param column int object representing the index of the column
+     * @param move int object representing the value of the user move
+     * @return true if the move was correct (i.e. matches the solution)
+     */
+    public boolean correctMove(int row, int column, int move) {
         return solutionBoard[row][column] == move;
     }
 

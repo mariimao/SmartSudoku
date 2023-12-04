@@ -5,7 +5,6 @@ import data_access.SudokuDAO;
 import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
@@ -57,7 +56,6 @@ public class Main {
         MenuViewModel menuViewModel = new MenuViewModel();
         NewGameViewModel newGameViewModel = new NewGameViewModel();
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
         EndGameViewModel endGameViewModel = new EndGameViewModel();
         PlayGameViewModel playGameViewModel = new PlayGameViewModel();
         SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
@@ -104,7 +102,7 @@ public class Main {
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, easyGameViewModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject, boardDataAccessObject);
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject, boardDataAccessObject);
         views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
 
         EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel, startViewModel, signupViewModel, loginViewModel);

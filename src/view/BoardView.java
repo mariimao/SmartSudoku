@@ -1,28 +1,53 @@
 package view;
 
+import app.*;
+import data_access.SpotifyDAO;
+import data_access.SudokuDAO;
+import data_access.UserDAO;
 import entity.board.GameState;
-import interface_adapter.easy_game.EasyGameController;
-import interface_adapter.easy_game.EasyGameViewModel;
+import entity.user.CommonUserFactory;
+import entity.user.User;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.end_game.EndGameController;
+import interface_adapter.end_game.EndGamePresenter;
+import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
+import interface_adapter.leaderboard.LeaderboardViewModel;
+import interface_adapter.login.LoginViewModel;
 import interface_adapter.make_move.MakeMoveController;
+import interface_adapter.make_move.MakeMovePresenter;
+import interface_adapter.make_move.MakeMoveViewModel;
+import interface_adapter.menu.MenuState;
+import interface_adapter.menu.MenuViewModel;
+import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
+import interface_adapter.pause_game.PauseGamePresenter;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameState;
 import interface_adapter.play_game.PlayGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
+import interface_adapter.signup.SignupViewModel;
+import interface_adapter.spotify.SpotifyViewModel;
+import interface_adapter.start.StartViewModel;
+import use_case.end_game.EndGameInteractor;
+import use_case.make_move.MakeMoveInputData;
+import use_case.make_move.MakeMoveInteractor;
+import use_case.pause_game.PauseGameInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BoardView extends JPanel implements ActionListener, PropertyChangeListener {
     private final Color blue = new Color(97, 150, 242);
@@ -31,9 +56,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final Color black = Color.black;
 
     public final String viewName = "PLAY GAME";
-
-    private final EasyGameViewModel easyGameViewModel;
-    private final EasyGameController easyGameController;
 
     private final PauseGameController pauseGameController;
     private final PauseGameViewModel pauseGameViewModel;
@@ -53,103 +75,11 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton rules;
     private final JPanel buttons;
     private final JLabel timerLabel;
-    private final JTextField rowInputField = new JTextField(1);
-    private final JTextField columnInputField = new JTextField(1);
-    private final JTextField valueInputField = new JTextField(1);
     private final MakeMoveController makeMoveController;
 
-
-//    public static void main(String[] args) {
-//        // Build the main program window, the main panel containing the
-//        // various cards, and the layout, and stitch them together.
-//
-//        // The main application window.
-//        JFrame application = new JFrame("SudokuScramble");
-//        application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//
-//        CardLayout cardLayout = new CardLayout();
-//
-//        // The various View objects. Only one view is visible at a time.
-//        JPanel views = new JPanel(cardLayout);
-//        application.add(views);
-//
-//        // This keeps track of and manages which view is currently showing.
-//        ViewManagerModel viewManagerModel = new ViewManagerModel();
-//        new ViewManager(views, cardLayout, viewManagerModel);
-//
-//        // The data for the views, such as username and password, are in the ViewModels.
-//        // This information will be changed by a presenter object that is reporting the
-//        // results from the use case. The ViewModels are observable, and will
-//        // be observed by the Views.
-//        StartViewModel startViewModel = new StartViewModel();
-//        LoginViewModel loginViewModel = new LoginViewModel();
-//        SignupViewModel signupViewModel = new SignupViewModel();
-//        PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
-//        ResumeGameViewModel resumeGameViewModel = new ResumeGameViewModel();
-//        MenuViewModel menuViewModel = new MenuViewModel();
-//        NewGameViewModel newGameViewModel = new NewGameViewModel();
-//        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
-//        EasyGameViewModel easyGameViewModel = new EasyGameViewModel();
-//        EndGameViewModel endGameViewModel = new EndGameViewModel();
-//        PlayGameViewModel playGameViewModel1 = new PlayGameViewModel();
-//        SpotifyViewModel spotifyViewModel = new SpotifyViewModel();
-//        MakeMoveViewModel makeMoveViewModel1 = new MakeMoveViewModel();
-//
-//
-//        // testing userDAO
-//        Logger.getLogger("org.mongodb.driver").setLevel(Level.OFF);
-//
-//        UserDAO userDataAccessObject;
-//        try {
-//            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
-//                    "smartsudoku", "user", new CommonUserFactory());
-//        } catch (Exception e) {
-//            throw new RuntimeException(e);
-//        }
-//
-//        StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-//        views.add(startView, startView.viewName);
-//
-//        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
-//        views.add(signupView, signupView.viewName);
-//
-//        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel1, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
-//        views.add(loginView, loginView.viewName);
-//
-//        // TODO: Update this when you add more views
-//        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel1);
-//        views.add(menuView, menuView.viewName);
-//
-//        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel1, userDataAccessObject);
-//        views.add(pausedGameView, pausedGameView.viewName);
-//
-//        NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel1, loginViewModel, spotifyViewModel, new SpotifyDAO() );
-//        views.add(newGameView, newGameViewModel.getViewName());
-//
-//        LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, userDataAccessObject);
-//        views.add(leaderboardView, leaderboardViewModel.getViewName());
-//
-//        EndGameController endGameController1 = new EndGameController(new EndGameInteractor(userDataAccessObject, new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel)));
-//        PauseGameController pauseGameController1 = new PauseGameController(new PauseGameInteractor(userDataAccessObject, new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel)));
-//        MakeMoveController makeMoveController1 = new MakeMoveController(new MakeMoveInteractor(userDataAccessObject, new MakeMovePresenter(makeMoveViewModel1, viewManagerModel)));
-//
-//        EasyGameController easyGameController1 = new EasyGameController(new UserMoveInteractor(userDataAccessObject, new));
-//
-//        BoardView boardView = new BoardView(easyGameViewModel, pauseGameController1, pauseGameViewModel, endGameController1, endGameViewModel, playGameViewModel1, makeMoveViewModel1, makeMoveController1);
-//        views.add(boardView, boardView.viewName);  // TODO: link neccessary views and viewmodels
-//
-//        viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
-//        viewManagerModel.firePropertyChanged();
-//
-//        application.pack();
-//        application.setVisible(true);
-//    }
-
-    public BoardView(EasyGameViewModel easyGameViewModel, EasyGameController easyGameController, PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
+    public BoardView(PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
                                  PlayGameViewModel playGameViewModel, MakeMoveController makeMoveController) {
-        this.easyGameViewModel = easyGameViewModel;
-        this.easyGameController = easyGameController;
         this.pauseGameController = pauseGameController;
         this.pauseGameViewModel = pauseGameViewModel;
         this.endGameController = endGameController;
@@ -158,7 +88,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.makeMoveController = makeMoveController;
 
         playGameViewModel.addPropertyChangeListener(this);
-        easyGameViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
 
         // Creating the Title of the View
@@ -193,19 +122,26 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.add(lives);
 
         timerLabel = new JLabel();
+        int countdownTime = 200;
         String start = LocalDateTime.now().toString(); // initialize outside of action listener
         currentState.setStartTime(LocalDateTime.parse(start));
 
-        //TODO: it starts counting from newGameView, not sure how to fix
-        // ALSO, cannot pause count when pressing pause
         Timer timer = new Timer(1000, new ActionListener() { //delay is 1 second
             @Override
             public void actionPerformed(ActionEvent e) {
-                currentState.setTimePlayed(currentState.getTimePlayed() + 1); // increases time played every 1 sec
-                int hours = currentState.getTimePlayed() / 60 / 60;
-                int minutes = currentState.getTimePlayed() / 60;
-                int seconds = currentState.getTimePlayed() % 60;
-                timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                LocalDateTime currentTime = LocalDateTime.now();
+                Duration elapsedTime = Duration.between((currentState.getStartTime()), currentTime);
+                long remainingTimeInSeconds = countdownTime - elapsedTime.getSeconds();
+
+               if (remainingTimeInSeconds >= 0) {
+                   int hours = (int) (remainingTimeInSeconds / 3600);
+                   int minutes = (int) ((remainingTimeInSeconds % 3600) / 60);
+                   int seconds = (int) (remainingTimeInSeconds % 60);
+
+                   timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+               } else {
+                   timerLabel.setText("00:00:00");
+               }
             }
         });
         timer.setRepeats(true);
@@ -262,33 +198,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         this.add(startPlayingPanel);
 
-        LabelTextPanel rowInfo = new LabelTextPanel(
-                new JLabel(EasyGameViewModel.ROW_LABEL), rowInputField);
-        rowInfo.setFont(new Font("Verdana", Font.BOLD, 16));
-        rowInfo.setBackground(white);
-        rowInfo.setForeground(darkblue);
-        this.add(rowInfo);
-
-        LabelTextPanel columnInfo = new LabelTextPanel(
-                new JLabel(EasyGameViewModel.COLUMN_LABEL), columnInputField);
-        columnInfo.setFont(new Font("Verdana", Font.BOLD, 16));
-        columnInfo.setBackground(white);
-        columnInfo.setForeground(darkblue);
-        this.add(columnInfo);
-
-        LabelTextPanel valueInfo = new LabelTextPanel(
-                new JLabel(EasyGameViewModel.VALUE_LABEL), valueInputField);
-        valueInfo.setFont(new Font("Verdana", Font.BOLD, 16));
-        valueInfo.setBackground(white);
-        valueInfo.setForeground(darkblue);
-        this.add(valueInfo);
-
-
         buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(buttons);
-        rowInfo.setVisible(false);
-        columnInfo.setVisible(false);
-        valueInfo.setVisible(false);
         buttons.setVisible(false);
         timerLabel.setVisible(false);
         lives.setVisible(false);
@@ -341,7 +252,8 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                     currentState.getUserName(),
                                     currentState.getCurrentGame(),
                                     currentState.getTime(),
-                                    currentState.getLives());
+                                    currentState.getLives(),
+                                    currentState.getScores());
                         }
                     }
                 }
@@ -448,13 +360,14 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                                     currentState.getUserName(),
                                                     currentState.getCurrentGame(),
                                                     currentState.getTime(),
-                                                    currentState.getLives()
+                                                    currentState.getLives(),
+                                                    currentState.getScores()
                                             );
                                         }
                                     }
 
 
-                                } catch (NumberFormatException ignored) {
+                                } catch (NumberFormatException | IOException ignored) {
                                     JOptionPane.showMessageDialog(board, "Input Must Be an Integer");
 
                                     // Re-enable editing
@@ -468,8 +381,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                             }
                                         }
                                     }
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
                                 }
                             }
 

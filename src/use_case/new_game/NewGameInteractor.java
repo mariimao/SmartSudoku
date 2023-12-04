@@ -4,8 +4,8 @@ import entity.board.GameState;
 import entity.user.User;
 
 public class NewGameInteractor implements NewGameInputBoundary{
-    final NewGameDataAccessInterface newGameDataAccessInterface;
-    final NewGameOutputBoundary newGamePresenter;
+    private final NewGameDataAccessInterface newGameDataAccessInterface;
+    private final NewGameOutputBoundary newGamePresenter;
 
     public NewGameInteractor(NewGameDataAccessInterface newGameDataAccessInterface, NewGameOutputBoundary newGamePresenter) {
         this.newGameDataAccessInterface = newGameDataAccessInterface;
@@ -15,7 +15,9 @@ public class NewGameInteractor implements NewGameInputBoundary{
     @Override
     public void execute(NewGameInputData newGameInputData) {
         User user = newGameDataAccessInterface.get(newGameInputData.getUsername());
-        if (user == null) {newGamePresenter.prepareFailView("Error: No User is Logged In");}
+        if (user == null) {
+            newGamePresenter.prepareFailView("Error: No User is Logged In");
+        }
         else {
             GameState newGame = new GameState(newGameInputData.getDifficulty());
             NewGameOutputData newGameOutputData = new NewGameOutputData(user, newGame);

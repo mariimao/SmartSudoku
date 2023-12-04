@@ -15,7 +15,5 @@ public class PauseGameOutputData {
 
     public GameState getCurrentGame() {return user.getPausedGame();}
 
-    public boolean isUseCaseFailed() {return useCaseFailed;}
-
     public User getUser() {return user;}
 }

@@ -20,11 +20,14 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="main" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "git-widget-placeholder": "Javadoc",
+    "git-widget-placeholder": "board__view",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
@@ -112,6 +115,27 @@
     <SUITE FILE_PATH="coverage/SmartSudoku$All_in_SmartSudoku.ic" NAME="All in SmartSudoku Coverage Results" MODIFIED="1701657980849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/SmartSudoku$data_access_in_SmartSudoku.ic" NAME="data_access in SmartSudoku Coverage Results" MODIFIED="1701657069050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>data_access.*</FILTER>
+    <task id="LOCAL-00001" summary="deleted user_move use case">
+      <option name="closed" value="true" />
+      <created>1701663791485</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701663791485</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="fixed end game bug but there's still an issue with saving the time of the score to the database" />
+    <MESSAGE value="deleted user_move use case" />
+    <option name="LAST_COMMIT_MESSAGE" value="deleted user_move use case" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701385664456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>database.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/SmartSudoku$test_in_SmartSudoku.ic" NAME="test in SmartSudoku Coverage Results" MODIFIED="1701385692086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$HardBoardTest.ic" NAME="HardBoardTest Coverage Results" MODIFIED="1701385637532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
