@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public interface SpotifyDataAccessInterface {
 
     /**
-     * @returns an array of suggestions of songs based on search
+     * @return an array of suggestions of songs based on search
      * @param search is the String search that represents what the user wants to search
      */
     ArrayList<String> getSuggestions(String search) throws IOException;
