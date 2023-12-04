@@ -51,17 +51,13 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * @param userFactory
      * @throws Exception
      */
-    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws Exception {
+    public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws MongoException {
         this.userFactory = userFactory;
 
         //Create a MongoDB Client -> Database -> Collection (where the users are)
-        try {
-            this.userCollection = MongoClients.create(uri)
-                    .getDatabase(database)
-                    .getCollection(collection);
-        } catch (MongoException e) {
-            throw new MongoException("Could not get database");
-        }
+        this.userCollection = MongoClients.create(uri)
+                .getDatabase(database)
+                .getCollection(collection);
 
         // gets info from mongo and creates account object
         // creates list of accounts (in document form)
@@ -107,10 +103,10 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
 
 
                 if (stringScores == null) {
-                    scores.put(LocalTime.now(), 0); //TODO: may need to change
+                    scores.put(LocalTime.now(), 0);
                 } else {
                     for (String time : stringScores.keySet()) {
-                        scores.put(LocalTime.parse(time), scores.get(time));
+                        scores.put(LocalTime.parse(time), stringScores.get(time));
                     }
                 }
 
@@ -233,9 +229,20 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * @param user
      */
     private void changeScores(User user) {
-        this.userCollection.findOneAndUpdate(
-                eq("name", user.getName()), //find by name
-                eq("scores", user.getScores())); //update score
+        Map<String, Integer> stringScores = new HashMap<>();
+        for (LocalTime time : user.getScores().keySet()) {
+            stringScores.put(time.toString(), user.getScores().get(time));
+        }
+
+        this.userCollection.deleteOne(eq("name", user.getName()));
+        Document entry = new Document()
+                .append("_id", new ObjectId())
+                .append("name", user.getName())
+                .append("password", user.getPassword())
+                .append("scores", stringScores)
+                .append("pausedGamePastBoards", user.getPausedGame())
+                .append("pausedgame", null);
+        this.userCollection.insertOne(entry);
     }
 
     /**

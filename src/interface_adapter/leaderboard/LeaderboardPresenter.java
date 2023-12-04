@@ -17,11 +17,15 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
     private final LeaderboardViewModel leaderboardViewModel;
 
+    private final MenuViewModel menuViewModel;
+
     private final ViewManagerModel viewManagerModel;
     public LeaderboardPresenter(ViewManagerModel viewManagerModel,
-                                LeaderboardViewModel leaderboardViewModel) {
+                                LeaderboardViewModel leaderboardViewModel,
+                                MenuViewModel menuViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.leaderboardViewModel = leaderboardViewModel;
+        this.menuViewModel = menuViewModel;
     }
 
     @Override
@@ -33,8 +37,11 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
     public void prepareSuccessView(LeaderboardOutputData leaderboardOutputData) {
         LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
-        leaderboardViewModel.setLeaderboardState(leaderboardState);
-        leaderboardViewModel.firePropertyChanged();
+        leaderboardState.setUsername(menuViewModel.getMenuState().getUsername());
+        leaderboardState.setSortingMethod("rank");
+        leaderboardState.setLeaderboard(leaderboardOutputData.getLeaderboard());
+        this.leaderboardViewModel.setLeaderboardState(leaderboardState);
+        this.leaderboardViewModel.firePropertyChanged();
 
         viewManagerModel.setActiveViewName(leaderboardViewModel.getViewName());
         viewManagerModel.firePropertyChanged();

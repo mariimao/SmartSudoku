@@ -30,29 +30,43 @@ import view.EndGameView;
  */
 public class EndGameUseCaseFactory {
 
-    /** Prevent instantiation. */
-    private EndGameUseCaseFactory() {}
+    /**
+     * Prevent instantiation.
+     */
+    private EndGameUseCaseFactory() {
+    }
 
     /**
      * Creates a new EndGameView object.
-     * @param viewManagerModel is a new viewManagerModel object
-     * @param endGameViewModel is a new endGameViewModel object
+     *
+     * @param viewManagerModel     is a new viewManagerModel object
+     * @param endGameViewModel     is a new endGameViewModel object
      * @param userDataAccessObject is a new userDataAccess object
-     * @param menuViewModel is a new menuViewModel object
+     * @param menuViewModel        is a new menuViewModel object
      * @param leaderboardViewModel is a new leaderboardViewModel object
-     * @param startViewModel is a new startViewModel object
-     * @param signupViewModel is a new signupViewModel object
-     * @param loginViewModel is a new loginViewModel object
+     * @param startViewModel       is a new startViewModel object
+     * @param signupViewModel      is a new signupViewModel object
+     * @param loginViewModel       is a new loginViewModel object
      * @return EndGameView object, with parameters for newly created relevant models and controllers
      */
     public static EndGameView create(ViewManagerModel viewManagerModel, EndGameViewModel endGameViewModel, UserDAO userDataAccessObject, MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, StartViewModel startViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel) {
 
         EndGameController endGameController = createUserEndGameUserCase(viewManagerModel, endGameViewModel, menuViewModel, leaderboardViewModel, userDataAccessObject);
         MenuController menuController = createUserMenuUseCase(viewManagerModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-        LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, userDataAccessObject);
+        LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
         return new EndGameView(endGameViewModel, endGameController, viewManagerModel, menuController, menuViewModel, leaderboardController, leaderboardViewModel, new PlayGameViewModel());
     }
 
+    /**
+     * Creates a menu Controller
+     * @param viewManagerModel
+     * @param startViewModel
+     * @param menuViewModel
+     * @param signupViewModel
+     * @param loginViewModel
+     * @param userDataAccessObject
+     * @return a menu controller
+     */
     private static MenuController createUserMenuUseCase(ViewManagerModel viewManagerModel, StartViewModel startViewModel,
                                                         MenuViewModel menuViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel,
                                                         MenuUserDataAccessInterface userDataAccessObject) {
@@ -61,13 +75,30 @@ public class EndGameUseCaseFactory {
         MenuInteractor menuInteractor = new MenuInteractor(userDataAccessObject, menuPresenter);
         return new MenuController(menuInteractor);
     }
-    private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
-        LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel);
+
+    /**
+     * Create a LeaderboardController
+     * @param viewManagerModel
+     * @param leaderboardViewModel
+     * @param leaderboardDataAccessInterface
+     * @return a leaderboardController
+     */
+    private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
+        LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel, menuViewModel);
         LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface, leaderboardPresenter);
         return new LeaderboardController(leaderboardInteractor);
 
     }
 
+    /**
+     * Creates a EndGameController
+     * @param viewManagerModel
+     * @param endGameViewModel
+     * @param menuViewModel
+     * @param leaderboardViewModel
+     * @param endGameDataAccessInterface
+     * @return a EndGameController
+     */
     private static EndGameController createUserEndGameUserCase(ViewManagerModel viewManagerModel, EndGameViewModel endGameViewModel, MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, EndGameDataAccessInterface endGameDataAccessInterface) {
         EndGamePresenter endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
         EndGameInteractor endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);

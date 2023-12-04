@@ -10,6 +10,7 @@ import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyState;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
@@ -18,13 +19,16 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.SortedMap;
+import java.time.LocalTime;
+import java.util.*;
 
 public class LeaderboardView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "leaderboard view";
 
     private final LeaderboardViewModel leaderboardViewModel;
     private final LeaderboardController leaderboardController;
+
+    private final MenuViewModel menuViewModel;
 
     private final JLabel choices;
     // buttons + options
@@ -39,9 +43,10 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
     private final Color white = Color.white;
     private final Color black = Color.black;
 
-    public LeaderboardView(LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController) {
+    public LeaderboardView(LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController, MenuViewModel menuViewModel) {
         this.leaderboardViewModel = leaderboardViewModel;
         this.leaderboardController = leaderboardController;
+        this.menuViewModel = menuViewModel;
 
 
         this.leaderboardViewModel.addPropertyChangeListener(this);
@@ -75,27 +80,15 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
         this.add(choices);
         this.add(sortingMethod);
 
-        JTable table;
-        DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
-        if (LeaderboardViewModel.LEADERBOARD!=null) { //we have scores
-            for (Object i : LeaderboardViewModel.LEADERBOARD.keySet()) {
-                model.addRow(new Object[]{i, LeaderboardViewModel.LEADERBOARD.get(i)});
-            }
-            table = new JTable(model);
-            this.add(table);
-        } else {
-            JLabel labels = new JLabel(LeaderboardViewModel.NO_SCORES_LABEL);
-            this.add(labels);
-        }
-
 
         userView.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-//                        if (e.getSource().equals(cancel)) {
-//                            // leaderboardController.execute();
-//                        }
+                        if (e.getSource().equals(userView)) {
+                            leaderboardController.execute(leaderboardViewModel.getLeaderboardState().getUsername(),
+                                    leaderboardViewModel.getLeaderboardState().getSortingMethod(), true, false);
+                        }
                     }
                 }
         );
@@ -137,7 +130,6 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
 
 
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -145,7 +137,50 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-        LeaderboardState state = (LeaderboardState) evt.getNewValue();
+        if (evt.getPropertyName().equals("leaderboard")) {
+            LeaderboardState state = (LeaderboardState) evt.getNewValue();
+            leaderboardViewModel.setLeaderboardState(state);
+
+
+            SortedMap<Object, Object> leaderboard = state.getLeaderboard();
+
+            JTable table;
+            JLabel time = new JLabel("Updated as of " + LocalTime.now().toString());
+            this.add(time);
+            DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
+            if (leaderboard!=null) {
+                for (Object i : leaderboard.keySet()) {
+                    model.addRow(new Object[]{i, leaderboard.get(i)});
+                }
+                table = new JTable(model);
+                this.add(table);
+            } else {
+                JLabel labels = new JLabel("no users");
+                this.add(labels);
+            }
+
+//
+//            JTable table;
+//            DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
+//
+//
+//            if (!leaderboard.isEmpty()) { //we have scores
+//                JLabel labels = new JLabel("Here are the scores:");
+//                this.add(labels);
+//
+//                for (Object i : leaderboard.keySet()) {
+//                    Vector<String> vector = new Vector<>();
+//                    vector.add(i.toString() + " - " + leaderboard.get(i).toString());
+//                    model.addRow(vector);
+//                }
+//
+//                table = new JTable(model);
+//                this.add(table);
+//            } else {
+//                JLabel labels = new JLabel(leaderboardViewModel.NO_SCORES_LABEL);
+//                this.add(labels);
+//            }
+        }
     }
 }
 

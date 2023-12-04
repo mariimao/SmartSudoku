@@ -1,13 +1,15 @@
 package interface_adapter.leaderboard;
 
+import java.util.Map;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class LeaderboardState {
     private String username = "";
     private String error = null;
-    private String sortingMethod = "";
+    private String sortingMethod = "rank"; // default
 
-    private SortedMap<Object, Object> leaderboard = null;
+    private SortedMap<Object, Object> leaderboard = new TreeMap<>();
 
 
     public LeaderboardState(LeaderboardState copy) {
@@ -43,5 +45,9 @@ public class LeaderboardState {
 
     public void setLeaderboard(SortedMap<Object, Object> leaderboard) {
         this.leaderboard = leaderboard;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

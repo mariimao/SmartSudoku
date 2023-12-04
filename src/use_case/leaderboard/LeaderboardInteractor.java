@@ -30,7 +30,7 @@ public class LeaderboardInteractor  implements LeaderboardInputBoundary{
             leaderboardPresenter.prepareBackView();
         } else {
             if (leaderboardDataAccessInterface.existsByName(user)) {
-                if (method.equals("Rank")) { // currently only one sorting method
+                if (method=="rank") { // currently only one sorting method
                     Map<String, User> accounts = leaderboardDataAccessInterface.getAccounts();
                     leaderboard = new LeaderboardByRank(accounts);
                     output = leaderboard.getLeaderboard();
