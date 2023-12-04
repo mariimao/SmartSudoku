@@ -26,12 +26,17 @@ public class PlayMusicInteractor implements PlayMusicInputBoundary{
             SpotifyPlayer spotifyPlayer = new SpotifyPlayer(token);
             String album_id = playMusicDataAccessInterface.getAlbumID(songID);
             Integer position = playMusicDataAccessInterface.getTrackPosition(songID);
+            int positions = position.intValue();
             String name = playMusicDataAccessInterface.getTrackName(songID);
             ArrayList<String> devices = spotifyPlayer.getDevices();
-            spotifyPlayer.play(album_id, position, devices.get(0));
+            if (!devices.isEmpty()) {
+                spotifyPlayer.play(album_id, positions, devices.get(0));
 
-            PlayMusicOutputData playMusicOutputData = new PlayMusicOutputData(name);
-            playMusicPresenter.prepareSuccessView(playMusicOutputData);
+                PlayMusicOutputData playMusicOutputData = new PlayMusicOutputData(name);
+                playMusicPresenter.prepareSuccessView(playMusicOutputData);
+            } else {
+                playMusicPresenter.prepareFailView("Could not find a device.");
+            }
         } else {
             playMusicPresenter.prepareFailView("Could not find song.");
         }
