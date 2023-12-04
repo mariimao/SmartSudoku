@@ -11,12 +11,18 @@ import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGamePresenter;
 import interface_adapter.new_game.NewGameViewModel;
 
+import interface_adapter.play_music.PlayMusicController;
+import interface_adapter.play_music.PlayMusicPresenter;
 import interface_adapter.spotify.SpotifyController;
 import interface_adapter.spotify.SpotifyPresenter;
 import interface_adapter.spotify.SpotifyViewModel;
 import use_case.new_game.NewGameDataAccessInterface;
 import use_case.new_game.NewGameInputBoundary;
 import use_case.new_game.NewGameInteractor;
+import use_case.play_music.PlayMusicDataAccessInterface;
+import use_case.play_music.PlayMusicInputBoundary;
+import use_case.play_music.PlayMusicInteractor;
+import use_case.spotify.SpotifyDataAccessInterface;
 import use_case.spotify.SpotifyInputBoundary;
 import use_case.spotify.SpotifyInteractor;
 
@@ -62,12 +68,13 @@ public class NewGameUseCaseFactory {
                                      SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO) {
         // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
         NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
+        PlayMusicController playMusicController = playMusicControllerUseCase(viewManagerModel,newGameViewModel, spotifyDAO);
         PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);
         SpotifyController spotifyController = createUserSpotifyCase(viewManagerModel, spotifyViewModel, spotifyDAO, newGameViewModel);
-        return new NewGameView(newGameViewModel, newGameController, playGameViewModel, playGameController, spotifyViewModel, spotifyController, loginViewModel);
+        return new NewGameView(newGameViewModel, newGameController, playGameViewModel, playGameController, spotifyViewModel, spotifyController, loginViewModel, playMusicController);
     }
 
-    private static SpotifyController createUserSpotifyCase(ViewManagerModel viewManagerModel, SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO, NewGameViewModel newGameViewModel) {
+    private static SpotifyController createUserSpotifyCase(ViewManagerModel viewManagerModel, SpotifyViewModel spotifyViewModel, SpotifyDataAccessInterface spotifyDAO, NewGameViewModel newGameViewModel) {
         SpotifyPresenter spotifyPresenter = new SpotifyPresenter(spotifyViewModel, newGameViewModel, viewManagerModel);
         SpotifyInputBoundary spotifyInteractor = new SpotifyInteractor(spotifyDAO, spotifyPresenter);
         return new SpotifyController(spotifyInteractor);
@@ -84,5 +91,13 @@ public class NewGameUseCaseFactory {
         PlayGamePresenter playGamePresenter = new PlayGamePresenter(playGameViewModel, viewManagerModel);
         PlayGameInputBoundary playGameInteractor = new PlayGameInteractor(playGameDataAccessInterface, playGamePresenter);
         return new PlayGameController(playGameInteractor);
+    }
+
+    private static PlayMusicController playMusicControllerUseCase(ViewManagerModel viewManagerModel,
+                                                                NewGameViewModel newGameViewModel,
+                                                                PlayMusicDataAccessInterface playMusicDataAccessInterface) {
+        PlayMusicPresenter playMusicPresenter = new PlayMusicPresenter(newGameViewModel, viewManagerModel);
+        PlayMusicInputBoundary playMusicInteractor = new PlayMusicInteractor(playMusicDataAccessInterface, playMusicPresenter);
+        return new PlayMusicController(playMusicInteractor);
     }
 }

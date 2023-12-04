@@ -1,5 +1,6 @@
 package data_access;
 
+import entity.SpotifyPlayer;
 import org.junit.Before;
 import org.junit.Test;
 
