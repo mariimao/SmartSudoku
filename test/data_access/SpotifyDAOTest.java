@@ -1,8 +1,10 @@
 package data_access;
+import data_access.SpotifyDAO;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.IOException;
+import java.util.ArrayList;
+
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -60,7 +62,17 @@ public class SpotifyDAOTest {
     }
 
     @Test
-    public void testGetSuggestions() throws IOException {
-        assert spotifyDAO.getSuggestions("shape of you").contains("1KqvRRQd3lfM0pAlkGPrgD");
+    public void testRefreshToken() {
+        String token = spotifyDAO.getRefreshToken();
+        String current_token = spotifyDAO.getApiToken();
+        assertEquals(current_token, token);
+    }
+
+    @Test
+    public void testSuggestions() {
+        ArrayList<String> suggestions = spotifyDAO.getSuggestions("hello");
+        // default amount is 20
+        assertEquals(20, suggestions.size());
     }
 }
+
