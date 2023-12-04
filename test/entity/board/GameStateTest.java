@@ -1,12 +1,9 @@
 package entity.board;
 
-import interface_adapter.easy_game.EasyGameState;
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;

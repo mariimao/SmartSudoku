@@ -2,6 +2,8 @@ import data_access.SpotifyDAO;
 import org.junit.Test;
 import use_case.spotify.*;
 
+import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class SpotifyUseCaseTest {
@@ -9,7 +11,7 @@ public class SpotifyUseCaseTest {
     SpotifyDataAccessInterface userDataBase;
 
     @Test
-    public void testSuccessSearch() {
+    public void testSuccessSearch() throws IOException {
 
         SpotifyInputData inputData = new SpotifyInputData("bad idea");
         SpotifyDataAccessInterface userDataAccessObject;
@@ -39,7 +41,7 @@ public class SpotifyUseCaseTest {
     }
 
     @Test
-    public void testSearchFailed() {
+    public void testSearchFailed() throws IOException {
         SpotifyInputData inputData = new SpotifyInputData("+-=-=-=-=-=");
         SpotifyDataAccessInterface userDataAccessObject;
         try {
