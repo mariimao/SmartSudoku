@@ -25,6 +25,9 @@ import java.beans.PropertyChangeListener;
 // "Resume Game" - takes them back to the game they are playing
 // "Log Out" - takes them back to SignUp View
 
+/**
+ * View for the PauseGameView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class PausedGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "GAME PAUSED";
     private final Color blue = new Color(97, 150, 242);
@@ -43,6 +46,17 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
     final JButton logOut;
     final JButton resumeGame;
 
+    /**
+     * Constructor for PauseGame View
+     * @param resumeGameController the controller for ResumeGame, is ResumeGameController object
+     * @param menuController the controller for menu use case, is MenuController object
+     * @param pauseGameViewModel the view model for pause, is PauseGameViewModel object
+     * @param resumeGameViewModel the view model for resumegame, is ResumeGameViewModel object
+     * @param menuViewModel the view model for the menu, is MenuViewModel object
+     * @param startController the controller for the start, is StartController object
+     * @param startViewModel the view model for the start, is StartViewModel object
+     * @param viewManagerModel the view manager model, is ViewManagerModel object
+     */
     public PausedGameView(PauseGameViewModel pauseGameViewModel,
                           StartViewModel startViewModel,
                           MenuViewModel menuViewModel,
@@ -124,12 +138,19 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
-
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

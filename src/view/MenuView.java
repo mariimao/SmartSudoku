@@ -54,7 +54,7 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final Color black = Color.black;
 
     /**
-     * Constructor for Login View
+     * Constructor for Menu View
      * @param loginViewModel the view model for login usecase, is a LoginViewModel object
      * @param menuViewModel the view model for the menu usecase, is a MenuViewModel object
      * @param resumeGameViewModel the view model for the resume usecase, is a ResumeGameViewModel object
