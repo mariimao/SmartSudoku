@@ -299,7 +299,7 @@ public class HardBoard implements Board {
                 if (board[i][j] != 0) {
                     int value = board[i][j];
                     String b = "(" + value + ")";
-                    if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i / 2 + b + j / 2))
+                    if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i / 3 + b + j / 3))
                         isValidBoard = false;
                 }
             }
@@ -310,15 +310,15 @@ public class HardBoard implements Board {
     /**
      * This function stores the user's current move into the board, then sends an
      * updated board to the GameState.
-     * @param x is the x-coordinate of the user's move
-     * @param y is the y-coordinate of the user's move
+     * @param row is the y-coordinate of the user's move
+     * @param col is the x-coordinate of the user's move
      * @param move is the integer value of the user's move
      * @return an updated HardBoard
      */
-    public HardBoard makeMove(int x, int y, int move) {
+    public HardBoard makeMove(int row, int col, int move) {
         HashMap<Integer, Boolean> value = new HashMap<>();
         value.put(move, true);
-        this.currBoard[y][x] = (value);
+        this.currBoard[row][col] = (value);
         return this;
     }
 
@@ -330,6 +330,21 @@ public class HardBoard implements Board {
      * @return true if the move was correct (i.e. matches the solution)
      */
     public boolean correctMove(int row, int column, int move) {
+        int[][] arrayBoard = new int[9][9];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (currBoard[i][j].isEmpty()) {
+                    arrayBoard[i][j] = 0;
+                }
+                else {
+                    for (Map.Entry<Integer, Boolean> entry : currBoard[i][j].entrySet()) {
+                        arrayBoard[i][j] = entry.getKey();
+                    }
+                }
+            }
+        }
+        solve(arrayBoard);
+        solutionBoard = arrayBoard;
         return solutionBoard[row][column] == move;
     }
 

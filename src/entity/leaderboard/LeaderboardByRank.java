@@ -79,13 +79,22 @@ public class LeaderboardByRank implements Leaderboard {
     private Map<Integer, Set<String>> highScoreToUsers() {
         Map<Integer, Set<String>> highScoreToUsersMap = new HashMap<>();
         for (String name : accounts.keySet()) {
-            Integer highScore = Collections.max(accounts.get(name).getScores().values());
-            if (highScoreToUsersMap.containsKey(highScore)) {
-                highScoreToUsersMap.get(highScore).add(name);
-            } else {
-                Set<String> names = new HashSet<>();
-                names.add(name);
-                highScoreToUsersMap.put(highScore, names);
+            Map<LocalTime, Integer> timeScores = accounts.get(name).getScores();
+
+            if (timeScores.size()!=0) {
+                List scores = new ArrayList<>();
+                for (Integer i : timeScores.values()) {
+                    scores.add(i.intValue());
+                }
+
+                int highScore = (int) Collections.max(scores);
+                if (highScoreToUsersMap.containsKey(highScore)) {
+                    highScoreToUsersMap.get(highScore).add(name);
+                } else {
+                    Set<String> names = new HashSet<>();
+                    names.add(name);
+                    highScoreToUsersMap.put(highScore, names);
+                }
             }
         }
         return highScoreToUsersMap;

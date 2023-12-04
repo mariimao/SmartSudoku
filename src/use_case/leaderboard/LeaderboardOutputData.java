@@ -12,7 +12,7 @@ public class LeaderboardOutputData {
         this.leaderboard = leaderboard;
     }
 
-    public String getLeaderboard() {
-        return getLeaderboard().toString();
+    public SortedMap<Object, Object> getLeaderboard() {
+        return leaderboard;
     }
 }

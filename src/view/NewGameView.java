@@ -18,6 +18,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class NewGameView extends JPanel implements ActionListener, PropertyChangeListener {
@@ -101,8 +102,8 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             int difficulty = 1;
                             newGameViewModel.getState().setDifficulty(difficulty);
                             playGameViewModel.getState().setCurrentGame(new GameState(difficulty));
-                            playGameViewModel.getState().setUserName(loginViewModel.getLoginState().getUsername());
-                            playGameController.execute(loginViewModel.getLoginState().getUsername(), playGameViewModel.getState().getCurrentGame(), difficulty );
+                            playGameViewModel.getState().setUserName(newGameViewModel.getState().getUserName());
+                            playGameController.execute(newGameViewModel.getState().getUserName(), playGameViewModel.getState().getCurrentGame(), difficulty );
                         }
                     }
                 }
@@ -150,7 +151,11 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(searchSong)) {
                             SpotifyState spotifyState = spotifyViewModel.getSpotifyState();
-                            spotifyController.execute(spotifyState.getSearch());
+                            try {
+                                spotifyController.execute(spotifyState.getSearch());
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
 
                             songOptions.removeAllItems(); // starts clean
                             ArrayList<String> suggestions = spotifyViewModel.getSpotifyState().getSearchResults();

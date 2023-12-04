@@ -29,7 +29,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final PauseGameViewModel pauseGameViewModel;
     private final ResumeGameViewModel resumeGameViewModel;
 
-
+    private final MenuViewModel menuViewModel;
 
     // text input
     private final JTextField usernameInputField =  new JTextField(20);
@@ -45,12 +45,14 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final Color black = Color.black;
 
     public LoginView(LoginController loginController, LoginViewModel loginViewModel, PlayGameViewModel playGameViewModel,
-                     PauseGameViewModel pauseGameViewModel, ResumeGameViewModel resumeGameViewModel) {
+                     PauseGameViewModel pauseGameViewModel, ResumeGameViewModel resumeGameViewModel,
+                     MenuViewModel menuViewModel) {
         this.loginViewModel = loginViewModel;
         this.loginController = loginController;
         this.playGameViewModel = playGameViewModel;
         this.pauseGameViewModel = pauseGameViewModel;
         this.resumeGameViewModel = resumeGameViewModel;
+        this.menuViewModel = menuViewModel;
 
         loginViewModel.addPropertyChangeListener(this);
 
@@ -111,6 +113,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                             LoginState currentState = loginViewModel.getLoginState();
                             playGameViewModel.getState().setUserName(currentState.getUsername());
                             resumeGameViewModel.getState().setUserName(currentState.getUsername());
+                            menuViewModel.getMenuState().setUsername(currentState.getUsername());
                             loginController.execute(currentState.getUsername(),
                                     currentState.getPassword());
                         }

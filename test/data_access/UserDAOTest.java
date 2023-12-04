@@ -28,7 +28,7 @@ public class UserDAOTest {
     @AfterEach
     void tearDown() {
         // Clean up any resources or data created during tests
-        userDAO.deleteAll();
+        userDAO.delete("testUser");
     }
 
     @Test
@@ -42,6 +42,17 @@ public class UserDAOTest {
 
         assertTrue(userDAO.existsByName("testUser"));
         assertEquals(user, userDAO.get("testUser"));
+    }
+
+    @Test
+    public void testScores() {
+        Map<LocalTime, Integer> scores = new HashMap<>();
+        scores.put(LocalTime.now(), 4);
+        scores.put(LocalTime.now(), 9);
+        CommonUser user = new CommonUser("other", "testPassword", scores);
+        userDAO.addUser(user);
+        userDAO.addScore(user, LocalTime.now(), 18);
+        assert(user.getScores().values().contains(18));
     }
 
     @Test

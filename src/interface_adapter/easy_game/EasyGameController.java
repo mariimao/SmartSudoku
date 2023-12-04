@@ -4,6 +4,8 @@ import entity.board.GameState;
 import use_case.user_move.UserMoveInputBoundary;
 import use_case.user_move.UserMoveInputData;
 
+import java.io.IOException;
+
 public class EasyGameController {
     final UserMoveInputBoundary userMoveInteractor;
 
@@ -12,7 +14,7 @@ public class EasyGameController {
     }
 
 
-    public void execute(GameState currentState, int row, int column, int value) {
+    public void execute(GameState currentState, int row, int column, int value) throws IOException {
         UserMoveInputData userMoveInputData = new UserMoveInputData(currentState, row, column, value);
         userMoveInteractor.execute(userMoveInputData);
     }

@@ -42,7 +42,6 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
     private final JButton loadgame;
     private final JButton newgame;
     private final JButton leaderboard;
-    private final JButton pastgames;
 
     private final JButton cancel;
 
@@ -87,10 +86,6 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
         leaderboard.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(leaderboard);
 
-        pastgames = new CustomButton(menuViewModel.PAST_GAMES_BUTTON_LABEL, darkblue, white);
-        pastgames.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-        this.add(pastgames);
-
         cancel = new CustomButton(menuViewModel.CANCEL_BUTTON_LABEL, darkblue, white);
         cancel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(cancel);
@@ -129,18 +124,9 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                             LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
                             String username = menuViewModel.getMenuState().getUsername(); // get username from menu
                             String sortingMethod = leaderboardState.getSortingMethod();
-                            leaderboardController.execute("mary", sortingMethod, false, false); // false from menu
-                        }
-                    }
-                }
-        );
-
-        pastgames.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        if (e.getSource().equals(loadgame)) {
-                            // pastgamesController.execute();
+                            leaderboardState.setUsername(username);
+                            leaderboardViewModel.setLeaderboardState(leaderboardState);
+                            leaderboardController.execute(username, sortingMethod, false, false); // false from menu
                         }
                     }
                 }
