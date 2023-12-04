@@ -12,6 +12,10 @@ public class NewGameOutputData {
         this.user = user;
         this.newGame = newGame;
     }
-    public GameState getNewGame() {return newGame;}
-    public User getUser() {return user;}
+    public GameState getNewGame() {
+        return newGame;
+    }
+    public User getUser() {
+        return user;
+    }
 }

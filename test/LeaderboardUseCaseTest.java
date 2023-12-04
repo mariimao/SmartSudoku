@@ -25,7 +25,7 @@ public class LeaderboardUseCaseTest {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
         UserDAO userDAO = new UserDAOTest().getUserDAO();
         LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(useCaseTestObjects.getViewManagerModel(),
-                useCaseTestObjects.getLeaderboardViewModel());
+                useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getMenuViewModel());
         leaderboardInteractor = new LeaderboardInteractor(userDAO, leaderboardPresenter);
     }
 

@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * View for the StartView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class StartView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Start";
@@ -29,6 +32,11 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
     private final Color black = new Color(0, 0, 0);
 
 
+    /**
+     * Constructor for Start View
+     * @param startController the controller for start usecase, is a StartController object
+     * @param startViewModel the view model for start usercase, is a StartViewModel object
+     */
     public StartView(StartController startController, StartViewModel startViewModel) {
         // initializes start
         this.startViewModel = startViewModel;
@@ -89,11 +97,19 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
         );
     }
 
+    /**
+     * Records the action performed
+     * @param e the action even that occurs
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         //JOptionPane.showConfirmDialog(this, " not implemented yet.");
     }
 
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         //StartState state = (StartState) evt.getNewValue();

@@ -14,7 +14,10 @@ public class PauseGameInputData {
         past_states = pastStates;
     }
 
-    String getUsername() {return userName;}
-    GameState getCurrent_state() {return current_state;}
-    LinkedList<GameState> getPast_states() {return past_states;}
+    public String getUsername() {
+        return userName;
+    }
+    public GameState getCurrent_state() {
+        return current_state;
+    }
 }
