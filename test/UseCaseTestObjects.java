@@ -1,5 +1,4 @@
 import interface_adapter.ViewManagerModel;
-import interface_adapter.easy_game.EasyGameViewModel;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
@@ -31,7 +30,6 @@ public class UseCaseTestObjects {
     private MenuViewModel menuViewModel;
     private NewGameViewModel newGameViewModel;
     private LeaderboardViewModel leaderboardViewModel;
-    private EasyGameViewModel easyGameViewModel;
     private PlayGameViewModel playGameViewModel;
     private SpotifyViewModel spotifyViewModel;
     private MakeMoveViewModel makeMoveViewModel;
@@ -56,7 +54,6 @@ public class UseCaseTestObjects {
         menuViewModel = new MenuViewModel();
         newGameViewModel = new NewGameViewModel();
         leaderboardViewModel = new LeaderboardViewModel();
-        easyGameViewModel = new EasyGameViewModel();
         endGameViewModel = new EndGameViewModel();
         playGameViewModel = new PlayGameViewModel();
         spotifyViewModel = new SpotifyViewModel();
@@ -103,9 +100,6 @@ public class UseCaseTestObjects {
         return newGameViewModel;
     }
 
-    public EasyGameViewModel getEasyGameViewModel() {
-        return easyGameViewModel;
-    }
 
     public MakeMoveViewModel getMakeMoveViewModel() {
         return makeMoveViewModel;

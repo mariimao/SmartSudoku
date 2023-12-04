@@ -36,14 +36,14 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
     /**
      * @return the client id
      */
-    private String getClientId() {
+    public String getClientId() {
         return this.client_id;
     }
 
     /**
      * @return the client secret
      */
-    private String getClientSecret() {
+    public String getClientSecret() {
         return this.client_secret;
     }
 

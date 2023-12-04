@@ -1,6 +1,5 @@
 package entity.board;
 
-import interface_adapter.easy_game.EasyGameState;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
