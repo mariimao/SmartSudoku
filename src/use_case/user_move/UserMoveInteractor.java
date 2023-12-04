@@ -3,6 +3,8 @@ package use_case.user_move;
 import entity.board.Board;
 import use_case.make_move.MakeMoveBoardDataAccessInterface;
 
+import java.io.IOException;
+
 public class UserMoveInteractor implements UserMoveInputBoundary {
 
     final UserMoveDataAccessInterface userMoveDataAccessInterface;
@@ -17,7 +19,7 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
         this.easyGamePresenter = easyGamePresenter;
     }
 
-    public void execute(UserMoveInputData userMoveInputData) {
+    public void execute(UserMoveInputData userMoveInputData) throws IOException {
         Board current_board = userMoveInputData.getCurrent_board();
         int row = userMoveInputData.getRow();
         int column = userMoveInputData.getColumn();

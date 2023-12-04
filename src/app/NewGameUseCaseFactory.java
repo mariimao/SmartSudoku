@@ -85,14 +85,4 @@ public class NewGameUseCaseFactory {
         PlayGameInputBoundary playGameInteractor = new PlayGameInteractor(playGameDataAccessInterface, playGamePresenter);
         return new PlayGameController(playGameInteractor);
     }
-    private static LoginController createUserSignupUseCase(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel,
-                                                           MenuViewModel menuViewModel, LoginUserDataAccessInterface userDataAccessObject) throws IOException {
-
-        LoginOutputBoundary loginOutputBoundary = new LoginPresenter( loginViewModel, menuViewModel, viewManagerModel);
-
-        LoginInputBoundary userLoginInteractor = new LoginInteractor(
-                userDataAccessObject, loginOutputBoundary);
-
-        return new LoginController(userLoginInteractor);
-    }
 }

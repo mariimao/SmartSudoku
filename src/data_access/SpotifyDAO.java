@@ -2,7 +2,6 @@ package data_access;
 
 import okhttp3.*;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 import use_case.spotify.SpotifyDataAccessInterface;
 
@@ -86,7 +85,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
     /**
      * @return the access code
      */
-    public String getAccessCode() {
+    public String getAccessCode() throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String jsonBody = "grant_type=client_credentials&client_id=" + CLIENT_ID + "&client_secret=" + CLIENT_SECRET;
@@ -96,23 +95,19 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .post(requestBody)
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-            return responseBody.getString("access_token");
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return responseBody.getString("access_token");
     }
 
     /**
      * @param id the song identification
      * @return returns the song artists name
      */
-    public String getArtistname(String id) {
+    public String getArtistname(String id) throws IOException {
         // Just for testing api calling
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -122,24 +117,19 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
                 .url("https://api.spotify.com/v1/artists/" + id)
                 .addHeader("Authorization", "Bearer " + (access_token))
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString);
-            String name = responseBody.getString("name");
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
+        String name = responseBody.getString("name");
 
-            return name;
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return name;
     }
 
     /**
      * @param id the song identification
      * @return returns the track name
      */
-    public String getTrackName(String id) {
+    public String getTrackName(String id) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
@@ -148,27 +138,23 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
                 .url("https://api.spotify.com/v1/tracks/" + id)
                 .addHeader("Authorization", "Bearer " + (access_token))
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString);
 
-            // gets the name of the track based on ID
-            String name = responseBody.getString("name");
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
 
-            return name;
+        // gets the name of the track based on ID
+        String name = responseBody.getString("name");
 
+        return name;
 
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     /**
      * @param id the song identification
      * @return returns the track duration
      */
-    public int getTrackDuration(String id) {
+    public int getTrackDuration(String id) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
@@ -176,27 +162,22 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
                 .url("https://api.spotify.com/v1/tracks/" + id)
                 .addHeader("Authorization", "Bearer " + (access_token))
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString);
 
-            // gets the duration in milliseconds
-            int duration = responseBody.getInt("duration_ms");
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
 
-            return duration;
+        // gets the duration in milliseconds
+        int duration = responseBody.getInt("duration_ms");
 
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return duration;
     }
 
     /**
      * @param search the search phrase
      * @return a list of song ids
      */
-    public ArrayList<String> getSuggestions(String search) {
+    public ArrayList<String> getSuggestions(String search) throws IOException {
         // should return a list of id suggestions
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();

@@ -1,5 +1,6 @@
 package use_case.spotify;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class SpotifyInteractor implements SpotifyInputBoundary {
@@ -13,7 +14,7 @@ public class SpotifyInteractor implements SpotifyInputBoundary {
         this.spotifyDataAccessInterface = spotifyDataAccessInterface;
     }
     @Override
-    public void execute(SpotifyInputData spotifyInputData) {
+    public void execute(SpotifyInputData spotifyInputData) throws IOException {
         String searchKey = spotifyInputData.getSearchKey();
         ArrayList<String> searchResults = spotifyDataAccessInterface.getSuggestions(searchKey);
         ArrayList<String> searchWithNames = new ArrayList<>();

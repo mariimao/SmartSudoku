@@ -152,15 +152,5 @@ public class GameState {
         return  representation.toString();
     }
 
-    public static void main(String[] args) {
-        //TODO: DELETE MAIN, just for testing
-        EasyBoard testBoard = new EasyBoard("003T00004T004T01F2T00");
-        GameState testState = new GameState(1);
-        System.out.println(testState.currBoard);
-        String stringRep = testState.toStringPause();
-        System.out.println("String Rep of State: " + testState.toStringPause());
-        System.out.println(Arrays.toString(stringRep.split("-")));
-    }
-
 }
 

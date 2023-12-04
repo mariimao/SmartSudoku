@@ -5,6 +5,7 @@ import entity.board.GameState;
 import entity.user.User;
 import use_case.user_move.UserMoveOutputData;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class MakeMoveInteractor implements MakeMoveInputBoundary {
@@ -19,7 +20,7 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
     }
 
     @Override
-    public GameState execute(MakeMoveInputData makeMoveInputData) {
+    public GameState execute(MakeMoveInputData makeMoveInputData) throws IOException {
         GameState gameBeingPlayed = makeMoveInputData.getGameBeingPlayed();
         int x = makeMoveInputData.getMoveCol();
         int y = makeMoveInputData.getMoveRow();

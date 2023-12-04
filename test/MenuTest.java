@@ -1,4 +1,3 @@
-
 import app.MenuUseCaseFactory;
 import data_access.UserDAO;
 import entity.user.CommonUserFactory;
