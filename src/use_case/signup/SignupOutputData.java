@@ -18,7 +18,7 @@ public class SignupOutputData {
     }
 
     /**
-     * @returns the username of the user
+     * @return the username of the user
      */
     public String getUsername() {
         return username;
