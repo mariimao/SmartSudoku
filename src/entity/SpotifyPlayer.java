@@ -55,14 +55,14 @@ public class SpotifyPlayer {
                 .addHeader("Authorization", "Bearer " + (this.token))
                 .put(requestBody)
                 .build();
-//        try {
-//            Response response = client.newCall(request).execute();
-////            String responseString = response.body().string();
-////            JSONObject responseBody = new JSONObject(responseString); // testing purposes
-//
-//        } catch (IOException | JSONException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Response response = client.newCall(request).execute();
+            String responseString = response.body().string();
+            JSONObject responseBody = new JSONObject(responseString); // testing purposes
+
+        } catch (IOException | JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
