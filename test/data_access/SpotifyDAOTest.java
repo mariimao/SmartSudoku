@@ -1,7 +1,10 @@
 package data_access;
 
+import data_access.SpotifyDAO;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 
@@ -37,4 +40,19 @@ public class SpotifyDAOTest {
         assertEquals(spotifyDAO.getTrackDuration(trackID), expectedTime);
     }
 
+    @Test
+    public void testRefreshToken() {
+        String token = spotifyDAO.getRefreshToken();
+        String current_token = spotifyDAO.getApiToken();
+        assertEquals(current_token, token);
+    }
+
+    @Test
+    public void testSuggestions() {
+        ArrayList<String> suggestions = spotifyDAO.getSuggestions("hello");
+        // default amount is 20
+        assertEquals(20, suggestions.size());
+    }
+
 }
+
