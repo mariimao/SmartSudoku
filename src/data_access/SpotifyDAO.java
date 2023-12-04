@@ -182,7 +182,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
      * @param id the song identification
      * @return returns position the track has in the album
      */
-    public String getTrackPosition(String id) throws IOException {
+    public Integer getTrackPosition(String id) throws IOException {
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
         String access_token = getAccessCode();
@@ -197,7 +197,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
 
         // gets the name of the track based on ID
-        String name =  responseBody.getString("track_number");
+        int name =  responseBody.getInt("track_number");
 
         return name;
 
