@@ -4,13 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ec73a82f-0ef1-4b4e-84ad-8cd8dc3f3c75" name="Changes" comment="deleted unnecessary lines of code">
+    <list default="true" id="ec73a82f-0ef1-4b4e-84ad-8cd8dc3f3c75" name="Changes" comment="edited some tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/SpotifyUseCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SpotifyUseCaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/UseCaseTestObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UseCaseTestObjects.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/data_access/SpotifyDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/data_access/SpotifyDAOTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/entity/board/GameStateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/entity/board/GameStateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/game/GameController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/game/GamePresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/board/BoardInputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/board/BoardOutputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/CustomButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/CustomButton.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LabelTextPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LabelTextPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LeaderboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LeaderboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,11 +45,21 @@
     </recent_temporary>
   </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="edited some tests">
+      <option name="closed" value="true" />
+      <created>1701675906471</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1701675906472</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="deleted unnecessary lines of code" />
-    <option name="LAST_COMMIT_MESSAGE" value="deleted unnecessary lines of code" />
+    <MESSAGE value="edited some tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="edited some tests" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701385664456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -47,6 +47,10 @@ import java.beans.PropertyChangeListener;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * View for the EndGameView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
+
 public class EndGameView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "End Game";
@@ -75,6 +79,19 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
 
     private JLabel score;
     private final PlayGameState finalState;
+
+    /**
+     * Constructor for End Game View
+     *
+     * @param menuViewModel         the view model for the menu usecase, is a MenuViewModel object
+     * @param leaderboardController the controller for the leaderboard, is LeaderboardController object
+     * @param leaderboardViewModel  the view model for the leaderboard, is LeaderboardViewModel object
+     * @param endGameViewModel the view model for end game, is EndGameViewModel object
+     * @param endGameController the controller for end game, is EndGameController object
+     * @param menuController the controller for menu, is MenuController object
+     * @param playGameViewModel the view model for play game, is PlayGameViewModel object
+     * @param viewManagerModel the view manager model, is ViewManagerModel object
+     */
 
 
     public EndGameView(EndGameViewModel endGameViewModel,
@@ -151,11 +168,20 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
         this.add(buttons);
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
+
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
