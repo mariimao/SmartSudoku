@@ -1,52 +1,48 @@
 package use_case.end_game;
 
+import entity.Scores;
 import entity.board.GameState;
+import entity.user.User;
 
-/**
- * Class representing the input data of the EndGame.
- */
+import java.util.LinkedList;
+
 public class EndGameInputData {
     final private String user;
     final private GameState current_state;
     final private int time;
     final private int lives;
+    final private Scores scores;
 
-    /**
-     * Constructor for the EndGameInputData object.
-     * @param user is a String object representing the username
-     * @param current_state is a GameState object representing the current state
-     * @param time is an int representing the current time elapsed
-     * @param lives is an int representing the current lives left
-     */
-    public EndGameInputData(String user, GameState current_state, int time, int lives) {
+
+    public EndGameInputData(String user, GameState current_state, int time, int lives, Scores scores) {
         this.user = user;
         this.current_state = current_state;
         this.time = time;
         this.lives = lives;
+        this.scores = scores;
     }
 
-    /* ----- Getters and setters ----- */
-    public String getUsername() {
+    String getUsername() {
         return user;
     }
 
-    public GameState getCurrent_state() {
+    GameState getCurrent_state() {
         return current_state;
     }
 
-    public boolean isCompleted() {
+    boolean isCompleted() {
         return current_state.gameOver();
     }
 
-    public int spacesLeft() {
+    int spacesLeft() {
         return current_state.spacesLeft();
     }
 
-    public int getTime() {
+    int getTime() {
         return this.time;
     }
 
-    public int getLives() {
+    int getLives() {
         return this.lives;
     }
 }
