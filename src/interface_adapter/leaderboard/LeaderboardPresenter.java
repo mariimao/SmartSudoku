@@ -1,18 +1,16 @@
 package interface_adapter.leaderboard;
 
 import interface_adapter.ViewManagerModel;
-        import interface_adapter.login.LoginState;
-        import interface_adapter.menu.MenuState;
         import interface_adapter.menu.MenuViewModel;
-        import interface_adapter.signup.SignupState;
         import use_case.leaderboard.LeaderboardOutputBoundary;
         import use_case.leaderboard.LeaderboardOutputData;
-        import view.LeaderboardView;
 
 import javax.swing.*;
-import java.time.LocalDateTime;
-        import java.time.format.DateTimeFormatter;
 
+/**
+ * Class representing the LeaderboardPresenter.
+ * This class is responsible for updating the views.
+ */
 public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
     private final LeaderboardViewModel leaderboardViewModel;
@@ -20,6 +18,13 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
     private final MenuViewModel menuViewModel;
 
     private final ViewManagerModel viewManagerModel;
+
+    /**
+     * Constructor for a LeaderboardPresenter object.
+     * @param viewManagerModel is a ViewManagerModel object
+     * @param leaderboardViewModel is a LeaderboardViewModel object
+     * @param menuViewModel is a MenuViewModel
+     */
     public LeaderboardPresenter(ViewManagerModel viewManagerModel,
                                 LeaderboardViewModel leaderboardViewModel,
                                 MenuViewModel menuViewModel) {
@@ -28,6 +33,9 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
         this.menuViewModel = menuViewModel;
     }
 
+    /**
+     * If the view type is Back, then a backView object is prepared.
+     */
     @Override
     public void prepareBackView() {
         viewManagerModel.setActiveViewName(new MenuViewModel().getViewName());
@@ -35,6 +43,11 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
     }
 
 
+    /**
+     * Called when Leaderboard runs successfully - prepares a success view. This updates the state of the leaderboard
+     * view model, and notifies the viewManagerModel.
+     * @param leaderboardOutputData is an LeaderboardOutputData object
+     */
     public void prepareSuccessView(LeaderboardOutputData leaderboardOutputData) {
         LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
         leaderboardState.setUsername(menuViewModel.getMenuState().getUsername());
@@ -47,6 +60,11 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
         viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Called when Leaderboard doesn't run successfully - prepares a fail view. This notifies the leaderboardViewModel,
+     * and calls a JDialog to display the error.
+     * @param error is a String containing a description of the error
+     */
     @Override
     public void prepareFailView(String error) {
         LeaderboardState leaderboardState = leaderboardViewModel.getLeaderboardState();
