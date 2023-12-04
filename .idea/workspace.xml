@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="Finished test files for CommonUserTest">
+    <list default="true" id="f504582d-aebb-4b86-b5f3-29eac2c87bb8" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/SigninTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SigninTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-        <option value="JUnit5 Test Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -27,444 +20,98 @@
         <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;history&quot;: [
-    {
-      &quot;state&quot;: &quot;OPEN&quot;
-    }
-  ],
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GithubPullRequestsUISettings">
-    <option name="recentNewPullRequestHead">
-      <RepoCoordinatesHolder>
-        <option name="owner" value="mariimao" />
-        <option name="repository" value="SmartSudoku" />
-      </RepoCoordinatesHolder>
-    </option>
-    <option name="selectedUrlAndAccountId">
-      <UrlAndAccount>
-        <option name="accountId" value="a934f9b6-92b1-44e9-be4a-2e512c65a768" />
-        <option name="url" value="https://github.com/mariimao/SmartSudoku" />
-      </UrlAndAccount>
-    </option>
-  </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedTabId" value="CurrentFile" />
-  </component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 5
-}</component>
-  <component name="ProjectId" id="2YS4NvHPRZUNUoiAqFgCsCAZq3V" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectViewState">
-    <option name="autoscrollFromSource" value="true" />
-    <option name="showLibraryContents" value="true" />
-  </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "TestCases",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "vue.rearranger.settings.migration": "true"
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/make_move&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+    "git-widget-placeholder": "Javadoc",
+    "node.js.selected.package.tslint": "(autodetect)"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\make_move" />
-      <recent name="C:\Users\akunn\IdeaProjects\SmartSudoku\src\use_case\play_game" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="view" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.test in SmartSudoku">
-    <configuration name="SigninTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SmartSudoku" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SigninTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SigninTest.testExistingUser" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SmartSudoku" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SigninTest" />
-      <option name="METHOD_NAME" value="testExistingUser" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SigninTest.testIncorrectTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SmartSudoku" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SigninTest" />
-      <option name="METHOD_NAME" value="testIncorrectTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SigninTest.testSuccessCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SmartSudoku" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SigninTest" />
-      <option name="METHOD_NAME" value="testSuccessCreation" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="test in SmartSudoku" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="SmartSudoku" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/test" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.test in SmartSudoku" />
-        <item itemvalue="JUnit.SigninTest" />
-        <item itemvalue="JUnit.SigninTest.testSuccessCreation" />
-        <item itemvalue="JUnit.SigninTest.testExistingUser" />
-        <item itemvalue="JUnit.SigninTest.testIncorrectTest" />
-      </list>
-    </recent_temporary>
-  </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+}]]></component>
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="1445cf65-3733-4961-a499-e2d83ab21f3e" name="Changes" comment="" />
-      <created>1700505611173</created>
-      <option name="number" value="Default" />
-      <option name="presentableId" value="Default" />
-      <updated>1700505611173</updated>
-      <workItem from="1700505613602" duration="3436000" />
-      <workItem from="1700542974010" duration="19576000" />
-      <workItem from="1701303645790" duration="5211000" />
-    </task>
-    <task id="LOCAL-00001" summary="changed NewGameView to use the colours and look better">
+    <task id="LOCAL-00001" summary="added javadoc to signup use case">
       <option name="closed" value="true" />
-      <created>1700850942987</created>
+      <created>1701663626563</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1700850942987</updated>
+      <updated>1701663626563</updated>
     </task>
-    <task id="LOCAL-00002" summary="Added API calls, need to test with spotify with premium + add proper use case for accessing database">
+    <task id="LOCAL-00002" summary="added javadoc to login use case">
       <option name="closed" value="true" />
-      <created>1701104316645</created>
+      <created>1701664487890</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1701104316645</updated>
+      <updated>1701664487890</updated>
     </task>
-    <task id="LOCAL-00003" summary="committing tests from pull request 53">
+    <task id="LOCAL-00003" summary="added api call that returns album id based on track id">
       <option name="closed" value="true" />
-      <created>1701113972915</created>
+      <created>1701665125772</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1701113972915</updated>
+      <updated>1701665125772</updated>
     </task>
-    <task id="LOCAL-00004" summary="committing changes from merge main into playgame">
+    <task id="LOCAL-00004" summary="updated javadoc for spotify use case">
       <option name="closed" value="true" />
-      <created>1701178474686</created>
+      <created>1701666592389</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1701178474686</updated>
+      <updated>1701666592389</updated>
     </task>
-    <task id="LOCAL-00005" summary="committing changes from resolving conflicts after pulling from main">
+    <task id="LOCAL-00005" summary="added position for album">
       <option name="closed" value="true" />
-      <created>1701310263375</created>
+      <created>1701666851191</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1701310263375</updated>
+      <updated>1701666851191</updated>
     </task>
-    <task id="LOCAL-00006" summary="resolved build errors caused by conflicts">
+    <task id="LOCAL-00006" summary="editing added position for album to integer">
       <option name="closed" value="true" />
-      <created>1701310765448</created>
+      <created>1701668944836</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1701310765448</updated>
+      <updated>1701668944836</updated>
     </task>
-    <task id="LOCAL-00007" summary="just changed Main.main to match the updated code for the board view">
+    <task id="LOCAL-00007" summary="added javadoc for signup and start view">
       <option name="closed" value="true" />
-      <created>1701311305131</created>
+      <created>1701672115061</created>
       <option name="number" value="00007" />
       <option name="presentableId" value="LOCAL-00007" />
       <option name="project" value="LOCAL" />
-      <updated>1701311305131</updated>
+      <updated>1701672115061</updated>
     </task>
-    <task id="LOCAL-00008" summary="Updated UserDAO so that it loads the paused game from mongo">
-      <option name="closed" value="true" />
-      <created>1701315185808</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1701315185808</updated>
-    </task>
-    <task id="LOCAL-00009" summary="added tests for UserDAO and deleted some non-useful methods in the class">
-      <option name="closed" value="true" />
-      <created>1701391087344</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1701391087344</updated>
-    </task>
-    <task id="LOCAL-00010" summary="Fixed the bug in the NewGame use case.">
-      <option name="closed" value="true" />
-      <created>1701392824950</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1701392824950</updated>
-    </task>
-    <task id="LOCAL-00011" summary="deleted EasyGameView.java and added a button to pop-up rules.">
-      <option name="closed" value="true" />
-      <created>1701394845355</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1701394845355</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Committing changes from merging origin/SudokuDAO into main and fixing conflicts.">
-      <option name="closed" value="true" />
-      <created>1701407183989</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1701407183989</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Committing changes from merging">
-      <option name="closed" value="true" />
-      <created>1701461197349</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1701461197349</updated>
-    </task>
-    <task id="LOCAL-00014" summary="Committing BoardView">
-      <option name="closed" value="true" />
-      <created>1701462243447</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1701462243447</updated>
-    </task>
-    <task id="LOCAL-00015" summary="Committing BoardView">
-      <option name="closed" value="true" />
-      <created>1701462359235</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1701462359235</updated>
-    </task>
-    <task id="LOCAL-00016" summary="fixed popup issue when clicking login in StartView. Also implemented not allowing users to enter more than one value at a time for the bo">
-      <option name="closed" value="true" />
-      <created>1701475524871</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1701475524871</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
-  <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="a2c57861-dfd7-4eb4-ba4f-46a03617ce56" value="TOOL_WINDOW" />
-      </map>
-    </option>
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-        <entry key="a2c57861-dfd7-4eb4-ba4f-46a03617ce56">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="HEAD" />
-                      </list>
-                    </value>
-                  </entry>
-                  <entry key="structure">
-                    <value>
-                      <list>
-                        <option value="dir:C:/Users/akunn/IdeaProjects/SmartSudoku/src/use_case/play_game" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-              <option name="SHOW_ONLY_AFFECTED_CHANGES" value="true" />
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added a method that converts boards to arrays and a method that converts arrays to board. I want to use them to try and build a board scrambling function" />
-    <MESSAGE value="changed NewGameView to use the colours and look better" />
-    <MESSAGE value="Added API calls, need to test with spotify with premium + add proper use case for accessing database" />
-    <MESSAGE value="small changes to newGame use case" />
-    <MESSAGE value="committing tests from pull request 53" />
-    <MESSAGE value="committing just to checkout" />
-    <MESSAGE value="committing changes from merge main into playgame" />
-    <MESSAGE value="Fixed the bugs in the pause and resume buttons for all views that call the controllers for those use cases" />
-    <MESSAGE value="committing changes from resolving conflicts after pulling from main" />
-    <MESSAGE value="resolved build errors caused by conflicts" />
-    <MESSAGE value="just changed Main.main to match the updated code for the board view" />
-    <MESSAGE value="Updated UserDAO so that it loads the paused game from mongo" />
-    <MESSAGE value="added tests for UserDAO and deleted some non-useful methods in the class" />
-    <MESSAGE value="Fixed the bug in the NewGame use case." />
-    <MESSAGE value="deleted EasyGameView.java and added a button to pop-up rules." />
-    <MESSAGE value="Finished test files for CommonUserTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finished test files for CommonUserTest" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <breakpoint type="java-exception">
-          <properties class="java.lang.ArrayIndexOutOfBoundsException" package="java.lang" />
-          <option name="timeStamp" value="22" />
-        </breakpoint>
-        <breakpoint type="java-exception">
-          <properties class="java.lang.NullPointerException" package="java.lang" />
-          <option name="timeStamp" value="24" />
-        </breakpoint>
-        <breakpoint type="java-exception">
-          <properties class="java.lang.RuntimeException" package="java.lang" />
-          <option name="timeStamp" value="42" />
-        </breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/view/StartView.java</url>
-          <line>86</line>
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
-          <line>165</line>
-          <option name="timeStamp" value="130" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
-          <line>166</line>
-          <option name="timeStamp" value="131" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
-          <line>168</line>
-          <option name="timeStamp" value="132" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="133" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/data_access/SudokuDAO.java</url>
-          <line>173</line>
-          <option name="timeStamp" value="134" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/test/CommonUserTest.java</url>
-          <line>42</line>
-          <properties class="CommonUserTest" method="testAddScores">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="129" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="added javadoc to signup use case" />
+    <MESSAGE value="added javadoc to login use case" />
+    <MESSAGE value="added api call that returns album id based on track id" />
+    <MESSAGE value="updated javadoc for spotify use case" />
+    <MESSAGE value="added position for album" />
+    <MESSAGE value="editing added position for album to integer" />
+    <MESSAGE value="added javadoc for signup and start view" />
+    <option name="LAST_COMMIT_MESSAGE" value="added javadoc for signup and start view" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/SmartSudoku$HardBoardTest.ic" NAME="HardBoardTest Coverage Results" MODIFIED="1701385637532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$EasyBoardTest.ic" NAME="EasyBoardTest Coverage Results" MODIFIED="1701564248440" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$test_in_SmartSudoku.ic" NAME="test in SmartSudoku Coverage Results" MODIFIED="1701574947806" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701458020332" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/SmartSudoku$LeaderboardUseCaseTest.ic" NAME="LeaderboardUseCaseTest Coverage Results" MODIFIED="1701655377792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$test_in_SmartSudoku.ic" NAME="test in SmartSudoku Coverage Results" MODIFIED="1701385692086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$SpotifyUseCaseTest.ic" NAME="SpotifyUseCaseTest Coverage Results" MODIFIED="1701654581973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$UserDAOTest.ic" NAME="UserDAOTest Coverage Results" MODIFIED="1701385664456" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>database.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/SmartSudoku$SpotifyDAOTest.ic" NAME="SpotifyDAOTest Coverage Results" MODIFIED="1701457975204" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>database.*</FILTER>
+    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuDAOTest.ic" NAME="SudokuDAOTest Coverage Results" MODIFIED="1701657061556" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>data_access.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/SmartSudoku$CommonUserTest.ic" NAME="CommonUserTest Coverage Results" MODIFIED="1701572027270" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuAPITest_testCorrectVerificationFalse.ic" NAME="SudokuAPITest.testCorrectVerificationFalse Coverage Results" MODIFIED="1701564159481" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>database.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuAPITest.ic" NAME="SudokuAPITest Coverage Results" MODIFIED="1701572941412" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>database.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/SmartSudoku$database_in_SmartSudoku.ic" NAME="database in SmartSudoku Coverage Results" MODIFIED="1701567499601" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/SmartSudoku$SudokuAPITest_testCorrectSolution.ic" NAME="SudokuAPITest.testCorrectSolution Coverage Results" MODIFIED="1701572930983" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>database.*</FILTER>
+    <SUITE FILE_PATH="coverage/SmartSudoku$All_in_SmartSudoku.ic" NAME="All in SmartSudoku Coverage Results" MODIFIED="1701657980849" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/SmartSudoku$data_access_in_SmartSudoku.ic" NAME="data_access in SmartSudoku Coverage Results" MODIFIED="1701657069050" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>data_access.*</FILTER>
     </SUITE>
   </component>
 </project>
