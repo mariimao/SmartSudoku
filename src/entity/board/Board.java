@@ -2,6 +2,7 @@ package entity.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Interface for the Board class.
@@ -32,6 +33,11 @@ public interface Board {
      * @return Hashmap template for a blank sudoku board
      */
     HashMap<Integer, Boolean>[][] generateBlankBoard();
+
+    /**
+     * Updates the solution board.
+     */
+    void updateSolutionBoard();
 
     /**
      * This function stores the user's current move into the board, then sends an

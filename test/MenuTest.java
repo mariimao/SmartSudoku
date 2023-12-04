@@ -51,14 +51,8 @@ public class MenuTest {
     }
 
     @Test
-    public void testPastGamesPresent() {
-        JButton button = (JButton) menuComponents[4];
-        assert(button.getText().equals("PAST GAMES"));
-    }
-
-    @Test
     public void testBackButtonPresent() {
-        JButton button = (JButton) menuComponents[5];
+        JButton button = (JButton) menuComponents[4];
         assert(button.getText().equals("BACK"));
     }
 

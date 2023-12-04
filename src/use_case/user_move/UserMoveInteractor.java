@@ -25,6 +25,7 @@ public class UserMoveInteractor implements UserMoveInputBoundary {
         int column = userMoveInputData.getColumn();
         int value = userMoveInputData.getValue();
 
+        current_board.updateSolutionBoard();
         if (current_board.correctMove(row, column, value)) {
             userMoveInputData.loseLife();
             if (userMoveInputData.getLives() < 1) {

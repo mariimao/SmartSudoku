@@ -28,6 +28,7 @@ public class NewGamePresenter implements NewGameOutputBoundary {
 
     @Override
     public void prepareFailView(String error) {
+        System.out.println("Called2");
         NewGameState newGameState = newGameViewModel.getState();
         newGameState.setNewGameError(error);
         newGameViewModel.firePropertyChanged();
