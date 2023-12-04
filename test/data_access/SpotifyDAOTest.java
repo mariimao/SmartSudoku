@@ -3,6 +3,7 @@ import data_access.SpotifyDAO;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 
@@ -69,7 +70,7 @@ public class SpotifyDAOTest {
     }
 
     @Test
-    public void testSuggestions() {
+    public void testSuggestions() throws IOException {
         ArrayList<String> suggestions = spotifyDAO.getSuggestions("hello");
         // default amount is 20
         assertEquals(20, suggestions.size());
