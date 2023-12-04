@@ -42,13 +42,12 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     private final UserFactory userFactory;
 
     /**
-     * Initializes the userdao.
+     * Initializes the UserDAO.
      *
      * @param uri         the uri of the mongoclient
      * @param database    the name of the database
      * @param collection  the collection name
-     * @param userFactory
-     * @throws Exception
+     * @param userFactory is a UserFactory object
      */
     public UserDAO(String uri, String database, String collection, UserFactory userFactory) throws MongoException {
         this.userFactory = userFactory;
@@ -225,7 +224,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     /**
      * updates the user in the database to include their new score
      *
-     * @param user
+     * @param user is a User object
      */
     private void changeScores(User user) {
         Map<String, Integer> stringScores = new HashMap<>();
@@ -256,8 +255,8 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
     /**
      * sets the final game
      *
-     * @param user
-     * @return
+     * @param user is a User object
+     * @return a boolean value, representing whether the function has been implemented properly
      */
     public boolean setFinalGame(User user) {
         String name = user.getName();
@@ -283,7 +282,7 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * Sets the progress of the user.
      * ASSUMPTION: this method would only ever be called if the User.pausedGame is not null
      *
-     * @param user
+     * @param user is a User object
      * @return true if game was paused successfully and false otherwise
      */
     public boolean setProgress(User user) {
