@@ -5,7 +5,6 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardPresenter;
 import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.menu.MenuViewModel;
 import use_case.leaderboard.LeaderboardDataAccessInterface;
 import use_case.leaderboard.LeaderboardInputBoundary;
 import use_case.leaderboard.LeaderboardInteractor;
