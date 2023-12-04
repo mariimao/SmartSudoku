@@ -14,9 +14,6 @@ import interface_adapter.make_move.MakeMoveController;
 import interface_adapter.make_move.MakeMovePresenter;
 import interface_adapter.make_move.MakeMoveViewModel;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.new_game.NewGameController;
-import interface_adapter.new_game.NewGamePresenter;
-import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGamePresenter;
 import interface_adapter.pause_game.PauseGameViewModel;
@@ -28,20 +25,15 @@ import use_case.end_game.EndGameDataAccessInterface;
 import use_case.end_game.EndGameInteractor;
 import use_case.make_move.MakeMoveDataAccessInterface;
 import use_case.make_move.MakeMoveInteractor;
-import use_case.make_move.MakeMoveOutputBoundary;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.pause_game.PauseGameInteractor;
 import use_case.play_game.PlayGameDataAccessInterface;
 import use_case.play_game.PlayGameInputBoundary;
 import use_case.play_game.PlayGameInteractor;
-import use_case.user_move.UserMoveBoardDataAccessInterface;
+import use_case.make_move.MakeMoveBoardDataAccessInterface;
 import use_case.user_move.UserMoveDataAccessInterface;
 import use_case.user_move.UserMoveInteractor;
 import view.BoardView;
-import view.PausedGameView;
-
-import javax.swing.*;
-import java.io.IOException;
 
 /**
  * Use case factory for the Board state.
@@ -76,7 +68,7 @@ public class BoardUseCaseFactory {
         PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject);
         EndGameController endGameController = createUserEndGameUseCase(viewManagerModel, leaderboardViewModel, endGameViewModel, menuViewModel, userDataAccessObject);
         PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);
-        MakeMoveController makeMoveController = createUserMakeMoveUseCase(userDataAccessObject, makeMoveViewModel, viewManagerModel);
+        MakeMoveController makeMoveController = createUserMakeMoveUseCase(userDataAccessObject, makeMoveViewModel, viewManagerModel, boardDataAccessObject);
 
         return new BoardView(easyGameViewModel, easyGameController, pauseGameController, pauseGameViewModel, endGameController, endGameViewModel, playGameViewModel,
                 makeMoveController);
@@ -128,9 +120,9 @@ public class BoardUseCaseFactory {
      * @param endGameViewModel is an EndGameViewModel object
      * @return an EasyGameController object, to be passed into the constructor
      */
-    private static EasyGameController createUserEasyGameUseCase(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel, UserMoveDataAccessInterface userMoveDataAccessInterface, UserMoveBoardDataAccessInterface userMoveBoardDataAccessInterface, EndGameViewModel endGameViewModel) {
+    private static EasyGameController createUserEasyGameUseCase(ViewManagerModel viewManagerModel, EasyGameViewModel easyGameViewModel, UserMoveDataAccessInterface userMoveDataAccessInterface, MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface, EndGameViewModel endGameViewModel) {
         EasyGamePresenter easyGamePresenter = new EasyGamePresenter(viewManagerModel, easyGameViewModel, endGameViewModel);
-        UserMoveInteractor userMoveInteractor = new UserMoveInteractor(userMoveDataAccessInterface, userMoveBoardDataAccessInterface, easyGamePresenter);
+        UserMoveInteractor userMoveInteractor = new UserMoveInteractor(userMoveDataAccessInterface, makeMoveBoardDataAccessInterface, easyGamePresenter);
         return new EasyGameController(userMoveInteractor);
     }
 
@@ -151,9 +143,10 @@ public class BoardUseCaseFactory {
 
     private static MakeMoveController createUserMakeMoveUseCase(MakeMoveDataAccessInterface makeMoveDataAccessInterface,
                                                                 MakeMoveViewModel makeMoveViewModel,
-                                                                ViewManagerModel viewManagerModel) {
+                                                                ViewManagerModel viewManagerModel,
+                                                                MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface) {
         MakeMovePresenter makeMovePresenter = new MakeMovePresenter(makeMoveViewModel, viewManagerModel);
-        MakeMoveInteractor makeMoveInteractor = new MakeMoveInteractor(makeMoveDataAccessInterface, makeMovePresenter);
+        MakeMoveInteractor makeMoveInteractor = new MakeMoveInteractor(makeMoveDataAccessInterface, makeMovePresenter, makeMoveBoardDataAccessInterface);
         return new MakeMoveController(makeMoveInteractor);
     }
 }
