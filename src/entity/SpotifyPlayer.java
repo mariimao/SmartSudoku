@@ -1,5 +1,6 @@
-package data_access;
+package entity;
 
+import data_access.SpotifyDAO;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -12,18 +13,18 @@ import java.util.ArrayList;
 /**
  * A data access object for getting the playback of spotify songs
  */
-public class SpotifyPlayer implements StartPlayerDataAccessInterface {
+public class SpotifyPlayer {
 
     private final String token;
 
     /**
      * Constructor for spotify player
      *
-     * @param spotifyDAO is the spotify data access object, it gets song data
+     * @param token is the token from the spotify data access object, it gets song data
      */
-    public SpotifyPlayer(SpotifyDAO spotifyDAO) {
+    public SpotifyPlayer(String token) {
 
-        this.token = spotifyDAO.getApiToken();
+        this.token = token;
     }
 
     /**
@@ -33,7 +34,8 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
      * @param position position in the album
      * @param device   the device the song will play on
      */
-    public void play(String album_id, String position, String device) {
+    public void play(String album_id, int position, String device) {
+        Integer positions = position;
         // Just for testing api calling
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -41,7 +43,7 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
         String jsonBody = "{\n" +
                 "    \"context_uri\": \"spotify:album:" + album_id + "\",\n" +
                 "    \"offset\": {\n" +
-                "        \"position\": " + position + "\n" +
+                "        \"position\": " + positions + "\n" +
                 "    },\n" +
                 "    \"position_ms\": 0\n" +
                 "}";
@@ -52,14 +54,14 @@ public class SpotifyPlayer implements StartPlayerDataAccessInterface {
                 .addHeader("Authorization", "Bearer " + (this.token))
                 .put(requestBody)
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString); // testing purposes
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
+//        try {
+//            Response response = client.newCall(request).execute();
+////            String responseString = response.body().string();
+////            JSONObject responseBody = new JSONObject(responseString); // testing purposes
+//
+//        } catch (IOException | JSONException e) {
+//            throw new RuntimeException(e);
+//        }
     }
 
     /**

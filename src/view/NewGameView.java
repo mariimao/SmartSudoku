@@ -1,14 +1,30 @@
 package view;
-
+import data_access.SpotifyDAO;
+import app.*;
+import data_access.UserDAO;
 import entity.board.GameState;
+import entity.user.CommonUserFactory;
+import entity.user.User;
+import interface_adapter.ViewManagerModel;
+import interface_adapter.end_game.EndGameViewModel;
+import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
+import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
+import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.play_music.PlayMusicController;
+import interface_adapter.signup.SignupState;
+import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyController;
 import interface_adapter.spotify.SpotifyState;
 import interface_adapter.spotify.SpotifyViewModel;
+import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameController;
 import interface_adapter.play_game.PlayGameViewModel;
+import interface_adapter.resume_game.ResumeGameViewModel;
+import interface_adapter.signup.SignupViewModel;
+import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -20,6 +36,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NewGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "new game view";
@@ -30,7 +48,9 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
     private final SpotifyController spotifyController;
     private final SpotifyViewModel spotifyViewModel;
     private final LoginViewModel loginViewModel;
-    // TODO: the viewModel and controller for the board view use case need to be added
+
+    private final PlayMusicController playMusicController;
+
     private final JButton createEasyGame;
     private final JButton createHardGame;
 
@@ -44,7 +64,7 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
 
 
     public NewGameView(NewGameViewModel newGameViewModel, NewGameController newGameController, PlayGameViewModel playGameViewModel, PlayGameController playGameController,
-                       SpotifyViewModel spotifyViewModel, SpotifyController spotifyController, LoginViewModel loginViewModel) {
+                       SpotifyViewModel spotifyViewModel, SpotifyController spotifyController, LoginViewModel loginViewModel, PlayMusicController playMusicController) {
         this.newGameViewModel = newGameViewModel;
         this.newGameController = newGameController;
         this.playGameViewModel = playGameViewModel;
@@ -52,6 +72,7 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
         this.spotifyViewModel = spotifyViewModel;
         this.spotifyController = spotifyController;
         this.loginViewModel = loginViewModel;
+        this.playMusicController = playMusicController;
 
         newGameViewModel.addPropertyChangeListener(this);
         playGameViewModel.addPropertyChangeListener(this);
@@ -132,13 +153,20 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                     if(e.getStateChange() == ItemEvent.SELECTED) {
                         if (e.getSource() instanceof JComboBox) {
                             JComboBox cb = (JComboBox) e.getSource();
-                            String chosenSong = (String) cb.getSelectedItem();
+                            if (cb.getSelectedIndex() != 0) {
+                                String chosenSong = (String) cb.getSelectedItem();
 
-                            SpotifyState spotifyState = new SpotifyState(spotifyViewModel.getSpotifyState());
-                            spotifyState.setChosenSong(chosenSong);
-                            spotifyViewModel.setSpotifyState(spotifyState);
+                                SpotifyState spotifyState = new SpotifyState(spotifyViewModel.getSpotifyState());
+                                spotifyState.setChosenSong(chosenSong);
+                                spotifyViewModel.setSpotifyState(spotifyState);
 
-                            System.out.println(chosenSong); //just for testing
+                                int chosenSongPlace = cb.getSelectedIndex();
+                                try {
+                                    playMusicController.execute(chosenSong, chosenSongPlace, spotifyViewModel.getSpotifyState().getSearch());
+                                } catch (IOException ex) {
+                                    throw new RuntimeException(ex);
+                                }
+                            }
                         }
                     }
                 }
@@ -158,14 +186,12 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             }
 
                             songOptions.removeAllItems(); // starts clean
+                            songOptions.addItem("Check search results.");
                             ArrayList<String> suggestions = spotifyViewModel.getSpotifyState().getSearchResults();
-                            if (!suggestions.isEmpty()) {
-                                for (String name : suggestions) {
-                                    songOptions.addItem(name);
-                                }
-                            } else {
-                                songOptions.addItem("NONE");
+                            for (String name : suggestions) {
+                                songOptions.addItem(name);
                             }
+
                         }
                     }
                 }

@@ -4,6 +4,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import use_case.spotify.SpotifyDataAccessInterface;
 
 import java.io.IOException;
@@ -14,7 +15,7 @@ import java.util.Objects;
 /**
  * A data access object for spotify making use of the spotify API
  */
-public class SpotifyDAO implements SpotifyDataAccessInterface {
+public class SpotifyDAO implements SpotifyDataAccessInterface, PlayMusicDataAccessInterface {
 
     private static final String CLIENT_ID = "ba373bd1e8e44eecb52e192d0fbac238";
     private static final String CLIENT_SECRET = "d99a71ede58b40179cf0946792c7123f";
@@ -36,14 +37,14 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
     /**
      * @return the client id
      */
-    private String getClientId() {
+    String getClientId() {
         return this.client_id;
     }
 
     /**
      * @return the client secret
      */
-    private String getClientSecret() {
+    String getClientSecret() {
         return this.client_secret;
     }
 
@@ -52,6 +53,29 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
      */
     public String getApiToken() {
         return this.current_token;
+    }
+
+    /**
+     * @return returns the access code
+     */
+    public String requestAuthorization() throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        String scope = "app-remote-control streaming user-read-playback-state";
+        String jsonBody = "https://accounts.spotify.com/authorize" +
+                "?response_type=code" +
+                "&client_id=" + client_id +
+                "&scope=" + scope +
+                "&redirect_uri=http://localhost:8888/callback";
+
+        Request request = new Request.Builder()
+                .url(jsonBody)
+                .get()
+                .build();
+        Response response = client.newCall(request).execute();
+        String responseString = "{"  + response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
+        return responseBody.getString("token");
     }
 
     /**
@@ -173,6 +197,31 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
         // gets the name of the track based on ID
         String name = album.getString("id");
+
+        return name;
+
+    }
+
+    /**
+     * @param id the song identification
+     * @return returns position the track has in the album
+     */
+    public Integer getTrackPosition(String id) throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        String access_token = getAccessCode();
+        Request request = new Request.Builder()
+                .url("https://api.spotify.com/v1/tracks/" + id)
+                .addHeader("Authorization", "Bearer " + (access_token))
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
+
+
+        // gets the name of the track based on ID
+        int name = responseBody.getInt("track_number");
 
         return name;
 
