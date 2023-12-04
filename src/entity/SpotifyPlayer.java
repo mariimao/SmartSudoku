@@ -36,6 +36,7 @@ public class SpotifyPlayer {
      */
     public void play(String album_id, int position, String device) {
         Integer positions = position;
+        String positionString = positions.toString();
         // Just for testing api calling
         OkHttpClient client = new OkHttpClient().newBuilder()
                 .build();
@@ -43,7 +44,7 @@ public class SpotifyPlayer {
         String jsonBody = "{\n" +
                 "    \"context_uri\": \"spotify:album:" + album_id + "\",\n" +
                 "    \"offset\": {\n" +
-                "        \"position\": " + positions + "\n" +
+                "        \"position\": " + positionString + "\n" +
                 "    },\n" +
                 "    \"position_ms\": 0\n" +
                 "}";
