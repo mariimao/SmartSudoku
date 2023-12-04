@@ -39,6 +39,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * View for the NewGameView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class NewGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "new game view";
     private final NewGameViewModel newGameViewModel;
@@ -63,6 +66,16 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
     private final Color black = new Color(0, 0, 0);
 
 
+    /**
+     * Constructor for NewGame View
+     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
+     * @param newGameController the controller for new game, is NewGameController object
+     * @param newGameViewModel the view model for new game, is NewGameViewModel object
+     * @param playGameViewModel the view model for playgame, is PlayGameViewModel object
+     * @param playGameController the controller for playgame, is PlayGameController object
+     * @param spotifyController the controller for spotify use case, is SpotifyController object
+     * @param spotifyViewModel the view model for spotify use case, is SpotifyViewModel object
+     */
     public NewGameView(NewGameViewModel newGameViewModel, NewGameController newGameController, PlayGameViewModel playGameViewModel, PlayGameController playGameController,
                        SpotifyViewModel spotifyViewModel, SpotifyController spotifyController, LoginViewModel loginViewModel, PlayMusicController playMusicController) {
         this.newGameViewModel = newGameViewModel;
@@ -223,10 +236,18 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
 
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

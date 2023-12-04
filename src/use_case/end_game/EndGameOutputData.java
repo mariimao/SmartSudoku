@@ -1,6 +1,5 @@
 package use_case.end_game;
 
-import entity.Scores;
 import entity.board.GameState;
 import entity.user.User;
 

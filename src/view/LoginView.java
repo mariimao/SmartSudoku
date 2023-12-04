@@ -21,6 +21,9 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * View for the LoginView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "login view";
 
@@ -45,6 +48,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final Color white = Color.white;
     private final Color black = Color.black;
 
+    /**
+     * Constructor for Login View
+     * @param loginController the controller for login usecase, is a LoginController object
+     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
+     * @param menuViewModel the view model for the menu usecase, is a MenuViewModel object
+     * @param pauseGameViewModel the view model for the pause usecase, is a PauseGameViewModel object
+     * @param playGameViewModel the view model for the play usecase, is a PlayGameViewModel object
+     * @param resumeGameViewModel the view model for the resume usecase, is a ResumeGameViewModel object
+     */
     public LoginView(LoginController loginController, LoginViewModel loginViewModel, PlayGameViewModel playGameViewModel,
                      PauseGameViewModel pauseGameViewModel, ResumeGameViewModel resumeGameViewModel,
                      MenuViewModel menuViewModel) {
@@ -185,11 +197,19 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * Records and notifies of any property change such as username or password errors
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();
