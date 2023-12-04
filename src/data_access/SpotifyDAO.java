@@ -153,6 +153,33 @@ public class SpotifyDAO implements SpotifyDataAccessInterface {
 
     /**
      * @param id the song identification
+     * @return returns the albumID
+     */
+    public String getAlbumID(String id) throws IOException {
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .build();
+        String access_token = getAccessCode();
+        // System.out.println(access_token);
+        Request request = new Request.Builder()
+                .url("https://api.spotify.com/v1/tracks/" + id)
+                .addHeader("Authorization", "Bearer " + (access_token))
+                .build();
+
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
+        JSONObject album = responseBody.getJSONObject("album");
+
+
+        // gets the name of the track based on ID
+        String name = album.getString("id");
+
+        return name;
+
+    }
+
+    /**
+     * @param id the song identification
      * @return returns the track duration
      */
     public int getTrackDuration(String id) throws IOException {
