@@ -13,7 +13,7 @@ public class HardBoardFactory implements BoardFactory {
      * @return a new HardBoard object
      */
     @Override
-    public Board create() {
+    public HardBoard create() {
         return new HardBoard();
     }
 

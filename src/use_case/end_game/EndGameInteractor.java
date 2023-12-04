@@ -19,16 +19,15 @@ public class EndGameInteractor implements EndGameInputBoundary {
 
     @Override
     public void execute(EndGameInputData endGameInputData) {
-        String user = endGameInputData.getUsername();
-        boolean completed = !endGameInputData.getCurrent_state().gameOver();
+        User user = endGameDataAccessInterface.get(endGameInputData.getUsername());
+        boolean isCompleted = endGameInputData.isCompleted();
+        int spacesLeft = endGameInputData.spacesLeft();
         int lives = endGameInputData.getLives();
         int timePlayed = endGameInputData.getTime();
         Scores score = new Scores();
-        score.setScores(timePlayed, 0, lives, completed); //no deduct on boards
-        endGameDataAccessInterface.addScore(endGameDataAccessInterface.get(user), LocalTime.from(LocalDateTime.now()), (Integer) timePlayed);
-
-        // akunna: i had to make score point to something and also change the user name into a user
-        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score.getScores());
+        score.setScores(timePlayed, spacesLeft, lives, isCompleted);
+        endGameDataAccessInterface.addScore(user, LocalTime.from(LocalDateTime.now()), (Integer) timePlayed);
+        EndGameOutputData endGameOutputData = new EndGameOutputData(user, score.getScores(), endGameInputData.getCurrent_state());
         endGamePresenter.prepareSuccessView(endGameOutputData);
     }
 }

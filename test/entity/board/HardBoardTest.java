@@ -13,14 +13,21 @@ import static org.junit.Assert.*;
 
 public class HardBoardTest {
     private HardBoard hardBoard;
+    private HardBoard hardBoard2;
+    private int[][] solutionBoard2;
     private int[][] solutionBoard;
     HashMap<Integer, Boolean>[][] currBoard;
 
     @Before
     public void init() {
-        hardBoard = new HardBoard();
+        hardBoard = new HardBoardFactory().create();
         solutionBoard = hardBoard.getSolutionBoard();
         currBoard = hardBoard.getCurrBoard();
+        System.out.println(hardBoard);
+        String positions = "09F01F4F07F08F7F009F03F04F6F4F00006F01F5F3F2F08F6F05F00000009F07F0" +
+                "067435100850000000003590007170320000";
+        hardBoard2 = new HardBoardFactory().create(positions);
+        solutionBoard2 = hardBoard2.getSolutionBoard();
     }
 
     @Test

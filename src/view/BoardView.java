@@ -224,7 +224,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
         //TODO: it starts counting from newGameView, not sure how to fix
         // ALSO, cannot pause count when pressing pause
-
         Timer timer = new Timer(1000, new ActionListener() { //delay is 1 second
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -363,20 +362,17 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(endGame)) {
-                            EndGameState endGameState = endGameViewModel.getState();
-                            endGameState.setUser(playGameViewModel.getState().getUserName());
-                            endGameState.setTime(currentState.getTimePlayed());
-                            endGameState.setLives(currentState.getLives());
-                            endGameState.setEndGame(currentState.getCurrentGame());
+                            currentState.setTime(currentState.getTimePlayed());
                             endGameController.execute(
-                                    endGameState.getUser(),
-                                    endGameState.getEndGame(),
-                                    endGameState.getTime(),
-                                    endGameState.getLives());
+                                    currentState.getUserName(),
+                                    currentState.getCurrentGame(),
+                                    currentState.getTime(),
+                                    currentState.getLives());
                         }
                     }
                 }
         );
+
 
         pauseGame.addActionListener(
                 new ActionListener() {
@@ -466,6 +462,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                         System.out.println(Arrays.deepToString(currentState.getCurrentGame().getCurrBoard().getSolutionBoard()));
 
                                         currentState.setCurrentGame(makeMoveController.execute(Integer.parseInt(enteredNumber), x, y, currentState.getCurrentGame()));
+                                        lives.setText("LIVES: ".concat(String.valueOf(currentState.getCurrentGame().getLives())));
 
                                         boardReset(buttons, timerLabel);
 

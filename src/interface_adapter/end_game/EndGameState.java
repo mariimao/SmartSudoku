@@ -18,7 +18,7 @@ public class EndGameState {
     public EndGameState() {
     }
 
-    public void setEndGame(GameState gameState) {
+    public void setFinalGame(GameState gameState) {
         endGame = gameState;
     }
 

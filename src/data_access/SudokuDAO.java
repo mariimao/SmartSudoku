@@ -4,7 +4,7 @@ import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import use_case.user_move.UserMoveBoardDataAccessInterface;
+import use_case.make_move.MakeMoveBoardDataAccessInterface;
 
 import java.io.IOException;
 import java.net.URLEncoder;
@@ -14,7 +14,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SudokuDAO implements UserMoveBoardDataAccessInterface {
+public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
 
     /**
      * Helper function for encoding board
