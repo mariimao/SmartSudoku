@@ -5,18 +5,10 @@ import interface_adapter.ViewManagerModel;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardPresenter;
 import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.menu.MenuController;
-import interface_adapter.menu.MenuPresenter;
-import interface_adapter.menu.MenuViewModel;
 import use_case.leaderboard.LeaderboardDataAccessInterface;
 import use_case.leaderboard.LeaderboardInputBoundary;
 import use_case.leaderboard.LeaderboardInteractor;
-import use_case.menu.MenuInteractor;
-import use_case.menu.MenuOutputBoundary;
 import view.LeaderboardView;
-
-import javax.swing.*;
-import java.io.IOException;
 
 /**
  * Use case factory for the Leaderboard state.

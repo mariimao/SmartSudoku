@@ -1,7 +1,5 @@
 package entity.user;
 
-import entity.user.User;
-
 import java.time.LocalTime;
 import java.util.Map;
 

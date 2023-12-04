@@ -3,22 +3,15 @@ package view;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardState;
 import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.login.LoginState;
-import interface_adapter.menu.MenuController;
-import interface_adapter.menu.MenuViewModel;
-import interface_adapter.signup.SignupViewModel;
-import interface_adapter.spotify.SpotifyState;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.SortedMap;
 
 public class LeaderboardView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "leaderboard view";
