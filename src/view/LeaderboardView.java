@@ -17,6 +17,9 @@ import java.beans.PropertyChangeListener;
 import java.time.LocalTime;
 import java.util.SortedMap;
 
+/**
+ * View for the LeaderboardView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class LeaderboardView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "leaderboard view";
 
@@ -38,6 +41,13 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
     private final Color white = Color.white;
     private final Color black = Color.black;
 
+    /**
+     * Constructor for Leaderboard View
+     *
+     * @param menuViewModel         the view model for the menu usecase, is a MenuViewModel object
+     * @param leaderboardController the controller for the leaderboard, is LeaderboardController object
+     * @param leaderboardViewModel  the view model for the leaderboard, is LeaderboardViewModel object
+     */
     public LeaderboardView(LeaderboardViewModel leaderboardViewModel, LeaderboardController leaderboardController, MenuViewModel menuViewModel) {
         this.leaderboardViewModel = leaderboardViewModel;
         this.leaderboardController = leaderboardController;
@@ -52,7 +62,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         JPanel buttons = new JPanel();
@@ -106,7 +116,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 new ItemListener() {
                     @Override
                     public void itemStateChanged(ItemEvent e) {
-                        if(e.getStateChange() == ItemEvent.SELECTED) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
                             if (e.getSource() instanceof JComboBox) {
                                 JComboBox cb = (JComboBox) e.getSource();
                                 String chosenMethod = (String) cb.getSelectedItem();
@@ -125,11 +135,22 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
 
 
     }
+
+    /**
+     * Records the action performed
+     *
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * Records and notifies of any property change
+     *
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("leaderboard")) {
@@ -142,8 +163,8 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
             JTable table;
             JLabel time = new JLabel("Updated as of " + LocalTime.now().toString());
             this.add(time);
-            DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
-            if (leaderboard!=null) {
+            DefaultTableModel model = new DefaultTableModel(new Object[]{"Rank", "Users"}, 0);
+            if (leaderboard != null) {
                 for (Object i : leaderboard.keySet()) {
                     model.addRow(new Object[]{i, leaderboard.get(i)});
                 }
@@ -153,30 +174,6 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 JLabel labels = new JLabel("no users");
                 this.add(labels);
             }
-
-//
-//            JTable table;
-//            DefaultTableModel model = new DefaultTableModel(new Object[] { "Rank", "Users" }, 0);
-//
-//
-//            if (!leaderboard.isEmpty()) { //we have scores
-//                JLabel labels = new JLabel("Here are the scores:");
-//                this.add(labels);
-//
-//                for (Object i : leaderboard.keySet()) {
-//                    Vector<String> vector = new Vector<>();
-//                    vector.add(i.toString() + " - " + leaderboard.get(i).toString());
-//                    model.addRow(vector);
-//                }
-//
-//                table = new JTable(model);
-//                this.add(table);
-//            } else {
-//                JLabel labels = new JLabel(leaderboardViewModel.NO_SCORES_LABEL);
-//                this.add(labels);
-//            }
         }
     }
 }
-
-

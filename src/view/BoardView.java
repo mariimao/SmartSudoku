@@ -49,6 +49,9 @@ import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * View for the BoardView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class BoardView extends JPanel implements ActionListener, PropertyChangeListener {
     private final Color blue = new Color(97, 150, 242);
     private final Color darkblue = new Color(50, 78, 156);
@@ -76,6 +79,16 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JPanel buttons;
     private final JLabel timerLabel;
     private final MakeMoveController makeMoveController;
+
+    /**
+     * Constructor for Board View
+     * @param pauseGameController the controller for pause game, is PauseGameController object
+     * @param pauseGameViewModel the view model for pause game, is PauseGameViewModel object
+     * @param playGameViewModel the view model for play game, is PlayGameViewModel object
+     * @param makeMoveController the controller for make move use case, is MakeMoveController object
+     * @param endGameController the controller for end game, is EndGameController object
+     * @param endGameViewModel the view model for end game, is EndGameViewModel object
+     */
 
     public BoardView(PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
@@ -394,9 +407,20 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
+
     @Override
     public void actionPerformed(ActionEvent e) {
     }
+
+    /**
+     * Resets the board
+     * @param buttons buttons on the screen
+     * @param timer time label
+     */
 
     public void boardReset(JPanel buttons, JLabel timer) {
             // Set the layout manager to BoxLayout with Y_AXIS
@@ -437,6 +461,10 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
     }
 
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (evt.getPropertyName().equals("PLAYGAMESTATE")) {
