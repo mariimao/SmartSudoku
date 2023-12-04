@@ -56,31 +56,6 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
     }
 
     /**
-     * tests if there is a valid encoder
-     * @param s1
-     * @param s2
-     * @return
-     */
-    private static Boolean testEncoder(String s1, String s2) {
-        int length1 = s1.length();
-        int length2 = s2.length();
-        if (s1.length() != s2.length()) {
-            return false;
-        }
-        int i = 0;
-        char[] charArray1 = s1.toCharArray();
-        char[] charArray2 = s2.toCharArray();
-        for (i = 0; i < s1.length(); i++) {
-            if (charArray1[i] != charArray2[i]) {
-                char a = charArray1[i];
-                char b = charArray2[i];
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
      * converts the string to a 2-dimensional array
      * @param grid the string
      * @return a 2-dimensional array that represents the board
@@ -188,32 +163,26 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
      * @param number_correct_moves the number of moves to fill
      * @return a 2-dimensional array representing the board
      */
-    public int[][] generateBoard(int number_correct_moves) {
+    public int[][] generateBoard(int number_correct_moves) throws IOException {
         OkHttpClient client = new OkHttpClient();
         Request request = new Request.Builder()
                 .url("https://sudoku-api.vercel.app/api/dosuku?query={newboard(limit:1){grids{value}}}")
                 .build();
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString);
-            JSONObject board = responseBody.getJSONObject("newboard");
-            JSONObject grids = board.getJSONArray("grids").getJSONObject(0);
-            JSONArray value = grids.getJSONArray("value");
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString);
+        JSONObject board = responseBody.getJSONObject("newboard");
+        JSONObject grids = board.getJSONArray("grids").getJSONObject(0);
+        JSONArray value = grids.getJSONArray("value");
 
-            int[][] result = stringToArray(value.toString());
-            int[][] solution = stringToArray(generateSolution(result));
+        int[][] result = stringToArray(value.toString());
+        int[][] solution = stringToArray(generateSolution(result));
 
-            if (number_correct_moves == 0) {
-                return result;
-            }
-            else {
-                return insertCorrectMoves(result, solution, number_correct_moves);
-            }
-
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
+        if (number_correct_moves == 0) {
+            return result;
+        }
+        else {
+            return insertCorrectMoves(result, solution, number_correct_moves);
         }
     }
 
@@ -222,7 +191,7 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
      * @param board the current board
      * @return a string representing the solutions
      */
-    public String generateSolution(int [][] board) {
+    public String generateSolution(int [][] board) throws IOException {
         OkHttpClient client = new OkHttpClient();
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
         Map<String, int[][]> input = new HashMap<>();
@@ -235,16 +204,11 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .build();
 
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString); // error happens at this line
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-            return responseBody.getJSONArray("solution").toString();
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
-        }
+        return responseBody.getJSONArray("solution").toString();
     }
 
     /**
@@ -252,7 +216,7 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
      * @param board the current board
      * @return true if it is valid or not
      */
-    public Boolean verifyBoard(int[][] board) {
+    public Boolean verifyBoard(int[][] board) throws IOException {
         OkHttpClient client = new OkHttpClient();
 
         MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
@@ -267,56 +231,16 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .build();
 
-        try {
-            Response response = client.newCall(request).execute();
-            String responseString = response.body().string();
-            JSONObject responseBody = new JSONObject(responseString); // error happens at this line
+        Response response = client.newCall(request).execute();
+        String responseString = response.body().string();
+        JSONObject responseBody = new JSONObject(responseString); // error happens at this line
 
-            if (responseBody.get("status").equals("unsolvable")) {
-                // means input is false
-                return false;
-            }
-            return true;
-
-        } catch (IOException | JSONException e) {
-            throw new RuntimeException(e);
+        if (responseBody.get("status").equals("unsolvable")) {
+            // means input is false
+            return false;
         }
-    }
+        return true;
 
-    public static void main(String[] args) {
-        // TESTING API CALLS
-        SudokuDAO sudokuDAO = new SudokuDAO();
-        // should be true
-        int [][] board = {
-                {0,0,0,0,0,0,8,0,0},
-                {0,0,4,0,0,8,0,0,9},
-                {0,7,0,0,0,0,0,0,5},
-                {0,1,0,0,7,5,0,0,8},
-                {0,5,6,0,9,1,3,0,0},
-                {7,8,0,0,0,0,0,0,0},
-                {0,2,0,0,0,0,0,0,0},
-                {0,0,0,9,3,0,0,1,0},
-                {0,0,5,7,0,0,4,0,3}
-        };
-        //System.out.println(sudokuDAO.verifyBoard(board));
-        //should be false
-        int [][] board2 = {
-                {0,0,0,0,0,0,8,8,0},
-                {0,0,4,0,0,8,0,0,9},
-                {0,7,0,0,0,0,0,0,5},
-                {0,1,0,0,7,5,0,0,8},
-                {0,5,6,0,9,1,3,0,0},
-                {7,8,0,0,0,0,0,0,0},
-                {0,2,0,0,0,0,0,0,0},
-                {0,0,0,9,3,0,0,1,0},
-                {0,0,5,7,0,0,4,0,3}
-        };
-        //System.out.println(sudokuDAO.verifyBoard(board2));
-        System.out.println(sudokuDAO.generateBoard(2));
-        //System.out.println(Arrays.deepToString(board2));
-        //System.out.println(sudokuDAO.generateBoard(2));
-        System.out.println(Arrays.deepToString(board2));
-        //System.out.print(sudokuDAO.generateSolution(sudokuDAO.generateBoard(5)));
     }
 
 

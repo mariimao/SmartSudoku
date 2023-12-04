@@ -25,18 +25,22 @@ import java.io.IOException;
  */
 public class LoginUseCaseFactory {
 
-    /** Prevent instantiation. */
-    private LoginUseCaseFactory() {}
+    /**
+     * Prevent instantiation.
+     */
+    private LoginUseCaseFactory() {
+    }
 
     /**
      * Creates a new LoginView object. If the data file could not be opened, then the function throws an error.
-     * @param viewManagerModel is a new ViewManagerModel object
-     * @param loginViewModel is a new LoginViewModel object
-     * @param menuViewModel is a new MenuViewModel object
-     * @param playGameViewModel is a new PlayGameViewModel object
-     * @param pauseGameViewModel is a new PauseGameViewModel object
-     * @param resumeGameViewModel is a new ResumeGameViewModel object
-     * @param startViewModel is a new StartViewModel object
+     *
+     * @param viewManagerModel     is a new ViewManagerModel object
+     * @param loginViewModel       is a new LoginViewModel object
+     * @param menuViewModel        is a new MenuViewModel object
+     * @param playGameViewModel    is a new PlayGameViewModel object
+     * @param pauseGameViewModel   is a new PauseGameViewModel object
+     * @param resumeGameViewModel  is a new ResumeGameViewModel object
+     * @param startViewModel       is a new StartViewModel object
      * @param userDataAccessObject is a new UserDataAccessObject
      * @return LoginView object, with parameters for newly created relevant models and controllers
      */
@@ -45,20 +49,28 @@ public class LoginUseCaseFactory {
             PlayGameViewModel playGameViewModel, PauseGameViewModel pauseGameViewModel,
             ResumeGameViewModel resumeGameViewModel, StartViewModel startViewModel, UserDAO userDataAccessObject) {
 
+        LoginController loginController = null;
         try {
-            LoginController loginController = createUserSignupUseCase(viewManagerModel, loginViewModel, menuViewModel, userDataAccessObject);
-            return new LoginView(loginController, loginViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel);
+            loginController = createUserSignupUseCase(viewManagerModel, loginViewModel, menuViewModel, userDataAccessObject);
         } catch (IOException e) {
-            JOptionPane.showMessageDialog(null, "Could not open user data file.");
+            throw new RuntimeException(e);
         }
-
-        return null;
+        return new LoginView(loginController, loginViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, menuViewModel);
     }
 
+    /**
+     * Creates a LoginController
+     * @param viewManagerModel
+     * @param loginViewModel
+     * @param menuViewModel
+     * @param userDataAccessObject
+     * @return
+     * @throws IOException
+     */
     private static LoginController createUserSignupUseCase(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel,
                                                            MenuViewModel menuViewModel, LoginUserDataAccessInterface userDataAccessObject) throws IOException {
 
-        LoginOutputBoundary loginOutputBoundary = new LoginPresenter( loginViewModel, menuViewModel, viewManagerModel);
+        LoginOutputBoundary loginOutputBoundary = new LoginPresenter(loginViewModel, menuViewModel, viewManagerModel);
 
         LoginInputBoundary userLoginInteractor = new LoginInteractor(
                 userDataAccessObject, loginOutputBoundary);

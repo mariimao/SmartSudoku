@@ -1,5 +1,6 @@
 package interface_adapter.leaderboard;
 
+import entity.leaderboard.Leaderboard;
 import interface_adapter.ViewModel;
 import interface_adapter.login.LoginState;
 import view.LeaderboardView;
@@ -19,19 +20,16 @@ public class LeaderboardViewModel extends ViewModel {
 
     public static String NO_SCORES_LABEL = "No scores available yet.";
 
-    public String[] CHOICES = {"Rank"};
+    public static String[] CHOICES = {"Rank"};
 
-    private static LeaderboardState leaderboardState = new LeaderboardState();
-
-
-    public static SortedMap<Object, Object> LEADERBOARD = leaderboardState.getLeaderboard();
+    private LeaderboardState leaderboardState = new LeaderboardState();
 
     public LeaderboardViewModel() {
         super("leaderboard view");
     }
 
     public SortedMap<Object, Object> getLeaderboard() {
-        return LEADERBOARD;
+        return getLeaderboardState().getLeaderboard();
     }
 
     public void setLeaderboardState(LeaderboardState leaderboardState) {
@@ -41,7 +39,7 @@ public class LeaderboardViewModel extends ViewModel {
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
     public void firePropertyChanged() {
-        support.firePropertyChange("state", null, this.leaderboardState);
+        support.firePropertyChange("leaderboard", null, this.leaderboardState);
     }
 
 
