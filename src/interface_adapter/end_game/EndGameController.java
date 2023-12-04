@@ -13,7 +13,7 @@ public class EndGameController {
     }
 
     public void execute(String user, GameState current_state, int time, int lives, Scores scores) {
-        EndGameInputData endGameInputData = new EndGameInputData(user, current_state, time, lives);
+        EndGameInputData endGameInputData = new EndGameInputData(user, current_state, time, lives, scores);
         endGameUseCaseInteractor.execute(endGameInputData);
     }
 }

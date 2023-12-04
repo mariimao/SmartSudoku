@@ -233,9 +233,15 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
      * @param user
      */
     private void changeScores(User user) {
-        this.userCollection.findOneAndUpdate(
-                eq("name", user.getName()), //find by name
-                eq("scores", user.getScores())); //update score
+        Map<LocalTime, Integer> scores = accounts.get(user.getName()).getScores();
+        Map<String, Integer> stringScores = new HashMap<>();
+        for (LocalTime time : scores.keySet()) {
+            stringScores.put(time.toString(), scores.get(time));
+        }
+
+        Bson filter = Filters.eq("name", user.getName());   // Creating a filter
+        Bson updateScores = Updates.set("scores", stringScores);    // Creating an update for the game state
+        UpdateResult resultScores = this.userCollection.updateOne(filter, updateScores);
     }
 
     /**

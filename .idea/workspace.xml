@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c908897d-ac1f-4e0f-b68b-b15e855c7eef" name="Changes" comment="fixed end game bug but there's still an issue with saving the time of the score to the database">
-      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveBoardDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveBoardDataAccessInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/user_move/UserMoveInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,12 +21,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "board__view",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;git-widget-placeholder&quot;: &quot;board__view&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task id="LOCAL-00001" summary="fixed end game bug but there's still an issue with saving the time of the score to the database">
       <option name="closed" value="true" />
@@ -47,6 +50,20 @@
           <properties class="java.lang.ClassCastException" package="java.lang" />
           <option name="timeStamp" value="61" />
         </breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java</url>
+          <line>25</line>
+          <properties class="interface_adapter.end_game.EndGamePresenter" method="prepareSuccessView">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/view/BoardView.java</url>
+          <line>372</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
