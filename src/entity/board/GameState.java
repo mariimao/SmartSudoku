@@ -129,6 +129,10 @@ public class GameState {
 
     public LinkedList<GameState> getPastStates() {return this.past_states; }
 
+    public void setPastStates(LinkedList<GameState> past_states) {
+        this.past_states = past_states;
+    }
+
     /* ----- toString() methods ----- */
     // TODO: Figure out which of these to delete later
     public String toStringPause() {

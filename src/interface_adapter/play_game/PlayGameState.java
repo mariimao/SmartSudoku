@@ -20,6 +20,8 @@ public class PlayGameState {
     private LocalDateTime startTime = null;
 
     private int timePlayed = 0;
+    private boolean newGameStarted = false;
+    private boolean oldGameResumed = false;
 
     public PlayGameState() {}
     public void setCurrentGame(GameState gameState) { currentGame = gameState;}
@@ -75,5 +77,17 @@ public class PlayGameState {
 
     public Scores getScores() {return this.scores;}
 
+    public boolean isNewGameStarted() {
+        return newGameStarted;
+    }
 
+    public boolean isOldGameResumed() {
+        return oldGameResumed;
+    }
+
+    public void setOldGameResumed(boolean oldGameResumed) {
+        this.oldGameResumed = oldGameResumed;
+    }
+
+    public void setNewGameStarted(boolean truth) {this.newGameStarted = truth;}
 }

@@ -6,7 +6,9 @@ import entity.user.User;
 import use_case.user_move.UserMoveOutputData;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 
 public class MakeMoveInteractor implements MakeMoveInputBoundary {
     final MakeMoveDataAccessInterface makeMoveDataAccessInterface;
@@ -33,6 +35,9 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
             System.out.println(Arrays.deepToString(gameBeingPlayed.getCurrBoard().getSolutionBoard()));
 
             if (gameBeingPlayed.correctMove(x, y, val)) {
+                LinkedList<GameState> newPastStates= gameBeingPlayed.getPastStates();
+                newPastStates.add(gameBeingPlayed);
+                gameBeingPlayed.setPastStates(newPastStates);
                 gameBeingPlayed.setCurrBoard(gameBeingPlayed.makeMove(x, y, val));
                 if (makeMoveInputData.getGameBeingPlayed().getDifficulty() == 1) {
                     Board scrambledBoard = gameBeingPlayed.scrambleBoard();

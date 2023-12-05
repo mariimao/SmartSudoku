@@ -25,6 +25,7 @@ public class ResumeGamePresenter implements ResumeGameOutputBoundary {
         resumeGameState.setPausedGame(resumeGameOutputData.getPausedGame());
         resumeGameState.setPastGames(resumeGameOutputData.getPausedGame().getPastStates());
         playGameViewModel.getState().setCurrentGame(resumeGameState.getPausedGame());
+        playGameViewModel.getState().setOldGameResumed(true);
         // JOptionPane.showMessageDialog(null, "Game Successfully Resumed");   // for now I'll just use a popup
         this.viewManagerModel.setActiveViewName(playGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
