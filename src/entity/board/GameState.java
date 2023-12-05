@@ -73,6 +73,7 @@ public class GameState {
     }
 
     public boolean correctMove(int row, int column, int move) {
+        currBoard.updateSolutionBoard();
         return currBoard.correctMove(row, column, move);
     }
 

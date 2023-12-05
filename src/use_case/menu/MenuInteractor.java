@@ -15,7 +15,6 @@ public class MenuInteractor implements MenuInputBoundary {
     @Override
     public void execute() {
         // redirects the user to the menu
-        //StartOutputData startOutputData = new StartOutputData();
         menuPresenter.prepareSuccessView();
     }
 }

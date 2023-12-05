@@ -6,6 +6,9 @@ import interface_adapter.start.StartState;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * The ViewModel class for Spotify use case. Extends ViewModel Class.
+ */
 public class SignupViewModel extends ViewModel {
 
     public static final String TITLE_LABEL = "Sign Up";
@@ -18,23 +21,41 @@ public class SignupViewModel extends ViewModel {
 
     private SignupState signupState = new SignupState();
 
+    /**
+     * Constructor for SignupViewModel, inherits from ViewModel
+     */
     public SignupViewModel() {
         super("signup view");
     }
 
+    /**
+     * Sets Signup state for viewmodel to use
+     * @param signupState the state of signup use case
+     */
     public void setSignupState(SignupState signupState) {
         this.signupState = signupState;
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    /**
+     * Fires property change to view model
+     */
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.signupState);
     }
 
+    /**
+     * Adds propertychangelistener for support
+     * @param listener the listener that listens for property changes
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
+    /**
+     *
+     * @return the signup state of the view model
+     */
     public SignupState getSignupState() { return this.signupState; }
 }

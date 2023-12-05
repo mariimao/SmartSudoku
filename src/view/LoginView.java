@@ -1,22 +1,13 @@
 package view;
 
-import app.*;
-import data_access.UserDAO;
-import entity.user.CommonUserFactory;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.easy_game.EasyGameViewModel;
-import interface_adapter.end_game.EndGameViewModel;
-import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
-import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -29,9 +20,10 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
+/**
+ * View for the LoginView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class LoginView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "login view";
 
@@ -56,6 +48,15 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final Color white = Color.white;
     private final Color black = Color.black;
 
+    /**
+     * Constructor for Login View
+     * @param loginController the controller for login usecase, is a LoginController object
+     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
+     * @param menuViewModel the view model for the menu usecase, is a MenuViewModel object
+     * @param pauseGameViewModel the view model for the pause usecase, is a PauseGameViewModel object
+     * @param playGameViewModel the view model for the play usecase, is a PlayGameViewModel object
+     * @param resumeGameViewModel the view model for the resume usecase, is a ResumeGameViewModel object
+     */
     public LoginView(LoginController loginController, LoginViewModel loginViewModel, PlayGameViewModel playGameViewModel,
                      PauseGameViewModel pauseGameViewModel, ResumeGameViewModel resumeGameViewModel,
                      MenuViewModel menuViewModel) {
@@ -196,11 +197,19 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * Records and notifies of any property change such as username or password errors
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         LoginState state = (LoginState) evt.getNewValue();

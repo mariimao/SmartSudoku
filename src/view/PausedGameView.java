@@ -1,27 +1,14 @@
 package view;
 
-import app.LoginUseCaseFactory;
-import app.SignupUseCaseFactory;
-import app.StartUseCaseFactory;
-import data_access.UserDAO;
-import entity.user.CommonUser;
-import entity.user.CommonUserFactory;
-import entity.user.User;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
-import interface_adapter.menu.MenuPresenter;
 import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.resume_game.ResumeGameController;
 import interface_adapter.resume_game.ResumeGameState;
 import interface_adapter.resume_game.ResumeGameViewModel;
-import interface_adapter.signup.SignupViewModel;
 import interface_adapter.start.StartController;
-import interface_adapter.start.StartPresenter;
 import interface_adapter.start.StartViewModel;
-import use_case.menu.MenuInteractor;
-import use_case.start.StartInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -31,11 +18,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.time.LocalTime;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 // when the game is paused I want it to move from the GameView to this one
 // It should have two buttons, "Go Back to Menu", "Log Out", "Resume Game
@@ -43,6 +25,9 @@ import java.util.logging.Logger;
 // "Resume Game" - takes them back to the game they are playing
 // "Log Out" - takes them back to SignUp View
 
+/**
+ * View for the PauseGameView which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class PausedGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "GAME PAUSED";
     private final Color blue = new Color(97, 150, 242);
@@ -61,6 +46,17 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
     final JButton logOut;
     final JButton resumeGame;
 
+    /**
+     * Constructor for PauseGame View
+     * @param resumeGameController the controller for ResumeGame, is ResumeGameController object
+     * @param menuController the controller for menu use case, is MenuController object
+     * @param pauseGameViewModel the view model for pause, is PauseGameViewModel object
+     * @param resumeGameViewModel the view model for resumegame, is ResumeGameViewModel object
+     * @param menuViewModel the view model for the menu, is MenuViewModel object
+     * @param startController the controller for the start, is StartController object
+     * @param startViewModel the view model for the start, is StartViewModel object
+     * @param viewManagerModel the view manager model, is ViewManagerModel object
+     */
     public PausedGameView(PauseGameViewModel pauseGameViewModel,
                           StartViewModel startViewModel,
                           MenuViewModel menuViewModel,
@@ -142,12 +138,19 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
     }
 
-
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
 
+    /**
+     * Records and notifies of any property change
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

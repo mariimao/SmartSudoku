@@ -1,7 +1,5 @@
 package entity.user;
 
-import entity.user.User;
-
 import java.time.LocalTime;
 import java.util.Map;
 
@@ -11,5 +9,12 @@ import java.util.Map;
  */
 public interface UserFactory {
 
+    /**
+     * Creates a new User object.
+     * @param name is a String object representing the username
+     * @param password is a String object representing the password
+     * @param scores is a Map object of the scores, which are represented in < Time, Score > format
+     * @return a new User object
+     */
     User create(String name, String password, Map<LocalTime, Integer> scores);
 }

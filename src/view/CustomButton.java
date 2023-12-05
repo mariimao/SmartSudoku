@@ -1,9 +1,11 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
+
+/**
+ * Custom button which extends JButton.
+ */
 
 public class CustomButton extends JButton {
     public CustomButton(String text, Color background, Color foreground) {

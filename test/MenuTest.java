@@ -11,8 +11,7 @@ import use_case.menu.MenuUserDataAccessInterface;
 import javax.swing.*;
 import java.awt.*;
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class MenuTest {
 
@@ -51,14 +50,8 @@ public class MenuTest {
     }
 
     @Test
-    public void testPastGamesPresent() {
-        JButton button = (JButton) menuComponents[4];
-        assert(button.getText().equals("PAST GAMES"));
-    }
-
-    @Test
     public void testBackButtonPresent() {
-        JButton button = (JButton) menuComponents[5];
+        JButton button = (JButton) menuComponents[4];
         assert(button.getText().equals("BACK"));
     }
 

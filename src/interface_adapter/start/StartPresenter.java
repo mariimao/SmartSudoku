@@ -11,7 +11,9 @@ import interface_adapter.signup.SignupViewModel;
 import use_case.start.StartOutputBoundary;
 import use_case.start.StartOutputData;
 
-
+/**
+ * Class of Presenter for start use case. Implements StartOutputBoundary
+ */
 public class StartPresenter implements StartOutputBoundary {
 
     private final StartViewModel startViewModel;
@@ -20,6 +22,13 @@ public class StartPresenter implements StartOutputBoundary {
 
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Constructor for StartPresenter
+     * @param startViewModel the view model for start, is StartViewModel object
+     * @param signupViewModel the signup View model, is SignupViewModel object
+     * @param loginViewModel the viewmodel for login, is LoginViewModel object
+     * @param viewManagerModel the viewMangerModel that manages the views
+     */
     public StartPresenter (StartViewModel startViewModel, SignupViewModel signupViewModel,
                            LoginViewModel loginViewModel, ViewManagerModel viewManagerModel) {
         this.startViewModel = startViewModel;
@@ -28,6 +37,10 @@ public class StartPresenter implements StartOutputBoundary {
         this.signupViewModel = signupViewModel;
     }
 
+    /**
+     * Prepares the success view if use case is successful
+     * @param startOutputData is the output data that is sent to presenter
+     */
     @Override
     public void prepareSuccessView(StartOutputData startOutputData) {
 
@@ -52,6 +65,11 @@ public class StartPresenter implements StartOutputBoundary {
 
 
     }
+
+    /**
+     * Prepares fail view for when use case is unsuccessful
+     * @param error the String that is displayed to use about the error
+     */
     public void prepareFailView(String error) {
         startViewModel.firePropertyChanged();
     }

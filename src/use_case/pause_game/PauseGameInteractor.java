@@ -17,7 +17,11 @@ public class PauseGameInteractor implements PauseGameInputBoundary{
         user.setPausedGame(pauseGameInputData.getCurrent_state());
         boolean useCaseSuccess = pauseGameDataAccessInterface.setProgress(user);  // try and save the User's current game
         PauseGameOutputData pauseGameOutputData = new PauseGameOutputData(user, useCaseSuccess);  // create OutputData
-        if (useCaseSuccess) {pauseGamePresenter.prepareSuccessView(pauseGameOutputData);}  // if it was saved show success view
-        else {pauseGamePresenter.prepareSuccessView(pauseGameOutputData);}  // if not, show failed view
+        if (useCaseSuccess) {
+            pauseGamePresenter.prepareSuccessView(pauseGameOutputData);
+        }  // if it was saved show success view
+        else {
+            pauseGamePresenter.prepareSuccessView(pauseGameOutputData);
+        }  // if not, show failed view
     }
 }

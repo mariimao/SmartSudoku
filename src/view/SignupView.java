@@ -16,6 +16,9 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * View for the Signup which extends JPanel. Also implements ActionListener and PropertyChangeListener
+ */
 public class SignupView  extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "signup view";
@@ -40,9 +43,14 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
 
     private final Color black = Color.black;
 
-    public SignupView(SignupController menuController, SignupViewModel signupViewModel) {
+    /**
+     * Constructor for Signup View
+     * @param signupController the controller for signup usecase, is a SignupController object
+     * @param signupViewModel the view model for signup usercase, is a SignupViewModel object
+     */
+    public SignupView(SignupController signupController, SignupViewModel signupViewModel) {
         this.signupViewModel = signupViewModel;
-        this.signupController = menuController;
+        this.signupController = signupController;
 
         signupViewModel.addPropertyChangeListener(this);
 
@@ -190,9 +198,17 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
 
     }
 
+    /**
+     * Records the action performed
+     * @param e the action that was performed
+     */
     @Override
     public void actionPerformed(ActionEvent e) {}
 
+    /**
+     * Records and notifies of any property change such as username or password errors
+     * @param evt the propertychange event that is fired by the viewmodel
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         SignupState state = (SignupState) evt.getNewValue();

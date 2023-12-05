@@ -191,7 +191,7 @@ public class SignupTest {
         userPanel.dispatchEvent(userEvent);
 
         try {
-            sleep(1000);
+            sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -209,7 +209,7 @@ public class SignupTest {
 
         // pause execution for a second
         try {
-            sleep(1000);
+            sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -232,7 +232,7 @@ public class SignupTest {
 
         // pause execution for a second
         try {
-            sleep(1000);
+            sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -250,7 +250,7 @@ public class SignupTest {
 
         // pause execution for 3 seconds
         try {
-            sleep(3000);
+            sleep(300);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
