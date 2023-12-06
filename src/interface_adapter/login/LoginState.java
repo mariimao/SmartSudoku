@@ -9,13 +9,6 @@ public class LoginState {
     private String password = "";
     private String passwordError = null;
 
-    public LoginState(LoginState copy) { // copy constructor
-        this.username = copy.username;
-        this.usernameError = copy.usernameError;
-        this.password = copy.password;
-        this.passwordError = copy.passwordError;
-    }
-
     public LoginState() {}
 
     public String getUsername() {

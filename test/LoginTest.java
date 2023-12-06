@@ -2,9 +2,8 @@ import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import entity.user.UserFactory;
-import org.junit.Before;
+import interface_adapter.login.LoginController;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import use_case.login.*;
 
 import java.time.LocalTime;
@@ -50,7 +49,8 @@ public class LoginTest {
         Map<LocalTime, Integer> scores = new HashMap<>();
         scores.put(LocalTime.now(), 100);
         LoginInputBoundary interactor = new LoginInteractor(userDataAccessObject, loginPresenter);
-        interactor.execute(inputData);
+        LoginController loginController = new LoginController(interactor);
+        loginController.execute("name", "pass");
     }
 
     @Test
