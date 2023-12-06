@@ -1,38 +1,13 @@
 package view;
 
-import app.*;
-import data_access.SpotifyDAO;
-import data_access.SudokuDAO;
-import data_access.UserDAO;
 import entity.board.GameState;
-import entity.user.CommonUserFactory;
-import entity.user.User;
-import interface_adapter.ViewManagerModel;
 import interface_adapter.end_game.EndGameController;
-import interface_adapter.end_game.EndGamePresenter;
-import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
-import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.login.LoginViewModel;
 import interface_adapter.make_move.MakeMoveController;
-import interface_adapter.make_move.MakeMovePresenter;
-import interface_adapter.make_move.MakeMoveViewModel;
-import interface_adapter.menu.MenuState;
-import interface_adapter.menu.MenuViewModel;
-import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
-import interface_adapter.pause_game.PauseGamePresenter;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameState;
 import interface_adapter.play_game.PlayGameViewModel;
-import interface_adapter.resume_game.ResumeGameViewModel;
-import interface_adapter.signup.SignupViewModel;
-import interface_adapter.spotify.SpotifyViewModel;
-import interface_adapter.start.StartViewModel;
-import use_case.end_game.EndGameInteractor;
-import use_case.make_move.MakeMoveInputData;
-import use_case.make_move.MakeMoveInteractor;
-import use_case.pause_game.PauseGameInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -45,27 +20,13 @@ import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * View for the BoardView which extends JPanel. Also implements ActionListener and PropertyChangeListener
  */
 public class BoardView extends JPanel implements ActionListener, PropertyChangeListener {
     private final Color blue = new Color(97, 150, 242);
-    private final Color darkblue = new Color(50, 78, 156);
-    private final Color white = Color.white;
-    private final Color black = Color.black;
-
     public final String viewName = "PLAY GAME";
-
-    private final PauseGameController pauseGameController;
-    private final PauseGameViewModel pauseGameViewModel;
-
-    private final EndGameViewModel endGameViewModel;
-    private final EndGameController endGameController;
-    private final PlayGameViewModel playGameViewModel;
     private static int size = 4;
     private final PlayGameState currentState;
     private final JLabel lives;
@@ -78,7 +39,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton rules;
     private final JPanel buttons;
     private final JLabel timerLabel;
-    private final MakeMoveController makeMoveController;
 
     /**
      * Constructor for Board View
@@ -93,12 +53,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     public BoardView(PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
                                  EndGameController endGameController, EndGameViewModel endGameViewModel,
                                  PlayGameViewModel playGameViewModel, MakeMoveController makeMoveController) {
-        this.pauseGameController = pauseGameController;
-        this.pauseGameViewModel = pauseGameViewModel;
-        this.endGameController = endGameController;
-        this.endGameViewModel = endGameViewModel;
-        this.playGameViewModel = playGameViewModel;
-        this.makeMoveController = makeMoveController;
 
         playGameViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
@@ -107,6 +61,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         JLabel title = new JLabel("Play Smart Sudoku");
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 30));
+        Color darkblue = new Color(50, 78, 156);
         title.setForeground(darkblue);
         title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
         this.add(title);
@@ -129,7 +84,9 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         lives = new JLabel();
         lives.setText("LIVES: ".concat(String.valueOf(newGameState.getLives())));
         lives.setFont(new Font("Consolas", Font.ITALIC, 20));
+        Color white = Color.white;
         lives.setBackground(white);
+        Color black = Color.black;
         lives.setForeground(black);
         lives.setAlignmentX(Component.LEFT_ALIGNMENT);
         this.add(lives);
@@ -353,12 +310,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                     else {
                                         // recreate the board based on the new scrambled board
                                         // ASSUMPTION: playgameviewmodel.getState.currentGame has been set to the new scrambled board
-
-                                        System.out.println("BoardView");
-                                        System.out.println(currentState.getCurrentGame().getCurrBoard());
-
-                                        System.out.println("BoardView solutions");
-                                        System.out.println(Arrays.deepToString(currentState.getCurrentGame().getCurrBoard().getSolutionBoard()));
 
                                         currentState.setCurrentGame(makeMoveController.execute(Integer.parseInt(enteredNumber), x, y, currentState.getCurrentGame()));
                                         lives.setText("LIVES: ".concat(String.valueOf(currentState.getCurrentGame().getLives())));

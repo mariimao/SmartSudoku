@@ -81,9 +81,11 @@ public class Main {
         }
 
         StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
+        assert startView != null;
         views.add(startView, startView.viewName);
 
         SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
+        assert signupView != null;
         views.add(signupView, signupView.viewName);
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
@@ -91,9 +93,11 @@ public class Main {
 
         // TODO: Update this when you add more views
         MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel);
+        assert menuView != null;
         views.add(menuView, menuView.viewName);
 
         PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel, userDataAccessObject);
+        assert pausedGameView != null;
         views.add(pausedGameView, pausedGameView.viewName);
 
         NewGameView newGameView = NewGameUseCaseFactory.create(viewManagerModel, newGameViewModel, userDataAccessObject, playGameViewModel, loginViewModel, spotifyViewModel, new SpotifyDAO());

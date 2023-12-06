@@ -82,7 +82,7 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
 
     /**
      * Converts the current board into an int array. This is ONLY for hard board.
-     * @param currBoard
+     * @param currBoard is a nested array representation of the current board
      * @return a 2-dimensional array
      */
     public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
@@ -107,7 +107,7 @@ public class SudokuDAO implements MakeMoveBoardDataAccessInterface {
 
     /**
      * Converts the current board into a hashmap. This is ONLY for hard board.
-     * @param currBoard
+     * @param currBoard is a nested array representation of the current board
      * @return a hashmap of the numbers and if they are empty or not
      */
     public HashMap<Integer, Boolean>[][] convertToHashMap (int [][]  currBoard) {

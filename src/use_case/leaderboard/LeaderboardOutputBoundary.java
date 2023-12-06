@@ -1,7 +1,7 @@
 package use_case.leaderboard;
 
 /**
- * This class is the interface of the Leaderboard output boundary. It is implemented by LeaderboardPresented.
+ * This class is the interface of the Leaderboard output boundary. It is implemented by LeaderboardPresenter.
  */
 public interface LeaderboardOutputBoundary {
 
