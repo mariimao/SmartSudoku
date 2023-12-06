@@ -3,10 +3,7 @@ package app;
 import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
 import interface_adapter.new_game.NewGamePresenter;
 import interface_adapter.new_game.NewGameViewModel;
@@ -29,19 +26,10 @@ import use_case.spotify.SpotifyInteractor;
 import interface_adapter.play_game.PlayGameController;
 import interface_adapter.play_game.PlayGamePresenter;
 import interface_adapter.play_game.PlayGameViewModel;
-import use_case.login.LoginInputBoundary;
-import use_case.login.LoginInteractor;
-import use_case.login.LoginOutputBoundary;
-import use_case.login.LoginUserDataAccessInterface;
-import use_case.new_game.NewGameDataAccessInterface;
-import use_case.new_game.NewGameInputBoundary;
-import use_case.new_game.NewGameInteractor;
 import use_case.play_game.PlayGameDataAccessInterface;
 import use_case.play_game.PlayGameInputBoundary;
 import use_case.play_game.PlayGameInteractor;
 import view.NewGameView;
-
-import java.io.IOException;
 
 /**
  * Use case factory for the NewGame state.
@@ -66,7 +54,6 @@ public class NewGameUseCaseFactory {
      */
     public static NewGameView create(ViewManagerModel viewManagerModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject, PlayGameViewModel playGameViewModel, LoginViewModel loginViewModel,
                                      SpotifyViewModel spotifyViewModel, SpotifyDAO spotifyDAO) {
-        // TODO: Update these lines so that it includes the viewmodels that include the views for the games, leaderboard, etc.
         NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
         PlayMusicController playMusicController = playMusicControllerUseCase(viewManagerModel,newGameViewModel, spotifyDAO);
         PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);

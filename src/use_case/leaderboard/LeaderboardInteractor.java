@@ -1,6 +1,5 @@
 package use_case.leaderboard;
 
-import data_access.UserDAO;
 import entity.leaderboard.Leaderboard;
 import entity.leaderboard.LeaderboardByRank;
 import entity.user.User;

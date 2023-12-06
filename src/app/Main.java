@@ -84,11 +84,11 @@ public class Main {
         assert startView != null;
         views.add(startView, startView.viewName);
 
-        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, startViewModel, userDataAccessObject);
+        SignupView signupView = SignupUseCaseFactory.create(viewManagerModel, loginViewModel, signupViewModel, userDataAccessObject);
         assert signupView != null;
         views.add(signupView, signupView.viewName);
 
-        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, startViewModel, userDataAccessObject);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, menuViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, userDataAccessObject);
         views.add(loginView, loginView.viewName);
 
         // TODO: Update this when you add more views
@@ -109,7 +109,7 @@ public class Main {
         BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject, boardDataAccessObject);
         views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
 
-        EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel, startViewModel, signupViewModel, loginViewModel);
+        EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel);
         views.add(endGameView, endGameViewModel.getViewName());
 
         viewManagerModel.setActiveViewName(startView.viewName);  //TODO: change back to startView.viewName
