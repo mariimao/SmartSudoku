@@ -171,7 +171,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 table = new JTable(model);
                 this.add(table);
             } else {
-                JLabel labels = new JLabel("no users");
+                JLabel labels = new JLabel(leaderboardViewModel.NO_SCORES_LABEL);
                 this.add(labels);
             }
         }

@@ -1,9 +1,9 @@
 package interface_adapter.leaderboard;
 
 import interface_adapter.ViewManagerModel;
-        import interface_adapter.menu.MenuViewModel;
-        import use_case.leaderboard.LeaderboardOutputBoundary;
-        import use_case.leaderboard.LeaderboardOutputData;
+import interface_adapter.menu.MenuViewModel;
+import use_case.leaderboard.LeaderboardOutputBoundary;
+import use_case.leaderboard.LeaderboardOutputData;
 
 import javax.swing.*;
 
@@ -21,9 +21,10 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
 
     /**
      * Constructor for a LeaderboardPresenter object.
-     * @param viewManagerModel is a ViewManagerModel object
+     *
+     * @param viewManagerModel     is a ViewManagerModel object
      * @param leaderboardViewModel is a LeaderboardViewModel object
-     * @param menuViewModel is a MenuViewModel
+     * @param menuViewModel        is a MenuViewModel
      */
     public LeaderboardPresenter(ViewManagerModel viewManagerModel,
                                 LeaderboardViewModel leaderboardViewModel,
@@ -46,6 +47,7 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
     /**
      * Called when Leaderboard runs successfully - prepares a success view. This updates the state of the leaderboard
      * view model, and notifies the viewManagerModel.
+     *
      * @param leaderboardOutputData is an LeaderboardOutputData object
      */
     public void prepareSuccessView(LeaderboardOutputData leaderboardOutputData) {
@@ -63,6 +65,7 @@ public class LeaderboardPresenter implements LeaderboardOutputBoundary {
     /**
      * Called when Leaderboard doesn't run successfully - prepares a fail view. This notifies the leaderboardViewModel,
      * and calls a JDialog to display the error.
+     *
      * @param error is a String containing a description of the error
      */
     @Override
