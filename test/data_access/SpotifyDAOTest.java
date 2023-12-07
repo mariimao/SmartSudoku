@@ -71,7 +71,7 @@ public class SpotifyDAOTest {
 
     @Test
     public void testSuggestions() throws IOException {
-        ArrayList<String> suggestions = spotifyDAO.getSuggestions("hello");
+        ArrayList<String> suggestions = spotifyDAO.getSuggestions("watermelon sugar");
         // default amount is 20
         assertEquals(20, suggestions.size());
     }

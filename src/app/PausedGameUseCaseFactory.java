@@ -1,5 +1,6 @@
 package app;
 
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
@@ -19,6 +20,7 @@ import use_case.menu.MenuInputBoundary;
 import use_case.menu.MenuInteractor;
 import use_case.menu.MenuOutputBoundary;
 import use_case.menu.MenuUserDataAccessInterface;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.resume_game.ResumeGameInputBoundary;
 import use_case.resume_game.ResumeGameInteractor;
@@ -61,11 +63,11 @@ public class PausedGameUseCaseFactory {
                                         StartViewModel startViewModel, MenuViewModel menuViewModel,
                                         SignupViewModel signupViewModel, LoginViewModel loginViewModel,
                                         ResumeGameViewModel resumeGameViewModel, PlayGameViewModel playGameViewModel,
-                                        UserDAO userDataAccessObject) {
+                                        UserDAO userDataAccessObject, SpotifyDAO spotifyDAO) {
         try {
             StartController startController = createUserStartUseCase(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
             MenuController menuController = createUserMenuUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, playGameViewModel);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, spotifyDAO, playGameViewModel);
             return new PausedGameView(pauseGameViewModel, startViewModel, menuViewModel, viewManagerModel, resumeGameViewModel, startController, menuController, resumeGameController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open page.");
@@ -77,9 +79,10 @@ public class PausedGameUseCaseFactory {
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
                                                              ResumeGameDataAccessInterface resumeGameDataAccessInterface,
+                                                             PlayMusicDataAccessInterface playMusicDataAccessInterface,
                                                              PlayGameViewModel playGameViewModel) {
         ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel, playGameViewModel);
-        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
+        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, playMusicDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
     }
 

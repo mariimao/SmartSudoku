@@ -1,17 +1,17 @@
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
-import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.resume_game.ResumeGameController;
-import org.junit.Before;
 import org.junit.Test;
-import use_case.pause_game.*;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.resume_game.ResumeGameInteractor;
 import use_case.resume_game.ResumeGameOutputBoundary;
 import use_case.resume_game.ResumeGameOutputData;
 
+import java.io.IOException;
 import java.time.LocalTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ResumeTest {
 
     @Test
-    public void testInteractorExecutes() {
+    public void testInteractorExecutes() throws IOException {
         UserDAO userDataAccessObject;
         try {
             userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
@@ -37,7 +37,9 @@ public class ResumeTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
         ResumeGameDataAccessInterface userDataBase = userDataAccessObject;
+        PlayMusicDataAccessInterface playMusicDataAccessInterface = spotifyDAO;
         ResumeGameOutputBoundary creationPresenter = new ResumeGameOutputBoundary() {
             @Override
             public void prepareSuccessView(ResumeGameOutputData resumeGameOutputData) {
@@ -49,13 +51,13 @@ public class ResumeTest {
                 fail("Use case failed but is unexpected.");
             }
         };
-        ResumeGameInteractor interactor = new ResumeGameInteractor(userDataBase, creationPresenter);
+        ResumeGameInteractor interactor = new ResumeGameInteractor(userDataBase, playMusicDataAccessInterface, creationPresenter);
         ResumeGameController resumeGameController = new ResumeGameController(interactor);
         resumeGameController.execute("testUser");
     }
 
     @Test
-    public void testInteractorFails() {
+    public void testInteractorFails() throws IOException {
         UserDAO userDataAccessObject;
         try {
             userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
@@ -67,6 +69,9 @@ public class ResumeTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
+        PlayMusicDataAccessInterface playMusicDataAccessInterface = spotifyDAO;
+
         ResumeGameDataAccessInterface userDataBase = userDataAccessObject;
         ResumeGameOutputBoundary creationPresenter = new ResumeGameOutputBoundary() {
             @Override
@@ -79,13 +84,13 @@ public class ResumeTest {
                 assertTrue(true);
             }
         };
-        ResumeGameInteractor interactor = new ResumeGameInteractor(userDataBase, creationPresenter);
+        ResumeGameInteractor interactor = new ResumeGameInteractor(userDataBase, playMusicDataAccessInterface, creationPresenter);
         ResumeGameController resumeGameController = new ResumeGameController(interactor);
         resumeGameController.execute("testUser");
     }
 
     @Test
-    public void testInteractorFails2() {
+    public void testInteractorFails2() throws IOException {
         UserDAO userDataAccessObject;
         try {
             userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
@@ -93,6 +98,10 @@ public class ResumeTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
+        PlayMusicDataAccessInterface playMusicDataAccessInterface = spotifyDAO;
+
         ResumeGameDataAccessInterface userDataBase = userDataAccessObject;
         ResumeGameOutputBoundary creationPresenter = new ResumeGameOutputBoundary() {
             @Override
@@ -105,7 +114,7 @@ public class ResumeTest {
                 assertTrue(true);
             }
         };
-        ResumeGameInteractor interactor = new ResumeGameInteractor(userDataBase, creationPresenter);
+        ResumeGameInteractor interactor = new ResumeGameInteractor(userDataBase, playMusicDataAccessInterface, creationPresenter);
         ResumeGameController resumeGameController = new ResumeGameController(interactor);
         resumeGameController.execute("testUser2");
     }

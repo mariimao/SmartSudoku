@@ -80,6 +80,13 @@ public class Main {
             throw new RuntimeException(e);
         }
 
+        SpotifyDAO spotifyDAO;
+        try {
+            spotifyDAO = new SpotifyDAO();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
         StartView startView = StartUseCaseFactory.create(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
         assert startView != null;
         views.add(startView, startView.viewName);
@@ -92,11 +99,11 @@ public class Main {
         views.add(loginView, loginView.viewName);
 
         // TODO: Update this when you add more views
-        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel);
+        MenuView menuView = MenuUseCaseFactory.create(viewManagerModel, menuViewModel, resumeGameViewModel, loginViewModel, newGameViewModel, userDataAccessObject, leaderboardViewModel, playGameViewModel, spotifyDAO);
         assert menuView != null;
         views.add(menuView, menuView.viewName);
 
-        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel, userDataAccessObject);
+        PausedGameView pausedGameView = PausedGameUseCaseFactory.create(viewManagerModel, pauseGameViewModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, resumeGameViewModel, playGameViewModel, userDataAccessObject, spotifyDAO);
         assert pausedGameView != null;
         views.add(pausedGameView, pausedGameView.viewName);
 
@@ -106,7 +113,7 @@ public class Main {
         LeaderboardView leaderboardView = LeaderboardUseCaseFactory.create(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
         views.add(leaderboardView, leaderboardViewModel.getViewName());
 
-        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject, boardDataAccessObject);
+        BoardView boardView = BoardUseCaseFactory.create(viewManagerModel, pauseGameViewModel, endGameViewModel, leaderboardViewModel, menuViewModel, startViewModel, playGameViewModel, makeMoveViewModel, userDataAccessObject, boardDataAccessObject, spotifyDAO);
         views.add(boardView, playGameViewModel.getViewName());  // TODO: link neccessary views and viewmodels
 
         EndGameView endGameView = EndGameUseCaseFactory.create(viewManagerModel, endGameViewModel, userDataAccessObject, menuViewModel, leaderboardViewModel);

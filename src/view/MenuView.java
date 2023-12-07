@@ -21,6 +21,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 /**
  * View for the MenuView which extends JPanel. Also implements ActionListener and PropertyChangeListener
@@ -111,7 +112,11 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(loadgame)) {
                             ResumeGameState resumeGameState = resumeGameViewModel.getState();
-                            resumeGameController.execute(resumeGameState.getUserName());
+                            try {
+                                resumeGameController.execute(resumeGameState.getUserName());
+                            } catch (IOException ex) {
+                                throw new RuntimeException(ex);
+                            }
                         }
                     }
                 }

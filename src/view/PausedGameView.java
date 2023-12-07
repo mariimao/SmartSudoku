@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 // when the game is paused I want it to move from the GameView to this one
 // It should have two buttons, "Go Back to Menu", "Log Out", "Resume Game
@@ -128,7 +129,11 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
                     public void actionPerformed(ActionEvent evt) {
                         if (evt.getSource().equals(resumeGame)) {
                             ResumeGameState resumeGameState = resumeGameViewModel.getState();
-                            resumeGameController.execute(resumeGameState.getUserName());
+                            try {
+                                resumeGameController.execute(resumeGameState.getUserName());
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
                         }
                     }
                 }

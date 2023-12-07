@@ -1,5 +1,6 @@
 package app;
 
+import data_access.SpotifyDAO;
 import data_access.SudokuDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
@@ -23,6 +24,7 @@ import use_case.make_move.MakeMoveInteractor;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.pause_game.PauseGameInteractor;
 import use_case.make_move.MakeMoveBoardDataAccessInterface;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import view.BoardView;
 
 /**
@@ -55,9 +57,10 @@ public class BoardUseCaseFactory {
                                    LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,
                                    StartViewModel startViewModel, PlayGameViewModel playGameViewModel, MakeMoveViewModel
                                            makeMoveViewModel,
-                                   UserDAO userDataAccessObject, SudokuDAO boardDataAccessObject) {
+                                   UserDAO userDataAccessObject, SudokuDAO boardDataAccessObject,
+                                   SpotifyDAO spotifyDAO) {
 
-        PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject);
+        PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject, spotifyDAO);
         EndGameController endGameController = createUserEndGameUseCase(viewManagerModel, leaderboardViewModel, endGameViewModel, menuViewModel, userDataAccessObject);
         MakeMoveController makeMoveController = createUserMakeMoveUseCase(userDataAccessObject, makeMoveViewModel, viewManagerModel, boardDataAccessObject);
 
@@ -99,9 +102,10 @@ public class BoardUseCaseFactory {
      */
     private static PauseGameController createUserPauseUseCase(StartViewModel startViewModel, MenuViewModel menuViewModel,
                                                               PauseGameViewModel pauseGameViewModel,
-                                                              ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface) {
+                                                              ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface,
+                                                              PlayMusicDataAccessInterface playMusicDataAccessInterface) {
         PauseGamePresenter pauseGamePresenter = new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel);
-        PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, pauseGamePresenter);
+        PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, playMusicDataAccessInterface, pauseGamePresenter);
         return new PauseGameController(pauseGameInteractor);
     }
 

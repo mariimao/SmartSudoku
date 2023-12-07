@@ -1,5 +1,6 @@
 package app;
 
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.leaderboard.LeaderboardController;
@@ -24,6 +25,7 @@ import use_case.menu.MenuOutputBoundary;
 import use_case.new_game.NewGameDataAccessInterface;
 import use_case.new_game.NewGameInputBoundary;
 import use_case.new_game.NewGameInteractor;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.resume_game.ResumeGameInputBoundary;
 import use_case.resume_game.ResumeGameInteractor;
@@ -57,11 +59,11 @@ public class MenuUseCaseFactory {
      */
     public static MenuView create(
             ViewManagerModel viewManagerModel, MenuViewModel menuViewModel, ResumeGameViewModel resumeGameViewModel, LoginViewModel loginViewModel, NewGameViewModel newGameViewModel, UserDAO userDataAccessObject,
-            LeaderboardViewModel leaderboardViewModel, PlayGameViewModel playGameViewModel) {
+            LeaderboardViewModel leaderboardViewModel, PlayGameViewModel playGameViewModel, SpotifyDAO spotifyDAO) {
 
         try {
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, playGameViewModel);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject,spotifyDAO, playGameViewModel);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
             LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
             return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController, loginViewModel);
@@ -91,10 +93,11 @@ public class MenuUseCaseFactory {
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
                                                              ResumeGameDataAccessInterface resumeGameDataAccessInterface,
+                                                             PlayMusicDataAccessInterface playMusicDataAccessInterface,
                                                              PlayGameViewModel playGameViewModel) {
 
         ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel, playGameViewModel);
-        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
+        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, playMusicDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
     }
 

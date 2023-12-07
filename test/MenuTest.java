@@ -1,4 +1,5 @@
 import app.MenuUseCaseFactory;
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import org.junit.Before;
@@ -22,10 +23,11 @@ public class MenuTest {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
         UserDAO userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
                 "smartsudoku", "user", new CommonUserFactory());
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
         JPanel menuView = MenuUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getMenuViewModel(), useCaseTestObjects.getResumeGameViewModel(),
                 useCaseTestObjects.getLoginViewModel(), useCaseTestObjects.getNewGameViewModel(),
-                userDAO, useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getPlayGameViewModel());
+                userDAO, useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getPlayGameViewModel(), spotifyDAO);
 
         assert menuView != null;
         menuComponents = menuView.getComponents();
