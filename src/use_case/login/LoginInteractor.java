@@ -5,18 +5,19 @@ import entity.user.User;
 /**
  * Class representing the interactor for the Login usecase. This class implements the LoginInputBoundary.
  */
-public class LoginInteractor implements LoginInputBoundary{
+public class LoginInteractor implements LoginInputBoundary {
 
     private final LoginUserDataAccessInterface loginUserDataAccessInterface;
     private final LoginOutputBoundary loginPresenter;
 
     /**
      * Constructor for the LoginInteractor object.
+     *
      * @param loginUserDataAccessInterface is a LoginUserDataAccessInterface object
-     * @param loginPresenter is a LoginOutputBoundary object
+     * @param loginPresenter               is a LoginOutputBoundary object
      */
     public LoginInteractor(LoginUserDataAccessInterface loginUserDataAccessInterface,
-                            LoginOutputBoundary loginPresenter) {
+                           LoginOutputBoundary loginPresenter) {
         this.loginUserDataAccessInterface = loginUserDataAccessInterface;
         this.loginPresenter = loginPresenter;
     }
@@ -25,6 +26,7 @@ public class LoginInteractor implements LoginInputBoundary{
      * Executes the Login UseCase.
      * This function allows the user to log into the screen using an existing username and correct password.
      * If the user input it not valid, sends fail view.
+     *
      * @param loginInputData is an SignupInputData object
      */
     public void execute(LoginInputData loginInputData) {
@@ -45,7 +47,6 @@ public class LoginInteractor implements LoginInputBoundary{
             }
         }
     }
-
 
 
 }

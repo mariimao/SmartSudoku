@@ -9,7 +9,8 @@ public class SignupOutputData {
 
     /**
      * Constructor for an SignupOutputData object.
-     * @param username is the username of the user.
+     *
+     * @param username      is the username of the user.
      * @param useCaseFailed is a boolean that determiens if the use case was successful
      */
     public SignupOutputData(String username, boolean useCaseFailed) {

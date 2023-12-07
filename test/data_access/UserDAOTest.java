@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 public class UserDAOTest {
     private UserDAO userDAO;
 
@@ -53,7 +54,7 @@ public class UserDAOTest {
         CommonUser user = new CommonUser("other", "testPassword", scores);
         userDAO.addUser(user);
         userDAO.addScore(user, LocalTime.now(), 18);
-        assert(user.getScores().values().contains(18));
+        assert (user.getScores().containsValue(18));
     }
 
     @Test
@@ -64,7 +65,8 @@ public class UserDAOTest {
         ArrayList<GameState> gameStates = new ArrayList<>();
         GameState testEasyGame = new GameState(1);
         GameState testHardGame = new GameState(2);
-        gameStates.add(testHardGame); gameStates.add(testEasyGame);
+        gameStates.add(testHardGame);
+        gameStates.add(testEasyGame);
 
         CommonUser user = new CommonUser("testUser", "testPassword", scores);
         String userName = "testUser";

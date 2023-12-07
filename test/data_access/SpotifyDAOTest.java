@@ -1,18 +1,17 @@
 package data_access;
-import data_access.SpotifyDAO;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class SpotifyDAOTest {
 
     private SpotifyDAO spotifyDAO;
+
     @Before
     public void init() {
         spotifyDAO = new SpotifyDAO();
@@ -20,23 +19,23 @@ public class SpotifyDAOTest {
 
     @Test
     public void testGetClientId() {
-        assertTrue(spotifyDAO.getClientId().equals("ba373bd1e8e44eecb52e192d0fbac238"));
+        assertEquals("ba373bd1e8e44eecb52e192d0fbac238", spotifyDAO.getClientId());
     }
 
     @Test
     public void testGetClientSecret() {
-        assertTrue(spotifyDAO.getClientSecret().equals("d99a71ede58b40179cf0946792c7123f"));
+        assertEquals("d99a71ede58b40179cf0946792c7123f", spotifyDAO.getClientSecret());
     }
 
     @Test
     public void testGetApiToken() {
-        assertTrue(spotifyDAO.getApiToken().equals(""));
+        assertEquals("", spotifyDAO.getApiToken());
     }
 
     @Test
     public void testGetAccessCode() throws IOException {
         System.out.println(spotifyDAO.getAccessCode());
-        assertTrue(!spotifyDAO.getAccessCode().startsWith("BQBbLF1XlLhlhHHVsPo"));
+        assertFalse(spotifyDAO.getAccessCode().startsWith("BQBbLF1XlLhlhHHVsPo"));
     }
 
     @Test
@@ -71,7 +70,7 @@ public class SpotifyDAOTest {
 
     @Test
     public void testSuggestions() throws IOException {
-        ArrayList<String> suggestions = spotifyDAO.getSuggestions("hello");
+        ArrayList<String> suggestions = spotifyDAO.getSuggestions("watermelon sugar");
         // default amount is 20
         assertEquals(20, suggestions.size());
     }

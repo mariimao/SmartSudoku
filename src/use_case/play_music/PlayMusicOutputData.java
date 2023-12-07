@@ -1,7 +1,8 @@
 package use_case.play_music;
 
 public class PlayMusicOutputData {
-    private String songName;
+    private final String songName;
+
     public PlayMusicOutputData(String songName) {
         this.songName = songName;
     }

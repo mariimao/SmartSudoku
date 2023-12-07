@@ -1,30 +1,15 @@
 package view;
-import data_access.SpotifyDAO;
-import app.*;
-import data_access.UserDAO;
+
 import entity.board.GameState;
-import entity.user.CommonUserFactory;
-import entity.user.User;
-import interface_adapter.ViewManagerModel;
-import interface_adapter.end_game.EndGameViewModel;
-import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.menu.MenuViewModel;
 import interface_adapter.new_game.NewGameController;
-import interface_adapter.new_game.NewGameState;
 import interface_adapter.new_game.NewGameViewModel;
+import interface_adapter.play_game.PlayGameController;
+import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.play_music.PlayMusicController;
-import interface_adapter.signup.SignupState;
-import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyController;
 import interface_adapter.spotify.SpotifyState;
 import interface_adapter.spotify.SpotifyViewModel;
-import interface_adapter.pause_game.PauseGameViewModel;
-import interface_adapter.play_game.PlayGameController;
-import interface_adapter.play_game.PlayGameViewModel;
-import interface_adapter.resume_game.ResumeGameViewModel;
-import interface_adapter.signup.SignupViewModel;
-import interface_adapter.start.StartViewModel;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
@@ -36,8 +21,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * View for the NewGameView which extends JPanel. Also implements ActionListener and PropertyChangeListener
@@ -68,13 +51,14 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
 
     /**
      * Constructor for NewGame View
-     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
-     * @param newGameController the controller for new game, is NewGameController object
-     * @param newGameViewModel the view model for new game, is NewGameViewModel object
-     * @param playGameViewModel the view model for playgame, is PlayGameViewModel object
+     *
+     * @param loginViewModel     the view model for login usecase, is a LoginViewModel object
+     * @param newGameController  the controller for new game, is NewGameController object
+     * @param newGameViewModel   the view model for new game, is NewGameViewModel object
+     * @param playGameViewModel  the view model for playgame, is PlayGameViewModel object
      * @param playGameController the controller for playgame, is PlayGameController object
-     * @param spotifyController the controller for spotify use case, is SpotifyController object
-     * @param spotifyViewModel the view model for spotify use case, is SpotifyViewModel object
+     * @param spotifyController  the controller for spotify use case, is SpotifyController object
+     * @param spotifyViewModel   the view model for spotify use case, is SpotifyViewModel object
      */
     public NewGameView(NewGameViewModel newGameViewModel, NewGameController newGameController, PlayGameViewModel playGameViewModel, PlayGameController playGameController,
                        SpotifyViewModel spotifyViewModel, SpotifyController spotifyController, LoginViewModel loginViewModel, PlayMusicController playMusicController) {
@@ -96,7 +80,7 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 90));
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         //  creating the buttons
@@ -137,7 +121,7 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             newGameViewModel.getState().setDifficulty(difficulty);
                             playGameViewModel.getState().setCurrentGame(new GameState(difficulty));
                             playGameViewModel.getState().setUserName(newGameViewModel.getState().getUserName());
-                            playGameController.execute(newGameViewModel.getState().getUserName(), playGameViewModel.getState().getCurrentGame(), difficulty );
+                            playGameController.execute(newGameViewModel.getState().getUserName(), playGameViewModel.getState().getCurrentGame(), difficulty);
                         }
                     }
                 }
@@ -153,37 +137,37 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
                             playGameViewModel.getState().setDifficulty(difficulty);
                             playGameViewModel.getState().setCurrentGame(new GameState(difficulty));
                             playGameViewModel.getState().setUserName(loginViewModel.getLoginState().getUsername());
-                            playGameController.execute(loginViewModel.getLoginState().getUsername(), playGameViewModel.getState().getCurrentGame(), difficulty );
+                            playGameController.execute(loginViewModel.getLoginState().getUsername(), playGameViewModel.getState().getCurrentGame(), difficulty);
                         }
                     }
                 }
         );
 
         songOptions.addItemListener(
-            new ItemListener() {
-                @Override
-                public void itemStateChanged(ItemEvent e) {
-                    if(e.getStateChange() == ItemEvent.SELECTED) {
-                        if (e.getSource() instanceof JComboBox) {
-                            JComboBox cb = (JComboBox) e.getSource();
-                            if (cb.getSelectedIndex() != 0) {
-                                String chosenSong = (String) cb.getSelectedItem();
+                new ItemListener() {
+                    @Override
+                    public void itemStateChanged(ItemEvent e) {
+                        if (e.getStateChange() == ItemEvent.SELECTED) {
+                            if (e.getSource() instanceof JComboBox) {
+                                JComboBox cb = (JComboBox) e.getSource();
+                                if (cb.getSelectedIndex() != 0) {
+                                    String chosenSong = (String) cb.getSelectedItem();
 
-                                SpotifyState spotifyState = new SpotifyState(spotifyViewModel.getSpotifyState());
-                                spotifyState.setChosenSong(chosenSong);
-                                spotifyViewModel.setSpotifyState(spotifyState);
+                                    SpotifyState spotifyState = new SpotifyState(spotifyViewModel.getSpotifyState());
+                                    spotifyState.setChosenSong(chosenSong);
+                                    spotifyViewModel.setSpotifyState(spotifyState);
 
-                                int chosenSongPlace = cb.getSelectedIndex();
-                                try {
-                                    playMusicController.execute(chosenSong, chosenSongPlace, spotifyViewModel.getSpotifyState().getSearch());
-                                } catch (IOException ex) {
-                                    throw new RuntimeException(ex);
+                                    int chosenSongPlace = cb.getSelectedIndex();
+                                    try {
+                                        playMusicController.execute(chosenSong, chosenSongPlace, spotifyViewModel.getSpotifyState().getSearch());
+                                    } catch (IOException ex) {
+                                        throw new RuntimeException(ex);
+                                    }
                                 }
                             }
                         }
                     }
                 }
-            }
         );
 
         searchSong.addActionListener(
@@ -238,14 +222,17 @@ public class NewGameView extends JPanel implements ActionListener, PropertyChang
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
+
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

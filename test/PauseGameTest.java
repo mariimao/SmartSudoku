@@ -1,27 +1,23 @@
-import app.NewGameUseCaseFactory;
 import app.PausedGameUseCaseFactory;
 import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
-import interface_adapter.new_game.NewGameController;
-import interface_adapter.new_game.NewGameViewModel;
 import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGameViewModel;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import use_case.new_game.*;
 import use_case.pause_game.*;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import view.PausedGameView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,19 +35,20 @@ public class PauseGameTest {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
         UserDAO userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
                 "smartsudoku", "user", new CommonUserFactory());
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
         PauseGameViewModel pauseGameViewModel = new PauseGameViewModel();
         pausedGameView = PausedGameUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 pauseGameViewModel, useCaseTestObjects.getStartViewModel(), useCaseTestObjects.getMenuViewModel(),
                 useCaseTestObjects.getSignupViewModel(), useCaseTestObjects.getLoginViewModel(),
                 useCaseTestObjects.getResumeGameViewModel(), useCaseTestObjects.getPlayGameViewModel(),
-                userDAO);
+                userDAO, spotifyDAO);
 
         assert pausedGameView != null;
         pauseGameComponents = pausedGameView.getComponents();
     }
 
     @Test
-    public void testInteractorExecutes() {
+    public void testInteractorExecutes() throws IOException {
         UserDAO userDataAccessObject;
         try {
             userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
@@ -63,6 +60,9 @@ public class PauseGameTest {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
+        PlayMusicDataAccessInterface playMusicDataAccessInterface = spotifyDAO;
+
         PauseGameDataAccessInterface userDataBase = userDataAccessObject;
         PauseGameOutputBoundary creationPresenter = new PauseGameOutputBoundary() {
 
@@ -78,7 +78,7 @@ public class PauseGameTest {
         };
 
         GameState gameState = new GameState(1);
-        PauseGameInputBoundary interactor = new PauseGameInteractor(userDataBase, creationPresenter);
+        PauseGameInputBoundary interactor = new PauseGameInteractor(userDataBase, playMusicDataAccessInterface, creationPresenter);
         PauseGameController pauseGameController = new PauseGameController(interactor);
         pauseGameController.execute("testUser", gameState, gameState.getPastStates());
     }
@@ -110,7 +110,9 @@ public class PauseGameTest {
     @Test
     public void testPauseGameView() {
         JFrame jf = new JFrame();
-        jf.setContentPane(pausedGameView); jf.pack(); jf.setVisible(true);
+        jf.setContentPane(pausedGameView);
+        jf.pack();
+        jf.setVisible(true);
         JPanel buttons = (JPanel) pauseGameComponents[1];
         view.CustomButton menuButton = (view.CustomButton) buttons.getComponent(0);
         view.CustomButton logoutButton = (view.CustomButton) buttons.getComponent(1);
@@ -121,6 +123,7 @@ public class PauseGameTest {
         createCloseTimer().start();
         resumeButton.doClick();
     }
+
     private Timer createCloseTimer() {
         ActionListener close = new ActionListener() {
 
@@ -132,7 +135,7 @@ public class PauseGameTest {
 
                     if (window instanceof JDialog) {
 
-                        JDialog dialog = (JDialog)window;
+                        JDialog dialog = (JDialog) window;
 
                         // this ignores old dialogs
                         if (dialog.isVisible()) {

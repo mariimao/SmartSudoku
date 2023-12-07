@@ -64,7 +64,7 @@ public class SpotifyPlayer {
     }
 
     /**
-     * Pauses current song playing
+     * Pauses current song playing. Can also unpause.
      *
      * @param device the device the song is playing on
      */

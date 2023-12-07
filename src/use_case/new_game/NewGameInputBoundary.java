@@ -7,6 +7,7 @@ public interface NewGameInputBoundary {
 
     /**
      * Executes the NewGame use case.
+     *
      * @param newGameInputData is an NewGameInputData object
      */
     void execute(NewGameInputData newGameInputData);

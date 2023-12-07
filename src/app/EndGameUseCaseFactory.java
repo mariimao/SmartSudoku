@@ -47,7 +47,7 @@ public class EndGameUseCaseFactory {
 
         EndGameController endGameController = createUserEndGameUserCase(viewManagerModel, endGameViewModel, menuViewModel, leaderboardViewModel, userDataAccessObject);
         MenuController menuController = createUserMenuUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
-        LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
+        LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
         return new EndGameView(endGameViewModel, endGameController, viewManagerModel, menuController, menuViewModel, leaderboardController, leaderboardViewModel, new PlayGameViewModel());
     }
 
@@ -60,7 +60,7 @@ public class EndGameUseCaseFactory {
         return new MenuController(menuInteractor);
     }
 
-    private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
+    private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
         LeaderboardPresenter leaderboardPresenter = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel, menuViewModel);
         LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface, leaderboardPresenter);
         return new LeaderboardController(leaderboardInteractor);
@@ -68,7 +68,7 @@ public class EndGameUseCaseFactory {
     }
 
     private static EndGameController createUserEndGameUserCase(ViewManagerModel viewManagerModel, EndGameViewModel endGameViewModel, MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, EndGameDataAccessInterface endGameDataAccessInterface) {
-        EndGamePresenter endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
+        EndGamePresenter endGamePresenter = new EndGamePresenter(endGameViewModel, viewManagerModel);
         EndGameInteractor endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);
         return new EndGameController(endGameInteractor);
 

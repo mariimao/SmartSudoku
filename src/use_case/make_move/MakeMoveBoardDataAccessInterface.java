@@ -10,20 +10,23 @@ public interface MakeMoveBoardDataAccessInterface {
 
     /**
      * Converts the current board into an int array. This is ONLY for hard board.
+     *
      * @param currBoard is a nested array representation of the current board
      * @return a 2-dimensional array
      */
-    int [][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard);
+    int[][] convertToIntArray(HashMap<Integer, Boolean>[][] currBoard);
 
     /**
      * Converts the current board into a hashmap. This is ONLY for hard board.
+     *
      * @param currBoard is a nested array representation of the current board
      * @return a hashmap of the numbers and if they are empty or not
      */
-    HashMap<Integer, Boolean>[][] convertToHashMap (int [][]  currBoard);
+    HashMap<Integer, Boolean>[][] convertToHashMap(int[][] currBoard);
 
     /**
      * Generates a new board with n number of additional square prefilled
+     *
      * @param number_correct_moves the number of moves to fill
      * @return a 2-dimensional array representing the board
      */
@@ -31,13 +34,15 @@ public interface MakeMoveBoardDataAccessInterface {
 
     /**
      * generates the solutions using the sudoku api
+     *
      * @param board the current board
      * @return a string representing the solutions
      */
-    String generateSolution(int [][] board) throws IOException;
+    String generateSolution(int[][] board) throws IOException;
 
     /**
      * verifies if the board is solvable and follows the rules
+     *
      * @param board the current board
      * @return true if it is valid or not
      */

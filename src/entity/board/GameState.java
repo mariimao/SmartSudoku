@@ -1,6 +1,7 @@
 package entity.board;
 
-import java.util. *;
+import java.util.LinkedList;
+import java.util.StringJoiner;
 
 /**
  * A class representing the overall state of the game.
@@ -8,10 +9,9 @@ import java.util. *;
 public class GameState {
     private final int difficulty; // 1 - easy, 2 - hard
     private final SudokuScrambler sudokuScrambler;
+    private final LinkedList<GameState> past_states;
     private Board currBoard;
     private int lives;
-
-    private LinkedList<GameState> past_states;
 
     /**
      * Initializes a new GameState object.
@@ -20,6 +20,7 @@ public class GameState {
      * generated, along with a HardSudokuScrambler object.
      * This function also initializes lives to 5, and generates an empty LinkedList to
      * store past states.
+     *
      * @param difficulty is either 1 (easy) or 2 (hard)
      */
     public GameState(int difficulty) {
@@ -42,7 +43,8 @@ public class GameState {
      * EasySudokuScrambler object. If difficulty is set to 2, then a HardBoard object is
      * generated, along with a HardSudokuScrambler object.
      * This function also initializes lives to 5.
-     * @param difficulty is either 1 (easy) or 2 (hard)
+     *
+     * @param difficulty  is either 1 (easy) or 2 (hard)
      * @param past_states is a non-empty LinkedList of past GameStates
      */
     // akunna: overloading the GameState constructor so that it can pass in a linked list for the previous GameStates
@@ -62,8 +64,9 @@ public class GameState {
 
     /**
      * Makes a move based on the user input.
-     * @param x column value (x coordinate) for user input
-     * @param y row value (y coordinate) for user input
+     *
+     * @param x    column value (x coordinate) for user input
+     * @param y    row value (y coordinate) for user input
      * @param move user input value
      * @return a Board object of the current board
      */
@@ -92,7 +95,7 @@ public class GameState {
     /**
      * Subtracts 1 from the number of lives.
      */
-    public void loseLife(){
+    public void loseLife() {
         lives -= 1;
     }
 
@@ -103,7 +106,9 @@ public class GameState {
         return currBoard.noSpacesLeft();
     }
 
-    public int spacesLeft() {return currBoard.spacesLeft();}
+    public int spacesLeft() {
+        return currBoard.spacesLeft();
+    }
 
     /* ----- Getters and setters ----- */
     public int getDifficulty() {
@@ -115,9 +120,13 @@ public class GameState {
     }
 
     public void setCurrBoard(String values) {
-        if (difficulty == 1) {this.currBoard = new EasyBoard(values);}
-        else {this.currBoard = new HardBoard(values);}
+        if (difficulty == 1) {
+            this.currBoard = new EasyBoard(values);
+        } else {
+            this.currBoard = new HardBoard(values);
+        }
     }
+
     public void setCurrBoard(Board board) {
         this.currBoard = board;
     }
@@ -126,9 +135,13 @@ public class GameState {
         return this.lives;
     }
 
-    public void setLives(int life) {this.lives = life;}
+    public void setLives(int life) {
+        this.lives = life;
+    }
 
-    public LinkedList<GameState> getPastStates() {return this.past_states; }
+    public LinkedList<GameState> getPastStates() {
+        return this.past_states;
+    }
 
     /* ----- toString() methods ----- */
     // TODO: Figure out which of these to delete later
@@ -142,15 +155,19 @@ public class GameState {
         //                [{},          {3 = true},  {},          {1 = true}],
         //                [{1 = false}, {},          {2 = false}, {}]
         //                ]
-        if (this == null) {return "No Paused Game Exists";}
-        if (this.currBoard == null) {return "No Board Exists for this Game State ";}
+        if (this == null) {
+            return "No Paused Game Exists";
+        }
+        if (this.currBoard == null) {
+            return "No Board Exists for this Game State ";
+        }
         StringJoiner representation = new StringJoiner("-");
         String boardRep = this.currBoard.toStringPause();
         representation.add(boardRep);
         representation.add(String.valueOf(difficulty));
         representation.add(String.valueOf(lives));
 
-        return  representation.toString();
+        return representation.toString();
     }
 
 }

@@ -8,15 +8,16 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class EasyBoardTest {
+    HashMap<Integer, Boolean>[][] currBoard;
+    HashMap<Integer, Boolean>[][] currBoard2;
     private EasyBoard easyBoard;
     private EasyBoard easyBoard2;
     private int[][] solutionBoard;
     private int[][] solutionBoard2;
-    HashMap<Integer, Boolean>[][] currBoard;
-    HashMap<Integer, Boolean>[][] currBoard2;
 
     @Before
     public void init() {
@@ -67,7 +68,7 @@ public class EasyBoardTest {
     public void testGenerateBlankBoard() {
         boolean allBlankValues = true;
         HashMap<Integer, Boolean>[][] blankBoard = easyBoard.generateBlankBoard();
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (!blankBoard[i][j].isEmpty()) {
                     allBlankValues = false;
@@ -81,7 +82,7 @@ public class EasyBoardTest {
     @Test
     public void testCorrectMove() {
         boolean correctMoveIsValid = true;
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (!easyBoard.correctMove(i, j, solutionBoard[i][j])) {
                     correctMoveIsValid = false;
@@ -99,7 +100,7 @@ public class EasyBoardTest {
         boolean isValidSpacesLeft = true;
         int increment = 16;
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j ++) {
+            for (int j = 0; j < 4; j++) {
                 increment -= 1;
                 setBoard[i][j] = new HashMap<>();
                 setBoard[i][j].put(testerBoard.getSolutionBoard()[i][j], false);
@@ -115,7 +116,7 @@ public class EasyBoardTest {
     @Test
     public void testMakeMove() {
         boolean allMovesAreValid = true;
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (currBoard[i][j].isEmpty()) {
                     easyBoard.makeMove(i, j, solutionBoard[i][j]);
@@ -138,7 +139,7 @@ public class EasyBoardTest {
         boolean noSpacesLeft = true;
 
         HashMap<Integer, Boolean>[][] fullBoard = new HashMap[4][4];
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 HashMap<Integer, Boolean> value = new HashMap<>();
                 value.put(solutionBoard[i][j], true);

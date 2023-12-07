@@ -9,6 +9,7 @@ public interface SpotifyInputBoundary {
 
     /**
      * Executes the Spotify use case.
+     *
      * @param spotifyInputData is a SpotifyInputData object
      */
     void execute(SpotifyInputData spotifyInputData) throws IOException;

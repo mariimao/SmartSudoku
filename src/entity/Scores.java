@@ -1,13 +1,19 @@
 package entity;
 
+/**
+ * The Scores entity. Algorithm for calculating scores.
+ */
 public class Scores {
 
     private int scores;
-    private int timer_score;
-    private int board_deduct;
-    private int lives_left;
-    private boolean isCompleted;
 
+    /**
+     * Creates a score object
+     * @param timer_score   the time left
+     * @param board_deduct  how much of the board is left
+     * @param lives_left    the amount of lives left
+     * @param isCompleted   whether they completed it or not
+     */
     public Scores(int timer_score, int board_deduct, int lives_left, boolean isCompleted) {
 
         int current_score = 400;
@@ -18,19 +24,35 @@ public class Scores {
             // deduct by how much time is left
             current_score = current_score - board_deduct;
             // deduct by how many lives are left
-            current_score = current_score - (lives_left*50);
+            current_score = current_score - (lives_left * 50);
             // multiply by how much time is left
             current_score = current_score + timer_score;
         }
         this.scores = current_score;
     }
 
-    public Scores() {}
+    /**
+     * The default constructor for a score
+     */
+    public Scores() {
+    }
 
+    /**
+     *
+     * @return scores
+     */
     public int getScores() {
         return this.scores;
     }
-    public void setScores (int timer_score, int board_deduct, int lives_left, boolean isCompleted) {
+
+    /**
+     * Sets a new score
+     * @param timer_score   the time left
+     * @param board_deduct  how much of the board is left
+     * @param lives_left    the amount of lives left
+     * @param isCompleted   whether they completed it or not
+     */
+    public void setScores(int timer_score, int board_deduct, int lives_left, boolean isCompleted) {
         int current_score = 400;
         // if board is completed
         if (isCompleted) {
@@ -40,7 +62,7 @@ public class Scores {
             // deduct by how much time is left
             current_score = current_score - board_deduct;
             // deduct by how many lives are left
-            current_score = current_score - (lives_left*50);
+            current_score = current_score - (lives_left * 50);
             // multiply by how much time is left
             current_score = current_score + timer_score;
         }

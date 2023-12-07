@@ -12,6 +12,7 @@ public interface MenuOutputBoundary {
 
     /**
      * Called when Leaderboard doesn't run successfully - prepares a fail view.
+     *
      * @param error is a String containing a description of the error
      */
     void prepareFailView(String error);

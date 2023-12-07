@@ -1,8 +1,6 @@
 package use_case.end_game;
 
 import entity.Scores;
-import entity.Scores;
-import entity.board.GameState;
 import entity.user.User;
 
 import java.time.LocalDateTime;
@@ -17,8 +15,9 @@ public class EndGameInteractor implements EndGameInputBoundary {
 
     /**
      * Constructor for the EndGameInteractor object.
+     *
      * @param endGameDataAccessInterface is a EndGameDataAccessInterface object
-     * @param endGamePresenter is a EndGameOutputBoundary object
+     * @param endGamePresenter           is a EndGameOutputBoundary object
      */
     public EndGameInteractor(EndGameDataAccessInterface endGameDataAccessInterface, EndGameOutputBoundary endGamePresenter) {
         this.endGameDataAccessInterface = endGameDataAccessInterface;
@@ -29,6 +28,7 @@ public class EndGameInteractor implements EndGameInputBoundary {
      * Executes the EndGame UseCase.
      * This function creates a new Scores object and adds the score to the database for the respective user. It stores the
      * user, scores, and the state of the game into an endGameOutputData object, and sends this to the endGamePresenters
+     *
      * @param endGameInputData is an EndGameInputData object
      */
     @Override
@@ -40,7 +40,7 @@ public class EndGameInteractor implements EndGameInputBoundary {
         int timePlayed = endGameInputData.getTime();
         Scores score = new Scores();
         score.setScores(timePlayed, spacesLeft, lives, isCompleted);
-        endGameDataAccessInterface.addScore(user, LocalTime.from(LocalDateTime.now()), (Integer) timePlayed);
+        endGameDataAccessInterface.addScore(user, LocalTime.from(LocalDateTime.now()), timePlayed);
         EndGameOutputData endGameOutputData = new EndGameOutputData(user, score.getScores(), endGameInputData.getCurrent_state());
         endGamePresenter.prepareSuccessView(endGameOutputData);
     }

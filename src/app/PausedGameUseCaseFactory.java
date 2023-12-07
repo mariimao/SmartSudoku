@@ -1,5 +1,6 @@
 package app;
 
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
@@ -19,6 +20,7 @@ import use_case.menu.MenuInputBoundary;
 import use_case.menu.MenuInteractor;
 import use_case.menu.MenuOutputBoundary;
 import use_case.menu.MenuUserDataAccessInterface;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import use_case.resume_game.ResumeGameDataAccessInterface;
 import use_case.resume_game.ResumeGameInputBoundary;
 import use_case.resume_game.ResumeGameInteractor;
@@ -39,21 +41,24 @@ import java.io.IOException;
  */
 public class PausedGameUseCaseFactory {
 
-    /** Prevent instantiation. */
+    /**
+     * Prevent instantiation.
+     */
     private PausedGameUseCaseFactory() {
     }
 
     /**
      * Creates a new PausedGameView object. If the object could not be created, an error will be
      * shown using a JDialog.
-     * @param viewManagerModel is a ViewManagerModel object
-     * @param pauseGameViewModel is a PauseGameViewModel object
-     * @param startViewModel is a StartViewModel object
-     * @param menuViewModel is a MenuViewModel object
-     * @param signupViewModel is a SignupViewModel object
-     * @param loginViewModel is a LoginViewModel object
-     * @param resumeGameViewModel is a ResumeGameViewModel object
-     * @param playGameViewModel is a PlayGameViewModel object
+     *
+     * @param viewManagerModel     is a ViewManagerModel object
+     * @param pauseGameViewModel   is a PauseGameViewModel object
+     * @param startViewModel       is a StartViewModel object
+     * @param menuViewModel        is a MenuViewModel object
+     * @param signupViewModel      is a SignupViewModel object
+     * @param loginViewModel       is a LoginViewModel object
+     * @param resumeGameViewModel  is a ResumeGameViewModel object
+     * @param playGameViewModel    is a PlayGameViewModel object
      * @param userDataAccessObject is a UserDataAccessObject
      * @return PausedGameView object, with parameters for newly created relevant models and controllers
      */
@@ -61,11 +66,11 @@ public class PausedGameUseCaseFactory {
                                         StartViewModel startViewModel, MenuViewModel menuViewModel,
                                         SignupViewModel signupViewModel, LoginViewModel loginViewModel,
                                         ResumeGameViewModel resumeGameViewModel, PlayGameViewModel playGameViewModel,
-                                        UserDAO userDataAccessObject) {
+                                        UserDAO userDataAccessObject, SpotifyDAO spotifyDAO) {
         try {
             StartController startController = createUserStartUseCase(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
             MenuController menuController = createUserMenuUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, playGameViewModel);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, spotifyDAO, playGameViewModel);
             return new PausedGameView(pauseGameViewModel, startViewModel, menuViewModel, viewManagerModel, resumeGameViewModel, startController, menuController, resumeGameController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open page.");
@@ -77,9 +82,10 @@ public class PausedGameUseCaseFactory {
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
                                                              ResumeGameDataAccessInterface resumeGameDataAccessInterface,
+                                                             PlayMusicDataAccessInterface playMusicDataAccessInterface,
                                                              PlayGameViewModel playGameViewModel) {
         ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel, playGameViewModel);
-        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
+        ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, playMusicDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
     }
 

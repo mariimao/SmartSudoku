@@ -10,6 +10,7 @@ public class HardSudokuScrambler implements SudokuScrambler {
 
     /**
      * Initializes a new EasySudokuScrambler object.
+     *
      * @param currBoard is an EasyBoard object, that represents the current state of the board.
      */
     public HardSudokuScrambler(HardBoard currBoard) {
@@ -18,6 +19,7 @@ public class HardSudokuScrambler implements SudokuScrambler {
 
     /**
      * Updates the currBoard with a new HardBoard object.
+     *
      * @param currBoard is a Board object
      */
     public void updateBoard(Board currBoard) {
@@ -30,6 +32,7 @@ public class HardSudokuScrambler implements SudokuScrambler {
      * of the previous HardBoard with select values from the new solutionBoard. This ensures
      * that the new scrambled board is valid, and also that the positions from the old board
      * (including the new position filled in by the user) are maintained.
+     *
      * @return a new HardBoard object, which is the new scrambled board
      */
     public HardBoard scramble() {

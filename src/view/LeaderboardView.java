@@ -6,12 +6,14 @@ import interface_adapter.leaderboard.LeaderboardViewModel;
 import interface_adapter.menu.MenuViewModel;
 
 import javax.swing.*;
-import javax.swing.Timer;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.time.LocalTime;
@@ -58,7 +60,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
 
         this.setBackground(white);
 
-        JLabel title = new JLabel(leaderboardViewModel.TITLE_LABEL);
+        JLabel title = new JLabel(LeaderboardViewModel.TITLE_LABEL);
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
         title.setForeground(darkblue);
@@ -68,16 +70,16 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
         JPanel buttons = new JPanel();
         buttons.setBackground(white);
 
-        userView = new CustomButton(leaderboardViewModel.USER_BUTTON_LABEL, darkblue, white);
+        userView = new CustomButton(LeaderboardViewModel.USER_BUTTON_LABEL, darkblue, white);
         userView.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(userView);
 
-        menu = new CustomButton(leaderboardViewModel.MENU_BUTTON_LABEL, darkblue, white);
+        menu = new CustomButton(LeaderboardViewModel.MENU_BUTTON_LABEL, darkblue, white);
         menu.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         buttons.add(menu);
 
-        choices = new JLabel(leaderboardViewModel.SORT_BY_CHOICE_LABEL);
-        sortingMethod = new JComboBox<String>(leaderboardViewModel.CHOICES);
+        choices = new JLabel(LeaderboardViewModel.SORT_BY_CHOICE_LABEL);
+        sortingMethod = new JComboBox<String>(LeaderboardViewModel.CHOICES);
 
 
         this.add(title);
@@ -161,7 +163,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
             SortedMap<Object, Object> leaderboard = state.getLeaderboard();
 
             JTable table;
-            JLabel time = new JLabel("Updated as of " + LocalTime.now().toString());
+            JLabel time = new JLabel("Updated as of " + LocalTime.now());
             this.add(time);
             DefaultTableModel model = new DefaultTableModel(new Object[]{"Rank", "Users"}, 0);
             if (leaderboard != null) {
@@ -171,7 +173,7 @@ public class LeaderboardView extends JPanel implements ActionListener, PropertyC
                 table = new JTable(model);
                 this.add(table);
             } else {
-                JLabel labels = new JLabel("no users");
+                JLabel labels = new JLabel(LeaderboardViewModel.NO_SCORES_LABEL);
                 this.add(labels);
             }
         }

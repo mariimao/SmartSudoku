@@ -1,6 +1,9 @@
 package entity.board;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 
 /**
  * Class representing a 9x9 sudoku puzzle.
@@ -22,6 +25,7 @@ public class HardBoard implements Board {
     /**
      * Alternative constructor for HardBoard object.
      * Initializes the currBoard from a string of given positions.
+     *
      * @param positions a string representing a valid board
      */
     public HardBoard(String positions) {
@@ -33,6 +37,7 @@ public class HardBoard implements Board {
 
     /**
      * Called in the initial constructor of HardBoard.
+     *
      * @return a HashMap representation of a random 9x9 sudoku board
      */
     private HashMap<Integer, Boolean>[][] generateHardBoard() {
@@ -51,6 +56,7 @@ public class HardBoard implements Board {
 
     /**
      * Called in the alternative constructor of HardBoard.
+     *
      * @param str_positions positions that the board is to be generated to
      * @return HashMap representation of the newly generated board
      */
@@ -68,6 +74,7 @@ public class HardBoard implements Board {
     /**
      * This function generates a complete, randomized 9x9 sudoku board.
      * It is called in the initial constructor of HardBoard, to initialize solutionBoard.
+     *
      * @return a nested array of values for a completed 9x9 sudoku board
      */
     public int[][] generatePossibleValues() {
@@ -80,9 +87,7 @@ public class HardBoard implements Board {
             badBoard = entry.getValue();
             int[][] generated = entry.getKey();
             for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    possibleValues[i][j] = generated[i][j];
-                }
+                System.arraycopy(generated[i], 0, possibleValues[i], 0, 9);
             }
         }
         return possibleValues;
@@ -93,6 +98,7 @@ public class HardBoard implements Board {
      * This function randomly generates numbers from 1 to 9, and attempts to put them
      * into the sudoku grid. If the value is invalid (i.e. it can't be put in that position)
      * then it tries again.
+     *
      * @return a HashMap of the generated board, and whether the board is invalid
      */
     private HashMap<int[][], Boolean> generatePossibleHardBoardValuesHelper() {
@@ -130,10 +136,11 @@ public class HardBoard implements Board {
      * A helper method for generatePossibleEasyBoardValuesHelper().
      * Checks if a value can be placed in the grid while maintaining a valid grid
      * by checking the row, column, and corresponding 4x4 square.
+     *
      * @param possibleValues nested array of the currently generated board
-     * @param value value to be placed down
-     * @param x row coordinate of where the value is to be placed
-     * @param y column coordinate of where the value is to be placed
+     * @param value          value to be placed down
+     * @param x              row coordinate of where the value is to be placed
+     * @param y              column coordinate of where the value is to be placed
      * @return true if the value cannot be placed in that location
      */
     public boolean valueNotAvailable(int[][] possibleValues, int value, int x, int y) {
@@ -183,6 +190,7 @@ public class HardBoard implements Board {
      * presented to the user. Each square has a 50% chance of being chosen as a starting
      * position. If it is chosen to be a starting position, the value at that index is 1.
      * If it is chosen to be empty, the value at that index is 0.
+     *
      * @return Array of starting positions
      */
     private int[][] generateHardStartingPositions() {
@@ -198,11 +206,12 @@ public class HardBoard implements Board {
 
     /**
      * Helper method for the alternative version of generateHardBoard.
+     *
      * @param str_positions string of positions
-     * @param hardBoard blank HardBoard object
-     * @param blankValue blank HashMap object
-     * @param blankChar the char "0"
-     * @param sidelength the int 9
+     * @param hardBoard     blank HardBoard object
+     * @param blankValue    blank HashMap object
+     * @param blankChar     the char "0"
+     * @param sidelength    the int 9
      * @return a HashMap representation of the board based on the given positions
      */
     private HashMap<Integer, Boolean>[][] getHashMaps(String str_positions, HashMap<Integer, Boolean>[][] hardBoard, HashMap<Integer, Boolean> blankValue, String blankChar, int sidelength) {
@@ -213,11 +222,10 @@ public class HardBoard implements Board {
                 if (String.valueOf(str_positions.charAt(0)).equals(blankChar)) {
                     hardBoard[row][col] = blankValue;
                     str_positions = str_positions.substring(1);
-                }
-                else {
-                    info =  str_positions.substring(0,2);
+                } else {
+                    info = str_positions.substring(0, 2);
                     str_positions = str_positions.substring(2);
-                    int int_value = Integer.parseInt(info.substring(0,1));
+                    int int_value = Integer.parseInt(info.substring(0, 1));
                     boolean truth_value = info.charAt(1) == 'T';
                     HashMap<Integer, Boolean> value = new HashMap<>();
                     value.put(int_value, truth_value);
@@ -230,6 +238,7 @@ public class HardBoard implements Board {
 
     /**
      * Helper function for the alternative HardBoard constructor.
+     *
      * @param positions String of desired values
      * @return a nested array of the 9x9 sudoku board based on the desired values
      */
@@ -240,11 +249,10 @@ public class HardBoard implements Board {
                 if (String.valueOf(positions.charAt(0)).equals("0")) {
                     valueArray[row][col] = 0;
                     positions = positions.substring(1);
-                }
-                else {
-                    String info =  positions.substring(0,2);
+                } else {
+                    String info = positions.substring(0, 2);
                     positions = positions.substring(2);
-                    int int_value = Integer.parseInt(info.substring(0,1));
+                    int int_value = Integer.parseInt(info.substring(0, 1));
                     valueArray[row][col] = int_value;
                 }
             }
@@ -254,6 +262,7 @@ public class HardBoard implements Board {
 
     /**
      * Solves the sudoku board recursively based on a nested array of inputs.
+     *
      * @param board current state of the 9x9 board
      * @return true if the board has been solved
      */
@@ -278,6 +287,7 @@ public class HardBoard implements Board {
     /**
      * Helper function for solve(). Checks if the values in a 4x4 sudoku
      * board makes the board valid.
+     *
      * @param board nested array of values for the board
      * @return true if the board is valid
      */
@@ -300,8 +310,9 @@ public class HardBoard implements Board {
     /**
      * This function stores the user's current move into the board, then sends an
      * updated board to the GameState.
-     * @param row is the y-coordinate of the user's move
-     * @param col is the x-coordinate of the user's move
+     *
+     * @param row  is the y-coordinate of the user's move
+     * @param col  is the x-coordinate of the user's move
      * @param move is the integer value of the user's move
      * @return an updated HardBoard
      */
@@ -321,8 +332,7 @@ public class HardBoard implements Board {
             for (int j = 0; j < 9; j++) {
                 if (currBoard[i][j].isEmpty()) {
                     arrayBoard[i][j] = 0;
-                }
-                else {
+                } else {
                     for (Map.Entry<Integer, Boolean> entry : currBoard[i][j].entrySet()) {
                         arrayBoard[i][j] = entry.getKey();
                     }
@@ -335,9 +345,10 @@ public class HardBoard implements Board {
 
     /**
      * Checks if the user placed a correct move on the board.
-     * @param row int object representing the index of the row
+     *
+     * @param row    int object representing the index of the row
      * @param column int object representing the index of the column
-     * @param move int object representing the value of the user move
+     * @param move   int object representing the value of the user move
      * @return true if the move was correct (i.e. matches the solution)
      */
     public boolean correctMove(int row, int column, int move) {
@@ -346,6 +357,7 @@ public class HardBoard implements Board {
 
     /**
      * Checks if a board has been completely filled.
+     *
      * @return true if there are no spaces left
      */
     public boolean noSpacesLeft() {
@@ -445,8 +457,11 @@ public class HardBoard implements Board {
         for (int row = 0; row < sidelength; row++) {
             for (int col = 0; col < sidelength; col++) {
                 HashMap<Integer, Boolean> position = currBoard[row][col];
-                if (position.isEmpty()) {values.add(0);}
-                else {values.add(position.keySet().iterator().next());} // assuming the size of each position's hashmap is 1
+                if (position.isEmpty()) {
+                    values.add(0);
+                } else {
+                    values.add(position.keySet().iterator().next());
+                } // assuming the size of each position's hashmap is 1
             }
         }
         return values;

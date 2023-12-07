@@ -1,4 +1,5 @@
 package use_case.pause_game;
+
 import entity.board.GameState;
 
 import java.util.LinkedList;
@@ -13,9 +14,10 @@ public class PauseGameInputData {
 
     /**
      * Constructor for a PauseGameInputData object.
-     * @param userName is a string representing the username
+     *
+     * @param userName     is a string representing the username
      * @param currentState is a GameState object of the current state
-     * @param pastStates is a LinkedList of all the past states
+     * @param pastStates   is a LinkedList of all the past states
      */
     public PauseGameInputData(String userName, GameState currentState, LinkedList<GameState> pastStates) {
         this.userName = userName;
@@ -27,6 +29,7 @@ public class PauseGameInputData {
     public String getUsername() {
         return userName;
     }
+
     public GameState getCurrent_state() {
         return current_state;
     }

@@ -7,6 +7,7 @@ public interface LeaderboardInputBoundary {
 
     /**
      * Executes the Leaderboard use case.
+     *
      * @param leaderboardInputData is an LeaderboardInputData object
      */
     void execute(LeaderboardInputData leaderboardInputData);

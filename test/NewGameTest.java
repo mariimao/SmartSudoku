@@ -1,8 +1,6 @@
-import app.MenuUseCaseFactory;
 import app.NewGameUseCaseFactory;
 import data_access.SpotifyDAO;
 import data_access.UserDAO;
-import entity.board.EasyBoard;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
@@ -53,21 +51,21 @@ public class NewGameTest {
     public void testEasyGameButtonPresent() {
         JPanel buttons = (JPanel) newGameComponents[1];
         JButton button = (JButton) buttons.getComponent(0);
-        assert(button.getText().equals("EASY GAME"));
+        assert (button.getText().equals("EASY GAME"));
     }
 
     @Test
     public void testHardGameButtonPresent() {
         JPanel buttons = (JPanel) newGameComponents[1];
         JButton button = (JButton) buttons.getComponent(1);
-        assert(button.getText().equals("HARD GAME"));
+        assert (button.getText().equals("HARD GAME"));
     }
 
     @Test
     public void testSearchButtonPresent() {
         JPanel buttons = (JPanel) newGameComponents[2];
         JButton button = (JButton) buttons.getComponent(1);
-        assert(button.getText().equals("SEARCH"));
+        assert (button.getText().equals("SEARCH"));
     }
 
     @Test
@@ -154,7 +152,9 @@ public class NewGameTest {
     public void testNewGameView() {
         NewGameViewModel viewModel = new NewGameViewModel();
         JFrame jf = new JFrame();
-        jf.setContentPane(newGameView); jf.pack(); jf.setVisible(true);
+        jf.setContentPane(newGameView);
+        jf.pack();
+        jf.setVisible(true);
         Component[] newGameComponents = newGameView.getComponents();
         JPanel buttons = (JPanel) newGameComponents[1];
         view.CustomButton easyGame = (view.CustomButton) buttons.getComponent(0);
@@ -180,7 +180,7 @@ public class NewGameTest {
 
                     if (window instanceof JDialog) {
 
-                        JDialog dialog = (JDialog)window;
+                        JDialog dialog = (JDialog) window;
 
                         // this ignores old dialogs
                         if (dialog.isVisible()) {

@@ -1,7 +1,6 @@
 package interface_adapter.signup;
 
 import interface_adapter.ViewModel;
-import interface_adapter.start.StartState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -18,7 +17,7 @@ public class SignupViewModel extends ViewModel {
     public static final String USERNAME_LABEL = "   Enter Username";
     public static final String PASSWORD_LABEL = "   Enter Password";
     public static final String REPEATPASSWORD_LABEL = "Re-enter Password";
-
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private SignupState signupState = new SignupState();
 
     /**
@@ -29,16 +28,6 @@ public class SignupViewModel extends ViewModel {
     }
 
     /**
-     * Sets Signup state for viewmodel to use
-     * @param signupState the state of signup use case
-     */
-    public void setSignupState(SignupState signupState) {
-        this.signupState = signupState;
-    }
-
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
-    /**
      * Fires property change to view model
      */
     public void firePropertyChanged() {
@@ -47,6 +36,7 @@ public class SignupViewModel extends ViewModel {
 
     /**
      * Adds propertychangelistener for support
+     *
      * @param listener the listener that listens for property changes
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -54,8 +44,18 @@ public class SignupViewModel extends ViewModel {
     }
 
     /**
-     *
      * @return the signup state of the view model
      */
-    public SignupState getSignupState() { return this.signupState; }
+    public SignupState getSignupState() {
+        return this.signupState;
+    }
+
+    /**
+     * Sets Signup state for viewmodel to use
+     *
+     * @param signupState the state of signup use case
+     */
+    public void setSignupState(SignupState signupState) {
+        this.signupState = signupState;
+    }
 }
