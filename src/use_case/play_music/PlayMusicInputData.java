@@ -19,8 +19,4 @@ public class PlayMusicInputData {
     public String getSearch() {
         return search;
     }
-
-    public String getChosenSong(){
-        return chosenSong;
-    }
 }

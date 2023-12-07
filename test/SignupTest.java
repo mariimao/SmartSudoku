@@ -146,7 +146,7 @@ public class SignupTest {
 
         JPanel signupView = SignupUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getLoginViewModel(), useCaseTestObjects.getSignupViewModel(),
-                useCaseTestObjects.getStartViewModel(), userDAO);
+                userDAO);
 
         assert signupView != null;
         signupComponents = signupView.getComponents();

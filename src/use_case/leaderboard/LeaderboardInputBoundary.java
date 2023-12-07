@@ -6,7 +6,7 @@ package use_case.leaderboard;
 public interface LeaderboardInputBoundary {
 
     /**
-     * Executes the Leadeboard use case.
+     * Executes the Leaderboard use case.
      * @param leaderboardInputData is an LeaderboardInputData object
      */
     void execute(LeaderboardInputData leaderboardInputData);

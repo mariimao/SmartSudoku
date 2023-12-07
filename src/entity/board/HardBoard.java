@@ -37,16 +37,6 @@ public class HardBoard implements Board {
      */
     private HashMap<Integer, Boolean>[][] generateHardBoard() {
         int[][] possibleValues = solutionBoard;
-        // TODO: Delete this part later -----------
-        String str = "Solution: \n";
-        for (int z = 0; z < 9; z++) {
-            for (int w = 0; w < 9; w++) {
-                str += possibleValues[z][w];
-            }
-            str += "\n";
-        }
-        System.out.println(str);
-        // -----------------------------------
         int[][] positions = generateHardStartingPositions();
         HashMap<Integer, Boolean>[][] hardBoard = generateBlankBoard();
         for (int i = 0; i < 9; i++) {
@@ -461,26 +451,4 @@ public class HardBoard implements Board {
         }
         return values;
     }
-
-    // if we end up using valueNotAvailable, this helps convert Board into int[][] for possibleValues
-//    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
-//        int rows = 4;
-//        int cols = 4;
-//
-//        int[][] convertedArray = new int[rows][cols];
-//
-//        for (int i = 0; i < rows; i++) {
-//            for (int j = 0; j < cols; j++) {
-//                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
-//                    int value = currBoard[i][j].keySet().iterator().next();
-//                    convertedArray[i][j] = value;
-//                } else {
-//                    convertedArray[i][j] = 0;
-//                }
-//            }
-//        }
-//
-//        return convertedArray;
-//    }
-
 }

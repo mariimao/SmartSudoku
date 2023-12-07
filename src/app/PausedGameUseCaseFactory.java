@@ -1,7 +1,6 @@
 package app;
 
 import data_access.UserDAO;
-import entity.user.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.menu.MenuController;
@@ -65,8 +64,8 @@ public class PausedGameUseCaseFactory {
                                         UserDAO userDataAccessObject) {
         try {
             StartController startController = createUserStartUseCase(viewManagerModel, startViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-            MenuController menuController = createUserMenuUseCase(viewManagerModel, startViewModel, menuViewModel, signupViewModel, loginViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, loginViewModel, userDataAccessObject, playGameViewModel);
+            MenuController menuController = createUserMenuUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, playGameViewModel);
             return new PausedGameView(pauseGameViewModel, startViewModel, menuViewModel, viewManagerModel, resumeGameViewModel, startController, menuController, resumeGameController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open page.");
@@ -77,13 +76,8 @@ public class PausedGameUseCaseFactory {
 
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
-                                                             LoginViewModel loginViewModel,
                                                              ResumeGameDataAccessInterface resumeGameDataAccessInterface,
                                                              PlayGameViewModel playGameViewModel) {
-        // Going into the LoginState to retrieve the player's username
-        String username = loginViewModel.getLoginState().getUsername();  // ASSUMPTION: they have to already be logged in to hit the resume button
-        User user = resumeGameDataAccessInterface.get(username);
-
         ResumeGameOutputBoundary resumeGamePresenter = new ResumeGamePresenter(resumeGameViewModel, viewManagerModel, playGameViewModel);
         ResumeGameInputBoundary resumeGameInteractor = new ResumeGameInteractor(resumeGameDataAccessInterface, resumeGamePresenter);
         return new ResumeGameController(resumeGameInteractor);
@@ -98,8 +92,8 @@ public class PausedGameUseCaseFactory {
         return new StartController(startInteractor);
     }
 
-    private static MenuController createUserMenuUseCase(ViewManagerModel viewManagerModel, StartViewModel startViewModel,
-                                                        MenuViewModel menuViewModel, SignupViewModel signupViewModel, LoginViewModel loginViewModel,
+    private static MenuController createUserMenuUseCase(ViewManagerModel viewManagerModel,
+                                                        MenuViewModel menuViewModel,
                                                         MenuUserDataAccessInterface userDataAccessObject) throws IOException {
 
         MenuOutputBoundary menuPresenter = new MenuPresenter(menuViewModel, viewManagerModel);

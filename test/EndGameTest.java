@@ -43,8 +43,7 @@ public class EndGameTest {
         LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
         endGameView = EndGameUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getEndGameViewModel(), userDAO, useCaseTestObjects.getMenuViewModel(),
-                useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getStartViewModel(),
-                useCaseTestObjects.getSignupViewModel(), useCaseTestObjects.getLoginViewModel());
+                useCaseTestObjects.getLeaderboardViewModel());
         EndGamePresenter endGamePresenter = new EndGamePresenter(useCaseTestObjects.getLeaderboardViewModel(),
                 useCaseTestObjects.getMenuViewModel(), useCaseTestObjects.getEndGameViewModel(),
                 useCaseTestObjects.getViewManagerModel());

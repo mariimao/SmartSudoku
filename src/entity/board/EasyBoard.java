@@ -46,16 +46,6 @@ public class EasyBoard implements Board {
      */
     private HashMap<Integer, Boolean>[][] generateEasyBoard() {
         int[][] possibleValues = solutionBoard;
-        // TODO: Delete this part later -----------
-        String str = "Solution: \n";
-        for (int z = 0; z <= 3; z++) {
-            for (int w = 0; w <= 3; w++) {
-                str += possibleValues[z][w];
-            }
-            str += "\n";
-        }
-        System.out.println(str);
-        // -----------------------------------
         ArrayList<Integer> positions = generateEasyStartingPositions();
         HashMap<Integer, Boolean>[][] easyBoard = generateBlankBoard();
         int i = 0;
@@ -533,37 +523,5 @@ public class EasyBoard implements Board {
         }
         positions.add(info);
         return positions;
-    }
-
-    // if we end up using valueNotAvailable, this helps convert the Board into int[][] for possibleValues
-//    public int[][] convertToIntArray(HashMap<Integer, Boolean>[][]  currBoard) {
-//        int rows = 4;
-//        int cols = 4;
-//
-//        int[][] convertedArray = new int[rows][cols];
-//
-//        for (int i = 0; i < rows; i++) {
-//            for (int j = 0; j < cols; j++) {
-//                if (currBoard[i][j] != null && !currBoard[i][j].isEmpty()) {
-//                    int value = currBoard[i][j].keySet().iterator().next();
-//                    convertedArray[i][j] = value;
-//                } else {
-//                    convertedArray[i][j] = 0;
-//                }
-//            }
-//        }
-//
-//        return convertedArray;
-//    }
-
-    public static void main(String[] args) {
-        //TODO: DELETE MAIN, just for testing
-        EasyBoard testBoard = new EasyBoard();
-        System.out.println(testBoard);
-        System.out.println(testBoard.toStringPause());
-        EasyBoard testBoard2 = new EasyBoard("004T04T00003T00001T0");
-        System.out.println(testBoard2);
-
-        System.out.println(new EasyBoard("0000000000000000"));
     }
 }

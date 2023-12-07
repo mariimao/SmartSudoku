@@ -1,11 +1,9 @@
 package entity;
 
-import data_access.SpotifyDAO;
 import okhttp3.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import use_case.startplayer.StartPlayerDataAccessInterface;
 
 import java.io.IOException;
 import java.util.ArrayList;
