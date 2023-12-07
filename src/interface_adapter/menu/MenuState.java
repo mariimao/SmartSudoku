@@ -25,12 +25,16 @@ public class MenuState {
     /**
      * below are the getters and setters
      *
-     * @return
+     * @return username
      */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username with a string
+     * @param username
+     */
     public void setUsername(String username) {
         this.username = username;
     }

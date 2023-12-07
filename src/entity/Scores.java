@@ -1,13 +1,19 @@
 package entity;
 
+/**
+ * The Scores entity. Algorithm for calculating scores.
+ */
 public class Scores {
 
     private int scores;
-    private int timer_score;
-    private int board_deduct;
-    private int lives_left;
-    private boolean isCompleted;
 
+    /**
+     * Creates a score object
+     * @param timer_score   the time left
+     * @param board_deduct  how much of the board is left
+     * @param lives_left    the amount of lives left
+     * @param isCompleted   whether they completed it or not
+     */
     public Scores(int timer_score, int board_deduct, int lives_left, boolean isCompleted) {
 
         int current_score = 400;
@@ -25,13 +31,27 @@ public class Scores {
         this.scores = current_score;
     }
 
+    /**
+     * The default constructor for a score
+     */
     public Scores() {
     }
 
+    /**
+     *
+     * @return scores
+     */
     public int getScores() {
         return this.scores;
     }
 
+    /**
+     * Sets a new score
+     * @param timer_score   the time left
+     * @param board_deduct  how much of the board is left
+     * @param lives_left    the amount of lives left
+     * @param isCompleted   whether they completed it or not
+     */
     public void setScores(int timer_score, int board_deduct, int lives_left, boolean isCompleted) {
         int current_score = 400;
         // if board is completed

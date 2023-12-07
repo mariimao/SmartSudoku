@@ -19,7 +19,7 @@ public class LoginOutputData {
     }
 
     /**
-     * @returns the username of the user
+     * @return the username of the user
      */
     public String getName() {
         return name;
