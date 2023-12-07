@@ -7,15 +7,27 @@ import use_case.new_game.NewGameOutputData;
 
 import javax.swing.*;
 
+/**
+ * Class of Presenter for new game case. Implements NewGameOutputBoundary
+ */
 public class NewGamePresenter implements NewGameOutputBoundary {
     private final NewGameViewModel newGameViewModel;
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Constructor for NewGamePresenter
+     * @param newGameViewModel  the new game view model
+     * @param viewManagerModel  the view manager model
+     */
     public NewGamePresenter(NewGameViewModel newGameViewModel, ViewManagerModel viewManagerModel) {
         this.newGameViewModel = newGameViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
+    /**
+     * Prepares success view
+     * @param newGameOutputData is an NewGameOutputData object
+     */
     @Override
     public void prepareSuccessView(NewGameOutputData newGameOutputData) {
         NewGameState newGameState = newGameViewModel.getState();
@@ -23,12 +35,14 @@ public class NewGamePresenter implements NewGameOutputBoundary {
         newGameState.setUser(newGameOutputData.getUser());
         this.viewManagerModel.setActiveViewName(newGameViewModel.getViewName());
         this.viewManagerModel.firePropertyChanged();
-        // JOptionPane.showMessageDialog(null, "New Game Successfully Created");   // for now I'll just use a popup
     }
 
+    /**
+     * Prepares fail view with error message
+     * @param error is a String containing a description of the error
+     */
     @Override
     public void prepareFailView(String error) {
-        System.out.println("Called2");
         NewGameState newGameState = newGameViewModel.getState();
         newGameState.setNewGameError(error);
         newGameViewModel.firePropertyChanged();

@@ -6,6 +6,9 @@ import interface_adapter.signup.SignupState;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * The Login
+ */
 public class LoginViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Login";
 

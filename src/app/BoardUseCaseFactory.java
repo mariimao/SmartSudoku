@@ -19,11 +19,11 @@ import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.start.StartViewModel;
 import use_case.end_game.EndGameDataAccessInterface;
 import use_case.end_game.EndGameInteractor;
+import use_case.make_move.MakeMoveBoardDataAccessInterface;
 import use_case.make_move.MakeMoveDataAccessInterface;
 import use_case.make_move.MakeMoveInteractor;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.pause_game.PauseGameInteractor;
-import use_case.make_move.MakeMoveBoardDataAccessInterface;
 import use_case.play_music.PlayMusicDataAccessInterface;
 import view.BoardView;
 
@@ -104,7 +104,7 @@ public class BoardUseCaseFactory {
                                                               PauseGameViewModel pauseGameViewModel,
                                                               ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface,
                                                               PlayMusicDataAccessInterface playMusicDataAccessInterface) {
-        PauseGamePresenter pauseGamePresenter = new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel);
+        PauseGamePresenter pauseGamePresenter = new PauseGamePresenter(pauseGameViewModel, viewManagerModel);
         PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, playMusicDataAccessInterface, pauseGamePresenter);
         return new PauseGameController(pauseGameInteractor);
     }
@@ -113,8 +113,8 @@ public class BoardUseCaseFactory {
      * Creates a MakeMoveController
      *
      * @param makeMoveDataAccessInterface is a MakeMoveDataAccessInterface object
-     * @param makeMoveViewModel is a MakeMoveViewModel object
-     * @param viewManagerModel is a ViewManagerModel object
+     * @param makeMoveViewModel           is a MakeMoveViewModel object
+     * @param viewManagerModel            is a ViewManagerModel object
      * @return a MakeMoveController
      */
     private static MakeMoveController createUserMakeMoveUseCase(MakeMoveDataAccessInterface makeMoveDataAccessInterface,

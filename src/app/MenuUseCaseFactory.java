@@ -42,19 +42,23 @@ import java.io.IOException;
  */
 public class MenuUseCaseFactory {
 
-    /** Prevent instantiation. */
-    private MenuUseCaseFactory() {}
+    /**
+     * Prevent instantiation.
+     */
+    private MenuUseCaseFactory() {
+    }
 
     /**
      * Creates a new MenuView object. If the data file could not be opened, then the function throws an error.
-     * @param viewManagerModel is a new ViewManagerModel object
-     * @param menuViewModel is a new MenuViewModel object
-     * @param resumeGameViewModel is a new ResumeGameViewModel object
-     * @param loginViewModel is a new LoginViewModel object
-     * @param newGameViewModel is a new NewGameViewModel object
+     *
+     * @param viewManagerModel     is a new ViewManagerModel object
+     * @param menuViewModel        is a new MenuViewModel object
+     * @param resumeGameViewModel  is a new ResumeGameViewModel object
+     * @param loginViewModel       is a new LoginViewModel object
+     * @param newGameViewModel     is a new NewGameViewModel object
      * @param userDataAccessObject is a new UserDataAccessObject
      * @param leaderboardViewModel is a new LeaderboardViewModel object
-     * @param playGameViewModel is a new PlayGameViewModel object
+     * @param playGameViewModel    is a new PlayGameViewModel object
      * @return MenuView object, with parameters for newly created relevant models and controllers
      */
     public static MenuView create(
@@ -63,9 +67,9 @@ public class MenuUseCaseFactory {
 
         try {
             MenuController menuController = createUserSignupUseCase(viewManagerModel, menuViewModel, userDataAccessObject);
-            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject,spotifyDAO, playGameViewModel);
+            ResumeGameController resumeGameController = createUserResumeCase(viewManagerModel, resumeGameViewModel, userDataAccessObject, spotifyDAO, playGameViewModel);
             NewGameController newGameController = createUserNewGameCase(viewManagerModel, newGameViewModel, userDataAccessObject);
-            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
+            LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
             return new MenuView(menuController, menuViewModel, resumeGameController, resumeGameViewModel, newGameViewModel, newGameController, leaderboardViewModel, leaderboardController, loginViewModel);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
@@ -81,7 +85,7 @@ public class MenuUseCaseFactory {
     }
 
     private static MenuController createUserSignupUseCase(ViewManagerModel viewManagerModel,
-                                                           MenuViewModel menuViewModel, UserDAO userDataAccessObject) throws IOException {
+                                                          MenuViewModel menuViewModel, UserDAO userDataAccessObject) throws IOException {
 
         MenuOutputBoundary menuOutputBoundary = new MenuPresenter(menuViewModel, viewManagerModel);
 
@@ -90,6 +94,7 @@ public class MenuUseCaseFactory {
 
         return new MenuController(menuInteractor);
     }
+
     private static ResumeGameController createUserResumeCase(ViewManagerModel viewManagerModel,
                                                              ResumeGameViewModel resumeGameViewModel,
                                                              ResumeGameDataAccessInterface resumeGameDataAccessInterface,
@@ -102,7 +107,7 @@ public class MenuUseCaseFactory {
     }
 
     private static LeaderboardController createLeaderboardUseCase(ViewManagerModel viewManagerModel,
-                                                             LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
+                                                                  LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, LeaderboardDataAccessInterface leaderboardDataAccessInterface) {
         LeaderboardOutputBoundary leaderboardOutputBoundary = new LeaderboardPresenter(viewManagerModel, leaderboardViewModel, menuViewModel);
         LeaderboardInteractor leaderboardInteractor = new LeaderboardInteractor(leaderboardDataAccessInterface,
                 leaderboardOutputBoundary);

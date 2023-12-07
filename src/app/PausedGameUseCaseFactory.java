@@ -41,21 +41,24 @@ import java.io.IOException;
  */
 public class PausedGameUseCaseFactory {
 
-    /** Prevent instantiation. */
+    /**
+     * Prevent instantiation.
+     */
     private PausedGameUseCaseFactory() {
     }
 
     /**
      * Creates a new PausedGameView object. If the object could not be created, an error will be
      * shown using a JDialog.
-     * @param viewManagerModel is a ViewManagerModel object
-     * @param pauseGameViewModel is a PauseGameViewModel object
-     * @param startViewModel is a StartViewModel object
-     * @param menuViewModel is a MenuViewModel object
-     * @param signupViewModel is a SignupViewModel object
-     * @param loginViewModel is a LoginViewModel object
-     * @param resumeGameViewModel is a ResumeGameViewModel object
-     * @param playGameViewModel is a PlayGameViewModel object
+     *
+     * @param viewManagerModel     is a ViewManagerModel object
+     * @param pauseGameViewModel   is a PauseGameViewModel object
+     * @param startViewModel       is a StartViewModel object
+     * @param menuViewModel        is a MenuViewModel object
+     * @param signupViewModel      is a SignupViewModel object
+     * @param loginViewModel       is a LoginViewModel object
+     * @param resumeGameViewModel  is a ResumeGameViewModel object
+     * @param playGameViewModel    is a PlayGameViewModel object
      * @param userDataAccessObject is a UserDataAccessObject
      * @return PausedGameView object, with parameters for newly created relevant models and controllers
      */

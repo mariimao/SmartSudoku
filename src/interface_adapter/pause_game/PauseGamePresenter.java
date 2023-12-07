@@ -7,16 +7,14 @@ import interface_adapter.start.StartViewModel;
 import use_case.pause_game.PauseGameOutputBoundary;
 import use_case.pause_game.PauseGameOutputData;
 
+/**
+ * Class of Presenter for pause game use case. Implements PauseGameOutputBoundary
+ */
 public class PauseGamePresenter implements PauseGameOutputBoundary {
-    private final StartViewModel startViewModel;
-    private final MenuViewModel menuViewModel;
     private final PauseGameViewModel pauseGameViewModel;
     private ViewManagerModel viewManagerModel;
 
-    public PauseGamePresenter(
-            StartViewModel startViewModel, MenuViewModel menuViewModel, PauseGameViewModel pauseGameViewModel, ViewManagerModel viewManagerModel) {
-        this.startViewModel = startViewModel;
-        this.menuViewModel = menuViewModel;
+    public PauseGamePresenter(PauseGameViewModel pauseGameViewModel, ViewManagerModel viewManagerModel) {
         this.pauseGameViewModel = pauseGameViewModel;
         this.viewManagerModel = viewManagerModel;
     }

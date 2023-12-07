@@ -73,7 +73,7 @@ public class SpotifyDAO implements SpotifyDataAccessInterface, PlayMusicDataAcce
                 .get()
                 .build();
         Response response = client.newCall(request).execute();
-        String responseString = "{"  + response.body().string();
+        String responseString = "{" + response.body().string();
         JSONObject responseBody = new JSONObject(responseString);
         return responseBody.getString("token");
     }

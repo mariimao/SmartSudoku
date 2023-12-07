@@ -33,9 +33,9 @@ public interface User {
     void addScores(LocalTime time, Integer score);
 
     /**
-     * Sets the state of the game to be paused
+     * Gets the most recent game played
      */
-    void setPausedGame(GameState currentGame);
+    GameState getFinalGame();
 
     /**
      * Sets the state of the game to be the final or most recent game played
@@ -43,13 +43,13 @@ public interface User {
     void setFinalGame(GameState currentGame);
 
     /**
-     * Gets the most recent game played
-     */
-    GameState getFinalGame();
-
-    /**
      * Checks if the game is currently paused. Will get null pointer if game is not paused.
      */
     GameState getPausedGame();
+
+    /**
+     * Sets the state of the game to be paused
+     */
+    void setPausedGame(GameState currentGame);
 
 }

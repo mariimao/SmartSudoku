@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
- * The LeaderboardViewModel class. Extends ViewModel.
+ * The Controller for Login. Creates input data to be used by the controller.
  */
 public class LeaderboardViewModel extends ViewModel {
     public static String TITLE_LABEL = "Leaderboard";
@@ -15,9 +15,7 @@ public class LeaderboardViewModel extends ViewModel {
     public static String USER_BUTTON_LABEL = "See my results";
     public static String NO_SCORES_LABEL = "No scores available yet.";
     public static String[] CHOICES = {"Rank"};
-    /**
-     * Allows us to support bound properties.
-     */
+
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private LeaderboardState leaderboardState = new LeaderboardState();
 

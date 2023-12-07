@@ -2,6 +2,9 @@ package interface_adapter.login;
 
 import entity.user.User;
 
+/**
+ * The LoginState class. Represents the state of the login use case.
+ */
 public class LoginState {
     private String username = "";
     private User user = null;
@@ -9,8 +12,12 @@ public class LoginState {
     private String password = "";
     private String passwordError = null;
 
+    /**
+     * The constructor for LoginState.
+     */
     public LoginState() {}
 
+    //Below are the getters and setters //
     public String getUsername() {
         return username;
     }

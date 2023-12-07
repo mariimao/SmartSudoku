@@ -30,7 +30,7 @@ public class LeaderboardUseCaseFactory {
      * @return LeaderboardView object, with parameters for newly created relevant models and controllers
      */
     public static LeaderboardView create(ViewManagerModel viewManagerModel, LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel, UserDAO userDataAccessObject) {
-        LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel,userDataAccessObject);
+        LeaderboardController leaderboardController = createLeaderboardUseCase(viewManagerModel, leaderboardViewModel, menuViewModel, userDataAccessObject);
         return new LeaderboardView(leaderboardViewModel, leaderboardController, menuViewModel);
 
     }

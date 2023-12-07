@@ -6,6 +6,9 @@ import use_case.play_music.PlayMusicDataAccessInterface;
 
 import java.io.IOException;
 
+/**
+ * Class of Presenter for resume game use case. Implements ResumeGameInputBoundary
+ */
 public class ResumeGameInteractor implements ResumeGameInputBoundary{
     final ResumeGameDataAccessInterface resumeGameDataAccessInterface;
 
@@ -13,17 +16,27 @@ public class ResumeGameInteractor implements ResumeGameInputBoundary{
 
     final ResumeGameOutputBoundary resumeGamePresenter;
 
+    /**
+     * Constructor for MakeMovePresenter
+     * @param resumeGameDataAccessInterface the interface for data access of users
+     * @param playMusicDataAccessInterface  the interface for data access of spotify data
+     * @param resumeGamePresenter the presenter, is a ResumeGameOutputBoundary type
+     */
     public ResumeGameInteractor(ResumeGameDataAccessInterface resumeGameDataAccessInterface, PlayMusicDataAccessInterface playMusicDataAccessInterface, ResumeGameOutputBoundary resumeGamePresenter) {
         this.resumeGameDataAccessInterface = resumeGameDataAccessInterface;
         this.playMusicDataAccessInterface = playMusicDataAccessInterface;
         this.resumeGamePresenter = resumeGamePresenter;
     }
 
+    /**
+     * Execute the use case
+     * @param resumeGameInputData   the resume game data
+     * @throws IOException             throws exception is there is an error
+     */
     @Override
     public void execute(ResumeGameInputData resumeGameInputData) throws IOException {
         User user = resumeGameDataAccessInterface.get(resumeGameInputData.getUsername());
         if (user == null) {
-            System.out.println("null user");
             resumeGamePresenter.prepareFailView("Error: No User is Logged In.");
         }
         else {

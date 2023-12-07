@@ -21,15 +21,19 @@ import java.io.IOException;
  */
 public class StartUseCaseFactory {
 
-    /** Prevent instantiation. */
-    private StartUseCaseFactory() {}
+    /**
+     * Prevent instantiation.
+     */
+    private StartUseCaseFactory() {
+    }
 
     /**
      * Creates a new StartView object. If the object could not be created, an error will display.
-     * @param viewManagerModel is a ViewManagerModel object
-     * @param startViewModel is a StartViewModel object
-     * @param signupViewModel is a SignupViewModel object
-     * @param loginViewModel is a LoginViewModel object
+     *
+     * @param viewManagerModel     is a ViewManagerModel object
+     * @param startViewModel       is a StartViewModel object
+     * @param signupViewModel      is a SignupViewModel object
+     * @param loginViewModel       is a LoginViewModel object
      * @param userDataAccessObject is a UserDataAccessObject
      * @return StartView object, with parameters for newly created relevant models and controllers
      */
