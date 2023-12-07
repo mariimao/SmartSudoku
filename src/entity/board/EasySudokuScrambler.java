@@ -10,6 +10,7 @@ public class EasySudokuScrambler implements SudokuScrambler {
 
     /**
      * Initializes a new EasySudokuScrambler object.
+     *
      * @param currBoard is an EasyBoard object, that represents the current state of the board.
      */
     public EasySudokuScrambler(EasyBoard currBoard) {
@@ -18,6 +19,7 @@ public class EasySudokuScrambler implements SudokuScrambler {
 
     /**
      * Updates the currBoard with a new EasyBoard object.
+     *
      * @param currBoard is a Board object
      */
     public void updateBoard(Board currBoard) {
@@ -30,6 +32,7 @@ public class EasySudokuScrambler implements SudokuScrambler {
      * of the previous EasyBoard with select values from the new solutionBoard. This ensures
      * that the new scrambled board is valid, and also that the positions from the old board
      * (including the new position filled in by the user) are maintained.
+     *
      * @return a new EasyBoard object, which is the new scrambled board
      */
     public EasyBoard scramble() {
@@ -37,13 +40,9 @@ public class EasySudokuScrambler implements SudokuScrambler {
         EasyBoard newBoard = new EasyBoard();
         int[][] newBoardSolutions = newBoard.getSolutionBoard();
         HashMap<Integer, Boolean>[][] newBoardValues = newBoard.generateBlankBoard();
-        int x = -1; int y = -1;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (!currBoardValues[i][j].isEmpty()) {
-                    newBoardValues[i][j].put(newBoardSolutions[i][j], false);
-                } else if (x == -1 && y == -1) {
-                    x = i; y = j;
                     newBoardValues[i][j].put(newBoardSolutions[i][j], false);
                 }
             }

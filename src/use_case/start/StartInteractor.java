@@ -1,7 +1,5 @@
 package use_case.start;
 
-import data_access.UserDAO;
-
 public class StartInteractor implements StartInputBoundary {
 
     final StartUserDataAccessInterface startUserDataAccessInterface;

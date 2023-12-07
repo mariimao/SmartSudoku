@@ -19,7 +19,7 @@ import java.beans.PropertyChangeListener;
 /**
  * View for the Signup which extends JPanel. Also implements ActionListener and PropertyChangeListener
  */
-public class SignupView  extends JPanel implements ActionListener, PropertyChangeListener {
+public class SignupView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "signup view";
 
@@ -28,7 +28,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
     private final SignupController signupController;
 
     // text input
-    private final JTextField usernameInputField =  new JTextField(15);
+    private final JTextField usernameInputField = new JTextField(15);
     private final JPasswordField passwordInputField = new JPasswordField(15);
     private final JPasswordField repeatPasswordInputField = new JPasswordField(15);
 
@@ -45,8 +45,9 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
 
     /**
      * Constructor for Signup View
+     *
      * @param signupController the controller for signup usecase, is a SignupController object
-     * @param signupViewModel the view model for signup usercase, is a SignupViewModel object
+     * @param signupViewModel  the view model for signup usercase, is a SignupViewModel object
      */
     public SignupView(SignupController signupController, SignupViewModel signupViewModel) {
         this.signupViewModel = signupViewModel;
@@ -60,7 +61,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         JLabel username = new JLabel(SignupViewModel.USERNAME_LABEL);
@@ -104,7 +105,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
         signup = new CustomButton(SignupViewModel.SIGNUP_BUTTON_LABEL, blue, white);
         buttons.add(signup);
 
-        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(buttons);
 
 
@@ -129,7 +130,7 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(cancel)) {
                             setVisible(false);
-                            cancel.setVerifyInputWhenFocusTarget( false );
+                            cancel.setVerifyInputWhenFocusTarget(false);
                         }
                     }
                 }
@@ -147,10 +148,12 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
                     }
 
                     @Override
-                    public void keyPressed(KeyEvent e) {}
+                    public void keyPressed(KeyEvent e) {
+                    }
 
                     @Override
-                    public void keyReleased(KeyEvent e) {}
+                    public void keyReleased(KeyEvent e) {
+                    }
                 }
         );
 
@@ -165,10 +168,12 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
                     }
 
                     @Override
-                    public void keyPressed(KeyEvent e) {}
+                    public void keyPressed(KeyEvent e) {
+                    }
 
                     @Override
-                    public void keyReleased(KeyEvent e) {}
+                    public void keyReleased(KeyEvent e) {
+                    }
                 }
         );
 
@@ -200,13 +205,16 @@ public class SignupView  extends JPanel implements ActionListener, PropertyChang
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
     @Override
-    public void actionPerformed(ActionEvent e) {}
+    public void actionPerformed(ActionEvent e) {
+    }
 
     /**
      * Records and notifies of any property change such as username or password errors
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

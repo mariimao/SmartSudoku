@@ -6,15 +6,29 @@ import use_case.play_game.PlayGameOutputData;
 
 import javax.swing.*;
 
+/**
+ * Class of Presenter for play game case. Implements PlayGameOutputBoundary
+ */
 public class PlayGamePresenter implements PlayGameOutputBoundary {
     private final PlayGameViewModel playGameViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
+    /**
+     * Constructor for PlayGamePresenter
+     *
+     * @param playGameViewModel the play game view model
+     * @param viewManagerModel  the view manager model
+     */
     public PlayGamePresenter(PlayGameViewModel playGameViewModel, ViewManagerModel viewManagerModel) {
         this.playGameViewModel = playGameViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
+    /**
+     * Prepares success view
+     *
+     * @param playGameOutputData
+     */
     @Override
     public void prepareSuccessView(PlayGameOutputData playGameOutputData) {
         PlayGameState playGameState = playGameViewModel.getState();
@@ -30,6 +44,11 @@ public class PlayGamePresenter implements PlayGameOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Prepares fail view with error message
+     *
+     * @param error
+     */
     @Override
     public void prepareFailView(String error) {
         PlayGameState playGameState = playGameViewModel.getState();

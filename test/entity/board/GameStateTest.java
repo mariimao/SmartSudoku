@@ -9,6 +9,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 import static org.junit.Assert.*;
+
 public class GameStateTest {
 
     GameState easyGameState;
@@ -22,11 +23,15 @@ public class GameStateTest {
 
     @Test
     public void testEasyMakeMove() {
-        int row = 0; int col = 0; int val = 0;
+        int row = 0;
+        int col = 0;
+        int val = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (easyGameState.getCurrBoard().getCurrBoard()[i][j].isEmpty()) {
-                    row = i; col = j; val = easyGameState.getCurrBoard().getSolutionBoard()[i][j];
+                    row = i;
+                    col = j;
+                    val = easyGameState.getCurrBoard().getSolutionBoard()[i][j];
                     break;
                 }
             }
@@ -41,11 +46,15 @@ public class GameStateTest {
 
     @Test
     public void testHardMakeMove() {
-        int row = 0; int col = 0; int val = 0;
+        int row = 0;
+        int col = 0;
+        int val = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (hardGameState.getCurrBoard().getCurrBoard()[i][j].isEmpty()) {
-                    row = i; col = j; val = hardGameState.getCurrBoard().getSolutionBoard()[i][j];
+                    row = i;
+                    col = j;
+                    val = hardGameState.getCurrBoard().getSolutionBoard()[i][j];
                     break;
                 }
             }
@@ -109,11 +118,15 @@ public class GameStateTest {
 
     @Test
     public void testEasyIncorrectMove() {
-        int row = 0; int col = 0; int val = 0;
+        int row = 0;
+        int col = 0;
+        int val = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (easyGameState.getCurrBoard().getCurrBoard()[i][j].isEmpty()) {
-                    row = i; col = j; val = -1;
+                    row = i;
+                    col = j;
+                    val = -1;
                     break;
                 }
             }
@@ -128,11 +141,15 @@ public class GameStateTest {
 
     @Test
     public void testHardIncorrectMove() {
-        int row = 0; int col = 0; int val = 0;
+        int row = 0;
+        int col = 0;
+        int val = 0;
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (hardGameState.getCurrBoard().getCurrBoard()[i][j].isEmpty()) {
-                    row = i; col = j; val = -1;
+                    row = i;
+                    col = j;
+                    val = -1;
                     break;
                 }
             }
@@ -178,7 +195,7 @@ public class GameStateTest {
     public void testGameOver() {
         easyGameState.setCurrBoard("2F3F4F1F4F1F2F3F3F4F1F2F1F2F3F4F");
         hardGameState.setCurrBoard("6F3F5F9F4F7F2F1F8F1F7F9F2F8F3F5F4F6F2F4F8F6F1F5F3F9F7F9F2F4F8F7F1F6F3F5F8F5F" +
-                        "7F3F9F6F4F2F1F3F1F6F4F5F2F7F8F9F5F8F1F7F3F4F9F6F2F4F9F2F5F6F8F1F7F3F7F6F3F1F2F9F8F5F4F");
+                "7F3F9F6F4F2F1F3F1F6F4F5F2F7F8F9F5F8F1F7F3F4F9F6F2F4F9F2F5F6F8F1F7F3F7F6F3F1F2F9F8F5F4F");
         assertTrue(easyGameState.gameOver());
         assertTrue(hardGameState.gameOver());
     }

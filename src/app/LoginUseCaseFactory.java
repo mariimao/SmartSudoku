@@ -9,14 +9,12 @@ import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.resume_game.ResumeGameViewModel;
-import interface_adapter.start.StartViewModel;
 import use_case.login.LoginInputBoundary;
 import use_case.login.LoginInteractor;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginUserDataAccessInterface;
 import view.LoginView;
 
-import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -40,16 +38,15 @@ public class LoginUseCaseFactory {
      * @param playGameViewModel    is a new PlayGameViewModel object
      * @param pauseGameViewModel   is a new PauseGameViewModel object
      * @param resumeGameViewModel  is a new ResumeGameViewModel object
-     * @param startViewModel       is a new StartViewModel object
      * @param userDataAccessObject is a new UserDataAccessObject
      * @return LoginView object, with parameters for newly created relevant models and controllers
      */
     public static LoginView create(
             ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, MenuViewModel menuViewModel,
             PlayGameViewModel playGameViewModel, PauseGameViewModel pauseGameViewModel,
-            ResumeGameViewModel resumeGameViewModel, StartViewModel startViewModel, UserDAO userDataAccessObject) {
+            ResumeGameViewModel resumeGameViewModel, UserDAO userDataAccessObject) {
 
-        LoginController loginController = null;
+        LoginController loginController;
         try {
             loginController = createUserSignupUseCase(viewManagerModel, loginViewModel, menuViewModel, userDataAccessObject);
         } catch (IOException e) {
@@ -58,15 +55,6 @@ public class LoginUseCaseFactory {
         return new LoginView(loginController, loginViewModel, playGameViewModel, pauseGameViewModel, resumeGameViewModel, menuViewModel);
     }
 
-    /**
-     * Creates a LoginController
-     * @param viewManagerModel
-     * @param loginViewModel
-     * @param menuViewModel
-     * @param userDataAccessObject
-     * @return
-     * @throws IOException
-     */
     private static LoginController createUserSignupUseCase(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel,
                                                            MenuViewModel menuViewModel, LoginUserDataAccessInterface userDataAccessObject) throws IOException {
 

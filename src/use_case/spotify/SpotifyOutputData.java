@@ -1,6 +1,5 @@
 package use_case.spotify;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +12,7 @@ public class SpotifyOutputData {
 
     /**
      * Constructor for an SpotifyOutputData object.
+     *
      * @param searchResults is an array of the search results returned from the API
      * @param useCaseFailed is a boolean that determines if the use case was successful
      */

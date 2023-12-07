@@ -11,8 +11,9 @@ public class SignupInputData {
 
     /**
      * Constructor for the SignupInputData object.
-     * @param username the username of the user
-     * @param password the password entered by the user
+     *
+     * @param username       the username of the user
+     * @param password       the password entered by the user
      * @param repeatpassword the repeated password entered by the user
      */
     public SignupInputData(String username, String password, String repeatpassword) {

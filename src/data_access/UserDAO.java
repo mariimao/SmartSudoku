@@ -321,11 +321,4 @@ public class UserDAO implements PauseGameDataAccessInterface, StartUserDataAcces
         }
     }
 
-    /**
-     * The state of the game TODO: implement
-     *
-     * @param gameState
-     * @return
-     */
-
 }

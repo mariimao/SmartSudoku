@@ -2,10 +2,12 @@ package interface_adapter.play_game;
 
 import entity.Scores;
 import entity.board.GameState;
-import entity.user.User;
 
 import java.time.LocalDateTime;
 
+/**
+ * The state of PlayGame ViewModel
+ */
 public class PlayGameState {
     private String errorMessage = "";
     private GameState currentGame = null;
@@ -23,9 +25,11 @@ public class PlayGameState {
     private boolean newGameStarted = true;
     private boolean oldGameResumed = false;
 
-    public PlayGameState() {}
-    public void setCurrentGame(GameState gameState) { currentGame = gameState;}
-    public void setNewGameError(String e) {errorMessage = e;}
+    /**
+     * Constructor for PlayGameState
+     */
+    public PlayGameState() {
+    }
 
     public LocalDateTime getStartTime() {
         return startTime;
@@ -43,39 +47,78 @@ public class PlayGameState {
         this.timePlayed = timePlayed;
     }
 
-    public void setDifficulty(int difficulty) {this.difficulty = difficulty;}
     public GameState getCurrentGame() {
         return currentGame;
     }
-    public String getNewGameError() {return errorMessage;}
-    public int getDifficulty() {return difficulty;}
 
-    public String  getUserName() {return this.userName;}
+    //below are the getters and setters //
+    public void setCurrentGame(GameState gameState) {
+        currentGame = gameState;
+    }
 
-    public void setUserName(String username) {this.userName = username;}
+    public String getNewGameError() {
+        return errorMessage;
+    }
 
-    public void setTime(int time) {this.time = time;}
+    public void setNewGameError(String e) {
+        errorMessage = e;
+    }
 
-    public int getTime() {return this.time;}
+    public int getDifficulty() {
+        return difficulty;
+    }
 
-    public void setLives(int lives) {this.lives = lives;}
-    public void setSpacesLeft(int spacesLeft) {this.spacesLeft = spacesLeft;}
+    public void setDifficulty(int difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String username) {
+        this.userName = username;
+    }
+
+    public int getTime() {
+        return this.time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
+    }
 
     public int getSpacesLeft() {
         return spacesLeft;
     }
 
-    public void setIsCompleted(boolean isCompleted) {this.isCompleted = isCompleted;}
+    public void setSpacesLeft(int spacesLeft) {
+        this.spacesLeft = spacesLeft;
+    }
+
+    public void setIsCompleted(boolean isCompleted) {
+        this.isCompleted = isCompleted;
+    }
 
     public boolean isCompleted() {
         return isCompleted;
     }
 
-    public int getLives() {return lives;}
+    public int getLives() {
+        return lives;
+    }
 
-    public void setScores (Scores score) {scores = score;}
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 
-    public Scores getScores() {return this.scores;}
+    public Scores getScores() {
+        return this.scores;
+    }
+
+    public void setScores(Scores score) {
+        scores = score;
+    }
 
     public boolean isNewGameStarted() {
         return newGameStarted;

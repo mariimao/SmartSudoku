@@ -3,8 +3,6 @@ import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
 import interface_adapter.play_game.PlayGameController;
-import interface_adapter.play_game.PlayGameViewModel;
-import org.junit.Before;
 import org.junit.Test;
 import use_case.play_game.PlayGameDataAccessInterface;
 import use_case.play_game.PlayGameInteractor;
@@ -53,7 +51,8 @@ public class PlayGameTest {
 
     @Test
     public void testInteractorExecutes2() {
-        UserDAO userDataAccessObject;try {
+        UserDAO userDataAccessObject;
+        try {
             userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
                     "smartsudoku", "user", new CommonUserFactory());
             Map<LocalTime, Integer> scores = new HashMap<>();

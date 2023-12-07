@@ -1,4 +1,5 @@
 import app.MenuUseCaseFactory;
+import data_access.SpotifyDAO;
 import data_access.UserDAO;
 import entity.user.CommonUserFactory;
 import org.junit.Before;
@@ -11,7 +12,8 @@ import use_case.menu.MenuUserDataAccessInterface;
 import javax.swing.*;
 import java.awt.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class MenuTest {
 
@@ -22,10 +24,11 @@ public class MenuTest {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
         UserDAO userDAO = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
                 "smartsudoku", "user", new CommonUserFactory());
+        SpotifyDAO spotifyDAO = new SpotifyDAO();
         JPanel menuView = MenuUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getMenuViewModel(), useCaseTestObjects.getResumeGameViewModel(),
                 useCaseTestObjects.getLoginViewModel(), useCaseTestObjects.getNewGameViewModel(),
-                userDAO, useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getPlayGameViewModel());
+                userDAO, useCaseTestObjects.getLeaderboardViewModel(), useCaseTestObjects.getPlayGameViewModel(), spotifyDAO);
 
         assert menuView != null;
         menuComponents = menuView.getComponents();
@@ -34,25 +37,25 @@ public class MenuTest {
     @Test
     public void testLoadButtonPresent() {
         JButton button = (JButton) menuComponents[1];
-        assert(button.getText().equals("LOAD GAME"));
+        assert (button.getText().equals("LOAD GAME"));
     }
 
     @Test
     public void testNewGameButtonPresent() {
         JButton button = (JButton) menuComponents[2];
-        assert(button.getText().equals("NEW GAME"));
+        assert (button.getText().equals("NEW GAME"));
     }
 
     @Test
     public void testLeaderboardButtonPresent() {
         JButton button = (JButton) menuComponents[3];
-        assert(button.getText().equals("LEADERBOARD"));
+        assert (button.getText().equals("LEADERBOARD"));
     }
 
     @Test
     public void testBackButtonPresent() {
         JButton button = (JButton) menuComponents[4];
-        assert(button.getText().equals("BACK"));
+        assert (button.getText().equals("BACK"));
     }
 
     @Test

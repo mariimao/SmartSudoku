@@ -4,14 +4,216 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9669b0f3-dd63-468e-a5a8-6ae9ab0a0a82" name="Changes" comment="a">
+    <list default="true" id="9669b0f3-dd63-468e-a5a8-6ae9ab0a0a82" name="Changes" comment="commiting from merge">
+      <change afterPath="$PROJECT_DIR$/test/PlayMusicTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/BoardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/EndGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/EndGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/LeaderboardUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/LeaderboardUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/LoginUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/LoginUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/MenuUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/MenuUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/NewGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/NewGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/PausedGameUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/SignupUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/SignupUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/StartUseCaseFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/StartUseCaseFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SpotifyDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/SudokuDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/data_access/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/data_access/UserDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Scores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/Scores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/SpotifyPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/SpotifyPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/BoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/BoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasyBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/EasySudokuScrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/EasySudokuScrambler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/entity/board/GameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/GameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/HardBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/HardBoardFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardBoardFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/HardSudokuScrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/HardSudokuScrambler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/board/SudokuScrambler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/board/SudokuScrambler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/leaderboard/Leaderboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/leaderboard/Leaderboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/leaderboard/LeaderboardByRank.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/leaderboard/LeaderboardByRank.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/CommonUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/CommonUserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/CommonUserFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/user/UserFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entity/user/UserFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/ViewManagerModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/ViewManagerModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/ViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/ViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/end_game/EndGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/get_time/GetTimeController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/get_time/GetTimePresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/leaderboard/LeaderboardViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/login/LoginViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/login/LoginViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMovePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMovePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/make_move/MakeMoveViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/menu/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/menu/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/menu/MenuPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/menu/MenuPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/menu/MenuState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/menu/MenuState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/menu/MenuViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/menu/MenuViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/new_game/NewGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/pause_game/PauseGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGamePresenter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_game/PlayGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_music/PlayMusicController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_music/PlayMusicController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/play_music/PlayMusicPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/play_music/PlayMusicPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGamePresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/resume_game/ResumeGameViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/set_timer/SetTimerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/signup/SignupViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/signup/SignupViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/spotify/SpotifyViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/start/StartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/start/StartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/start/StartPresenter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/start/StartPresenter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/start/StartViewModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/interface_adapter/start/StartViewModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/startplayer/StartPlayerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/startplayer/StartPlayerPresenter.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/startplayer/StartPlayerState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/interface_adapter/startplayer/StartPlayerViewModel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/end_game/EndGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/get_time/GetTimeInputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/get_time/GetTimeInteractor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/get_time/GetTimeOutputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/get_time/GetTimeOutputData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/leaderboard/LeaderboardOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/login/LoginUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/login/LoginUserDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveBoardDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveBoardDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInputData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/make_move/MakeMoveOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/menu/MenuInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/menu/MenuInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/menu/MenuInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/menu/MenuInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/menu/MenuOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/menu/MenuOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/menu/MenuUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/menu/MenuUserDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/new_game/NewGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/new_game/NewGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/pause_game/PauseGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_game/PlayGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_game/PlayGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/play_music/PlayMusicOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/resume_game/ResumeGameOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerInputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerInputData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerInteractor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/set_timer/SetTimerOutputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/signup/SignupUserDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/spotify/SpotifyDataAccessInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/spotify/SpotifyDataAccessInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/spotify/SpotifyInputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/spotify/SpotifyInputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/spotify/SpotifyInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/spotify/SpotifyInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/spotify/SpotifyInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/spotify/SpotifyInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/spotify/SpotifyOutputBoundary.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/spotify/SpotifyOutputBoundary.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/spotify/SpotifyOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/spotify/SpotifyOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/start/StartInputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/start/StartInputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/start/StartInteractor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/start/StartInteractor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/start/StartOutputData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/use_case/start/StartOutputData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/startplayer/StartPlayerDataAccessInterface.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/startplayer/StartPlayerInputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/startplayer/StartPlayerInputData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/startplayer/StartPlayerInteractor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/startplayer/StartPlayerOutputBoundary.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/use_case/startplayer/StartPlayerOutputData.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/view/BoardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/BoardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/EndGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/EndGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LeaderboardView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LeaderboardView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/MenuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/MenuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/NewGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/NewGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/PausedGameView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/PausedGameView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/SignupView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/SignupView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/StartView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/StartView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/ViewManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/ViewManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/CommonUserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/CommonUserTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/EndGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/EndGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/GetTimeUseCaseTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/LeaderboardByRankTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/LeaderboardByRankTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/LeaderboardUseCaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/LeaderboardUseCaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/LoginTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/LoginTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/MakeMoveTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/MakeMoveTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/MenuTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/MenuTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/NewGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/NewGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PauseGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PauseGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/PlayGameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/PlayGameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/ResumeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/ResumeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/SignupTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/SignupTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/StartTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/StartTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/UseCaseTestObjects.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/UseCaseTestObjects.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_access/SpotifyDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/data_access/SpotifyDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_access/SpotifyPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/data_access/SpotifyPlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_access/SudokuDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/data_access/SudokuDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/data_access/UserDAOTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/data_access/UserDAOTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/entity/board/EasyBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/entity/board/EasyBoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/entity/board/EasySudokuScramblerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/entity/board/EasySudokuScramblerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/entity/board/GameStateTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/entity/board/GameStateTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/entity/board/HardBoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/entity/board/HardBoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/entity/board/HardSudokuScramblerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test/entity/board/HardSudokuScramblerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -20,7 +222,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Merging main",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
@@ -49,7 +251,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="a" />
-    <option name="LAST_COMMIT_MESSAGE" value="a" />
+    <MESSAGE value="commiting from merge" />
+    <option name="LAST_COMMIT_MESSAGE" value="commiting from merge" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,9 +1,5 @@
 package entity.board;
 
-import entity.board.Board;
-import entity.board.BoardFactory;
-import entity.board.HardBoard;
-
 /**
  * Factory for the creation of HardBoard objects.
  */

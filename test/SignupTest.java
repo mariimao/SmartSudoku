@@ -22,13 +22,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.lang.Thread.sleep;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class SignupTest {
 
-    private Component[] signupComponents;
     SignupUserDataAccessInterface userDataBase;
+    private Component[] signupComponents;
 
     @Test
     public void testSuccessCreation() {
@@ -146,7 +147,7 @@ public class SignupTest {
 
         JPanel signupView = SignupUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getLoginViewModel(), useCaseTestObjects.getSignupViewModel(),
-                useCaseTestObjects.getStartViewModel(), userDAO);
+                userDAO);
 
         assert signupView != null;
         signupComponents = signupView.getComponents();
@@ -156,14 +157,14 @@ public class SignupTest {
     public void testBackButtonPresent() {
         JPanel buttons = (JPanel) signupComponents[4];
         JButton backButton = (JButton) buttons.getComponent(0);
-        assert(backButton.getText().equals("BACK"));
+        assert (backButton.getText().equals("BACK"));
     }
 
     @Test
     public void testSignupButtonPresent() {
         JPanel buttons = (JPanel) signupComponents[4];
         JButton backButton = (JButton) buttons.getComponent(1);
-        assert(backButton.getText().equals("SIGNUP"));
+        assert (backButton.getText().equals("SIGNUP"));
     }
 
     @Test
@@ -173,7 +174,9 @@ public class SignupTest {
         SignupViewModel viewModel = new SignupViewModel();
         JPanel signupView = new SignupView(controller, viewModel);
         JFrame jf = new JFrame();
-        jf.setContentPane(signupView); jf.pack(); jf.setVisible(true);
+        jf.setContentPane(signupView);
+        jf.pack();
+        jf.setVisible(true);
         view.LabelTextPanel userPanel = (view.LabelTextPanel) signupView.getComponent(1);
         view.LabelTextPanel pwdPanel = (view.LabelTextPanel) signupView.getComponent(2);
         JTextField userField = (JTextField) userPanel.getComponent(1);

@@ -1,6 +1,5 @@
 package use_case.leaderboard;
 
-import data_access.UserDAO;
 import entity.user.User;
 
 import java.util.Map;
@@ -12,6 +11,7 @@ public interface LeaderboardDataAccessInterface {
 
     /**
      * Checks if the name appears in the accounts map.
+     *
      * @param username is the name we want to check
      * @return true if it does appear
      */
@@ -19,10 +19,11 @@ public interface LeaderboardDataAccessInterface {
 
     /**
      * Adds a new user.
+     *
      * @param user is a User type
      */
     void addUser(User user);
-  
+
     /* ----- Getters and setters ----- */
     Map<String, User> getAccounts();
 }

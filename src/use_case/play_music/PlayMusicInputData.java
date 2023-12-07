@@ -12,15 +12,11 @@ public class PlayMusicInputData {
         this.search = search;
     }
 
-    public int getChosenSongPlace(){
+    public int getChosenSongPlace() {
         return chosenSongPlace;
     }
 
     public String getSearch() {
         return search;
-    }
-
-    public String getChosenSong(){
-        return chosenSong;
     }
 }

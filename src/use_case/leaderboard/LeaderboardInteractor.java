@@ -1,24 +1,25 @@
 package use_case.leaderboard;
 
-import data_access.UserDAO;
 import entity.leaderboard.Leaderboard;
 import entity.leaderboard.LeaderboardByRank;
 import entity.user.User;
 
-import java.util.*;
+import java.util.Map;
+import java.util.SortedMap;
 
 /**
  * Class representing the interactor for the Leaderboard usecase. This class implements the LeaderboardInputBoundary.
  */
-public class LeaderboardInteractor  implements LeaderboardInputBoundary{
+public class LeaderboardInteractor implements LeaderboardInputBoundary {
 
     final LeaderboardDataAccessInterface leaderboardDataAccessInterface;
     final LeaderboardOutputBoundary leaderboardPresenter;
 
     /**
      * Constructor for a LeaderboardInteractor object.
+     *
      * @param leaderboardDataAccessInterface is a LeaderboardDataAccessInterface object
-     * @param leaderboardPresenter is a LeaderboardOutputBoundary object
+     * @param leaderboardPresenter           is a LeaderboardOutputBoundary object
      */
     public LeaderboardInteractor(LeaderboardDataAccessInterface leaderboardDataAccessInterface,
                                  LeaderboardOutputBoundary leaderboardPresenter) {
@@ -34,6 +35,7 @@ public class LeaderboardInteractor  implements LeaderboardInputBoundary{
      * It will then put this information into an output data object, and send it to the presenter to display a
      * successful view.
      * If this fails, this means that the account is invalid, and the corresponding error is passed to the presenter.
+     *
      * @param leaderboardInputData is a LeaderboardInputData object
      */
     @Override
@@ -48,7 +50,7 @@ public class LeaderboardInteractor  implements LeaderboardInputBoundary{
             leaderboardPresenter.prepareBackView();
         } else {
             if (leaderboardDataAccessInterface.existsByName(user)) {
-                if (method=="rank") { // currently only one sorting method
+                if (method == "rank") { // currently only one sorting method
                     Map<String, User> accounts = leaderboardDataAccessInterface.getAccounts();
                     leaderboard = new LeaderboardByRank(accounts);
                     output = leaderboard.getLeaderboard();

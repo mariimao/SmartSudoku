@@ -3,17 +3,30 @@ package use_case.pause_game;
 import entity.board.GameState;
 import entity.user.User;
 
+/**
+ * Class representing the output data for PauseGame.
+ */
 public class PauseGameOutputData {
-    // TODO: how will we conserve time when pausing?
     private final User user;
-    private boolean useCaseFailed;
+    private final boolean useCaseFailed;
 
+    /**
+     * Constructor method for the PauseGameOutputData object.
+     *
+     * @param user          is a User object
+     * @param useCaseFailed is a boolean object
+     */
     public PauseGameOutputData(User user, boolean useCaseFailed) {
         this.user = user;
         this.useCaseFailed = useCaseFailed;
     }
 
-    public GameState getCurrentGame() {return user.getPausedGame();}
+    /* ----- Getters and setters ----- */
+    public GameState getCurrentGame() {
+        return user.getPausedGame();
+    }
 
-    public User getUser() {return user;}
+    public User getUser() {
+        return user;
+    }
 }

@@ -13,10 +13,11 @@ public class SpotifyPresenter implements SpotifyOutputBoundary {
 
     private final NewGameViewModel newGameViewModel;
 
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor of Spotify Presenter
+     *
      * @param spotifyViewModel the view model for spotify use case, is SpotifyViewModel object
      * @param newGameViewModel the view model for newGame use case, is NewGameViewModel object
      * @param viewManagerModel the viewManagerModel for the app, changes the views
@@ -28,7 +29,8 @@ public class SpotifyPresenter implements SpotifyOutputBoundary {
     }
 
     /**
-     *  Prepares the success view if use case is successful
+     * Prepares the success view if use case is successful
+     *
      * @param spotifyOutputData is an SpotifyOutputData object
      */
     @Override
@@ -41,6 +43,7 @@ public class SpotifyPresenter implements SpotifyOutputBoundary {
 
     /**
      * Prepares fail view for when use case is unsuccessful
+     *
      * @param error is a String containing a description of the error
      */
     @Override

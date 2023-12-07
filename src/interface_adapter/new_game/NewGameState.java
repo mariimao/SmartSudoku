@@ -3,8 +3,9 @@ package interface_adapter.new_game;
 import entity.board.GameState;
 import entity.user.User;
 
-import java.util.LinkedList;
-
+/**
+ * The state of NewGame ViewModel
+ */
 public class NewGameState {
     private String errorMessage = "";
     private GameState game = null;
@@ -14,40 +15,53 @@ public class NewGameState {
     private String searchName = "";
     private String userName = "";
 
-    public NewGameState() {}
+    /**
+     * Constuctor for NewGameState
+     */
+    public NewGameState() {
+    }
+
+    public GameState getGame() {
+        return game;
+    }
+
+    // below are the getters and setters
     public void setGame(GameState gameState) {
         game = gameState;
     }
+
+    public String getNewGameError() {
+        return errorMessage;
+    }
+
     public void setNewGameError(String e) {
         errorMessage = e;
     }
+
+    public User getUser() {
+        return user;
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
+
+    public int getDifficulty() {
+        return difficulty;
+    }
+
     public void setDifficulty(int difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public String getSearchName() {
+        return searchName;
     }
 
     public void setSearchName(String searchName) {
         this.searchName = searchName;
     }
 
-    public GameState getGame() {
-        return game;
-    }
-    public String getNewGameError() {
-        return errorMessage;
-    }
-    public User getUser() {
-        return user;
-    }
-    public int getDifficulty() {
-        return difficulty;
-    }
-
-    public String getSearchName() {
-        return searchName;
-    }
     public String getUserName() {
         return userName;
     }

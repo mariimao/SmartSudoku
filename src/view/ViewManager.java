@@ -1,10 +1,11 @@
 package view;
 
+import interface_adapter.ViewManagerModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import interface_adapter.ViewManagerModel;
 
 /**
  * View manager which implements PropertyChangeListener
@@ -16,13 +17,13 @@ public class ViewManager implements PropertyChangeListener {
 
     private final JPanel views;
 
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for View Manager
      *
-     * @param views views, is JPanel object
-     * @param cardLayout, card layout, is CardLayout object
+     * @param views            views, is JPanel object
+     * @param cardLayout,      card layout, is CardLayout object
      * @param viewManagerModel the view manager model, is ViewManagerModel object
      */
 
@@ -35,6 +36,7 @@ public class ViewManager implements PropertyChangeListener {
 
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     public void propertyChange(PropertyChangeEvent evt) {

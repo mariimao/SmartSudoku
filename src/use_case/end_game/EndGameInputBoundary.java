@@ -7,6 +7,7 @@ public interface EndGameInputBoundary {
 
     /**
      * Executes the EndGame use case.
+     *
      * @param endGameInputData is an EndGameInputData object
      */
     void execute(EndGameInputData endGameInputData);

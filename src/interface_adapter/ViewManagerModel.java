@@ -5,11 +5,12 @@ import java.beans.PropertyChangeSupport;
 
 public class ViewManagerModel {
 
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private String activeViewName;
 
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
-    public String getActiveViewName() { return activeViewName; }
+    public String getActiveViewName() {
+        return activeViewName;
+    }
 
     public void setActiveViewName(String activeViewName) {
         this.activeViewName = activeViewName;

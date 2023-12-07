@@ -33,7 +33,7 @@ public class StartTest {
         JPanel labels = getStartViewLabels();
         SignupView sv = (SignupView) labels.getComponent(1);
         JLabel button = (JLabel) sv.getComponent(0);
-        assert(button.getText().equals("Sign Up"));
+        assert (button.getText().equals("Sign Up"));
     }
 
     @org.junit.Test
@@ -42,7 +42,7 @@ public class StartTest {
         JPanel labels = getStartViewLabels();
         LoginView sv = (LoginView) labels.getComponent(2);
         JLabel button = (JLabel) sv.getComponent(0);
-        assert(button.getText().equals("Login"));
+        assert (button.getText().equals("Login"));
     }
 
     @org.junit.Test
@@ -51,7 +51,7 @@ public class StartTest {
         JPanel labels = getStartViewLabels();
         StartView sv = (StartView) labels.getComponent(0);
         JLabel label = (JLabel) sv.getComponent(0);
-        assert(label.getText().equals("smart sudoku"));
+        assert (label.getText().equals("smart sudoku"));
     }
 
     @org.junit.Test
@@ -60,7 +60,7 @@ public class StartTest {
         JPanel labels = getStartViewLabels();
         StartView sv = (StartView) labels.getComponent(0);
         JLabel label = (JLabel) sv.getComponent(1);
-        assert(label.getText().equals("SUDOKU WITH A TWIST!"));
+        assert (label.getText().equals("SUDOKU WITH A TWIST!"));
     }
 
     @org.junit.Test

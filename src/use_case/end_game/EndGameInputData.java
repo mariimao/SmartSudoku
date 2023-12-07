@@ -2,9 +2,6 @@ package use_case.end_game;
 
 import entity.Scores;
 import entity.board.GameState;
-import entity.user.User;
-
-import java.util.LinkedList;
 
 public class EndGameInputData {
     final private String user;

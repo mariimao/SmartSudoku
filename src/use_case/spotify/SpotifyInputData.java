@@ -8,6 +8,7 @@ public class SpotifyInputData {
 
     /**
      * Constructor for the SpotifyInputData object.
+     *
      * @param searchKey the username of the user
      */
     public SpotifyInputData(String searchKey) {

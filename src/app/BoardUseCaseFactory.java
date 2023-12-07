@@ -1,5 +1,6 @@
 package app;
 
+import data_access.SpotifyDAO;
 import data_access.SudokuDAO;
 import data_access.UserDAO;
 import interface_adapter.ViewManagerModel;
@@ -14,20 +15,16 @@ import interface_adapter.menu.MenuViewModel;
 import interface_adapter.pause_game.PauseGameController;
 import interface_adapter.pause_game.PauseGamePresenter;
 import interface_adapter.pause_game.PauseGameViewModel;
-import interface_adapter.play_game.PlayGameController;
-import interface_adapter.play_game.PlayGamePresenter;
 import interface_adapter.play_game.PlayGameViewModel;
 import interface_adapter.start.StartViewModel;
 import use_case.end_game.EndGameDataAccessInterface;
 import use_case.end_game.EndGameInteractor;
+import use_case.make_move.MakeMoveBoardDataAccessInterface;
 import use_case.make_move.MakeMoveDataAccessInterface;
 import use_case.make_move.MakeMoveInteractor;
 import use_case.pause_game.PauseGameDataAccessInterface;
 import use_case.pause_game.PauseGameInteractor;
-import use_case.play_game.PlayGameDataAccessInterface;
-import use_case.play_game.PlayGameInputBoundary;
-import use_case.play_game.PlayGameInteractor;
-import use_case.make_move.MakeMoveBoardDataAccessInterface;
+import use_case.play_music.PlayMusicDataAccessInterface;
 import view.BoardView;
 
 /**
@@ -60,11 +57,11 @@ public class BoardUseCaseFactory {
                                    LeaderboardViewModel leaderboardViewModel, MenuViewModel menuViewModel,
                                    StartViewModel startViewModel, PlayGameViewModel playGameViewModel, MakeMoveViewModel
                                            makeMoveViewModel,
-                                   UserDAO userDataAccessObject, SudokuDAO boardDataAccessObject) {
+                                   UserDAO userDataAccessObject, SudokuDAO boardDataAccessObject,
+                                   SpotifyDAO spotifyDAO) {
 
-        PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject);
+        PauseGameController pauseGameController = createUserPauseUseCase(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel, userDataAccessObject, spotifyDAO);
         EndGameController endGameController = createUserEndGameUseCase(viewManagerModel, leaderboardViewModel, endGameViewModel, menuViewModel, userDataAccessObject);
-        PlayGameController playGameController = createUserPlayGameUseCase(viewManagerModel, playGameViewModel, userDataAccessObject);
         MakeMoveController makeMoveController = createUserMakeMoveUseCase(userDataAccessObject, makeMoveViewModel, viewManagerModel, boardDataAccessObject);
 
         return new BoardView(pauseGameController, pauseGameViewModel, endGameController, endGameViewModel, playGameViewModel,
@@ -88,7 +85,7 @@ public class BoardUseCaseFactory {
                                                               EndGameViewModel endGameViewModel,
                                                               MenuViewModel menuViewModel,
                                                               EndGameDataAccessInterface endGameDataAccessInterface) {
-        EndGamePresenter endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
+        EndGamePresenter endGamePresenter = new EndGamePresenter(endGameViewModel, viewManagerModel);
         EndGameInteractor endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);
         return new EndGameController(endGameInteractor);
     }
@@ -105,35 +102,19 @@ public class BoardUseCaseFactory {
      */
     private static PauseGameController createUserPauseUseCase(StartViewModel startViewModel, MenuViewModel menuViewModel,
                                                               PauseGameViewModel pauseGameViewModel,
-                                                              ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface) {
-        PauseGamePresenter pauseGamePresenter = new PauseGamePresenter(startViewModel, menuViewModel, pauseGameViewModel, viewManagerModel);
-        PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, pauseGamePresenter);
+                                                              ViewManagerModel viewManagerModel, PauseGameDataAccessInterface pauseGameDataAccessInterface,
+                                                              PlayMusicDataAccessInterface playMusicDataAccessInterface) {
+        PauseGamePresenter pauseGamePresenter = new PauseGamePresenter(pauseGameViewModel, viewManagerModel);
+        PauseGameInteractor pauseGameInteractor = new PauseGameInteractor(pauseGameDataAccessInterface, playMusicDataAccessInterface, pauseGamePresenter);
         return new PauseGameController(pauseGameInteractor);
-    }
-
-
-    /**
-     * Helper function for the BoardView constructor. Creates a new PlayGameController object.
-     *
-     * @param viewManagerModel            is a ViewManagerModel object
-     * @param playGameViewModel           is a PlayGameViewModel object
-     * @param playGameDataAccessInterface is a PlayGameDataAccessInterface object
-     * @return a PlayGameController object, to be passed into the constructor
-     */
-    private static PlayGameController createUserPlayGameUseCase(ViewManagerModel viewManagerModel,
-                                                                PlayGameViewModel playGameViewModel,
-                                                                PlayGameDataAccessInterface playGameDataAccessInterface) {
-        PlayGamePresenter playGamePresenter = new PlayGamePresenter(playGameViewModel, viewManagerModel);
-        PlayGameInputBoundary playGameInteractor = new PlayGameInteractor(playGameDataAccessInterface, playGamePresenter);
-        return new PlayGameController(playGameInteractor);
     }
 
     /**
      * Creates a MakeMoveController
      *
-     * @param makeMoveDataAccessInterface
-     * @param makeMoveViewModel
-     * @param viewManagerModel
+     * @param makeMoveDataAccessInterface is a MakeMoveDataAccessInterface object
+     * @param makeMoveViewModel           is a MakeMoveViewModel object
+     * @param viewManagerModel            is a ViewManagerModel object
      * @return a MakeMoveController
      */
     private static MakeMoveController createUserMakeMoveUseCase(MakeMoveDataAccessInterface makeMoveDataAccessInterface,
