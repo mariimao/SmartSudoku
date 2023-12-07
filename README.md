@@ -1,43 +1,15 @@
 # SmartSudoku
 
-## Files
+Welcome to SmartSudoku -- Sudoku with a twist!
+For those who have played sudoku, the gameplay on _your_ end is simple: play the game how you would ordinarily play a sudoku game. For those who haven't, an _n_ × _n_ grid is completed when all the rows and columns are filled with numbers from 1 to _n_ completely, with no repeats. To make this extra challenging, there are _n_ separate √n × √n squares on the grid you will have to fill as well. For example, if you have chosen Easy mode, n = 4 and √n = 2. If this sounds complicated, you can read the rules in more detail on the official website <a href=https://sudoku.com/how-to-play/sudoku-rules-for-complete-beginners/>here</a>!
 
-### app
-* Main: (temporary) Tester Code
-* StartUseCaseFactory: Begins the chain of use cases
+The twist of SmartSudoku is that every time you place a value on the board, the numbers on the board will scramble. Don't panic! You have 5 lives during the game, which is plently of room to make mistakes. Just make sure you finish within the 3-minute time limit.
 
-| method                                                    | function                             | interacts with?             |
-|-----------------------------------------------------------|--------------------------------------|-----------------------------|
-| private  StartUseCaseFactory()                            | Unimplemented                        |                             |
-| public static  StartView  create()                        | Returns new StartView  object        | start in interface adapters |
-| private static  StartController  createUserStartUseCase() | Returns a new StartController object | start in interface adapters |
+Before loading a new game, check out our song feature, which plays a song in the background while you're working on the puzzle!
 
-### data_access
-* UserDAO
+### To run this project
 
-| method | function |
-|---|---|
-| public <br>UserDAO() | Constructor<br>1. Create a MongoDB Client -> Database -> Collection (where the users are)<br>2. Gets info from Mongo and creates account object<br>3. Creates list of accounts (in document form) |
-| public boolean <br>existsbyName() | Unimplemented helper method |
-| public void <br>addUser(User user) | Helper method for UserDAO(), adds an existing user |
-| private void <br>addUser() | Helper method for UserDAO(), adds a non-existing user |
-| public boolean <br>existsByName() | Helper method for LoginInteractor() |
-| public User get() | Returns User object from the accounts by username |
-| public void <br>delete() | Deletes a single specified user |
-| public void <br>deleteAll() | Deletes all users |
-| public void <br>addScore() | Adds a score |
-| private void <br>changeScores() | Changes a score |
-| public void <br>saveProgress() | Saves a user's current game progress |
+Clone the repository, and run the ```Main``` file. This can be found in ```SmartSudoku``` → ```src``` → ```app``` → ```Main```. Make sure that you've installed the required Maven dependencies, such as MongoDB.
 
-* SpotifyDAO
-
-| method                            | function                                                                                                                                       |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| public <br>SpotifyDAO()           | Constructor<br>1. Creates the object containing client id and client secret -> helps with generating access token that is refreshed every hour |
-| public  <br>getClientId()         | Helper method for SpotifyDAO(), returns the client_id                                                                                          |
-| public <br>getClientSecret()      | Helper method for SpotifyDAO(), returns the client_secret                                                                                      |
-| public String <br>getAccessCode() | Makes an API POST request to Spotify API that retrieves an access token to access other parts of the api such as retrieving song names         |
-| public String <br>getArtistName() | Makes an API GET request that returns the name of an artist based on their spotify id                                                          |
-|public String <br>getTrackName() | Makes an API GET request that returns the name of a track based on the spotify ID of that track |
-| public int <br>getDuration() | Makes an API GET request that returns the duration of the selected track based on its spotify id (in Milliseconds) |
-| piblic ArrayList\<String\> <br>getSuggestions | Makes an API GET request that returns a list of suggested song ids based on the search input which is a string | 
+### Authors
+This project was made with love by <a href=https://github.com/mariimao>Mary</a>, <a href=https://github.com/akunnamegwa>Akunna</a>, <a href=https://github.com/CloudyKrypton>Janet</a>, <a href=https://github.com/tanjenn5>Jennifer</a>, and <a href=https://github.com/anne-huynh>Anna</a>.
