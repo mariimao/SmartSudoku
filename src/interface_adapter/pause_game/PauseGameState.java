@@ -5,12 +5,12 @@ import entity.user.User;
 
 import java.util.LinkedList;
 
-// TODO: remove entity.gamestate imports
 public class PauseGameState {
     private String errorMessage = "";
     private GameState pausedGame = null;
     private LinkedList<GameState> pastGames = null;
     private User user = null;
+    private int pausedTime = 1000;
 
 
     public PauseGameState() {}
@@ -31,4 +31,11 @@ public class PauseGameState {
     public String getPauseGameError() {return errorMessage;}
     public User getUser() {return user;}
 
+    public int getPausedTime() {
+        return pausedTime;
+    }
+
+    public void setPausedTime(int pausedTime) {
+        this.pausedTime = pausedTime;
+    }
 }

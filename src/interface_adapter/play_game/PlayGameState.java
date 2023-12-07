@@ -20,7 +20,7 @@ public class PlayGameState {
     private LocalDateTime startTime = null;
 
     private int timePlayed = 0;
-    private boolean newGameStarted = false;
+    private boolean newGameStarted = true;
     private boolean oldGameResumed = false;
 
     public PlayGameState() {}
