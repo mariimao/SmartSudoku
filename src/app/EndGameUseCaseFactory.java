@@ -68,7 +68,7 @@ public class EndGameUseCaseFactory {
     }
 
     private static EndGameController createUserEndGameUserCase(ViewManagerModel viewManagerModel, EndGameViewModel endGameViewModel, MenuViewModel menuViewModel, LeaderboardViewModel leaderboardViewModel, EndGameDataAccessInterface endGameDataAccessInterface) {
-        EndGamePresenter endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
+        EndGamePresenter endGamePresenter = new EndGamePresenter(endGameViewModel, viewManagerModel);
         EndGameInteractor endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);
         return new EndGameController(endGameInteractor);
 

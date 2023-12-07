@@ -85,7 +85,7 @@ public class BoardUseCaseFactory {
                                                               EndGameViewModel endGameViewModel,
                                                               MenuViewModel menuViewModel,
                                                               EndGameDataAccessInterface endGameDataAccessInterface) {
-        EndGamePresenter endGamePresenter = new EndGamePresenter(leaderboardViewModel, menuViewModel, endGameViewModel, viewManagerModel);
+        EndGamePresenter endGamePresenter = new EndGamePresenter(endGameViewModel, viewManagerModel);
         EndGameInteractor endGameInteractor = new EndGameInteractor(endGameDataAccessInterface, endGamePresenter);
         return new EndGameController(endGameInteractor);
     }

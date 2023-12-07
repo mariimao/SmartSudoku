@@ -5,27 +5,18 @@ import entity.Scores;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
-import entity.user.User;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
 import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
-import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.menu.MenuViewModel;
-import interface_adapter.play_game.PlayGameController;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.end_game.EndGameDataAccessInterface;
 import use_case.end_game.EndGameInteractor;
 import use_case.end_game.EndGameOutputBoundary;
 import use_case.end_game.EndGameOutputData;
-import use_case.play_game.PlayGameDataAccessInterface;
-import use_case.play_game.PlayGameInteractor;
-import use_case.play_game.PlayGameOutputBoundary;
-import use_case.play_game.PlayGameOutputData;
 import view.EndGameView;
-import view.LeaderboardView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,8 +28,6 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 public class EndGameTest {
-
-    private EndGameInteractor endGameInteractor;
     private Component[] endGameComponents;
     private EndGameView endGameView;
     @Before
@@ -49,10 +38,9 @@ public class EndGameTest {
         endGameView = EndGameUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getEndGameViewModel(), userDAO, useCaseTestObjects.getMenuViewModel(),
                 useCaseTestObjects.getLeaderboardViewModel());
-        EndGamePresenter endGamePresenter = new EndGamePresenter(useCaseTestObjects.getLeaderboardViewModel(),
-                useCaseTestObjects.getMenuViewModel(), useCaseTestObjects.getEndGameViewModel(),
+        EndGamePresenter endGamePresenter = new EndGamePresenter(useCaseTestObjects.getEndGameViewModel(),
                 useCaseTestObjects.getViewManagerModel());
-        endGameInteractor = new EndGameInteractor(userDAO, endGamePresenter);
+        EndGameInteractor endGameInteractor = new EndGameInteractor(userDAO, endGamePresenter);
         endGameComponents = endGameView.getComponents();
     }
 
@@ -115,8 +103,7 @@ public class EndGameTest {
         }
         EndGameDataAccessInterface userDataBase = userDataAccessObject;
 
-        EndGamePresenter endGamePresenter = new EndGamePresenter( new LeaderboardViewModel(), new MenuViewModel(),
-                new EndGameViewModel(), new ViewManagerModel());
+        EndGamePresenter endGamePresenter = new EndGamePresenter(new EndGameViewModel(), new ViewManagerModel());
 
         EndGameOutputData endGameOutputData = new EndGameOutputData(userDataAccessObject.get("testUser"), 10, gameState);
         endGamePresenter.prepareSuccessView(endGameOutputData);

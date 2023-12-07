@@ -1,11 +1,10 @@
 package interface_adapter.end_game;
 
-import entity.Scores;
 import entity.board.GameState;
-import entity.user.User;
 
-import java.util.LinkedList;
-
+/**
+ *
+ */
 public class EndGameState {
     private String errorMessage = "";
     private GameState endGame = null;
@@ -15,28 +14,16 @@ public class EndGameState {
     private int score = 0;
 
 
+    /**
+     * Initializes an empty end game state object
+     */
     public EndGameState() {
     }
 
+    //Below are the Getters and Setter //
     public void setFinalGame(GameState gameState) {
         endGame = gameState;
     }
-
-    public void setEndGameError(String e) {
-        errorMessage = e;
-    }
-
-    public void setUser(String username) {
-        this.username = username;
-    }
-
-    public void setTime(int time) {
-        this.time = time;
-    }
-
-    public void setScore(int score) {this.score = score;}
-
-    public void setLives(int lives) {this.lives = lives;}
 
     public GameState getEndGame() {
         return endGame;
@@ -46,17 +33,39 @@ public class EndGameState {
         return errorMessage;
     }
 
+    public void setEndGameError(String e) {
+        errorMessage = e;
+    }
+
     public int getTime() {
         return time;
+    }
+
+    public void setTime(int time) {
+        this.time = time;
     }
 
     public int getScore() {
         return score;
     }
 
-    public int getLives() {return lives;}
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+    public int getLives() {
+        return lives;
+    }
+
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
 
     public String getUser() {
         return username;
+    }
+
+    public void setUser(String username) {
+        this.username = username;
     }
 }
