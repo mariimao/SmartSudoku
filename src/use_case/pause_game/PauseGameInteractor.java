@@ -1,22 +1,24 @@
 package use_case.pause_game;
 
 import entity.SpotifyPlayer;
-import entity.user.*;
+import entity.user.User;
 import use_case.play_music.PlayMusicDataAccessInterface;
+
 import java.io.IOException;
 
 /**
  * Class representing the interactor for the PauseGame usecase. This class implements the PauseGameInputBoundary.
  */
-public class PauseGameInteractor implements PauseGameInputBoundary{
+public class PauseGameInteractor implements PauseGameInputBoundary {
     final PauseGameDataAccessInterface pauseGameDataAccessInterface;
     final PlayMusicDataAccessInterface playMusicDataAccessInterface;
     final PauseGameOutputBoundary pauseGamePresenter;
 
     /**
      * Is a constructor for a PauseGameInteractor object.
+     *
      * @param pauseGameDataAccessInterface is a PauseGameDataAccessInterface object
-     * @param pauseGamePresenter is a PauseGameOutputBoundary object
+     * @param pauseGamePresenter           is a PauseGameOutputBoundary object
      */
     public PauseGameInteractor(PauseGameDataAccessInterface pauseGameDataAccessInterface, PlayMusicDataAccessInterface playMusicDataAccessInterface, PauseGameOutputBoundary pauseGamePresenter) {
         this.pauseGameDataAccessInterface = pauseGameDataAccessInterface;
@@ -28,6 +30,7 @@ public class PauseGameInteractor implements PauseGameInputBoundary{
      * Executes the PauseGame use case.
      * This method saves the user's current game so it can be loaded later. If this succeeds, it prepares the success
      * view. If not, then it calls the fail view.
+     *
      * @param pauseGameInputData is an PauseGameInputData object
      */
     @Override

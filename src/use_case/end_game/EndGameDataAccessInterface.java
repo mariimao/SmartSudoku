@@ -11,6 +11,7 @@ public interface EndGameDataAccessInterface {
 
     /**
      * Adds a score to the user.
+     *
      * @param user  the user who achieved the score
      * @param time  the time they completed it
      * @param score the score they achieved
@@ -19,5 +20,6 @@ public interface EndGameDataAccessInterface {
 
     /* ----- Getters and setters ----- */
     User get(String username);
+
     boolean setFinalGame(User user);
 }

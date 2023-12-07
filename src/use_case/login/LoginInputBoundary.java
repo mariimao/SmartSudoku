@@ -7,6 +7,7 @@ public interface LoginInputBoundary {
 
     /**
      * Executes the Login use case.
+     *
      * @param loginInputData is a loginInputData object
      */
     void execute(LoginInputData loginInputData);

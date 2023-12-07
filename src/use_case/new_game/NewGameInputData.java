@@ -9,7 +9,8 @@ public class NewGameInputData {
 
     /**
      * Constructor for a object.
-     * @param userName is a String of the username
+     *
+     * @param userName   is a String of the username
      * @param difficulty is the int representing the difficulty (1 = easy, 2 = hard)
      */
     public NewGameInputData(String userName, int difficulty) {
@@ -18,6 +19,11 @@ public class NewGameInputData {
     }
 
     /* ----- Getters and setters ----- */
-    String getUsername() {return userName;}
-    int getDifficulty() {return difficulty;}
+    String getUsername() {
+        return userName;
+    }
+
+    int getDifficulty() {
+        return difficulty;
+    }
 }

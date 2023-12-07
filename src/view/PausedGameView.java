@@ -31,6 +31,9 @@ import java.io.IOException;
  */
 public class PausedGameView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "GAME PAUSED";
+    final JButton backToMenu;
+    final JButton logOut;
+    final JButton resumeGame;
     private final Color blue = new Color(97, 150, 242);
     private final Color darkblue = new Color(50, 78, 156);
     private final Color white = Color.white;
@@ -43,20 +46,18 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
     private final StartController startController;
     private final MenuController menuController;
     private final ResumeGameController resumeGameController;
-    final JButton backToMenu;
-    final JButton logOut;
-    final JButton resumeGame;
 
     /**
      * Constructor for PauseGame View
+     *
      * @param resumeGameController the controller for ResumeGame, is ResumeGameController object
-     * @param menuController the controller for menu use case, is MenuController object
-     * @param pauseGameViewModel the view model for pause, is PauseGameViewModel object
-     * @param resumeGameViewModel the view model for resumegame, is ResumeGameViewModel object
-     * @param menuViewModel the view model for the menu, is MenuViewModel object
-     * @param startController the controller for the start, is StartController object
-     * @param startViewModel the view model for the start, is StartViewModel object
-     * @param viewManagerModel the view manager model, is ViewManagerModel object
+     * @param menuController       the controller for menu use case, is MenuController object
+     * @param pauseGameViewModel   the view model for pause, is PauseGameViewModel object
+     * @param resumeGameViewModel  the view model for resumegame, is ResumeGameViewModel object
+     * @param menuViewModel        the view model for the menu, is MenuViewModel object
+     * @param startController      the controller for the start, is StartController object
+     * @param startViewModel       the view model for the start, is StartViewModel object
+     * @param viewManagerModel     the view manager model, is ViewManagerModel object
      */
     public PausedGameView(PauseGameViewModel pauseGameViewModel,
                           StartViewModel startViewModel,
@@ -84,7 +85,7 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         JPanel buttons = new JPanel();
@@ -145,6 +146,7 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
     @Override
@@ -154,6 +156,7 @@ public class PausedGameView extends JPanel implements ActionListener, PropertyCh
 
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

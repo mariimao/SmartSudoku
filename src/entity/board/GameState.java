@@ -9,10 +9,9 @@ import java.util.StringJoiner;
 public class GameState {
     private final int difficulty; // 1 - easy, 2 - hard
     private final SudokuScrambler sudokuScrambler;
+    private final LinkedList<GameState> past_states;
     private Board currBoard;
     private int lives;
-
-    private final LinkedList<GameState> past_states;
 
     /**
      * Initializes a new GameState object.

@@ -1,40 +1,16 @@
 package view;
 
-import app.*;
-import data_access.SpotifyDAO;
-import data_access.SudokuDAO;
-import data_access.UserDAO;
 import entity.Scores;
-import entity.board.GameState;
-import entity.user.CommonUserFactory;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.end_game.EndGameController;
-import interface_adapter.end_game.EndGamePresenter;
-import interface_adapter.end_game.EndGameState;
 import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardState;
 import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.login.LoginViewModel;
-import interface_adapter.make_move.MakeMoveController;
-import interface_adapter.make_move.MakeMovePresenter;
-import interface_adapter.make_move.MakeMoveViewModel;
 import interface_adapter.menu.MenuController;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.new_game.NewGameViewModel;
-import interface_adapter.pause_game.PauseGameController;
-import interface_adapter.pause_game.PauseGamePresenter;
-import interface_adapter.pause_game.PauseGameViewModel;
 import interface_adapter.play_game.PlayGameState;
 import interface_adapter.play_game.PlayGameViewModel;
-import interface_adapter.resume_game.ResumeGameViewModel;
-import interface_adapter.signup.SignupViewModel;
-import interface_adapter.spotify.SpotifyViewModel;
-import interface_adapter.start.StartController;
-import interface_adapter.start.StartViewModel;
-import use_case.end_game.EndGameInteractor;
-import use_case.make_move.MakeMoveInteractor;
-import use_case.pause_game.PauseGameInteractor;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -44,8 +20,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * View for the EndGameView which extends JPanel. Also implements ActionListener and PropertyChangeListener
@@ -54,31 +28,22 @@ import java.util.logging.Logger;
 public class EndGameView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "End Game";
-
+    final JButton menu;
+    final JButton leaderboard;
     private final Color blue = new Color(97, 150, 242);
     private final Color darkblue = new Color(50, 78, 156);
     private final Color white = Color.white;
     private final Color black = Color.black;
-
     private final EndGameViewModel endGameViewModel;
     private final EndGameController endGameController;
-
     private final ViewManagerModel viewManagerModel;
-
     private final MenuController menuController;
     private final MenuViewModel menuViewModel;
-
     private final LeaderboardController leaderboardController;
     private final LeaderboardViewModel leaderboardViewModel;
-
     private final PlayGameViewModel playGameViewModel;
-
-
-    final JButton menu;
-    final JButton leaderboard;
-
-    private JLabel score;
     private final PlayGameState finalState;
+    private JLabel score;
 
     /**
      * Constructor for End Game View
@@ -86,11 +51,11 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
      * @param menuViewModel         the view model for the menu usecase, is a MenuViewModel object
      * @param leaderboardController the controller for the leaderboard, is LeaderboardController object
      * @param leaderboardViewModel  the view model for the leaderboard, is LeaderboardViewModel object
-     * @param endGameViewModel the view model for end game, is EndGameViewModel object
-     * @param endGameController the controller for end game, is EndGameController object
-     * @param menuController the controller for menu, is MenuController object
-     * @param playGameViewModel the view model for play game, is PlayGameViewModel object
-     * @param viewManagerModel the view manager model, is ViewManagerModel object
+     * @param endGameViewModel      the view model for end game, is EndGameViewModel object
+     * @param endGameController     the controller for end game, is EndGameController object
+     * @param menuController        the controller for menu, is MenuController object
+     * @param playGameViewModel     the view model for play game, is PlayGameViewModel object
+     * @param viewManagerModel      the view manager model, is ViewManagerModel object
      */
 
 
@@ -124,7 +89,7 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
         score.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         score.setFont(new Font("Helvetica", Font.BOLD, 50));
         score.setForeground(darkblue);
-        score.setBorder(new CompoundBorder(score.getBorder(), new EmptyBorder(10,40,10,40)));
+        score.setBorder(new CompoundBorder(score.getBorder(), new EmptyBorder(10, 40, 10, 40)));
 
         JPanel buttons = new JPanel();
 
@@ -170,6 +135,7 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
 
@@ -180,6 +146,7 @@ public class EndGameView extends JPanel implements ActionListener, PropertyChang
 
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
 

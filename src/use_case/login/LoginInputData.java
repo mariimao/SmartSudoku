@@ -9,6 +9,7 @@ public class LoginInputData {
 
     /**
      * Constructor for the LoginInputData object.
+     *
      * @param username the username of the user
      * @param password the password entered by the user
      */

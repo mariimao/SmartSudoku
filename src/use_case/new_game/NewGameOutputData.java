@@ -8,11 +8,12 @@ import entity.user.User;
  */
 public class NewGameOutputData {
     private final User user;
-    private GameState newGame;
+    private final GameState newGame;
 
     /**
      * This is a constructor for a NewGameOutputData object.
-     * @param user is a User object
+     *
+     * @param user    is a User object
      * @param newGame is a GameState object
      */
     public NewGameOutputData(User user, GameState newGame) {
@@ -24,6 +25,7 @@ public class NewGameOutputData {
     public GameState getNewGame() {
         return newGame;
     }
+
     public User getUser() {
         return user;
     }

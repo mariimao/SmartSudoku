@@ -6,7 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
- * The Controller for Login. Creates input data to be used by the controller.
+ * The LoginViewModel class.
  */
 public class LeaderboardViewModel extends ViewModel {
     public static String TITLE_LABEL = "Leaderboard";
@@ -43,12 +43,19 @@ public class LeaderboardViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
 
-    // Below are getters and setters //
+    /**
+     *
+     * @return the current leaderboard state
+     */
     public LeaderboardState getLeaderboardState() {
         return leaderboardState;
     }
 
 
+    /**
+     * Sets the leaderboard state to an updated version
+     * @param leaderboardState
+     */
     public void setLeaderboardState(LeaderboardState leaderboardState) {
         this.leaderboardState = leaderboardState;
     }

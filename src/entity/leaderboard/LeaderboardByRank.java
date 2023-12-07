@@ -1,6 +1,5 @@
 package entity.leaderboard;
 
-import entity.user.CommonUser;
 import entity.user.User;
 
 import java.time.LocalTime;

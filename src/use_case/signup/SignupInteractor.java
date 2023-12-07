@@ -1,7 +1,8 @@
 package use_case.signup;
 
 
-import entity.user.*;
+import entity.user.User;
+import entity.user.UserFactory;
 
 import java.time.LocalTime;
 import java.util.Map;
@@ -20,13 +21,14 @@ public class SignupInteractor implements SignupInputBoundary {
 
     /**
      * Constructor for the SignupInteractor object.
+     *
      * @param signupUserDataAccessInterface is a SignupUserDataAccessInterface object
-     * @param signupPresenter is a SignupOutputBoundary object
-     * @param userFactory is the userFactory that creates the users
-     * @param scores is a mapping of the past scores
+     * @param signupPresenter               is a SignupOutputBoundary object
+     * @param userFactory                   is the userFactory that creates the users
+     * @param scores                        is a mapping of the past scores
      */
     public SignupInteractor(SignupUserDataAccessInterface signupUserDataAccessInterface,
-                           SignupOutputBoundary signupPresenter, UserFactory userFactory,
+                            SignupOutputBoundary signupPresenter, UserFactory userFactory,
                             Map<LocalTime, Integer> scores) {
         this.signupUserDataAccessInterface = signupUserDataAccessInterface;
         this.signupPresenter = signupPresenter;
@@ -39,17 +41,16 @@ public class SignupInteractor implements SignupInputBoundary {
      * This function creates a new User object and stores it into the MongoDB database if all inputs are valid.
      * If any input are invalid such as already existing username and non-matching passwords, it will send a fail view
      * to the presenter.
+     *
      * @param signupInputData is an SignupInputData object
      */
     @Override
     public void execute(SignupInputData signupInputData) {
-        if (signupUserDataAccessInterface.existsByName(signupInputData.getUsername())){
+        if (signupUserDataAccessInterface.existsByName(signupInputData.getUsername())) {
             signupPresenter.prepareFailView("Username already exists. Please pick a different username.");
-        }
-        else if (!Objects.equals(signupInputData.getPassword(), signupInputData.getRepeatPassword())) {
+        } else if (!Objects.equals(signupInputData.getPassword(), signupInputData.getRepeatPassword())) {
             signupPresenter.prepareFailView("Passwords do not match. Try again.");
-        }
-        else {
+        } else {
 
             User user = userFactory.create(signupInputData.getUsername(), signupInputData.getPassword(), scores);
             signupUserDataAccessInterface.addUser(user);

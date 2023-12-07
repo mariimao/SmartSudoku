@@ -1,19 +1,13 @@
 import app.LeaderboardUseCaseFactory;
-import app.PausedGameUseCaseFactory;
-import data_access.SpotifyDAO;
 import data_access.UserDAO;
-import data_access.UserDAOTest;
 import entity.user.CommonUserFactory;
 import entity.user.User;
 import entity.user.UserFactory;
 import interface_adapter.leaderboard.LeaderboardController;
 import interface_adapter.leaderboard.LeaderboardPresenter;
-import interface_adapter.leaderboard.LeaderboardViewModel;
-import interface_adapter.pause_game.PauseGameViewModel;
 import org.junit.Before;
 import org.junit.Test;
 import use_case.leaderboard.*;
-import use_case.spotify.*;
 import view.LeaderboardView;
 
 import javax.swing.*;
@@ -32,6 +26,7 @@ public class LeaderboardUseCaseTest {
     private LeaderboardDataAccessInterface userDataBase;
     private LeaderboardView leaderboardView;
     private Component[] leaderboardComponents;
+
     @Before
     public void init() {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
@@ -162,7 +157,9 @@ public class LeaderboardUseCaseTest {
     @Test
     public void testLeaderboardView() {
         JFrame jf = new JFrame();
-        jf.setContentPane(leaderboardView); jf.pack(); jf.setVisible(true);
+        jf.setContentPane(leaderboardView);
+        jf.pack();
+        jf.setVisible(true);
         JPanel buttons = (JPanel) leaderboardComponents[1];
         view.CustomButton resultsButton = (view.CustomButton) buttons.getComponent(0);
         view.CustomButton menuButton = (view.CustomButton) buttons.getComponent(1);
@@ -184,7 +181,7 @@ public class LeaderboardUseCaseTest {
 
                     if (window instanceof JDialog) {
 
-                        JDialog dialog = (JDialog)window;
+                        JDialog dialog = (JDialog) window;
 
                         // this ignores old dialogs
                         if (dialog.isVisible()) {

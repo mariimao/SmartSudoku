@@ -2,7 +2,6 @@ package use_case.play_game;
 
 import entity.board.GameState;
 import entity.user.User;
-import use_case.new_game.NewGameOutputData;
 
 public class PlayGameInteractor implements PlayGameInputBoundary {
     final PlayGameDataAccessInterface playGameDataAccessInterface;
@@ -18,8 +17,9 @@ public class PlayGameInteractor implements PlayGameInputBoundary {
         // if there is no User logged in, try again maybe take them back to login view
 
         User user = playGameDataAccessInterface.get(playGameInputData.getUsername());
-        if (user == null) {playGamePresenter.prepareFailView("Error: No User is Logged In");}
-        else {
+        if (user == null) {
+            playGamePresenter.prepareFailView("Error: No User is Logged In");
+        } else {
             GameState game = playGameInputData.getCurrentGame();
             int difficulty = playGameInputData.getDifficulty();
 

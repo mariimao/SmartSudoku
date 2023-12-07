@@ -34,8 +34,9 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Constructor for Start View
+     *
      * @param startController the controller for start usecase, is a StartController object
-     * @param startViewModel the view model for start usercase, is a StartViewModel object
+     * @param startViewModel  the view model for start usercase, is a StartViewModel object
      */
     public StartView(StartController startController, StartViewModel startViewModel) {
         // initializes start
@@ -50,24 +51,24 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 90));
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         JLabel welcome = new JLabel(StartViewModel.WELCOME_LABEL);
         welcome.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         welcome.setFont(new Font("Verdana", Font.ITALIC, 20));
         welcome.setForeground(darkblue);
-        welcome.setBorder(new CompoundBorder(welcome.getBorder(), new EmptyBorder(10,40,10,40)));
+        welcome.setBorder(new CompoundBorder(welcome.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(welcome);
 
         JPanel buttons = new JPanel();
         buttons.setBackground(darkblue);
 
-        signup = new CustomButton(startViewModel.SIGNUP_BUTTON_LABEL, blue, white);
-        login = new CustomButton(startViewModel.LOGIN_BUTTON_LABEL, white, blue);
+        signup = new CustomButton(StartViewModel.SIGNUP_BUTTON_LABEL, blue, white);
+        login = new CustomButton(StartViewModel.LOGIN_BUTTON_LABEL, white, blue);
         buttons.add(signup);
         buttons.add(login);
-        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10, 40, 10, 40)));
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -99,6 +100,7 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records the action performed
+     *
      * @param e the action even that occurs
      */
     @Override
@@ -108,6 +110,7 @@ public class StartView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

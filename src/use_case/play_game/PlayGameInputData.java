@@ -1,7 +1,6 @@
 package use_case.play_game;
 
 import entity.board.GameState;
-import entity.user.User;
 
 public class PlayGameInputData {
     final private String userName;
@@ -15,11 +14,15 @@ public class PlayGameInputData {
     }
 
     String getUsername() {
-        if (userName == null) {return null;}
-        else {return userName;}
+        return userName;
     }
-    GameState getCurrentGame() {return currentGame;}
+
+    GameState getCurrentGame() {
+        return currentGame;
+    }
     // TODO: figure out how song timer will fit in to this use case
 
-    int getDifficulty() {return difficulty;}
+    int getDifficulty() {
+        return difficulty;
+    }
 }

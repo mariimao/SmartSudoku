@@ -5,19 +5,20 @@ package use_case.leaderboard;
  */
 public class LeaderboardInputData {
 
-    final private String user;
-    final private String sortingMethod;
     final boolean userView;
     final boolean backView;
+    final private String user;
+    final private String sortingMethod;
 
     /**
      * Constructor for the LeaderboardInputData object.
-     * @param user is a String representing the username
+     *
+     * @param user          is a String representing the username
      * @param sortingMethod is a String representing the sorting method
-     * @param userView is a boolean, representing whether the userView should be present
-     * @param backView is a boolean, representing whether the backView should be present
+     * @param userView      is a boolean, representing whether the userView should be present
+     * @param backView      is a boolean, representing whether the backView should be present
      */
-    public LeaderboardInputData(String user, String sortingMethod, boolean userView, boolean backView){
+    public LeaderboardInputData(String user, String sortingMethod, boolean userView, boolean backView) {
         this.user = user;
         this.sortingMethod = sortingMethod;
         this.userView = userView;

@@ -11,6 +11,7 @@ public interface MakeMoveInputBoundary {
 
     /**
      * Executes the MakeMove use case.
+     *
      * @param makeMoveInputData is an MakeMoveInputData object
      * @return a GameState object
      */

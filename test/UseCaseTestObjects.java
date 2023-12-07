@@ -11,7 +11,6 @@ import interface_adapter.resume_game.ResumeGameViewModel;
 import interface_adapter.signup.SignupViewModel;
 import interface_adapter.spotify.SpotifyViewModel;
 import interface_adapter.start.StartViewModel;
-import view.MenuView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -21,17 +20,17 @@ public class UseCaseTestObjects {
 
     private final StartViewModel startViewModel;
     private final LoginViewModel loginViewModel;
-    private EndGameViewModel endGameViewModel;
-    private ViewManagerModel viewManagerModel;
-    private SignupViewModel signupViewModel;
-    private PauseGameViewModel pauseGameViewModel;
-    private ResumeGameViewModel resumeGameViewModel;
-    private MenuViewModel menuViewModel;
-    private NewGameViewModel newGameViewModel;
-    private LeaderboardViewModel leaderboardViewModel;
-    private PlayGameViewModel playGameViewModel;
-    private SpotifyViewModel spotifyViewModel;
-    private MakeMoveViewModel makeMoveViewModel;
+    private final EndGameViewModel endGameViewModel;
+    private final ViewManagerModel viewManagerModel;
+    private final SignupViewModel signupViewModel;
+    private final PauseGameViewModel pauseGameViewModel;
+    private final ResumeGameViewModel resumeGameViewModel;
+    private final MenuViewModel menuViewModel;
+    private final NewGameViewModel newGameViewModel;
+    private final LeaderboardViewModel leaderboardViewModel;
+    private final PlayGameViewModel playGameViewModel;
+    private final SpotifyViewModel spotifyViewModel;
+    private final MakeMoveViewModel makeMoveViewModel;
 
     public UseCaseTestObjects() {
         JFrame application = new JFrame("SudokuScramble");

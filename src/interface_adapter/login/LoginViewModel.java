@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
- * The Login
+ * The Login View Model class. Extends ViewModel Class.
  */
 public class LoginViewModel extends ViewModel {
     public static final String TITLE_LABEL = "Login";
@@ -17,23 +17,41 @@ public class LoginViewModel extends ViewModel {
 
     private LoginState loginState = new LoginState();
 
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+
+    /**
+     * Constructor for LoginViewModel
+     */
     public LoginViewModel() {
         super("login view");
     }
 
+    /**
+     * Sete the loginState to update view model
+     * @param loginState the state of login
+     */
     public void setLoginState(LoginState loginState) {
         this.loginState = loginState;
     }
 
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
+    /**
+     * Fires property change to view model
+     */
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.loginState);
     }
 
+    /**
+     * Adds propertychangelistener for support
+     * @param listener the listener that listens for property changes
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
 
+    /**
+     *
+     * @return the start state of the view model
+     */
     public LoginState getLoginState() { return this.loginState; }
 }

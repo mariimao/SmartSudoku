@@ -4,7 +4,6 @@ import entity.board.Board;
 import entity.board.GameState;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * Class representing the interactor for the MakeMove usecase. This class implements the MakeMoveInputBoundary.
@@ -16,8 +15,9 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
 
     /**
      * Constructor for the MakeMove interactor.
-     * @param makeMoveDataAccessInterface is a MakeMoveDataAccessInterface object
-     * @param makeMovePresenter is a MakeMoveOutputBoundary object
+     *
+     * @param makeMoveDataAccessInterface      is a MakeMoveDataAccessInterface object
+     * @param makeMovePresenter                is a MakeMoveOutputBoundary object
      * @param makeMoveBoardDataAccessInterface is a MakeMoveBoardDataAccessInterface object
      */
     public MakeMoveInteractor(MakeMoveDataAccessInterface makeMoveDataAccessInterface, MakeMoveOutputBoundary makeMovePresenter, MakeMoveBoardDataAccessInterface makeMoveBoardDataAccessInterface) {
@@ -29,6 +29,7 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
     /**
      * Executes the MakeMode use case.
      * If the move is correct, the board will scramble, then update. If the move is incorrect, the user will lose a life.
+     *
      * @param makeMoveInputData is an MakeMoveInputData object
      * @return a GameState object representing the updated state of the game.
      */
@@ -38,8 +39,9 @@ public class MakeMoveInteractor implements MakeMoveInputBoundary {
         int x = makeMoveInputData.getMoveCol();
         int y = makeMoveInputData.getMoveRow();
         int val = makeMoveInputData.getMoveValue();
-        if (gameBeingPlayed == null) {makeMovePresenter.prepareFailView("Error, Make Move Clicked While No Game Is Being Played");}
-        else{
+        if (gameBeingPlayed == null) {
+            makeMovePresenter.prepareFailView("Error, Make Move Clicked While No Game Is Being Played");
+        } else {
             if (gameBeingPlayed.correctMove(x, y, val)) {
                 gameBeingPlayed.setCurrBoard(gameBeingPlayed.makeMove(x, y, val));
                 if (makeMoveInputData.getGameBeingPlayed().getDifficulty() == 1) {

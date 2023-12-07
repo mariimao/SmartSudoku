@@ -10,6 +10,7 @@ public class MakeMoveOutputData {
 
     /**
      * Is a constructor for a MakeMoveOutputData object.
+     *
      * @param gameBeingPlayed is the state of the game being played
      */
     public MakeMoveOutputData(GameState gameBeingPlayed) {
@@ -17,5 +18,7 @@ public class MakeMoveOutputData {
     }
 
     /* ----- Getters and setters ----- */
-    public GameState getGameBeingPlayed() {return gameBeingPlayed;}
+    public GameState getGameBeingPlayed() {
+        return gameBeingPlayed;
+    }
 }

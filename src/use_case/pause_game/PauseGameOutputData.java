@@ -8,11 +8,12 @@ import entity.user.User;
  */
 public class PauseGameOutputData {
     private final User user;
-    private boolean useCaseFailed;
+    private final boolean useCaseFailed;
 
     /**
      * Constructor method for the PauseGameOutputData object.
-     * @param user is a User object
+     *
+     * @param user          is a User object
      * @param useCaseFailed is a boolean object
      */
     public PauseGameOutputData(User user, boolean useCaseFailed) {
@@ -21,7 +22,11 @@ public class PauseGameOutputData {
     }
 
     /* ----- Getters and setters ----- */
-    public GameState getCurrentGame() {return user.getPausedGame();}
+    public GameState getCurrentGame() {
+        return user.getPausedGame();
+    }
 
-    public User getUser() {return user;}
+    public User getUser() {
+        return user;
+    }
 }

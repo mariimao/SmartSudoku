@@ -13,8 +13,9 @@ public class SpotifyInteractor implements SpotifyInputBoundary {
 
     /**
      * Constructor for the SpotifyInteractor object.
+     *
      * @param spotifyDataAccessInterface is a SpotifyUserDataAccessInterface object
-     * @param spotifyPresenter is a SpotifyOutputBoundary object
+     * @param spotifyPresenter           is a SpotifyOutputBoundary object
      */
     public SpotifyInteractor(SpotifyDataAccessInterface spotifyDataAccessInterface,
                              SpotifyOutputBoundary spotifyPresenter) {
@@ -26,6 +27,7 @@ public class SpotifyInteractor implements SpotifyInputBoundary {
      * Executes the Spotify UseCase.
      * This function will execute and return search results for the user to choose and select from.
      * If the function does not go through properly, the function will prepare the fail view.
+     *
      * @param spotifyInputData is an SpotifyInputData object
      */
     @Override

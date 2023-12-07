@@ -3,13 +3,8 @@ import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
 import interface_adapter.make_move.MakeMoveController;
-import interface_adapter.play_game.PlayGameController;
 import org.junit.Test;
 import use_case.make_move.*;
-import use_case.play_game.PlayGameDataAccessInterface;
-import use_case.play_game.PlayGameInteractor;
-import use_case.play_game.PlayGameOutputBoundary;
-import use_case.play_game.PlayGameOutputData;
 
 import java.io.IOException;
 import java.time.LocalTime;
@@ -17,7 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class MakeMoveTest {
 
@@ -53,13 +49,15 @@ public class MakeMoveTest {
         MakeMoveController makeMoveController = new MakeMoveController(interactor);
         HashMap<Integer, Boolean>[][] currBoard = gameState.getCurrBoard().getCurrBoard();
         ArrayList<Integer> moveInfo = generateMove(currBoard, gameState.getCurrBoard().getSolutionBoard());
-        int val = moveInfo.get(0); int row = moveInfo.get(1); int col = moveInfo.get(2);
+        int val = moveInfo.get(0);
+        int row = moveInfo.get(1);
+        int col = moveInfo.get(2);
         makeMoveController.execute(val, row, col, gameState);
     }
 
     private ArrayList<Integer> generateMove(HashMap<Integer, Boolean>[][] currBoard, int[][] solutionBoard) {
         ArrayList<Integer> moveInfo = new ArrayList<>();
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (currBoard[i][j].isEmpty()) {
                     int value = solutionBoard[i][j];
@@ -85,7 +83,9 @@ public class MakeMoveTest {
         GameState gameState = new GameState(1);
         ArrayList<Integer> moveData = generateMove(gameState.getCurrBoard().getCurrBoard(),
                 gameState.getCurrBoard().getSolutionBoard());
-        int row = moveData.get(0); int col = moveData.get(1); int val = moveData.get(2);
+        int row = moveData.get(0);
+        int col = moveData.get(1);
+        int val = moveData.get(2);
         MakeMoveInputData makeMoveInputData = new MakeMoveInputData(row, col, val, gameState);
         makeMoveInputData.loseLife();
         assertEquals(4, makeMoveInputData.getGameBeingPlayed().getLives());

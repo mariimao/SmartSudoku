@@ -26,7 +26,7 @@ import java.io.IOException;
 /**
  * View for the MenuView which extends JPanel. Also implements ActionListener and PropertyChangeListener
  */
-public class MenuView  extends JPanel implements ActionListener, PropertyChangeListener{
+public class MenuView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "menu view";
 
@@ -56,15 +56,16 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Constructor for Menu View
-     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
-     * @param menuViewModel the view model for the menu usecase, is a MenuViewModel object
-     * @param resumeGameViewModel the view model for the resume usecase, is a ResumeGameViewModel object
+     *
+     * @param loginViewModel        the view model for login usecase, is a LoginViewModel object
+     * @param menuViewModel         the view model for the menu usecase, is a MenuViewModel object
+     * @param resumeGameViewModel   the view model for the resume usecase, is a ResumeGameViewModel object
      * @param leaderboardController the controller for the leaderboard, is LeaderboardController object
-     * @param leaderboardViewModel the view model for the leaderboard, is LeaderboardViewModel object
-     * @param menuController the controller for the menu, is MenuController object
-     * @param newGameController the controller for new game, is NewGameController object
-     * @param newGameViewModel the view model for new game, is NewGameViewModel object
-     * @param resumeGameController the controller for resuming the game, is ResumeGameController object
+     * @param leaderboardViewModel  the view model for the leaderboard, is LeaderboardViewModel object
+     * @param menuController        the controller for the menu, is MenuController object
+     * @param newGameController     the controller for new game, is NewGameController object
+     * @param newGameViewModel      the view model for new game, is NewGameViewModel object
+     * @param resumeGameController  the controller for resuming the game, is ResumeGameController object
      */
     public MenuView(MenuController menuController, MenuViewModel menuViewModel, ResumeGameController resumeGameController,
                     ResumeGameViewModel resumeGameViewModel, NewGameViewModel newGameViewModel, NewGameController newGameController,
@@ -87,22 +88,22 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
-        loadgame = new CustomButton(menuViewModel.LOAD_BUTTON_LABEL, darkblue, white);
+        loadgame = new CustomButton(MenuViewModel.LOAD_BUTTON_LABEL, darkblue, white);
         loadgame.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(loadgame);
 
-        newgame = new CustomButton(menuViewModel.NEW_BUTTON_LABEL, darkblue, white);
+        newgame = new CustomButton(MenuViewModel.NEW_BUTTON_LABEL, darkblue, white);
         newgame.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(newgame);
 
-        leaderboard = new CustomButton(menuViewModel.LEADERBOARD_BUTTON_LABEL, darkblue, white);
+        leaderboard = new CustomButton(MenuViewModel.LEADERBOARD_BUTTON_LABEL, darkblue, white);
         leaderboard.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(leaderboard);
 
-        cancel = new CustomButton(menuViewModel.CANCEL_BUTTON_LABEL, darkblue, white);
+        cancel = new CustomButton(MenuViewModel.CANCEL_BUTTON_LABEL, darkblue, white);
         cancel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         this.add(cancel);
 
@@ -159,7 +160,7 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
                         if (e.getSource().equals(cancel)) {
 
                             setVisible(false);
-                            cancel.setVerifyInputWhenFocusTarget( false );
+                            cancel.setVerifyInputWhenFocusTarget(false);
                         }
                     }
                 }
@@ -171,6 +172,7 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
     @Override
@@ -180,6 +182,7 @@ public class MenuView  extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

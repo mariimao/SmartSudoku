@@ -13,8 +13,9 @@ public class EndGameOutputData {
 
     /**
      * Constructor for an EndGameOutputData object.
-     * @param user is a User object
-     * @param score is an int representing the current score
+     *
+     * @param user      is a User object
+     * @param score     is an int representing the current score
      * @param finalGame is a GameState object of the final game state
      */
     public EndGameOutputData(User user, int score, GameState finalGame) {
@@ -25,7 +26,15 @@ public class EndGameOutputData {
     }
 
     /* ----- Getters and setters ----- */
-    public int getScore() {return score;}
-    public User getUser() {return user;}
-    public GameState getFinalGame() {return finalGame;}
+    public int getScore() {
+        return score;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public GameState getFinalGame() {
+        return finalGame;
+    }
 }

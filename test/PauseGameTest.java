@@ -110,7 +110,9 @@ public class PauseGameTest {
     @Test
     public void testPauseGameView() {
         JFrame jf = new JFrame();
-        jf.setContentPane(pausedGameView); jf.pack(); jf.setVisible(true);
+        jf.setContentPane(pausedGameView);
+        jf.pack();
+        jf.setVisible(true);
         JPanel buttons = (JPanel) pauseGameComponents[1];
         view.CustomButton menuButton = (view.CustomButton) buttons.getComponent(0);
         view.CustomButton logoutButton = (view.CustomButton) buttons.getComponent(1);
@@ -121,6 +123,7 @@ public class PauseGameTest {
         createCloseTimer().start();
         resumeButton.doClick();
     }
+
     private Timer createCloseTimer() {
         ActionListener close = new ActionListener() {
 
@@ -132,7 +135,7 @@ public class PauseGameTest {
 
                     if (window instanceof JDialog) {
 
-                        JDialog dialog = (JDialog)window;
+                        JDialog dialog = (JDialog) window;
 
                         // this ignores old dialogs
                         if (dialog.isVisible()) {

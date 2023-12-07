@@ -8,14 +8,15 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class HardBoardTest {
+    HashMap<Integer, Boolean>[][] currBoard;
     private HardBoard hardBoard;
     private HardBoard hardBoard2;
     private int[][] solutionBoard2;
     private int[][] solutionBoard;
-    HashMap<Integer, Boolean>[][] currBoard;
 
     @Before
     public void init() {
@@ -42,7 +43,7 @@ public class HardBoardTest {
                         value = entry.getKey().toString();
                     }
                     String b = "(" + value + ")";
-                    if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i/3 + b + j/3))
+                    if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i / 3 + b + j / 3))
                         isValidBoard = false;
                 }
             }
@@ -57,7 +58,7 @@ public class HardBoardTest {
         for (int i = 0; i < 9; ++i) {
             for (int j = 0; j < 9; ++j) {
                 String b = "(" + solutionBoard[i][j] + ")";
-                if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i/3 + b + j/3))
+                if (!seen.add(b + i) || !seen.add(j + b) || !seen.add(i / 3 + b + j / 3))
                     isValidTestBoard = false;
             }
         }
@@ -68,10 +69,11 @@ public class HardBoardTest {
     public void testGenerateBlankBoard() {
         boolean allBlankValues = true;
         HashMap<Integer, Boolean>[][] blankBoard = hardBoard.generateBlankBoard();
-        for (int i = 0; i < 4; i ++) {
+        for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (!blankBoard[i][j].isEmpty()) {
                     allBlankValues = false;
+                    break;
                 }
             }
         }
@@ -81,7 +83,7 @@ public class HardBoardTest {
     @Test
     public void testCorrectMove() {
         boolean correctMoveIsValid = true;
-        for (int i = 0; i < 9; i ++) {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (!hardBoard.correctMove(i, j, solutionBoard[i][j])) {
                     correctMoveIsValid = false;
@@ -99,7 +101,7 @@ public class HardBoardTest {
         boolean isValidSpacesLeft = true;
         int increment = 81;
         for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 9; j ++) {
+            for (int j = 0; j < 9; j++) {
                 increment -= 1;
                 setBoard[i][j] = new HashMap<>();
                 setBoard[i][j].put(testerBoard.getSolutionBoard()[i][j], false);
@@ -115,7 +117,7 @@ public class HardBoardTest {
     @Test
     public void testMakeMove() {
         boolean allMovesAreValid = true;
-        for (int i = 0; i < 9; i ++) {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 if (currBoard[i][j].isEmpty()) {
                     hardBoard.makeMove(i, j, solutionBoard[i][j]);
@@ -138,7 +140,7 @@ public class HardBoardTest {
         boolean noSpacesLeft = true;
 
         HashMap<Integer, Boolean>[][] fullBoard = new HashMap[9][9];
-        for (int i = 0; i < 9; i ++) {
+        for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) {
                 HashMap<Integer, Boolean> value = new HashMap<>();
                 value.put(solutionBoard[i][j], true);

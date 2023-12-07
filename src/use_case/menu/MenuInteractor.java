@@ -9,11 +9,12 @@ public class MenuInteractor implements MenuInputBoundary {
 
     /**
      * Constructor for the MenuInteractor object.
+     *
      * @param menuUserDataAccessInterface is a MenuUserDataAccessInterface object
-     * @param menuPresenter is a MenuOutputBoundary object
+     * @param menuPresenter               is a MenuOutputBoundary object
      */
     public MenuInteractor(MenuUserDataAccessInterface menuUserDataAccessInterface,
-                           MenuOutputBoundary menuPresenter) {
+                          MenuOutputBoundary menuPresenter) {
         this.menuUserDataAccessInterface = menuUserDataAccessInterface;
         this.menuPresenter = menuPresenter;
     }

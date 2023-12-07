@@ -13,7 +13,8 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
@@ -25,13 +26,11 @@ import java.util.ArrayList;
  * View for the BoardView which extends JPanel. Also implements ActionListener and PropertyChangeListener
  */
 public class BoardView extends JPanel implements ActionListener, PropertyChangeListener {
-    private final Color blue = new Color(97, 150, 242);
-    public final String viewName = "PLAY GAME";
     private static int size = 4;
+    public final String viewName = "PLAY GAME";
+    private final Color blue = new Color(97, 150, 242);
     private final PlayGameState currentState;
     private final JLabel lives;
-    private JPanel board = new JPanel();
-    private JTextField[][] box;
     private final JButton endGame;
     private final JButton pauseGame;
     private final JButton makeMove;
@@ -39,20 +38,23 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
     private final JButton rules;
     private final JPanel buttons;
     private final JLabel timerLabel;
+    private final JPanel board = new JPanel();
+    private JTextField[][] box;
 
     /**
      * Constructor for Board View
+     *
      * @param pauseGameController the controller for pause game, is PauseGameController object
-     * @param pauseGameViewModel the view model for pause game, is PauseGameViewModel object
-     * @param playGameViewModel the view model for play game, is PlayGameViewModel object
-     * @param makeMoveController the controller for make move use case, is MakeMoveController object
-     * @param endGameController the controller for end game, is EndGameController object
-     * @param endGameViewModel the view model for end game, is EndGameViewModel object
+     * @param pauseGameViewModel  the view model for pause game, is PauseGameViewModel object
+     * @param playGameViewModel   the view model for play game, is PlayGameViewModel object
+     * @param makeMoveController  the controller for make move use case, is MakeMoveController object
+     * @param endGameController   the controller for end game, is EndGameController object
+     * @param endGameViewModel    the view model for end game, is EndGameViewModel object
      */
 
     public BoardView(PauseGameController pauseGameController, PauseGameViewModel pauseGameViewModel,
-                                 EndGameController endGameController, EndGameViewModel endGameViewModel,
-                                 PlayGameViewModel playGameViewModel, MakeMoveController makeMoveController) {
+                     EndGameController endGameController, EndGameViewModel endGameViewModel,
+                     PlayGameViewModel playGameViewModel, MakeMoveController makeMoveController) {
 
         playGameViewModel.addPropertyChangeListener(this);
         this.currentState = playGameViewModel.getState();
@@ -63,13 +65,16 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         title.setFont(new Font("Helvetica", Font.BOLD, 30));
         Color darkblue = new Color(50, 78, 156);
         title.setForeground(darkblue);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         // Setting the Size of The Board Based on The State's Difficulty
         GameState newGameState = new GameState(currentState.getDifficulty());
-        if (currentState.getDifficulty() == 1) {size = 4;}
-        else {size = 9;}
+        if (currentState.getDifficulty() == 1) {
+            size = 4;
+        } else {
+            size = 9;
+        }
 
         // Setting Up The Layout of The Board
         box = new JTextField[size][size];
@@ -103,15 +108,15 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                 Duration elapsedTime = Duration.between((currentState.getStartTime()), currentTime);
                 long remainingTimeInSeconds = countdownTime - elapsedTime.getSeconds();
 
-               if (remainingTimeInSeconds >= 0) {
-                   int hours = (int) (remainingTimeInSeconds / 3600);
-                   int minutes = (int) ((remainingTimeInSeconds % 3600) / 60);
-                   int seconds = (int) (remainingTimeInSeconds % 60);
+                if (remainingTimeInSeconds >= 0) {
+                    int hours = (int) (remainingTimeInSeconds / 3600);
+                    int minutes = (int) ((remainingTimeInSeconds % 3600) / 60);
+                    int seconds = (int) (remainingTimeInSeconds % 60);
 
-                   timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
-               } else {
-                   timerLabel.setText("00:00:00");
-               }
+                    timerLabel.setText(String.format("%02d:%02d:%02d", hours, minutes, seconds));
+                } else {
+                    timerLabel.setText("00:00:00");
+                }
             }
         });
         timer.setRepeats(true);
@@ -163,12 +168,12 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
         startPlaying.setForeground(darkblue);
         startPlaying.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         JPanel startPlayingPanel = new JPanel();
-        startPlayingPanel.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        startPlayingPanel.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         startPlayingPanel.add(startPlaying);
 
         this.add(startPlayingPanel);
 
-        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(buttons);
         buttons.setVisible(false);
         timerLabel.setVisible(false);
@@ -270,7 +275,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                         x = col;
                                         y = row;
                                         box[row][col].setEditable(false);
-                                        inputCount ++;
+                                        inputCount++;
 
                                     }
                                     // Disable Editting Temporarily
@@ -282,8 +287,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                             if (!(inputCount == 1)) {
                                 JOptionPane.showMessageDialog(board, "Please Enter Exactly One Value Per Round");
                                 boardReset(buttons, timerLabel);
-                            }
-                            else {
+                            } else {
 
                                 try {
                                     // Checks to see if the user inputted an integer
@@ -319,7 +323,6 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
                                         lives.setText("LIVES: ".concat(String.valueOf(currentState.getCurrentGame().getLives())));
 
                                         boardReset(buttons, timerLabel);
-
 
 
                                         if (playGameViewModel.getState().getCurrentGame().getCurrBoard().noSpacesLeft()) {
@@ -364,6 +367,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
 
@@ -373,40 +377,44 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Resets the board
+     *
      * @param buttons buttons on the screen
-     * @param timer time label
+     * @param timer   time label
      */
 
     public void boardReset(JPanel buttons, JLabel timer) {
-            // Set the layout manager to BoxLayout with Y_AXIS
-            BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
-            GameState newGameState = currentState.getCurrentGame();
-            if (currentState.getDifficulty() == 1) {size = 4;}
-            else {size = 9;}
-            board.removeAll();
-            box = new JTextField[size][size];
-            board.setLayout(new GridLayout(size, size));
+        // Set the layout manager to BoxLayout with Y_AXIS
+        BoardView.this.setLayout(new BoxLayout(BoardView.this, BoxLayout.Y_AXIS));
+        GameState newGameState = currentState.getCurrentGame();
+        if (currentState.getDifficulty() == 1) {
+            size = 4;
+        } else {
+            size = 9;
+        }
+        board.removeAll();
+        box = new JTextField[size][size];
+        board.setLayout(new GridLayout(size, size));
 
-            ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
-            int i = 0;
-            int cellsize = 5;
-            for (int row = 0; row < size; row++) {
-                for (int col = 0; col < size; col++) {
-                    JTextField number = new JTextField();
-                    number.setSize(new Dimension(cellsize, cellsize));
-                    number.setHorizontalAlignment(JTextField.CENTER);
-                    number.setFont(new Font("Arial", Font.PLAIN, 20));
+        ArrayList<Integer> values = newGameState.getCurrBoard().toArray();
+        int i = 0;
+        int cellsize = 5;
+        for (int row = 0; row < size; row++) {
+            for (int col = 0; col < size; col++) {
+                JTextField number = new JTextField();
+                number.setSize(new Dimension(cellsize, cellsize));
+                number.setHorizontalAlignment(JTextField.CENTER);
+                number.setFont(new Font("Arial", Font.PLAIN, 20));
 
-                    if (values.get(i) != 0) {
-                        number.setText(String.valueOf(values.get(i)));
-                        number.setEditable(false);
-                    }
-
-                    box[row][col] = number;
-                    board.add(number);
-                    i++;
+                if (values.get(i) != 0) {
+                    number.setText(String.valueOf(values.get(i)));
+                    number.setEditable(false);
                 }
+
+                box[row][col] = number;
+                board.add(number);
+                i++;
             }
+        }
         board.revalidate();
         board.repaint();
         startPlaying.setVisible(false);
@@ -418,6 +426,7 @@ public class BoardView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records and notifies of any property change
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

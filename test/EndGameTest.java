@@ -30,6 +30,7 @@ import static org.junit.Assert.fail;
 public class EndGameTest {
     private Component[] endGameComponents;
     private EndGameView endGameView;
+
     @Before
     public void init() {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
@@ -79,7 +80,9 @@ public class EndGameTest {
     @Test
     public void testEndGameView() {
         JFrame jf = new JFrame();
-        jf.setContentPane(endGameView); jf.pack(); jf.setVisible(true);
+        jf.setContentPane(endGameView);
+        jf.pack();
+        jf.setVisible(true);
         JPanel buttons = (JPanel) endGameComponents[1];
         view.CustomButton menuButton = (view.CustomButton) buttons.getComponent(0);
         view.CustomButton leaderBoardButton = (view.CustomButton) buttons.getComponent(1);
@@ -131,9 +134,9 @@ public class EndGameTest {
         EndGameState endGameState = new EndGameState();
         endGameState.setTime(5);
         endGameViewModel.setState(endGameState);
-        assert( endGameState.getTime()==5);
+        assert (endGameState.getTime() == 5);
 
-        assert(endGameState.equals(endGameViewModel.getState()));
+        assert (endGameState.equals(endGameViewModel.getState()));
 
         endGameState.setFinalGame(gameState);
         endGameViewModel.setState(endGameState);

@@ -6,7 +6,7 @@ import entity.user.User;
 public class ResumeGameOutputData {
     // TODO: how will we conserve time when pausing?
     private final User user;
-    private boolean useCaseFailed;
+    private final boolean useCaseFailed;
 
     public ResumeGameOutputData(User user, boolean useCaseFailed) {
 
@@ -14,5 +14,7 @@ public class ResumeGameOutputData {
         this.useCaseFailed = useCaseFailed;
     }
 
-    public GameState getPausedGame() {return user.getPausedGame();}
+    public GameState getPausedGame() {
+        return user.getPausedGame();
+    }
 }

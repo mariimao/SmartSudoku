@@ -36,7 +36,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     private final MenuViewModel menuViewModel;
 
     // text input
-    private final JTextField usernameInputField =  new JTextField(20);
+    private final JTextField usernameInputField = new JTextField(20);
     private final JPasswordField passwordInputField = new JPasswordField(20);
 
     // buttons on menu
@@ -50,11 +50,12 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Constructor for Login View
-     * @param loginController the controller for login usecase, is a LoginController object
-     * @param loginViewModel the view model for login usecase, is a LoginViewModel object
-     * @param menuViewModel the view model for the menu usecase, is a MenuViewModel object
-     * @param pauseGameViewModel the view model for the pause usecase, is a PauseGameViewModel object
-     * @param playGameViewModel the view model for the play usecase, is a PlayGameViewModel object
+     *
+     * @param loginController     the controller for login usecase, is a LoginController object
+     * @param loginViewModel      the view model for login usecase, is a LoginViewModel object
+     * @param menuViewModel       the view model for the menu usecase, is a MenuViewModel object
+     * @param pauseGameViewModel  the view model for the pause usecase, is a PauseGameViewModel object
+     * @param playGameViewModel   the view model for the play usecase, is a PlayGameViewModel object
      * @param resumeGameViewModel the view model for the resume usecase, is a ResumeGameViewModel object
      */
     public LoginView(LoginController loginController, LoginViewModel loginViewModel, PlayGameViewModel playGameViewModel,
@@ -75,7 +76,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         title.setAlignmentX(JLabel.CENTER_ALIGNMENT);
         title.setFont(new Font("Helvetica", Font.BOLD, 50));
         title.setForeground(white);
-        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10,40,10,40)));
+        title.setBorder(new CompoundBorder(title.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(title);
 
         JLabel username = new JLabel(SignupViewModel.USERNAME_LABEL);
@@ -103,19 +104,19 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         JPanel buttons = new JPanel();
         buttons.setBackground(darkblue);
 
-        cancel = new JButton(loginViewModel.CANCEL_BUTTON_LABEL);
+        cancel = new JButton(LoginViewModel.CANCEL_BUTTON_LABEL);
         cancel.setBackground(white);
         cancel.setFont(new Font("Verdana", Font.BOLD, 16));
         cancel.setForeground(darkblue);
         buttons.add(cancel);
 
-        login = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
+        login = new JButton(LoginViewModel.LOGIN_BUTTON_LABEL);
         login.setBackground(blue);
         login.setFont(new Font("Verdana", Font.BOLD, 16));
         login.setForeground(white);
         buttons.add(login);
 
-        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10,40,10,40)));
+        buttons.setBorder(new CompoundBorder(buttons.getBorder(), new EmptyBorder(10, 40, 10, 40)));
         this.add(buttons);
 
         login.addActionListener(
@@ -140,7 +141,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                     public void actionPerformed(ActionEvent e) {
                         if (e.getSource().equals(cancel)) {
                             setVisible(false);
-                            cancel.setVerifyInputWhenFocusTarget( false );
+                            cancel.setVerifyInputWhenFocusTarget(false);
                         }
                     }
                 }
@@ -199,6 +200,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records the action performed
+     *
      * @param e the action that was performed
      */
     @Override
@@ -208,6 +210,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     /**
      * Records and notifies of any property change such as username or password errors
+     *
      * @param evt the propertychange event that is fired by the viewmodel
      */
     @Override

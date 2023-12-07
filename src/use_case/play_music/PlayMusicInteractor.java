@@ -1,16 +1,15 @@
 package use_case.play_music;
 
-import data_access.SpotifyDAO;
 import entity.SpotifyPlayer;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class PlayMusicInteractor implements PlayMusicInputBoundary{
+public class PlayMusicInteractor implements PlayMusicInputBoundary {
     final PlayMusicDataAccessInterface playMusicDataAccessInterface;
     final PlayMusicOutputBoundary playMusicPresenter;
 
-    public PlayMusicInteractor(PlayMusicDataAccessInterface playMusicDataAccessInterface, PlayMusicOutputBoundary playMusicPresenter){
+    public PlayMusicInteractor(PlayMusicDataAccessInterface playMusicDataAccessInterface, PlayMusicOutputBoundary playMusicPresenter) {
         this.playMusicDataAccessInterface = playMusicDataAccessInterface; //no presenters needed
         this.playMusicPresenter = playMusicPresenter;
     }

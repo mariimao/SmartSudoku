@@ -9,6 +9,7 @@ public interface PauseGameInputBoundary {
 
     /**
      * Executes the PauseGame use case.
+     *
      * @param pauseGameInputData is an PauseGameInputData object
      */
     void execute(PauseGameInputData pauseGameInputData) throws IOException;

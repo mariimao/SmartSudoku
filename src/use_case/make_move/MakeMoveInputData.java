@@ -13,9 +13,10 @@ public class MakeMoveInputData {
 
     /**
      * Constructor for the MakeMove input data object.
-     * @param moveValue is the int value of the user's move
-     * @param moveRow is the int value of the row from the user's move
-     * @param moveCol is the int value of the column from the user's move
+     *
+     * @param moveValue       is the int value of the user's move
+     * @param moveRow         is the int value of the row from the user's move
+     * @param moveCol         is the int value of the column from the user's move
      * @param gameBeingPlayed is a GameState of the game being played
      */
     public MakeMoveInputData(int moveValue, int moveRow, int moveCol, GameState gameBeingPlayed) {
@@ -33,9 +34,18 @@ public class MakeMoveInputData {
     }
 
     /* ----- Getters and setters ----- */
-    int getMoveValue() {return moveValue;}
-    int getMoveRow() {return moveRow;}
-    int getMoveCol() {return moveCol;}
+    int getMoveValue() {
+        return moveValue;
+    }
+
+    int getMoveRow() {
+        return moveRow;
+    }
+
+    int getMoveCol() {
+        return moveCol;
+    }
+
     public GameState getGameBeingPlayed() {
         return gameBeingPlayed;
     }
