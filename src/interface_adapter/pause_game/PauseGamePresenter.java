@@ -14,11 +14,20 @@ public class PauseGamePresenter implements PauseGameOutputBoundary {
     private final PauseGameViewModel pauseGameViewModel;
     private ViewManagerModel viewManagerModel;
 
+    /**
+     * Constructor for PauseGamePresenter
+     * @param pauseGameViewModel the pause game view model
+     * @param viewManagerModel the view manager model
+     */
     public PauseGamePresenter(PauseGameViewModel pauseGameViewModel, ViewManagerModel viewManagerModel) {
         this.pauseGameViewModel = pauseGameViewModel;
         this.viewManagerModel = viewManagerModel;
     }
 
+    /**
+     * Prepares success view
+     * @param pauseGameOutputData is an PauseGameOutputData object
+     */
     @Override
     public void prepareSuccessView(PauseGameOutputData pauseGameOutputData) {
         PauseGameState pauseGameState = pauseGameViewModel.getState();
@@ -30,6 +39,10 @@ public class PauseGamePresenter implements PauseGameOutputBoundary {
         this.viewManagerModel.firePropertyChanged();
     }
 
+    /**
+     * Prepares fail view with error message
+     * @param error is a String containing a description of the error
+     */
     @Override
     public void prepareFailView(String error) {
         PauseGameState pauseGameState = pauseGameViewModel.getState();

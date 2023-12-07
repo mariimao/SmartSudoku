@@ -6,6 +6,9 @@ import entity.user.User;
 
 import java.time.LocalDateTime;
 
+/**
+ * The state of PlayGame ViewModel
+ */
 public class PlayGameState {
     private String errorMessage = "";
     private GameState currentGame = null;
@@ -21,7 +24,12 @@ public class PlayGameState {
 
     private int timePlayed = 0;
 
+    /**
+     * Constructor for PlayGameState
+     */
     public PlayGameState() {}
+
+    //below are the getters and setters //
     public void setCurrentGame(GameState gameState) { currentGame = gameState;}
     public void setNewGameError(String e) {errorMessage = e;}
 

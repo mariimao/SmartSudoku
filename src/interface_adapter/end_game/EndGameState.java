@@ -3,7 +3,7 @@ package interface_adapter.end_game;
 import entity.board.GameState;
 
 /**
- *
+ * The state of EndGame ViewModel
  */
 public class EndGameState {
     private String errorMessage = "";

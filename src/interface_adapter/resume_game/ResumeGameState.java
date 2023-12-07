@@ -4,14 +4,21 @@ import entity.user.User;
 
 import java.util.LinkedList;
 
+/**
+ * The state of Resume Game ViewModel
+ */
 public class ResumeGameState {
     private String errorMessage = "";
     private GameState pausedGame = null;
     private LinkedList<GameState> pastGames = null;
     private String userName = "";
 
+    /**
+     * Constructor for ResumeGameState
+     */
     public ResumeGameState() {}
 
+    //Below are the getters and setters
     public void setPausedGame(GameState gameState) {pausedGame = gameState;}
     public void setPastGames(LinkedList<GameState> gameStateLinkedList) {pastGames = gameStateLinkedList;}
     public void setPauseGameError(String e) {errorMessage = e;}

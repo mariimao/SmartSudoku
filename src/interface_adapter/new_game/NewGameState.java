@@ -5,6 +5,9 @@ import entity.user.User;
 
 import java.util.LinkedList;
 
+/**
+ * The state of NewGame ViewModel
+ */
 public class NewGameState {
     private String errorMessage = "";
     private GameState game = null;
@@ -14,7 +17,12 @@ public class NewGameState {
     private String searchName = "";
     private String userName = "";
 
+    /**
+     * Constuctor for NewGameState
+     */
     public NewGameState() {}
+
+    // below are the getters and setters
     public void setGame(GameState gameState) {
         game = gameState;
     }
