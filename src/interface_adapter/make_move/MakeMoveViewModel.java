@@ -1,7 +1,6 @@
 package interface_adapter.make_move;
 
 import interface_adapter.ViewModel;
-import interface_adapter.new_game.NewGameState;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -15,30 +14,38 @@ public class MakeMoveViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    private MakeMoveState state = new MakeMoveState();
+    private final MakeMoveState state = new MakeMoveState();
 
     /**
      * Constructor for MakeMoveViewModel
      */
-    public MakeMoveViewModel() {super("MAKE MOVE");}
+    public MakeMoveViewModel() {
+        super("MAKE MOVE");
+    }
 
     /**
-     *
      * @return the current state of make move
      */
-    public MakeMoveState getState() {return state;}
+    public MakeMoveState getState() {
+        return state;
+    }
 
     /**
      * Fires property change to view model
      */
     @Override
-    public void firePropertyChanged() {support.firePropertyChange("state", null, this.state);}
+    public void firePropertyChanged() {
+        support.firePropertyChange("state", null, this.state);
+    }
 
     /**
      * Adds propertychangelistener for support
+     *
      * @param listener the listener that listens for property changes
      */
     @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {support.addPropertyChangeListener(listener);}
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        support.addPropertyChangeListener(listener);
+    }
 
 }

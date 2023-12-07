@@ -16,7 +16,7 @@ public class StartViewModel extends ViewModel {
 
     public static final String SIGNUP_BUTTON_LABEL = "SIGNUP";
     public static final String LOGIN_BUTTON_LABEL = "LOGIN";
-
+    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     private StartState startState = new StartState();
 
     /**
@@ -27,16 +27,6 @@ public class StartViewModel extends ViewModel {
     }
 
     /**
-     * Sets the startState to update to view model
-     * @param startState the state of the view for start use case
-     */
-    public void setStartState(StartState startState) {
-        this.startState = startState;
-    }
-
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-
-    /**
      * Fires property change to view model
      */
     public void firePropertyChanged() {
@@ -45,6 +35,7 @@ public class StartViewModel extends ViewModel {
 
     /**
      * Adds propertychangelistener for support
+     *
      * @param listener the listener that listens for property changes
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -52,8 +43,18 @@ public class StartViewModel extends ViewModel {
     }
 
     /**
-     *
      * @return the start state of the view model
      */
-    public StartState getStartState() { return this.startState; }
+    public StartState getStartState() {
+        return this.startState;
+    }
+
+    /**
+     * Sets the startState to update to view model
+     *
+     * @param startState the state of the view for start use case
+     */
+    public void setStartState(StartState startState) {
+        this.startState = startState;
+    }
 }

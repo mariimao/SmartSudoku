@@ -12,14 +12,15 @@ import javax.swing.*;
  */
 public class ResumeGamePresenter implements ResumeGameOutputBoundary {
     private final ResumeGameViewModel resumeGameViewModel;
-    private ViewManagerModel viewManagerModel;
     private final PlayGameViewModel playGameViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for ResumeGamePresenter
+     *
      * @param resumeGameViewModel the resume game view model
-     * @param viewManagerModel  the view manager model
-     * @param playGameViewModel the play game view model
+     * @param viewManagerModel    the view manager model
+     * @param playGameViewModel   the play game view model
      */
     public ResumeGamePresenter(ResumeGameViewModel resumeGameViewModel, ViewManagerModel viewManagerModel, PlayGameViewModel playGameViewModel) {
         this.resumeGameViewModel = resumeGameViewModel;
@@ -29,6 +30,7 @@ public class ResumeGamePresenter implements ResumeGameOutputBoundary {
 
     /**
      * Prepares success view
+     *
      * @param resumeGameOutputData is a ResumeGameOutputData object
      */
     @Override
@@ -45,6 +47,7 @@ public class ResumeGamePresenter implements ResumeGameOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override
@@ -53,7 +56,6 @@ public class ResumeGamePresenter implements ResumeGameOutputBoundary {
         resumeGameState.setPauseGameError(error);
         resumeGameViewModel.firePropertyChanged();
         JOptionPane.showMessageDialog(null, error);   // for now I'll just use a popup
-
 
 
     }

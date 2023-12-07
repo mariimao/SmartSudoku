@@ -2,12 +2,8 @@ package interface_adapter.make_move;
 
 import entity.board.GameState;
 import interface_adapter.ViewManagerModel;
-import interface_adapter.new_game.NewGameState;
-import interface_adapter.new_game.NewGameViewModel;
-import use_case.make_move.MakeMoveInputBoundary;
 import use_case.make_move.MakeMoveOutputBoundary;
 import use_case.make_move.MakeMoveOutputData;
-import use_case.new_game.NewGameOutputData;
 
 import javax.swing.*;
 
@@ -16,10 +12,11 @@ import javax.swing.*;
  */
 public class MakeMovePresenter implements MakeMoveOutputBoundary {
     private final MakeMoveViewModel makeMoveViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for MakeMovePresenter
+     *
      * @param makeMoveViewModel the make move view model
      * @param viewManagerModel  the view manager
      */
@@ -30,6 +27,7 @@ public class MakeMovePresenter implements MakeMoveOutputBoundary {
 
     /**
      * Prepares success view
+     *
      * @param makeMoveOutputData is a MakeMoveOutputData object
      * @return the GameState
      */
@@ -48,6 +46,7 @@ public class MakeMovePresenter implements MakeMoveOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override

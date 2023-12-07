@@ -1,10 +1,9 @@
 package interface_adapter.make_move;
 
 import entity.board.GameState;
-import entity.user.User;
 
 /**
- *  The state of MakeMove
+ * The state of MakeMove
  */
 public class MakeMoveState {
     private GameState gameBeingPlayed = null;
@@ -15,18 +14,41 @@ public class MakeMoveState {
     /**
      * Constuctor for MakeMoveState
      */
-    public MakeMoveState() {}
+    public MakeMoveState() {
+    }
+
+    public GameState getGameBeingPlayed() {
+        return gameBeingPlayed;
+    }
 
     // Below are the getters and setters
-    public void setGameBeingPlayed(GameState gameState) { gameBeingPlayed = gameState;}
-    public GameState getGameBeingPlayed() {return gameBeingPlayed;}
-    public void setValue(int value) {this.value = value;}
-    public int getValue() {return value;}
-    public void setRow(int row) {this.row = row;}
-    public int getRow() {return row;}
-    public void setCol(int col) {this.col = col;}
-    public int getCol() {return col;}
+    public void setGameBeingPlayed(GameState gameState) {
+        gameBeingPlayed = gameState;
+    }
 
+    public int getValue() {
+        return value;
+    }
+
+    public void setValue(int value) {
+        this.value = value;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public void setRow(int row) {
+        this.row = row;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
 
 
 }

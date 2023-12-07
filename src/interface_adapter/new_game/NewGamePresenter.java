@@ -1,7 +1,6 @@
 package interface_adapter.new_game;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.resume_game.ResumeGameState;
 import use_case.new_game.NewGameOutputBoundary;
 import use_case.new_game.NewGameOutputData;
 
@@ -12,12 +11,13 @@ import javax.swing.*;
  */
 public class NewGamePresenter implements NewGameOutputBoundary {
     private final NewGameViewModel newGameViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for NewGamePresenter
-     * @param newGameViewModel  the new game view model
-     * @param viewManagerModel  the view manager model
+     *
+     * @param newGameViewModel the new game view model
+     * @param viewManagerModel the view manager model
      */
     public NewGamePresenter(NewGameViewModel newGameViewModel, ViewManagerModel viewManagerModel) {
         this.newGameViewModel = newGameViewModel;
@@ -26,6 +26,7 @@ public class NewGamePresenter implements NewGameOutputBoundary {
 
     /**
      * Prepares success view
+     *
      * @param newGameOutputData is an NewGameOutputData object
      */
     @Override
@@ -39,6 +40,7 @@ public class NewGamePresenter implements NewGameOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override

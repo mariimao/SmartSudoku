@@ -1,9 +1,6 @@
 package interface_adapter.pause_game;
 
 import interface_adapter.ViewManagerModel;
-import interface_adapter.menu.MenuViewModel;
-import interface_adapter.resume_game.ResumeGameState;
-import interface_adapter.start.StartViewModel;
 import use_case.pause_game.PauseGameOutputBoundary;
 import use_case.pause_game.PauseGameOutputData;
 
@@ -12,12 +9,13 @@ import use_case.pause_game.PauseGameOutputData;
  */
 public class PauseGamePresenter implements PauseGameOutputBoundary {
     private final PauseGameViewModel pauseGameViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for PauseGamePresenter
+     *
      * @param pauseGameViewModel the pause game view model
-     * @param viewManagerModel the view manager model
+     * @param viewManagerModel   the view manager model
      */
     public PauseGamePresenter(PauseGameViewModel pauseGameViewModel, ViewManagerModel viewManagerModel) {
         this.pauseGameViewModel = pauseGameViewModel;
@@ -26,6 +24,7 @@ public class PauseGamePresenter implements PauseGameOutputBoundary {
 
     /**
      * Prepares success view
+     *
      * @param pauseGameOutputData is an PauseGameOutputData object
      */
     @Override
@@ -41,6 +40,7 @@ public class PauseGamePresenter implements PauseGameOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override

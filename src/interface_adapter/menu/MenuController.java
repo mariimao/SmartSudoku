@@ -1,7 +1,6 @@
 package interface_adapter.menu;
 
 import use_case.menu.MenuInputBoundary;
-import use_case.menu.MenuInteractor;
 
 /**
  * The class for MenuController. Acts as controller to send information to the interactor.
@@ -12,6 +11,7 @@ public class MenuController {
 
     /**
      * Constructor for MenuController
+     *
      * @param menuUseCaseInteractor the interactor, a MenuInputBoundary type
      */
     public MenuController(MenuInputBoundary menuUseCaseInteractor) {
@@ -21,7 +21,7 @@ public class MenuController {
     /**
      * Calls the interactor to execute. No input data is needed.
      */
-    public void execute () {
+    public void execute() {
         menuUseCaseInteractor.execute();
     }
 }

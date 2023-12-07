@@ -11,12 +11,13 @@ import javax.swing.*;
  */
 public class PlayGamePresenter implements PlayGameOutputBoundary {
     private final PlayGameViewModel playGameViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for PlayGamePresenter
+     *
      * @param playGameViewModel the play game view model
-     * @param viewManagerModel the view manager model
+     * @param viewManagerModel  the view manager model
      */
     public PlayGamePresenter(PlayGameViewModel playGameViewModel, ViewManagerModel viewManagerModel) {
         this.playGameViewModel = playGameViewModel;
@@ -25,6 +26,7 @@ public class PlayGamePresenter implements PlayGameOutputBoundary {
 
     /**
      * Prepares success view
+     *
      * @param playGameOutputData
      */
     @Override
@@ -43,6 +45,7 @@ public class PlayGamePresenter implements PlayGameOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error
      */
     @Override

@@ -1,11 +1,8 @@
 package interface_adapter.start;
 
 import interface_adapter.ViewManagerModel;
-
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-
-
 import interface_adapter.signup.SignupState;
 import interface_adapter.signup.SignupViewModel;
 import use_case.start.StartOutputBoundary;
@@ -20,17 +17,18 @@ public class StartPresenter implements StartOutputBoundary {
     private final LoginViewModel loginViewModel;
     private final SignupViewModel signupViewModel;
 
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructor for StartPresenter
-     * @param startViewModel the view model for start, is StartViewModel object
-     * @param signupViewModel the signup View model, is SignupViewModel object
-     * @param loginViewModel the viewmodel for login, is LoginViewModel object
+     *
+     * @param startViewModel   the view model for start, is StartViewModel object
+     * @param signupViewModel  the signup View model, is SignupViewModel object
+     * @param loginViewModel   the viewmodel for login, is LoginViewModel object
      * @param viewManagerModel the viewMangerModel that manages the views
      */
-    public StartPresenter (StartViewModel startViewModel, SignupViewModel signupViewModel,
-                           LoginViewModel loginViewModel, ViewManagerModel viewManagerModel) {
+    public StartPresenter(StartViewModel startViewModel, SignupViewModel signupViewModel,
+                          LoginViewModel loginViewModel, ViewManagerModel viewManagerModel) {
         this.startViewModel = startViewModel;
         this.viewManagerModel = viewManagerModel;
         this.loginViewModel = loginViewModel;
@@ -39,6 +37,7 @@ public class StartPresenter implements StartOutputBoundary {
 
     /**
      * Prepares the success view if use case is successful
+     *
      * @param startOutputData is the output data that is sent to presenter
      */
     @Override
@@ -68,6 +67,7 @@ public class StartPresenter implements StartOutputBoundary {
 
     /**
      * Prepares fail view for when use case is unsuccessful
+     *
      * @param error the String that is displayed to use about the error
      */
     public void prepareFailView(String error) {

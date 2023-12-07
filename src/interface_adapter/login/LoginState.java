@@ -15,43 +15,48 @@ public class LoginState {
     /**
      * The constructor for LoginState.
      */
-    public LoginState() {}
+    public LoginState() {
+    }
 
     //Below are the getters and setters //
     public String getUsername() {
         return username;
     }
 
-    public String getUsernameError() {
-        return usernameError;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getPasswordError() {
-        return passwordError;
-    }
-    public User getUser() {return user;}
-
-
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getUsernameError() {
+        return usernameError;
     }
 
     public void setUsernameError(String usernameError) {
         this.usernameError = usernameError;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getPasswordError() {
+        return passwordError;
     }
 
     public void setPasswordError(String passwordError) {
         this.passwordError = passwordError;
     }
 
-    public void setUser(User user) {this.user = user;}
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 

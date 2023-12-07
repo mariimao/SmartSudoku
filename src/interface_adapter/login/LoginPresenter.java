@@ -3,8 +3,6 @@ package interface_adapter.login;
 import interface_adapter.ViewManagerModel;
 import interface_adapter.menu.MenuState;
 import interface_adapter.menu.MenuViewModel;
-import interface_adapter.signup.SignupState;
-import interface_adapter.signup.SignupViewModel;
 import use_case.login.LoginOutputBoundary;
 import use_case.login.LoginOutputData;
 
@@ -21,12 +19,13 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     /**
      * Constructor for LoginPresenter
-     * @param loginViewModel        is a LoginViewModel object
-     * @param menuViewModel         is a MenuViewModel object
-     * @param viewManagerModel      is a ViewManagerModel object
+     *
+     * @param loginViewModel   is a LoginViewModel object
+     * @param menuViewModel    is a MenuViewModel object
+     * @param viewManagerModel is a ViewManagerModel object
      */
-    public LoginPresenter (LoginViewModel loginViewModel,
-                           MenuViewModel menuViewModel, ViewManagerModel viewManagerModel) {
+    public LoginPresenter(LoginViewModel loginViewModel,
+                          MenuViewModel menuViewModel, ViewManagerModel viewManagerModel) {
         this.viewManagerModel = viewManagerModel;
         this.loginViewModel = loginViewModel;
         this.menuViewModel = menuViewModel;
@@ -34,6 +33,7 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     /**
      * Prepares the success view. Changes to menu view
+     *
      * @param loginOutputData is an LoginOutputData object
      */
     @Override
@@ -48,15 +48,15 @@ public class LoginPresenter implements LoginOutputBoundary {
 
     /**
      * Prepares the fail view with a error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override
     public void prepareFailView(String error) {
         LoginState loginState = loginViewModel.getLoginState();
-        if (error.equals("Incorrect password. Try again.")){
+        if (error.equals("Incorrect password. Try again.")) {
             loginState.setPasswordError(error);
-        }
-        else {
+        } else {
             loginState.setUsernameError(error);
             JOptionPane.showMessageDialog(null, "User Does Not Exist. Go To Signup Page");
         }

@@ -1,7 +1,7 @@
 package interface_adapter.menu;
 
 /**
- *  The state of Menu ViewModel
+ * The state of Menu ViewModel
  */
 public class MenuState {
 
@@ -9,6 +9,7 @@ public class MenuState {
 
     /**
      * Copy constructor, makes a copy
+     *
      * @param copy the copy we want to replicate from
      */
     public MenuState(MenuState copy) {
@@ -17,11 +18,13 @@ public class MenuState {
 
     /**
      * Default constuctor for MenuState
-      */
-    public MenuState() {}
+     */
+    public MenuState() {
+    }
 
     /**
      * below are the getters and setters
+     *
      * @return
      */
     public String getUsername() {

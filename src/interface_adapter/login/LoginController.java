@@ -12,7 +12,8 @@ public class LoginController {
 
     /**
      * The constructor for LoginController
-     * @param loginInteractor   is a LoginInputBoundary type
+     *
+     * @param loginInteractor is a LoginInputBoundary type
      */
     public LoginController(LoginInputBoundary loginInteractor) {
         this.loginInteractor = loginInteractor;
@@ -20,8 +21,9 @@ public class LoginController {
 
     /**
      * Create the input data and calls the interactor
-     * @param username      the username they entered
-     * @param password      the password they entered
+     *
+     * @param username the username they entered
+     * @param password the password they entered
      */
     public void execute(String username, String password) {
         LoginInputData loginInputData = new LoginInputData(username, password);

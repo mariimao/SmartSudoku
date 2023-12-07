@@ -17,23 +17,40 @@ public class PauseGameState {
     /**
      * Constructor for PauseGameState
      */
-    public PauseGameState() {}
-
-    //Below are the getters and setters
-    public void setPausedGame(GameState gameState) {pausedGame = gameState;}
-    public void setPastGames(LinkedList<GameState> gameStateLinkedList) {pastGames = gameStateLinkedList;}
-    public void setPauseGameError(String e) {errorMessage = e;}
-    public void setUser(User user) {this.user = user;}
+    public PauseGameState() {
+    }
 
     public GameState getPausedGame() {
         return pausedGame;
+    }
+
+    //Below are the getters and setters
+    public void setPausedGame(GameState gameState) {
+        pausedGame = gameState;
     }
 
     public LinkedList<GameState> getPastGames() {
         return pastGames;
     }
 
-    public String getPauseGameError() {return errorMessage;}
-    public User getUser() {return user;}
+    public void setPastGames(LinkedList<GameState> gameStateLinkedList) {
+        pastGames = gameStateLinkedList;
+    }
+
+    public String getPauseGameError() {
+        return errorMessage;
+    }
+
+    public void setPauseGameError(String e) {
+        errorMessage = e;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 }

@@ -18,8 +18,9 @@ public class PlayMusicPresenter implements PlayMusicOutputBoundary {
 
     /**
      * Constructor for PlayMusicPresenter
+     *
      * @param newGameViewModel the new game view model
-     * @param viewManagerModel  the view manager
+     * @param viewManagerModel the view manager
      */
     public PlayMusicPresenter(NewGameViewModel newGameViewModel, ViewManagerModel viewManagerModel) {
         this.newGameViewModel = newGameViewModel;
@@ -28,6 +29,7 @@ public class PlayMusicPresenter implements PlayMusicOutputBoundary {
 
     /**
      * Prepares success view
+     *
      * @param playMusicOutputData is a PlayMusicOutputData object
      */
     @Override
@@ -39,6 +41,7 @@ public class PlayMusicPresenter implements PlayMusicOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override

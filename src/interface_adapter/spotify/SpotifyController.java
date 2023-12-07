@@ -13,6 +13,7 @@ public class SpotifyController {
 
     /**
      * Constructor of Spotify Controller
+     *
      * @param spotifyInteractor the interactor of spotify use case that makes decisions
      */
     public SpotifyController(SpotifyInputBoundary spotifyInteractor) {
@@ -21,6 +22,7 @@ public class SpotifyController {
 
     /**
      * Executes the use case's interactor to perform action
+     *
      * @param searchKey the key that the user uses to search for songs
      * @throws IOException in the case that the search is not found or api call fails
      */

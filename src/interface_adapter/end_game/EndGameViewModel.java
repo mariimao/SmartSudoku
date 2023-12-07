@@ -32,7 +32,7 @@ public class EndGameViewModel extends ViewModel {
     /**
      * Detects when a property has changed
      *
-     * @param listener      the listener, is a PropertyChangeListener
+     * @param listener the listener, is a PropertyChangeListener
      */
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {

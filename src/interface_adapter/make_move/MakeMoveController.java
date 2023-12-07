@@ -14,6 +14,7 @@ public class MakeMoveController {
 
     /**
      * Constructor of MakeMove Controller
+     *
      * @param makeMoveInteractor the interactor that makes decisions with input data
      */
     public MakeMoveController(MakeMoveInputBoundary makeMoveInteractor) {
@@ -22,15 +23,16 @@ public class MakeMoveController {
 
     /**
      * Executes the use case interactor to perform action
-     * @param value             the value the user entered
-     * @param x                 the column value of the box they inputted
-     * @param y                 the row value of the box they inputted
-     * @param gameBeingPlayed   the current game being played, is a GameState object
-     * @return                  returns a GameState
-     * @throws IOException      exception if the value entered is invalid
+     *
+     * @param value           the value the user entered
+     * @param x               the column value of the box they inputted
+     * @param y               the row value of the box they inputted
+     * @param gameBeingPlayed the current game being played, is a GameState object
+     * @return returns a GameState
+     * @throws IOException exception if the value entered is invalid
      */
     public GameState execute(int value, int x, int y, GameState gameBeingPlayed) throws IOException {
-        MakeMoveInputData makeMoveInputData = new MakeMoveInputData(value,x, y, gameBeingPlayed);
+        MakeMoveInputData makeMoveInputData = new MakeMoveInputData(value, x, y, gameBeingPlayed);
         return makeMoveInteractor.execute(makeMoveInputData);
     }
 }

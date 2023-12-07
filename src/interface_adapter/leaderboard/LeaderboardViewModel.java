@@ -44,7 +44,6 @@ public class LeaderboardViewModel extends ViewModel {
     }
 
     /**
-     *
      * @return the current leaderboard state
      */
     public LeaderboardState getLeaderboardState() {
@@ -54,6 +53,7 @@ public class LeaderboardViewModel extends ViewModel {
 
     /**
      * Sets the leaderboard state to an updated version
+     *
      * @param leaderboardState
      */
     public void setLeaderboardState(LeaderboardState leaderboardState) {

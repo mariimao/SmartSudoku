@@ -14,8 +14,9 @@ public class MenuPresenter implements MenuOutputBoundary {
 
     /**
      * Constructor for MenuPresenter
-     * @param menuViewModel the menu view model
-     * @param viewManagerModel  the view manager model
+     *
+     * @param menuViewModel    the menu view model
+     * @param viewManagerModel the view manager model
      */
     public MenuPresenter(MenuViewModel menuViewModel, ViewManagerModel viewManagerModel) {
         this.menuViewModel = menuViewModel;
@@ -33,6 +34,7 @@ public class MenuPresenter implements MenuOutputBoundary {
 
     /**
      * Prepares fail view with error message
+     *
      * @param error is a String containing a description of the error
      */
     @Override
