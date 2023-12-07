@@ -5,9 +5,14 @@ import entity.Scores;
 import entity.board.GameState;
 import entity.user.CommonUser;
 import entity.user.CommonUserFactory;
+import entity.user.User;
+import interface_adapter.ViewManagerModel;
 import interface_adapter.end_game.EndGameController;
 import interface_adapter.end_game.EndGamePresenter;
+import interface_adapter.end_game.EndGameState;
+import interface_adapter.end_game.EndGameViewModel;
 import interface_adapter.leaderboard.LeaderboardViewModel;
+import interface_adapter.menu.MenuViewModel;
 import interface_adapter.play_game.PlayGameController;
 import org.junit.Before;
 import org.junit.Test;
@@ -40,7 +45,7 @@ public class EndGameTest {
     public void init() {
         UseCaseTestObjects useCaseTestObjects = new UseCaseTestObjects();
         UserDAO userDAO = new UserDAOTest().getUserDAO();
-        LeaderboardViewModel leaderboardViewModel = new LeaderboardViewModel();
+        EndGameViewModel endGameViewModel = new EndGameViewModel();
         endGameView = EndGameUseCaseFactory.create(useCaseTestObjects.getViewManagerModel(),
                 useCaseTestObjects.getEndGameViewModel(), userDAO, useCaseTestObjects.getMenuViewModel(),
                 useCaseTestObjects.getLeaderboardViewModel());
@@ -92,6 +97,59 @@ public class EndGameTest {
         view.CustomButton leaderBoardButton = (view.CustomButton) buttons.getComponent(1);
 
         menuButton.doClick();
+    }
+
+    @Test
+    public void testPresenter() {
+        UserDAO userDataAccessObject;
+        GameState gameState = new GameState(1);
+        try {
+            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+            Map<LocalTime, Integer> scores = new HashMap<>();
+            scores.put(LocalTime.now(), 4);
+            CommonUser user = new CommonUser("testUser", "testPassword", scores);
+            userDataAccessObject.addUser(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        EndGameDataAccessInterface userDataBase = userDataAccessObject;
+
+        EndGamePresenter endGamePresenter = new EndGamePresenter( new LeaderboardViewModel(), new MenuViewModel(),
+                new EndGameViewModel(), new ViewManagerModel());
+
+        EndGameOutputData endGameOutputData = new EndGameOutputData(userDataAccessObject.get("testUser"), 10, gameState);
+        endGamePresenter.prepareSuccessView(endGameOutputData);
+
+        endGamePresenter.prepareFailView("Unable to end the game.");
+    }
+
+    @Test
+    public void testViewModel() {
+        UserDAO userDataAccessObject;
+        GameState gameState = new GameState(1);
+        try {
+            userDataAccessObject = new UserDAO("mongodb+srv://smartsudoku:smartsudoku@cluster0.hbx3f3f.mongodb.net/\n\n",
+                    "smartsudoku", "user", new CommonUserFactory());
+            Map<LocalTime, Integer> scores = new HashMap<>();
+            scores.put(LocalTime.now(), 4);
+            CommonUser user = new CommonUser("testUser", "testPassword", scores);
+            userDataAccessObject.addUser(user);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        EndGameDataAccessInterface userDataBase = userDataAccessObject;
+
+        EndGameViewModel endGameViewModel = new EndGameViewModel();
+        EndGameState endGameState = new EndGameState();
+        endGameState.setTime(5);
+        endGameViewModel.setState(endGameState);
+        assert( endGameState.getTime()==5);
+
+        assert(endGameState.equals(endGameViewModel.getState()));
+
+        endGameState.setFinalGame(gameState);
+        endGameViewModel.setState(endGameState);
     }
 }
 

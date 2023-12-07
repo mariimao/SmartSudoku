@@ -5,6 +5,9 @@ import entity.board.GameState;
 import use_case.end_game.EndGameInputBoundary;
 import use_case.end_game.EndGameInputData;
 
+/**
+ *
+ */
 public class EndGameController {
     final EndGameInputBoundary endGameUseCaseInteractor;
 
