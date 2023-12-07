@@ -12,4 +12,4 @@ Before loading a new game, check out our song feature, which plays a song in the
 Clone the repository, and run the ```Main``` file. This can be found in ```SmartSudoku``` → ```src``` → ```app``` → ```Main```. Make sure that you've installed the required Maven dependencies, such as MongoDB.
 
 ### Authors
-This project was made with love by <a href=https://github.com/mariimao>Mary</a>, <a href=https://github.com/akunnamegwa>Akunna</a>, <a href=https://github.com/CloudyKrypton>Janet</a>, <a href=https://github.com/tanjenn5>Jennifer</a>, and <a href=https://github.com/anne-huynh>Anna</a>.
+This project was made with love by <a href=https://github.com/mariimao>Mary</a>, <a href=https://github.com/akunnamegwa>Akunna</a>, <a href=https://github.com/CloudyKrypton>Janet</a>, <a href=https://github.com/tanjenn5>Jennifer</a>, and <a href=https://github.com/anne-huynh>Anne</a>.
