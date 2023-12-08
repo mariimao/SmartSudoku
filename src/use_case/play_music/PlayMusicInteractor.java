@@ -5,14 +5,29 @@ import entity.SpotifyPlayer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Class representing the interactor for the play music use case. This class implements the PlayMusicInputBoundary.
+ */
 public class PlayMusicInteractor implements PlayMusicInputBoundary {
     final PlayMusicDataAccessInterface playMusicDataAccessInterface;
     final PlayMusicOutputBoundary playMusicPresenter;
 
+    /**
+     * Constructor for the PlayMusicInteractor object.
+     *
+     * @param playMusicDataAccessInterface is a PlayMusicDataAccessInterface object
+     * @param playMusicPresenter           is a PlayMusicOutputBoundary object
+     */
+
     public PlayMusicInteractor(PlayMusicDataAccessInterface playMusicDataAccessInterface, PlayMusicOutputBoundary playMusicPresenter) {
-        this.playMusicDataAccessInterface = playMusicDataAccessInterface; //no presenters needed
+        this.playMusicDataAccessInterface = playMusicDataAccessInterface;
         this.playMusicPresenter = playMusicPresenter;
     }
+
+    /**
+     * Executes the play music use case.
+     * @param playMusicInputData is an PlayMusicInputData object
+     */
 
     @Override
     public void execute(PlayMusicInputData playMusicInputData) throws IOException {
