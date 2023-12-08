@@ -3,14 +3,31 @@ package use_case.play_game;
 import entity.board.GameState;
 import entity.user.User;
 
+
+/**
+ * Class representing the interactor for the play game use case. This class implements the PlayGameInputBoundary.
+ */
+
 public class PlayGameInteractor implements PlayGameInputBoundary {
     final PlayGameDataAccessInterface playGameDataAccessInterface;
     final PlayGameOutputBoundary playGamePresenter;
+
+    /**
+     * Constructor for the PlayGameInteractor object.
+     *
+     * @param playGameDataAccessInterface is a PlayGameDataAccessInterface object
+     * @param playGamePresenter           is a PlayGameOutputBoundary object
+     */
 
     public PlayGameInteractor(PlayGameDataAccessInterface playGameDataAccessInterface, PlayGameOutputBoundary playGamePresenter) {
         this.playGameDataAccessInterface = playGameDataAccessInterface;
         this.playGamePresenter = playGamePresenter;
     }
+
+    /**
+     * Executes the play game use case.
+     * @param playGameInputData is an PlayGameInputData object
+     */
 
     @Override
     public void execute(PlayGameInputData playGameInputData) {
@@ -32,7 +49,7 @@ public class PlayGameInteractor implements PlayGameInputBoundary {
 
             // If game holds an instance of GameState then the board will be scrambled and passed on
             else {
-                game.scrambleBoard();  // TODO: remove and check behaviour
+                game.scrambleBoard();
                 PlayGameOutputData playGameOutputData = new PlayGameOutputData(user, game);
                 playGamePresenter.prepareSuccessView(playGameOutputData);
             }
