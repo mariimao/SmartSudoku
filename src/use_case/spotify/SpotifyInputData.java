@@ -1,7 +1,7 @@
 package use_case.spotify;
 
 /**
- * Class representing the input data of the Spotify
+ * Class representing the input data of the Spotify use case
  */
 public class SpotifyInputData {
     private final String searchKey;
